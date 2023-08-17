@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import {
     Container,
     QuestionNumber,
@@ -7,49 +6,51 @@ import {
     Options,
     OptionButton,
     CurrentPosition,
+    BackButton,
+    Navigation,
 } from './LiteracyTestScreen.Style';
 
 const LiteracyTestScreen: React.FC = () => {
     const [currentQuestion, setCurrentQuestion] = useState(0); // 현재 문제 인덱스
     const [questions] = useState([
         {
-            question: '문제1',
+            question: '1',
             options: ['선택지1', '선택지2', '선택지3', '선택지4'],
         },
         {
-            question: '문제2',
+            question: '2',
             options: ['선택지1', '선택지2', '선택지3', '선택지4'],
         },
         {
-            question: '문제3',
+            question: '3',
             options: ['선택지1', '선택지2', '선택지3', '선택지4'],
         },
         {
-            question: '문제4',
+            question: '4',
             options: ['선택지1', '선택지2', '선택지3', '선택지4'],
         },
         {
-            question: '문제5',
+            question: '5',
             options: ['선택지1', '선택지2', '선택지3', '선택지4'],
         },
         {
-            question: '문제6',
+            question: '6',
             options: ['선택지1', '선택지2', '선택지3', '선택지4'],
         },
         {
-            question: '문제7',
+            question: '7',
             options: ['선택지1', '선택지2', '선택지3', '선택지4'],
         },
         {
-            question: '문제8',
+            question: '8',
             options: ['선택지1', '선택지2', '선택지3', '선택지4'],
         },
         {
-            question: '문제',
+            question: '9',
             options: ['선택지1', '선택지2', '선택지3', '선택지4'],
         },
         {
-            question: '문제10',
+            question: '10',
             options: ['선택지1', '선택지2', '선택지3', '선택지4'],
         },
     ]);
@@ -61,10 +62,15 @@ const LiteracyTestScreen: React.FC = () => {
         }
         // 마지막 문제인 경우 다른 처리 로직
     };
+    const handlePreviousQuestion = () => {
+        if (currentQuestion > 0) {
+            setCurrentQuestion(currentQuestion - 1); // 이전 문제로 이동
+        }
+    };
 
     return (
         <Container>
-            <QuestionNumber>{`문제 ${currentQuestion + 1}`}</QuestionNumber>
+            <QuestionNumber>{`Q ${currentQuestion + 1}`}</QuestionNumber>
             <QuestionText>{questions[currentQuestion]?.question}</QuestionText>
             <Options>
                 {questions[currentQuestion]?.options.map((option, index) => (
@@ -76,10 +82,17 @@ const LiteracyTestScreen: React.FC = () => {
                     </OptionButton>
                 ))}
             </Options>
-            <CurrentPosition>{`${currentQuestion + 1} / ${
-                questions.length
-            }`}</CurrentPosition>
-            {/* 다음 페이지로 이동하는 버튼 등 추가 */}
+            <Navigation>
+                <BackButton
+                    onClick={handlePreviousQuestion}
+                    disabled={currentQuestion === 0}
+                >
+                    뒤로 가기
+                </BackButton>
+                <CurrentPosition>{`${currentQuestion + 1} / ${
+                    questions.length
+                }`}</CurrentPosition>
+            </Navigation>
         </Container>
     );
 };
