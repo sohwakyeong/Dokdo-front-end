@@ -7,8 +7,11 @@ import {
     startButton as StartButton,
     socialIcons as SocialIcons,
     socialIcon as SocialIcon,
+    socialIconImage as SocialIconImage,
 } from './LiteracyTestMain.Style';
-import literacyTestImage from '../../assets/img/문해력.png'; // 이미지 파일을 import 합니다.
+import literacyTestImage from '../../assets/img/문해력.png';
+import facebookIcon from '../../assets/img/facebook.png';
+import twitterIcon from '../../assets/img/twitter.png';
 
 const LiteracyTestMain: React.FC = () => {
     return (
@@ -22,10 +25,10 @@ const LiteracyTestMain: React.FC = () => {
             <StartButton>테스트 시작하기</StartButton>
             <SocialIcons>
                 <SocialIcon href="https://facebook.com">
-                    <img src="facebook-icon.png" alt="Facebook" />
+                    <SocialIconImage src={facebookIcon} alt="Facebook" />
                 </SocialIcon>
                 <SocialIcon href="https://twitter.com">
-                    <img src="twitter-icon.png" alt="Twitter" />
+                    <SocialIconImage src={twitterIcon} alt="Twitter" />
                 </SocialIcon>
                 {/* 여기에 더 많은 소셜 아이콘 추가 가능 */}
             </SocialIcons>

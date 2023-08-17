@@ -44,3 +44,7 @@ export const socialIcons = styled.div`
 export const socialIcon = styled.a`
     margin: 0 10px;
 `;
+export const socialIconImage = styled.img`
+    width: 24px; // 원하는 너비
+    height: 24px; // 원하는 높이
+`;
