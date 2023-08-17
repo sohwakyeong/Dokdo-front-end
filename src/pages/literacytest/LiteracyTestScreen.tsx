@@ -48,8 +48,6 @@ const LiteracyTestScreen: React.FC = () => {
             question: '문제',
             options: ['선택지1', '선택지2', '선택지3', '선택지4'],
         },
-
-        // 문제 3부터 10까지 반복적으로 추가
         {
             question: '문제10',
             options: ['선택지1', '선택지2', '선택지3', '선택지4'],
