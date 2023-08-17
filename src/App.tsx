@@ -1,3 +1,4 @@
+// src/App.tsx
 import React from 'react';
 import styled from 'styled-components';
 import GlobalStyles from './styles/GlobalStyles'; // GlobalStyles.ts 파일에서 export한 것을 import합니다.
