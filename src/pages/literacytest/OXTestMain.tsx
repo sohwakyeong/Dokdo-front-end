@@ -8,8 +8,8 @@ import {
     socialIcons as SocialIcons,
     socialIcon as SocialIcon,
     socialIconImage as SocialIconImage,
-} from './LiteracyTestMain.Style';
-import literacyTestImage from '../../assets/img/문해력.png';
+} from './OXTestMain.Style';
+import OXTestImage from '../../assets/img/ox퀴즈.png';
 import facebookIcon from '../../assets/img/facebook.png';
 import twitterIcon from '../../assets/img/twitter.png';
 import { Link } from 'react-router-dom';
@@ -25,7 +25,7 @@ const OXTestMain: React.FC = () => {
                     <Link to="/ox-quiz">OX 퀴즈</Link>
                 </MenuItem>
             </Menu>
-            <Image src={literacyTestImage} alt="Description" />{' '}
+            <Image src={OXTestImage} alt="Description" />{' '}
             {/* import한 이미지를 사용합니다. */}
             <StartButton>테스트 시작하기</StartButton>
             <SocialIcons>
