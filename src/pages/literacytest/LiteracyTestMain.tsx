@@ -12,13 +12,18 @@ import {
 import literacyTestImage from '../../assets/img/문해력.png';
 import facebookIcon from '../../assets/img/facebook.png';
 import twitterIcon from '../../assets/img/twitter.png';
+import { Link } from 'react-router-dom';
 
 const LiteracyTestMain: React.FC = () => {
     return (
         <Container>
             <Menu>
-                <MenuItem href="#literacy-test">문해력 테스트</MenuItem>
-                <MenuItem href="#ox-quiz">OX 퀴즈</MenuItem>
+                <MenuItem>
+                    <Link to="/literacy-test">문해력 테스트</Link>
+                </MenuItem>
+                <MenuItem>
+                    <Link to="/ox-quiz">OX 퀴즈</Link>
+                </MenuItem>
             </Menu>
             <Image src={literacyTestImage} alt="Description" />{' '}
             {/* import한 이미지를 사용합니다. */}
