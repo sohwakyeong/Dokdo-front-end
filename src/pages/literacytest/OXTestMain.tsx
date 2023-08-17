@@ -12,6 +12,7 @@ import {
 import OXTestImage from '../../assets/img/ox퀴즈.png';
 import facebookIcon from '../../assets/img/facebook.png';
 import twitterIcon from '../../assets/img/twitter.png';
+import kakaoIcon from '../../assets/img/카카오톡아이콘.png';
 import { Link } from 'react-router-dom';
 
 const OXTestMain: React.FC = () => {
@@ -34,6 +35,9 @@ const OXTestMain: React.FC = () => {
                 </SocialIcon>
                 <SocialIcon href="https://twitter.com">
                     <SocialIconImage src={twitterIcon} alt="Twitter" />
+                </SocialIcon>
+                <SocialIcon href="https://www.kakaocorp.com">
+                    <SocialIconImage src={kakaoIcon} alt="Facebook" />
                 </SocialIcon>
                 {/* 여기에 더 많은 소셜 아이콘 추가 가능 */}
             </SocialIcons>
