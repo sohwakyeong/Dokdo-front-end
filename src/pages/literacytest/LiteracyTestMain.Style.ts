@@ -2,12 +2,17 @@ import styled from 'styled-components';
 
 export const container = styled.div`
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 `;
 
 export const menu = styled.div`
     display: flex;
     justify-content: space-around;
-    padding: 15px;
+    padding: 15px 0;
+    width: 100%;
     background-color: #f3f3f3;
 `;
 

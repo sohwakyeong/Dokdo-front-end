@@ -8,6 +8,7 @@ import {
     socialIcons as SocialIcons,
     socialIcon as SocialIcon,
 } from './LiteracyTestMain.Style';
+import literacyTestImage from '../../assets/img/문해력.png'; // 이미지 파일을 import 합니다.
 
 const LiteracyTestMain: React.FC = () => {
     return (
@@ -16,7 +17,8 @@ const LiteracyTestMain: React.FC = () => {
                 <MenuItem href="#literacy-test">문해력 테스트</MenuItem>
                 <MenuItem href="#ox-quiz">OX 퀴즈</MenuItem>
             </Menu>
-            <Image src="/" alt="Description" />
+            <Image src={literacyTestImage} alt="Description" />{' '}
+            {/* import한 이미지를 사용합니다. */}
             <StartButton>테스트 시작하기</StartButton>
             <SocialIcons>
                 <SocialIcon href="https://facebook.com">
