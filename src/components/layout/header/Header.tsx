@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleHeader, Up, Logo, Nav, Down, StyledLink } from './Header.styled';
 import { Link } from 'react-router-dom'; 
-import searchIcon from '../../../assets/image/Glass.png';
+import searchIcon from '../../../assets/image/Search.png';
 import notificationIcon from '../../../assets/image/Bell.png';
 
 function Header() {

@@ -4,7 +4,6 @@ import GlobalStyles from './styles/GlobalStyles';
 import Layout from './components/layout/Layout';
 import MainRoutes from './routes/Main';
 
-
 function App() {
   return (
     <Router>
