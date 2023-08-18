@@ -1,13 +1,11 @@
 import React from 'react';
-import { StyledRightScreen,Warpper } from './RightScreen.styled';
+import { StyleRight, Button } from './RightScreen.styled';
 
 function RightScreen() {
   return (
-    <StyledRightScreen>
-      <Warpper>
-        <button>문의하기</button>
-      </Warpper>
-    </StyledRightScreen>
+    <StyleRight>
+      <Button>문의하기</Button>
+    </StyleRight>
   );
 }
 

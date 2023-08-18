@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
 import LeftScreen from './leftscreen/LeftScreen';
-import RightScreen from './rightscreen/RightScreen';
 import Header from './header/Header';
 import Footer from './footer/Footer';
-import { LayoutContainer } from './Layout.styled'; // 경로를 수정해야 함
+import { LayoutContainer, ContentWrapper } from './Layout.styled';
+import RightScreen from './rightscreen/RightScreen';
 
 interface LayoutProps {
   children: ReactNode;
@@ -13,11 +13,35 @@ function Layouts({ children }: LayoutProps) {
   return (
     <LayoutContainer>
       <LeftScreen />
-      <div> 
-        <Header />
-        {children} 
-        <Footer />
-      </div>
+      <ContentWrapper>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            width: '474px',
+            height: '100%',
+            position: 'fixed',
+            top: '0',
+            zIndex: '10',
+            boxSizing: 'border-box',
+            border: 'solid 1px black',
+          }}
+        >
+          <Header />
+          <Footer />
+        </div>
+        <div
+          style={{
+            position: 'absolute',
+            top: '0',
+            paddingTop: '110px',
+            paddingBottom: '70px',
+          }}
+        >
+          {children}
+        </div>
+      </ContentWrapper>
       <RightScreen />
     </LayoutContainer>
   );

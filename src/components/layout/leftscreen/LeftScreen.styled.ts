@@ -45,6 +45,7 @@ export const Input = styled.input`
   height: 50px;
   border-radius: 30px;
   padding-left: 15px;
+  
 
   &::placeholder {
     color: #999;

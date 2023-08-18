@@ -9,13 +9,14 @@ import {
   Button,
 } from './LeftScreen.styled';
 
+
 function LeftScreen() {
   return (
     <StyledLeftScreen>
       <Wrapper>
         <Logo>독도 로고</Logo>
         <Info>문해력 향상을 위한 독서 모임!</Info>
-        <div>
+        <div style={{ position: 'relative' }}>
           <Input type="text" placeholder="토론 모임을 검색해보세요" />
           <Button>icon</Button>
         </div>
@@ -33,3 +34,4 @@ function LeftScreen() {
 }
 
 export default LeftScreen;
+
