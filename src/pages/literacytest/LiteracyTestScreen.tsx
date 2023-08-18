@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import {
     Container,
@@ -11,6 +12,7 @@ import {
 } from './LiteracyTestScreen.Style';
 
 const LiteracyTestScreen: React.FC = () => {
+    const navigate = useNavigate();
     const [currentQuestion, setCurrentQuestion] = useState(0); // 현재 문제 인덱스
     const [questions] = useState([
         {
@@ -59,6 +61,9 @@ const LiteracyTestScreen: React.FC = () => {
         // 선택한 옵션 처리 로직 추가
         if (currentQuestion < questions.length - 1) {
             setCurrentQuestion(currentQuestion + 1); // 다음 문제로 이동
+        } else {
+            // 마지막 문제의 답을 클릭한 경우, 결과 화면으로 이동합니다.
+            navigate('/literacy-test/screen/result');
         }
         // 마지막 문제인 경우 다른 처리 로직
     };
