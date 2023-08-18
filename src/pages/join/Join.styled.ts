@@ -9,7 +9,7 @@ export const Container = styled.div`
   
   box-sizing: border-box;
   width: 474px;
-  margin: 60px auto;
+  margin: 160px auto;
 `;
 
 export const TitleWrap = styled.div`
@@ -48,17 +48,20 @@ export const Tag = styled.div`
 export const TagPlus =  styled.div`
 display: flex;
     color: red;
+    font-size: 13px;
+    margin-left: 5px;
 
 `;
 export const FormInput = styled.div`
     display: flex;
-    position:relative;
+
 
 `;
 
 export const Input = styled.input`
   display: flex;
-  width: 420px;
+  font-size: 16px;
+  width: 100%;
   height: 37px;
   border-radius: 8px;
 
@@ -75,26 +78,68 @@ export const EmailInput = styled(Input)`
 
 export const EmailSelect = styled.select`
     width: 130px;
+    font-size: 16px;
 `;
 
 
-export const InputButton = styled.input`
+export const InputButton = styled.button`
   display: flex;
-  text-align: center;
-
+  justify-content: center;
+  align-items: center;
+  height: 42px;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
 `;
 
 export const DupleButton = styled(InputButton)`
  width: 130px;
- height: 42px;
  margin-left: 10px;
 `;
 
 export const GenderButton = styled(InputButton)`  
-    width: 200px;
-    height: 42px;
+    width: 50%;
 
  &+& {
-    margin-left: 20px;
+    margin-left: 10px;
  } 
 `;
+
+export const Wrapper2 = styled(Wrapper)`
+margin: 10px 27px 16px 27px;
+
+`
+
+export const CheckWrapper = styled.div`
+  box-sizing: border-box;
+  border-radius: 4px;
+  background-color: lightgray;
+  padding: 10px 10px 15px 10px;
+
+  
+`
+export const CheckLabel = styled.label`
+display: flex;
+font-size: 18px;
+padding: 0 10px 20px 10px;
+`
+export const CheckInput = styled.input`
+  margin-right: 8px;
+`
+
+export const AllCheckLabel = styled(CheckLabel)`
+  font-size: 1.2rem;
+  border-bottom: 1px solid #bcbcbc;
+  padding: 15px 10px;
+`;
+
+
+export const CheckBox = styled.div`
+  margin-top: 20px;
+`;
+
+export const SubmitButton = styled(InputButton)`
+  width: 80%;
+  display: flex;
+ margin: 0 auto;
+`
