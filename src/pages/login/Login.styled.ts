@@ -7,18 +7,20 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
 
+  margin: 184px auto;
+
 `;
 
 export const LogoImg = styled.img`
   width: 100px;
   height: 100px;
-  padding-bottom: 100px;
+  padding-bottom: 72px;
 `;
 
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  margin: 10px;
+  margin: 10px 0 20px 0;
   box-sizing: border-box;
   width: 420px;
   justify-content: space-between;
@@ -26,7 +28,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Title = styled.div`
-  font-size: 24px;
+  font-size: 30px;
   text-align: left;
   color: black;
   font-weight: bold;
@@ -35,7 +37,7 @@ export const Title = styled.div`
 `;
 
 export const JoinLink = styled(Link)`
-  font-size: 13px;
+  font-size: 15px;
   text-decoration: none;
   color: black;
   margin-top: 10px;
@@ -55,20 +57,36 @@ export const Input = styled.input`
   height: 57px;
   text-align: center;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 20px;
   outline: none;
   cursor: pointer;
 
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.5rem;
 `;
+
+export const Save = styled.label`
+  display: flex;
+  color: black;
+  cursor: pointer;
+  font-size: 20px;
+  align-items: center;
+  
+  margin: 0 5px 5px 5px;
+
+`;
+export const SaveId = styled.input`
+text-align: center;
+margin-right: 8px;
+  
+`; 
 
 export const Button = styled.button`
   width: 420px;
   height: 57px;
   text-align: center;
   border-radius: 8px;
-  font-size: 16px;
-  margin-bottom: 0.8rem;
+  font-size: 18px;
+  margin-bottom: 0.5rem;
   cursor: pointer;
 `;
 
