@@ -6,7 +6,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
+  width: 474px;
   margin: 184px auto;
 
 `;
@@ -45,7 +45,7 @@ export const JoinLink = styled(Link)`
 
 `;
 
-export const Form = styled.div`
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -57,7 +57,7 @@ export const Input = styled.input`
   height: 57px;
   text-align: center;
   border-radius: 8px;
-  font-size: 20px;
+  font-size: 18px;
   outline: none;
   cursor: pointer;
 
@@ -68,15 +68,15 @@ export const Save = styled.label`
   display: flex;
   color: black;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 18px;
   align-items: center;
   
-  margin: 0 5px 5px 5px;
+  margin: 5px 10px 10px 10px;
 
 `;
 export const SaveId = styled.input`
-text-align: center;
-margin-right: 8px;
+
+margin: 0 8px 2px 0;
   
 `; 
 
