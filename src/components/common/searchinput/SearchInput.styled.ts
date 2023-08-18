@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const InputWrapper = styled.div`
+export const Wrapper = styled.div`
   position: relative;
   height: 60px;
   display: flex;
@@ -17,7 +17,7 @@ export const Input = styled.input`
   padding: 10px;
 `;
 
-export const SearchButton = styled.button`
+export const Button = styled.button`
   width: 24px;
   height: 24px;
   position: absolute;
@@ -31,7 +31,7 @@ export const SearchButton = styled.button`
   justify-content: center;
 `;
 
-export const SearchIcon = styled.img`
+export const Icon = styled.img`
   width: 16px;
   height: 16px;
 `;

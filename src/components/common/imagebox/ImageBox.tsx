@@ -1,13 +1,13 @@
 import React from 'react';
-import { ImageBoxContainer, Image } from './ImageBox.styled';
+import * as IB from './ImageBox.styled';
 
 //{ /* props -> {imagePath}*/ }
 function ImageBox() {
   return (
-    <ImageBoxContainer>
+    <IB.Container>
        {/* src={imagePath}*/}
-      <Image src="/" alt="이미지" />
-    </ImageBoxContainer>
+      <IB.Image src="/" alt="이미지" />
+    </IB.Container>
   );
 }
 

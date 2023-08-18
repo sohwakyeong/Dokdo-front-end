@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ImageBoxContainer = styled.div`
+export const Container = styled.div`
   width: 88px;
   height: 88px;
   border-radius: 20px;
