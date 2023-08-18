@@ -1,15 +1,15 @@
 import React, { ReactNode } from 'react';
-import LeftScreen from './leftscreen/LeftScreen';
-import Header from './header/Header';
-import Footer from './footer/Footer';
-import { LayoutContainer, ContentWrapper } from './Layout.styled';
-import RightScreen from './rightscreen/RightScreen';
+import LeftScreen from '../leftscreen/LeftScreen';
+import Header from '../header/Header';
+import Footer from '../footer/Footer';
+import { LayoutContainer, ContentWrapper } from './Layout1.styled';
+import RightScreen from '../rightscreen/RightScreen';
 
-interface LayoutProps {
+interface Layout1Props {
   children: ReactNode;
 }
 
-function Layouts({ children }: LayoutProps) {
+function Layout1({ children }: Layout1Props) {
   return (
     <LayoutContainer>
       <LeftScreen />
@@ -47,4 +47,4 @@ function Layouts({ children }: LayoutProps) {
   );
 }
 
-export default Layouts;
+export default Layout1;
