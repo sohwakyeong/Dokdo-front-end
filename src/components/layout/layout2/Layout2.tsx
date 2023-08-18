@@ -27,6 +27,8 @@ function Layout2({ children }: Layout2Props) {
       App.jsx에서는 어떤식으로 여러개의 레이아웃을 적용시키는걸까요? 
       <div>
       도와주세요 코치님 ~~~~~~~~!!!!!!😂😂😂😂😂😂😂😂😂
+
+      혹시 히든클래스 이용해서 하는 방법도 있을까요?
       </div>
     </LayoutContainer>
   );
