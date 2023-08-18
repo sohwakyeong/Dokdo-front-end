@@ -9,6 +9,7 @@ import {
     socialIcon as SocialIcon,
     socialIconImage as SocialIconImage,
 } from './OXTestMain.Style';
+import { useNavigate } from 'react-router-dom';
 import OXTestImage from '../../assets/img/ox퀴즈.png';
 import facebookIcon from '../../assets/img/facebook.png';
 import twitterIcon from '../../assets/img/twitter.png';
@@ -16,6 +17,12 @@ import kakaoIcon from '../../assets/img/카카오톡아이콘.png';
 import { Link } from 'react-router-dom';
 
 const OXTestMain: React.FC = () => {
+    const navigate = useNavigate(); // 이것을 추가합니다.
+
+    const handleStartTest = () => {
+        // 이 함수를 추가합니다.
+        navigate('/ox-quiz/screen'); // 여기에 이동하고자 하는 경로를 적습니다.
+    };
     return (
         <Container>
             <Menu>
@@ -28,7 +35,7 @@ const OXTestMain: React.FC = () => {
             </Menu>
             <Image src={OXTestImage} alt="Description" />{' '}
             {/* import한 이미지를 사용합니다. */}
-            <StartButton>테스트 시작하기</StartButton>
+            <StartButton onClick={handleStartTest}>테스트 시작하기</StartButton>
             <SocialIcons>
                 <SocialIcon href="https://facebook.com">
                     <SocialIconImage src={facebookIcon} alt="Facebook" />

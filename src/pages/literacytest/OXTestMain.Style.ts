@@ -6,6 +6,7 @@ export const container = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 474px;
 `;
 
 export const menu = styled.div`
