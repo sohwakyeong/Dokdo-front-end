@@ -3,10 +3,12 @@ import ImageBox from '../../components/common/imagebox/ImageBox';
 import * as M from './Main.styled';
 import BoardBox from '../../components/common/boardbox/BoardBox';
 import MoreButton from '../../components/common/morebutton/MoreButton';
+import Slider from '../../components/common/slider/Slider';
 
 function Main() {
   return (
-    <div>
+    <M.Wrapper>
+      <Slider />
       <M.GridContainer>
         <M.ImageRow>
           <ImageBox />
@@ -28,7 +30,9 @@ function Main() {
         <BoardBox />
         <MoreButton />
       </div>
-    </div>
+      <Slider />
+      <Slider />
+    </M.Wrapper>
   );
 }
 

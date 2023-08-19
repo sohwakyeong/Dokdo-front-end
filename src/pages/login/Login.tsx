@@ -1,37 +1,37 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 import {  } from 'react-router-dom';
-import LogoIcon from '../../assets/icon/samplelogo.jpeg';
+// import LogoIcon from '../../assets/icon/samplelogo.jpeg';
 
 import * as L from './Login.styled';
 
-function LoginComponent({ onSubmit }) {
-    const [Email, SetEmail] = useState("");
-    const [Password, SetPassword] = useState("");
+function LoginComponent() {
+  //   const [Email, SetEmail] = useState("");
+  //   const [Password, SetPassword] = useState("");
 
 
-  const onEmailHandler = (e) => {
-    SetEmail(e.target.value);
-  }
-  const onPasswordHandler = (e) => {
-    SetPassword(e.target.value);
-  }
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
+  // const onEmailHandler = (e) => {
+  //   SetEmail(e.target.value);
+  // }
+  // const onPasswordHandler = (e) => {
+  //   SetPassword(e.target.value);
+  // }
+  // const onSubmitHandler = (e) => {
+  //   e.preventDefault();
 
-    console.log('Email', Email);
-    console.log('Password', Password);
+  //   console.log('Email', Email);
+  //   console.log('Password', Password);
 
-    let formData= {
-      email: Email,
-      password: Password,
-    }
-    onSubmit(formData);
+  //   let formData= {
+  //     email: Email,
+  //     password: Password,
+  //   }
+  //   onSubmit(formData);
 
-  }
+  // }
 
   return (
     <L.Container>
-      <L.LogoImg src={LogoIcon} alt="logo" />
+      {/* <L.LogoImg src={LogoIcon} alt="logo" />
       <L.Wrapper>
         <L.Title>Login</L.Title>
         <L.JoinLink to="/">회원가입하기</L.JoinLink>
@@ -63,7 +63,7 @@ function LoginComponent({ onSubmit }) {
         <L.Button>
           <L.Google to="">구글아이디로 시작</L.Google>
         </L.Button>
-      </L.Form>
+      </L.Form> */}
     </L.Container>
   );
 }

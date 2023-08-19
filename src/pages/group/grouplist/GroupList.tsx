@@ -1,9 +1,14 @@
 import React from 'react';
-
+import SearchInput from '../../../components/common/searchinput/SearchInput';
+import Slider from '../../../components/common/slider/Slider';
+import * as GL from './GroupList.Styled'
 
 const GroupList = () => {
   return (
-    <div>토론모임 리스트 페이지</div>
+    <GL.Wrapper>
+      <SearchInput />
+      <Slider />
+    </GL.Wrapper>
   );
 };
 

@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+export const Wrapper = styled.div`
+  width: 474px;
+`;
+
 export const GridContainer = styled.div`
   display: flex;
   flex-direction: column;
