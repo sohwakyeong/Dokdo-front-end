@@ -24,12 +24,12 @@ function Main() {
         </M.ImageRow>
         <MoreButton />
       </M.GridContainer>
-      <div>
+      <M.GroupList>
         <BoardBox />
         <BoardBox />
         <BoardBox />
         <MoreButton />
-      </div>
+      </M.GroupList>
       <Slider />
       <Slider />
     </M.Wrapper>

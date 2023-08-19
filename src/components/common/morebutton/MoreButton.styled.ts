@@ -1,15 +1,9 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 474px;
-`;
-
 export const Border = styled.div`
   display: flex;
   justify-content: center;
-  width: 90%;
+  width: 100%;
   height: 50px;
   box-sizing: border-box;
   border: solid 1px #ddd;

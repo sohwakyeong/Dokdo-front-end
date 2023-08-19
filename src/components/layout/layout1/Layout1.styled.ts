@@ -25,7 +25,7 @@ export const CenteredContent = styled.div`
 
 export const Children = styled.div`
   width: 474px;
-  padding: 110px 0 70px 0;
+  padding: 100px 0 70px 0;
   box-shadow: 1px 0 0 #ddd;
   background-color: white;
   min-height: 100vh;

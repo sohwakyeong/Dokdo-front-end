@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
 
-  width: 474px;
+  width: 100%;
   height: 110px;
   background-color: white;
   margin: 10px 0;
@@ -17,7 +17,7 @@ export const Border = styled.div`
   border: solid 1px #ddd;
   border-radius: 15px;
   height: 100%;
-  width: 90%;
+  width: 100%;
   padding: 7px;
 `;
 

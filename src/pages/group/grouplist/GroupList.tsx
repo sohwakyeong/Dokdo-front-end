@@ -27,12 +27,18 @@ const GroupList = () => {
           <GL.ClickBox>클릭된 목록 박스</GL.ClickBox>
         </GL.HashTagBox>
       </GL.ChoiceBox>
-      <div>
-        <BoardBox />
-        <BoardBox />
-        <BoardBox />
-        <MoreButton />
-      </div>
+      <GL.ChoiceImageGroup>
+        <GL.ChoiceSelect>
+          <div>조건별 검색</div>
+          <div>셀렉트 박스</div>
+        </GL.ChoiceSelect>
+        <GL.ChoiceGroupBoard>
+          <BoardBox />
+          <BoardBox />
+          <BoardBox />
+          <MoreButton />
+        </GL.ChoiceGroupBoard>
+      </GL.ChoiceImageGroup>
     </GL.Wrapper>
   );
 };
