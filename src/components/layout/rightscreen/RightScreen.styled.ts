@@ -1,27 +1,22 @@
 import styled from 'styled-components';
 
-export const StyledRightScreen = styled.div`
-  background-color: #f0f0f0;
+export const StyleRight = styled.div`
   position: fixed;
   right: 0;
-  top: 0;
-  width: 15%;
-  height: 100vh;
-`;
-
-export const Warpper = styled.div`
+  width: calc(50% - 474px);
   display: flex;
   justify-content: center;
   align-items: end;
-  height: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  padding-bottom: 30px;
+`;
 
-  & button {
-    margin-bottom: 20px;
-    border: none;
-    background-color: blue;
-    color: white;
-    height: 30px;
-    width: 70px;
-    border-radius: 10px;
-  }
+export const Button = styled.button`
+  border: none;
+  background-color: blue;
+  color: white;
+  width: 200px;
+  height: 50px;
+  border-radius: 20px;
 `;
