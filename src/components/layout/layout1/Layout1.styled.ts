@@ -1,33 +1,34 @@
 import styled from 'styled-components';
 
+
 export const LayoutContainer = styled.div`
-  display: grid;
-  grid-template-columns: 50% 474px auto;
-  height: 100vh;
-  overflow: hidden;
+  display: flex;
+  height: 100%;
 `;
 
-
-export const HeaderWrapper = styled.div`
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
+export const Left = styled.div`
+  flex: 1;
+  background-color: #f0f0f0;
 `;
 
-export const FooterWrapper = styled.div`
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-  left: 0;
+export const Right = styled.div`
+  flex: 1;
+  /* background-color: transparent; */
 `;
 
-export const ContentWrapper = styled.div`
-  grid-column: 2 / span 1;
+export const CenteredContent = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Children = styled.div`
   width: 474px;
-  min-width: 474px;
+  padding: 110px 0 70px 0;
+  box-shadow: 1px 0 0 #ddd;
+  background-color: white;
+  min-height: 100vh;
   box-sizing: border-box;
+
 `;

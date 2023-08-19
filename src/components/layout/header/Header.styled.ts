@@ -6,7 +6,10 @@ export const StyleHeader = styled.div`
   display: flex;
   flex-direction: column;
   height: 100px;
-  border-bottom: solid 1px black;
+  width: 474px;
+  margin-bottom: 10px;
+  position: fixed;
+  z-index: 9999;
 `;
 
 export const Logo = styled.h1`
@@ -29,7 +32,6 @@ export const Up = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: solid 1px black;
   height: 40px;
   background-color: red;
 `;

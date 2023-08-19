@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   justify-content: center;
-
   width: 474px;
 `;
 
@@ -19,8 +18,9 @@ export const Border = styled.div`
 
 export const Button = styled.button`
   color: gray;
-  font-weight: bold;
   font-size: 15px;
   border: none;
   background-color: white;
+  cursor: pointer;
+  width: 90%;
 `;
