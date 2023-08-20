@@ -32,6 +32,10 @@ const Group = () => {
         <GR.NoticeImage>
           <img src="" alt="" />
         </GR.NoticeImage>
+        <GR.SectionLink>
+          <div>웹사이트 바로가기</div>
+          <div>공유하기</div>
+        </GR.SectionLink>
       </GR.Section>
       <Slider />
     </GR.Wrapper>

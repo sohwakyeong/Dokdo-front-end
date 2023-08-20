@@ -43,4 +43,18 @@ export const NoticeImage = styled.div`
 
 export const Section = styled.div`
   margin: 20px 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const SectionLink = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 30px;
+  border-bottom: solid 1px #ddd;
+  padding-bottom: 10px;
 `;
