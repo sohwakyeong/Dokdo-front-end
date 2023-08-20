@@ -8,6 +8,7 @@ import Slider from '../../components/common/slider/Slider';
 function Main() {
   return (
     <M.Wrapper>
+      
       <Slider />
       <M.GridContainer>
         <M.ImageRow>
