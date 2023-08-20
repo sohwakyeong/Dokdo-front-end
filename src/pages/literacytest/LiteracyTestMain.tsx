@@ -9,15 +9,17 @@ import {
   socialIcon as SocialIcon,
   socialIconImage as SocialIconImage,
   participantsContainer as ParticipantsContainer,
+  StyledLink,
 } from './LiteracyTestMain.Style';
 import { useNavigate } from 'react-router-dom';
 import literacyTestImage from '../../assets/img/문해력.png';
 import facebookIcon from '../../assets/img/facebook.png';
 import twitterIcon from '../../assets/img/twitter.png';
 import kakaoIcon from '../../assets/img/카카오톡아이콘.png';
-import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const LiteracyTestMain: React.FC = () => {
+  const location = useLocation();
   const navigate = useNavigate();
   const [participants, setParticipants] = useState(0);
 
@@ -32,11 +34,34 @@ const LiteracyTestMain: React.FC = () => {
   return (
     <Container>
       <Menu>
-        <MenuItem>
-          <Link to="/literacy-test">문해력 테스트</Link>
+        <MenuItem
+          style={{
+            backgroundColor:
+              location.pathname === '/literacy-test'
+                ? '#59C4FC'
+                : 'transparent',
+          }}
+        >
+          <StyledLink
+            to="/literacy-test"
+            style={{ textDecoration: 'none', color: '#000' }}
+          >
+            문해력 테스트
+          </StyledLink>
         </MenuItem>
-        <MenuItem>
-          <Link to="/ox-quiz">OX 퀴즈</Link>
+        <MenuItem
+          rightBorder
+          style={{
+            backgroundColor:
+              location.pathname === '/ox-quiz' ? '#59C4FC' : 'transparent',
+          }}
+        >
+          <StyledLink
+            to="/ox-quiz"
+            style={{ textDecoration: 'none', color: '#000' }}
+          >
+            OX 퀴즈
+          </StyledLink>
         </MenuItem>
       </Menu>
       <Image src={literacyTestImage} alt="Description" />

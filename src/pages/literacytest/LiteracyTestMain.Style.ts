@@ -1,4 +1,15 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: #000; // 글자색을 검정색으로 설정
+  cursor: pointer;
+  font-weight: bold;
+  width: 50%;
+  text-align: center;
+  padding: 10px 0;
+`;
 
 export const container = styled.div`
   text-align: center;
@@ -9,20 +20,26 @@ export const container = styled.div`
   width: 474px;
   background-color: #59c4fc;
 `;
-
 export const menu = styled.div`
   display: flex;
   justify-content: space-around;
-  padding: 15px 0;
   width: 100%;
   background-color: #f3f3f3;
+  border-bottom: 1px solid #333; // 메뉴 전체에 하단 테두리 추가
 `;
 
-export const menuItem = styled.a`
+interface MenuItemProps {
+  rightBorder?: boolean;
+}
+
+export const menuItem = styled.a<MenuItemProps>`
   text-decoration: none;
-  color: #333;
+  color: #000;
   cursor: pointer;
   font-weight: bold;
+  width: 50%;
+  text-align: center;
+  padding: 10px 0;
 `;
 
 export const image = styled.img`
@@ -32,26 +49,26 @@ export const image = styled.img`
 `;
 
 export const startButton = styled.button`
-  padding: 15px 30px; // 버튼 패딩 늘림
-  font-size: 18px; // 폰트 크기 조정
+  padding: 15px 30px;
+  font-size: 18px;
   cursor: pointer;
-  background-color: #007bff; // 버튼 배경색
-  color: #fff; // 글자색을 하얀색으로
-  border: none; // 테두리 제거
-  border-radius: 25px; // 둥근 모서리 효과
-  transition: 0.3s; // 호버 효과 부드럽게
-  text-transform: uppercase; // 글자를 대문자로
-  font-weight: bold; // 글자를 굵게
-  letter-spacing: 1px; // 글자 간격 조정
-  outline: none; // 클릭 시 외곽선 제거
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  transition: 0.3s;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
+  outline: none;
 
   &:hover {
-    background-color: #0056b3; // 호버 시 색상 변경
-    transform: scale(1.05); // 호버 시 버튼 확대
+    background-color: #0056b3;
+    transform: scale(1.05);
   }
 
   &:active {
-    transform: scale(1); // 클릭 시 원래 크기로 복귀
+    transform: scale(1);
   }
 `;
 
@@ -66,9 +83,9 @@ export const socialIcon = styled.a`
   margin: 0 10px;
 `;
 export const socialIconImage = styled.img`
-  width: 24px; // 원하는 너비
-  height: 24px; // 원하는 높이
-  border-radius: 50%; // 둥글게 만들기
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
 `;
 export const participantsContainer = styled.div`
   font-size: 16px;
