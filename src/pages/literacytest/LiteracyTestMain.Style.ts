@@ -25,7 +25,7 @@ export const menu = styled.div`
   justify-content: space-around;
   width: 100%;
   background-color: #f3f3f3;
-  border-bottom: 1px solid #333; // 메뉴 전체에 하단 테두리 추가
+  border-bottom: 1px solid #ffffff; // 메뉴 전체에 하단 테두리 추가
 `;
 
 interface MenuItemProps {
