@@ -11,7 +11,6 @@ const BookAndContest = () => {
           <BC.BoxTitle>도서를 추천합니다</BC.BoxTitle>
           <select>
             <option value="">장르선택</option>
-
             <option value="">교양</option>
             <option value="">자기계발</option>
             <option value="">현대문학</option>

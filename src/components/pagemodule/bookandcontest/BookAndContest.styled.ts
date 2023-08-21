@@ -45,7 +45,7 @@ export const Img = styled.div`
   width: 100%;
   height: 193px;
 
-  background-color: yellow;
+  background-color: #fff7ec;
 `;
 
 export const Info = styled.div`

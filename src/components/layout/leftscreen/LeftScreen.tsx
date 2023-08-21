@@ -27,7 +27,7 @@ function LeftScreen() {
         <Link to="/freeboard/list">
           자유 게시판ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ아직못함
         </Link>
-        <Link to="/books">책 추천</Link>
+        <Link to="/bookrec">책 추천</Link>
 
         <Link to="/contest">공모전</Link>
 
@@ -36,12 +36,8 @@ function LeftScreen() {
         <Link to="/group/board/detail/:id">토론 게시물 상세 페이지</Link>
         <Link to="/group/board/write/:id">토론 게시물 작성</Link>
         <Link to="/group/photo">토론 사진첩</Link>
-        <Link to="/contest/detail">
-          공모전디테일
-        </Link>
-        <Link to="/books/detail">
-          책 추천 디테일
-        </Link>
+        <Link to="/contest/detail">공모전디테일</Link>
+        <Link to="/bookrec/detail">책 추천 디테일</Link>
         <Link to="/group/photo/detail/:id">
           토론 사진 상세
           페이지ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ만든거랑비슷함
