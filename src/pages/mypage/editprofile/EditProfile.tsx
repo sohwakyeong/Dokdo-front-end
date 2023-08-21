@@ -92,9 +92,9 @@ function EditProfileComponent() {
           </EditStyle.GenderButton>
         </EditStyle.FormInput>
         {/* 나중에 Link to="" 지우고 navigate로 이동? */}
-        <EditStyle.SubmitButton><EditStyle.SubmitLink to="/">저장하기</EditStyle.SubmitLink></EditStyle.SubmitButton>
+        <EditStyle.SubmitButton><EditStyle.SubmitLink to="/user/mypage">저장하기</EditStyle.SubmitLink></EditStyle.SubmitButton>
       </EditStyle.Wrapper>
-      <EditStyle.DeleteAccount>탈퇴하기</EditStyle.DeleteAccount>
+      <EditStyle.DeleteAccount><EditStyle.SubmitLink to="/user/deleteaccount">탈퇴하기</EditStyle.SubmitLink></EditStyle.DeleteAccount>
     </EditStyle.Container>
   );
 }

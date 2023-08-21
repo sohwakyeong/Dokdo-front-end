@@ -70,56 +70,6 @@ function SignupComponent() {
             placeholder="비밀번호를 다시 입력해주세요."
           />
         </SignupStyle.FormInput>
-
-        <SignupStyle.FormTag>
-          <SignupStyle.Tag>닉네임</SignupStyle.Tag>
-          <SignupStyle.TagPlus>*(필수)</SignupStyle.TagPlus>
-        </SignupStyle.FormTag>
-        <SignupStyle.FormInput>
-          <SignupStyle.Input
-            id="name_val"
-            type="text"
-            name="is_Username"
-            placeholder="사용하실 닉네임을 입력해주세요."
-          />
-        </SignupStyle.FormInput>
-
-        <SignupStyle.FormTag>
-          <SignupStyle.Tag>한 줄 소개</SignupStyle.Tag>
-        </SignupStyle.FormTag>
-        <SignupStyle.FormInput>
-          <SignupStyle.Input
-            id="introduce_val"
-            type="text"
-            name="is_Introduce"
-            placeholder="10문자 이상 입력해주세요."
-          />
-        </SignupStyle.FormInput>
-
-        <SignupStyle.FormTag>
-          <SignupStyle.Tag>전화번호</SignupStyle.Tag>
-          <SignupStyle.TagPlus>*(필수)</SignupStyle.TagPlus>
-        </SignupStyle.FormTag>
-        <SignupStyle.FormInput>
-          <SignupStyle.Input
-            id="phone1_val"
-            type="text"
-            name="is_Userphone1"
-            placeholder='휴대폰 번호 입력("-" 제외 11자리 숫자 입력)'
-          />
-        </SignupStyle.FormInput>
-
-        <SignupStyle.FormTag>
-          <SignupStyle.Tag>성별 (선택)</SignupStyle.Tag>
-        </SignupStyle.FormTag>
-        <SignupStyle.FormInput>
-          <SignupStyle.GenderButton name="is_Gender" id="gender">
-            남성
-          </SignupStyle.GenderButton>
-          <SignupStyle.GenderButton name="is_Gender" id="gender">
-            여성
-          </SignupStyle.GenderButton>
-        </SignupStyle.FormInput>
       </SignupStyle.Wrapper>
 
       <SignupStyle.Wrapper2>

@@ -104,7 +104,6 @@ text-decoration: none;
 color: black;
 `;
 export const DeleteAccount = styled.p`
-
   border-bottom: 1px solid #2e2e2e;
   font-size: 15px;
 `;
