@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import * as A from './Admin.styled';
-import AdminComponent from "./Admin";
 
 function InquiryList (){
     return (
         <div>
-            <AdminComponent></AdminComponent>
             <section>
+            <A.MenuTop>
             <A.Headline>문의 목록</A.Headline>
-            <A.Toggle> 수정</A.Toggle>
+            <A.Toggle> 셀렉터 </A.Toggle>
+            </A.MenuTop>
             <A.Table>
             <thead>
                 <tr>

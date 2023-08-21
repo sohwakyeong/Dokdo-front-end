@@ -1,14 +1,14 @@
 import React from "react";
 import * as A from "./Admin.styled";
-import AdminComponent from "./Admin";
 
 function AdminPost (){
     return (
         <div>
-        <AdminComponent></AdminComponent>
         <section>
+            <A.MenuTop>
             <A.Headline>게시글 관리</A.Headline>
-            <A.Toggle>토글수정</A.Toggle>
+            <A.Toggle>셀렉터</A.Toggle>
+            </A.MenuTop>
             <A.Table>
                 <thead>
                 <tr>

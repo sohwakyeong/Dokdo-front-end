@@ -1,40 +1,38 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-    max-width: 940px;
-    height: 100vh;
-    margin: 0 auto;
     display: flex;
+    max-width: 940px;
+    height: 100%;
+    margin: 0 auto;
+    
 `
 export const SideBar = styled.div`
-    width:160px;
-    height:100vh;
-    background-color: beige;
-
-    position: relative;
-
     display: flex;
     flex-direction: column;
     justify-content:space-between;
     align-items: center;
+
+    width:160px;
+    height:100vh;
+    background-color: beige;
 `
 
 export const Main = styled.div`
-    width:780px;
-    height:100vh;
-
     display:flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    
+    width:780px;
+    height:100vh;
 `
 
 export const Input = styled.input`
+    position: static;
     width: 700px;
     height:50px;
     border-radius: 50px;
-
-    position: static;
     margin-top: 40px;
 
     &::placeholder{
@@ -45,59 +43,73 @@ export const Input = styled.input`
 `
 
 export const Todo = styled.div`
+    display: flex;
+    align-self: flex-start;
+    margin-top:40px;
+    margin-left: 40px;
     font-size:25px;
     font-weight: bold;
-
-    margin-top:50px;
-    margin-left: 40px;
-    align-self: flex-start;
 `
 
 export const Nav = styled.div`
-    margin-top:20px;
     display: flex;
     justify-content: space-between;
     width: 700px;
+    margin-top:20px;
+    padding-bottom: 20px;
 
     & div {
         font-size: 20px;
     }
 `
-
-export const Content = styled.div`
-    position: sticky;
-
+export const Children = styled.div`
+    width:700px;
+    padding-top: 10px;
+    background-color: white;
+    font-size: 20px;
+    overflow: auto;
+`
+export const MenuTop = styled.div`
+    display:flex;
+    flex-direction: column;
 `
 
 export const Headline = styled.div`
-    text-align:left;
+    padding: 20px 0;
     font-size: 30px;
-    margin-left: 40px;
+`
 
-    position: relative;
+export const Toggle = styled.button`
+    display: flex;
+    align-self: flex-end;
+    width:70px;
+    height: 20px;
 `
 
 export const Table = styled.table`
     width: 700px;
-    border-collapse : collapse;
     background-color: white;
     border: 1px #a39485 solid;
-    box-shadow: 0 2px 5px rgba(0,0,0,.25);
     border-radius: 5px;
+    border-collapse : collapse;
+    box-shadow: 0 2px 5px rgba(0,0,0,.25);
+    font-size: 15px;
     overflow: hidden;
     
     thead {
-        height: 30px;
-        text-align: center;
-        font-weight: bold;
-        background-color:#a39485;
+        height: 40px;
+        padding: 10px;
         color:white;
+        background-color:#a39485;
+        font-weight: bold;
+        font-size: 18px;
+        text-align: center;
     }
 
     td,tr {
-        text-align:center; 
-        border: 1px solid #a39485;
         padding:5px;
+        border: 1px solid #a39485;
+        text-align:center; 
     }
 `
 
@@ -109,35 +121,36 @@ export const Link = styled.a`
    ;
 `
 export const Info = styled.div`
-    margin-top: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 10px;
 
     & div {
         width: 70px;
         height: 70px; 
-        background-color: burlywood; 
         margin: 10px 0;
+        background-color: burlywood; 
        }
 `
 export const SideNav = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
+    
+      div {
+        padding:30px;
+    }
 `
 
 export const Button = styled.div`
     width: 100px;
     height: 35px;
+    margin-bottom: 20px;
+    background-color: burlywood; 
     border: none;
     border-radius: 5px;
-    background-color: burlywood; 
-    margin-bottom: 20px;
 `
 
-export const Toggle = styled.button`
-    position : absolute;
-    top:310px;
-    right:320px;
-`
+

@@ -1,8 +1,12 @@
-import React from "react";
+import React,{ ReactNode } from "react";
 import { Link } from "react-router-dom";
 import * as A from './Admin.styled';
 
-function AdminComponent() {
+interface AdminProps {
+   children: ReactNode;}
+
+
+function Admin({children}: AdminProps) {
     return (
     <A.Wrapper>
         <A.SideBar>
@@ -12,10 +16,15 @@ function AdminComponent() {
         </A.Info>
         <A.SideNav>
                 <Link to="/">홈</Link>
+                <div></div>
                 <Link to="/admin">대시보드</Link>
+                <div></div>
                 <Link to="/admin/user">사용자 목록</Link>
+                <div></div>
                 <Link to="/admin/post">게시글 관리</Link>
+                <div></div>
                 <Link to="/admin/group">모임 목록</Link>
+                <div></div>
                 <Link to="/admin/inquirylist">문의 사항</Link>
         </A.SideNav>    
         <A.Button>로그아웃</A.Button>
@@ -29,11 +38,11 @@ function AdminComponent() {
             <div>신규 모임</div>
             <div>신규 게시글</div>
             <div>답변 대기 문의</div>
-        <A.Content></A.Content>
         </A.Nav>
+        <A.Children>{children}</A.Children>
         </A.Main>
     </A.Wrapper>
     );
 }
 
-export default AdminComponent;
+export default Admin;

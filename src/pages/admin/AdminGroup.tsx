@@ -1,14 +1,14 @@
 import React from "react";
 import * as A from "./Admin.styled";
-import AdminComponent from "./Admin";
 
 function AdminGroup (){
     return (
         <div>
-            <AdminComponent></AdminComponent>
             <section>
+            <A.MenuTop>
             <A.Headline>모임 목록</A.Headline>
-            <A.Toggle>토글수정</A.Toggle>
+            <A.Toggle>셀렉터</A.Toggle>
+            </A.MenuTop>
             <A.Table>
             <thead>
                 <tr>
@@ -20,26 +20,6 @@ function AdminGroup (){
                 </tr>
             </thead>
                 <tbody>
-                <tr>
-                    <td>44</td>
-                    <td>가나다라마바사</td>
-                    <td>싹난 감자</td>
-                    <td>12</td>
-                    <td>
-                        <button>수정</button>
-                        <button>삭제</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>44</td>
-                    <td>가나다라마바사</td>
-                    <td>싹난 감자</td>
-                    <td>12</td>
-                    <td>
-                        <button>수정</button>
-                        <button>삭제</button>
-                    </td>
-                </tr>
                 <tr>
                     <td>44</td>
                     <td>가나다라마바사</td>
