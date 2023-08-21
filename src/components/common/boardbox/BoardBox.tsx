@@ -4,7 +4,6 @@ import BoardImgBox from './BoardImgBox';
 
 function BoardBox() {
   return (
-    <BB.Container>
       <BB.Border>
         <BB.TextBox>
           <div>해시태그</div>
@@ -14,7 +13,6 @@ function BoardBox() {
         </BB.TextBox>
         <BoardImgBox />
       </BB.Border>
-    </BB.Container>
   );
 }
 

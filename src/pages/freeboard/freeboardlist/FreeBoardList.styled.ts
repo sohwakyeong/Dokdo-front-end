@@ -7,6 +7,11 @@ export const Wrapper = styled.div`
   width: 474px;
 `;
 
+export const Title = styled.div`
+  margin: 30px;
+  font-size: 25px;
+`;
+
 export const FreeBoardBox = styled.div`
   display: flex;
   flex-direction: column;

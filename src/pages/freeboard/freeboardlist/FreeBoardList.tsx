@@ -8,9 +8,9 @@ const FreeBoardList = () => {
   return (
     <FB.Wrapper>
       <SearchInput />
-      <div>
+      <FB.Title>
         <div>우리들의 독도 이야기!</div>
-      </div>
+      </FB.Title>
       <FB.FreeBoardBox>
         <FB.FreeBoardSelectBox>
         <FB.FreeBoardSelect>
