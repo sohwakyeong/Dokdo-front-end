@@ -1,6 +1,6 @@
 import React from 'react';
 import * as EditStyle from './EditProfile.styled';
-import UserIcon from '../../../assets/image/Person.png';
+import UserIcon from '../../../assets/img/Person.png';
 
 // id나 type같은 값들은 수정해야됨
 

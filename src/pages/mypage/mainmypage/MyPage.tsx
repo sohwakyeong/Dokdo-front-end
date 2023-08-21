@@ -1,7 +1,7 @@
 import React from 'react';
 import {} from 'react-router-dom';
 import * as MyPageStyle from './MyPage.styled'
-import UserIcon from '../../../assets/image/Person.png';
+import UserIcon from '../../../assets/img/Person.png';
 
 function MyPageComponent() {
   return (

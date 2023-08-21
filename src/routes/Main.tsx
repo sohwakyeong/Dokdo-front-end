@@ -19,28 +19,155 @@ import BookRecommendation from '../pages/bookrecommendation/BookRecommendation';
 import Contest from '../pages/contest/Contest';
 import Notifications from '../pages/notifications/Notifications';
 import Likes from '../pages/likes/Likes';
+import Layout1 from '../components/layout/layout1/Layout1';
 
 const MainRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Main />} />
-      <Route path="/search" element={<Search />} />
-      <Route path="/group" element={<Group />} />
-      <Route path="/group/list" element={<GroupList />} />
-      <Route path="/group/detail/:id" element={<GroupDetail />} />
-      <Route path="/group/board" element={<GroupBoard />} />
-      <Route path="/group/board/detail/:id" element={<GroupBoardDetail />} />
-      <Route path="/group/board/write/:id" element={<GroupBoardWrite />} />
-      <Route path="/group/photo" element={<PhotoAlbum />} />
-      <Route path="/group/photo/detail/:id" element={<PhotoAlbumDetail />} />
-      <Route path="/group/photo/write/:id" element={<PhotoAlbumWrite />} />
-      <Route path="/freeboard/list" element={<FreeBoardList />} />
-      <Route path="/freeboard/detail" element={<FreeBoardDetail />} />
-      <Route path="/freeboard/write/:id" element={<FreeBoardWrite />} />
-      <Route path="/books" element={<BookRecommendation />} />
-      <Route path="/contest" element={<Contest />} />
-      <Route path="/notifications" element={<Notifications />} />
-      <Route path="/likes" element={<Likes />} />
+      <Route
+        path="/"
+        element={
+          <Layout1>
+            <Main />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/search"
+        element={
+          <Layout1>
+            <Search />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/group"
+        element={
+          <Layout1>
+            <Group />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/group/list"
+        element={
+          <Layout1>
+            <GroupList />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/group/detail/:id"
+        element={
+          <Layout1>
+            <GroupDetail />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/group/board"
+        element={
+          <Layout1>
+            <GroupBoard />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/group/board/detail/:id"
+        element={
+          <Layout1>
+            <GroupBoardDetail />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/group/board/write/:id"
+        element={
+          <Layout1>
+            <GroupBoardWrite />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/group/photo"
+        element={
+          <Layout1>
+            <PhotoAlbum />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/group/photo/detail/:id"
+        element={
+          <Layout1>
+            <PhotoAlbumDetail />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/group/photo/write/:id"
+        element={
+          <Layout1>
+            <PhotoAlbumWrite />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/freeboard/list"
+        element={
+          <Layout1>
+            <FreeBoardList />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/freeboard/detail"
+        element={
+          <Layout1>
+            <FreeBoardDetail />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/freeboard/write/:id"
+        element={
+          <Layout1>
+            <FreeBoardWrite />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/books"
+        element={
+          <Layout1>
+            <BookRecommendation />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/contest"
+        element={
+          <Layout1>
+            <Contest />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/notifications"
+        element={
+          <Layout1>
+            <Notifications />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/likes"
+        element={
+          <Layout1>
+            <Likes />
+          </Layout1>
+        }
+      />
     </Routes>
   );
 };

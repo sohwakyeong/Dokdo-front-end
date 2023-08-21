@@ -16,7 +16,7 @@ function AdminRoutes () {
             <Route path="/admin/group" element={<AdminGroup />} />
             <Route path="/admin/inquirylist" element={<InquiryList />} />
             <Route path="/admin/inquiryreply" element={<InquiryReply />} />
-            <Route path="/" element={<Admin /> } />
+            <Route path="/admin" element={<Admin /> } />
         </Routes>
     )
 }

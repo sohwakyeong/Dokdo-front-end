@@ -6,6 +6,7 @@ import LiteracyTestScreen from '../pages/literacytest/LiteracyTestScreen';
 import OXTestScreen from '../pages/literacytest/OXTestScreen';
 import OXTestResult from '../pages/literacytest/OXTestResult';
 import LiteracyTestResult from '../pages/literacytest/LiteracytestResult';
+import Layout1 from '../components/layout/layout1/Layout1';
 
 const LiteracytestRoute = () => {
   // 임의의 결과 배열
@@ -14,25 +15,59 @@ const LiteracytestRoute = () => {
 
   return (
     <Routes>
-      <Route path="/literacy-test" element={<LiteracyTestMain />} />
-      <Route path="/literacy-test/screen" element={<LiteracyTestScreen />} />
+      <Route
+        path="/literacy-test"
+        element={
+          <Layout1>
+            <LiteracyTestMain />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/literacy-test/screen"
+        element={
+          <Layout1>
+            <LiteracyTestScreen />
+          </Layout1>
+        }
+      />
       <Route
         path="/literacy-test/screen/result"
         element={
-          <LiteracyTestResult
-            results={results}
-            correctAnswers={correctAnswers}
-          />
+          <Layout1>
+            <LiteracyTestResult
+              results={results}
+              correctAnswers={correctAnswers}
+            />
+          </Layout1>
         }
-      />{' '}
+      />
+
       {/* 결과 화면 라우트 추가 */}
-      <Route path="/ox-quiz" element={<OXTestMain />} />
-      <Route path="/ox-quiz/screen" element={<OXTestScreen />} />
+      <Route
+        path="/ox-quiz"
+        element={
+          <Layout1>
+            <OXTestMain />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/ox-quiz/screen"
+        element={
+          <Layout1>
+            <OXTestScreen />
+          </Layout1>
+        }
+      />
       <Route
         path="/ox-quiz/screen/result"
-        element={<OXTestResult results={results} />}
+        element={
+          <Layout1>
+            <OXTestResult results={results} />
+          </Layout1>
+        }
       />
-      <Route path="*" element={<LiteracyTestMain />} />
     </Routes>
   );
 };

@@ -26,7 +26,7 @@ function Footer() {
           <img src={likeIcon} alt="좋아요 아이콘" />
           <div>좋아요</div>
         </FT.StyledLink>
-        <FT.StyledLink to="/login">
+        <FT.StyledLink to="/user/login">
           <img src={userIcon} alt="로그인/가입 아이콘" />
           <div>로그인/가입</div>
         </FT.StyledLink>
