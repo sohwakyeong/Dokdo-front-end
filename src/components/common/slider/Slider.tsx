@@ -5,7 +5,6 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './styles.css';
 import SlideImg1 from '../../../assets/img/인천독서토론예시이미지.png';
-import BoardBox from '../boardbox/BoardBox';
 import MidleBoardBox from '../boardbox/MidleBoardBox';
 import BookSlider from './BookSlider';
 
