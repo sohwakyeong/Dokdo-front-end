@@ -8,9 +8,17 @@ export const Wrapper = styled.div`
 
 export const GroupImage = styled.div`
   width: 100%;
-  height: 230px;
-  margin-top: 10px;
-  background-color: #ddd;
+  height: 100%;
+  margin: 10px 0;
+  border-top: 1px soild #ddd;
+  border-bottom: 1px soild #ddd;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 export const HashTag = styled.div`
@@ -34,11 +42,18 @@ export const DateText = styled.div`
 
 export const NoticeImage = styled.div`
   width: 100%;
-  height: 240px;
+  height: 100%;
   margin: 10px 0;
   background-color: #ddd;
   border-top: 1px soild #ddd;
   border-bottom: 1px soild #ddd;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 export const Section = styled.div`
