@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import LiteracyTestMain from '../pages/literacytest/LiteracyTestMain';
 import OXTestMain from '../pages/literacytest/OXTestMain';
@@ -9,9 +9,14 @@ import LiteracyTestResult from '../pages/literacytest/LiteracytestResult';
 import Layout1 from '../components/layout/layout1/Layout1';
 
 const LiteracytestRoute = () => {
-  // 임의의 결과 배열
+  // 사용자 답변을 관리할 상태
+  const [userAnswers, setUserAnswers] = useState<number[]>([]);
   const results = ['O', 'X', 'O', 'O', 'X'];
-  const correctAnswers = 3;
+
+  // 답변을 설정하는 함수
+  const handleSetUserAnswers = (answers: number[]) => {
+    setUserAnswers(answers);
+  };
 
   return (
     <Routes>
@@ -27,7 +32,7 @@ const LiteracytestRoute = () => {
         path="/literacy-test/screen"
         element={
           <Layout1>
-            <LiteracyTestScreen />
+            <LiteracyTestScreen setUserAnswers={handleSetUserAnswers} />
           </Layout1>
         }
       />
@@ -35,10 +40,7 @@ const LiteracytestRoute = () => {
         path="/literacy-test/screen/result"
         element={
           <Layout1>
-            <LiteracyTestResult
-              results={results}
-              correctAnswers={correctAnswers}
-            />
+            <LiteracyTestResult userAnswers={userAnswers} />
           </Layout1>
         }
       />
