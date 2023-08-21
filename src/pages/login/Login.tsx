@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import React, { useState } from 'react';
 import {  } from 'react-router-dom';
 // import LogoIcon from '../../assets/icon/samplelogo.jpeg';
@@ -38,24 +39,44 @@ function LoginComponent() {
       </L.Wrapper>
       <L.Form>
         <L.Input
+=======
+import React, { } from 'react';
+import {  } from 'react-redux';
+import { } from 'react-cookie';
+
+import LogoIcon from '../../assets/icon/samplelogo.jpeg';
+import * as LoginStyle from './Login.styled';
+
+function LoginComponent() {
+
+  return (
+    <LoginStyle.Container>
+      <LoginStyle.LogoImg src={LogoIcon} alt="logo" />
+      <LoginStyle.Wrapper>
+        <LoginStyle.Title>Login</LoginStyle.Title>
+        <LoginStyle.JoinLink to="/user/signup">회원가입하기</LoginStyle.JoinLink>
+      </LoginStyle.Wrapper>
+      <LoginStyle.Form>
+        <LoginStyle.Input
+>>>>>>> 60fc22ace8907373d0faafcc848fb03db7a56a5d
           type="email"
           id="id"
           placeholder="아이디를 입력해주세요."
-          value={Email}
-          onChange={onEmailHandler}
+     
+
         />
-        <L.Input
+        <LoginStyle.Input
           type="password"
-          value={Password}
-          onChange={onPasswordHandler}
+      
           placeholder="비밀번호를 입력해주세요."
         />
-        <L.Save htmlFor="check1">
-          <L.SaveId type="checkbox" id="check1" />
+        <LoginStyle.Save htmlFor="check1">
+          <LoginStyle.SaveId type="checkbox" id="check1" />
           아이디 저장하기
-        </L.Save>
-        <L.Button type="submit" onClick={onSubmitHandler}>
+        </LoginStyle.Save>
+        <LoginStyle.Button type="submit">
           로그인
+<<<<<<< HEAD
         </L.Button>
         <L.Button>
           <L.Kakao to="">카카오톡으로 시작</L.Kakao>
@@ -65,6 +86,17 @@ function LoginComponent() {
         </L.Button>
       </L.Form> */}
     </L.Container>
+=======
+        </LoginStyle.Button>
+        <LoginStyle.Button>
+          <LoginStyle.Kakao to="">카카오톡으로 시작</LoginStyle.Kakao>
+        </LoginStyle.Button>
+        <LoginStyle.Button>
+          <LoginStyle.Google to="">구글아이디로 시작</LoginStyle.Google>
+        </LoginStyle.Button>
+      </LoginStyle.Form>
+    </LoginStyle.Container>
+>>>>>>> 60fc22ace8907373d0faafcc848fb03db7a56a5d
   );
 }
 
