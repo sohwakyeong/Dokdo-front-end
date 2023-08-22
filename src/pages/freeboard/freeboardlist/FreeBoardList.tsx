@@ -2,7 +2,6 @@ import React from 'react';
 import * as FB from './FreeBoardList.styled';
 import SearchInput from '../../../components/common/searchinput/SearchInput';
 import BoardBox from '../../../components/common/boardbox/BoardBox';
-import MoreButton from '../../../components/common/morebutton/MoreButton';
 
 const FreeBoardList = () => {
   return (
