@@ -51,6 +51,11 @@ export const Img = styled.div`
 
 export const Info = styled.div`
   margin: 15px 0;
+  width: 100%;
+  & div {
+    padding: 3px;
+    text-align: start;
+  }
 `;
 
 export const SliederBox = styled.div`

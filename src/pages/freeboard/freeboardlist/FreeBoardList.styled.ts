@@ -20,17 +20,6 @@ export const FreeBoardBox = styled.div`
   height: 100%;
 `;
 
-export const Region = styled.div`
-  display: flex;
-  align-items: center;
-  height: 50px;
-
-  & li {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-`;
 export const FreeBoardSelectBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -39,6 +28,6 @@ export const FreeBoardSelectBox = styled.div`
 `;
 export const FreeBoardSelect = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   width: 100%;
 `;
