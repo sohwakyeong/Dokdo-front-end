@@ -31,7 +31,6 @@ export const BoxTitle = styled.div`
 
 export const List = styled.div`
   display: flex;
-  padding: 20px;
 `;
 
 export const ImgBox = styled.div`
@@ -50,11 +49,13 @@ export const Img = styled.div`
 `;
 
 export const Info = styled.div`
-  margin: 15px 0;
+  margin: 15px 0 25px 0;
   width: 100%;
+
   & div {
     padding: 3px;
     text-align: start;
+    font-size: 14px;
   }
 `;
 

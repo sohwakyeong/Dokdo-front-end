@@ -33,6 +33,7 @@ export const StyledLink = styled(Link)`
 export const GroupList = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 90%;
   margin: 20px 0;
 `;

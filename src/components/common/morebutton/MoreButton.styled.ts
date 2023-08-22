@@ -3,8 +3,9 @@ import styled from 'styled-components';
 export const Border = styled.div`
   display: flex;
   justify-content: center;
-  width: 100%;
-  height: 50px;
+  align-items: center;
+  width: 160px;
+  height: 43px;
   box-sizing: border-box;
   border: solid 1px #ddd;
   border-radius: 15px;
@@ -17,4 +18,5 @@ export const Button = styled.button`
   background-color: white;
   cursor: pointer;
   width: 90%;
+  margin: auto;
 `;

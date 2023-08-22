@@ -24,11 +24,14 @@ export default function Slider() {
           <SwiperSlide>
             <img src={SlideImg1} alt="토론이미지" />
           </SwiperSlide>
+
           <SwiperSlide>
+
           </SwiperSlide>
           <SwiperSlide>
             <MidleBoardBox />
           </SwiperSlide>
+
           <SwiperSlide>
             <BookSlider />
           </SwiperSlide>

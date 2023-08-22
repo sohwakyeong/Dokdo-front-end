@@ -48,6 +48,10 @@ export const GroupInfoTitle = styled.div`
 export const GroupInfoTP = styled.div`
   display: flex;
   padding: 5px;
+
+  & div {
+    padding: 0 10px;
+  }
 `;
 
 export const Schedule = styled.div`
@@ -97,6 +101,7 @@ export const Member = styled.div`
   align-items: center;
   font-size: 20px;
   height: 40px;
+  font-weight: bold;
 `;
 
 export const MemberImg = styled.div`
