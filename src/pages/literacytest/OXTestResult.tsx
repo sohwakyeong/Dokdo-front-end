@@ -5,7 +5,7 @@ import {
   SocialIcons,
   SocialIcon,
   SocialIconImage,
-  ResultImage, // 추가된 스타일 컴포넌트
+  ResultImage,
 } from './OXTestResult.Style';
 import questionsData from '../../assets/data/ox-questions.json';
 import facebookIcon from '../../assets/img/facebook.png';
