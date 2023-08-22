@@ -118,3 +118,8 @@ export const Desc = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
 `;
+
+export const ButtonDisplay = styled.div`
+  display: flex;
+  justify-content: center;
+`;

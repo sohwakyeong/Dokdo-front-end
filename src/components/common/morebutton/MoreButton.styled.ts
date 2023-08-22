@@ -8,7 +8,7 @@ export const Border = styled.div`
   height: 43px;
   box-sizing: border-box;
   border: solid 1px #ddd;
-  border-radius: 15px;
+  border-radius: 30px;
 `;
 
 export const Button = styled.button`
@@ -19,4 +19,7 @@ export const Button = styled.button`
   cursor: pointer;
   width: 90%;
   margin: auto;
+
+  white-space: nowrap;
+  display: inline-block;
 `;

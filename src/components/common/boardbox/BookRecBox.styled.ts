@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 90%;
 `;
 
 export const BoxTitleBox = styled.div`
@@ -42,8 +42,8 @@ export const ImgBox = styled.div`
 `;
 
 export const Img = styled.div`
-  width: 180px;
-  height: 180px;
+  width: 115px;
+  height: 115px;
 
   background-color: #fff7ec;
 `;
@@ -61,7 +61,5 @@ export const Info = styled.div`
 
 export const SliederBox = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 100%;
 `;

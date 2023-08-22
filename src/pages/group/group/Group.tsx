@@ -1,11 +1,11 @@
 import React from 'react';
 import SearchInput from '../../../components/common/searchinput/SearchInput';
 import * as GR from './Group.styled';
-import Slider from '../../../components/common/slider/Slider';
 import GroupTitleImg from '../../../assets/img/독서토론타이틀이미지예시.jpeg';
-import BookSlider from '../../../components/common/slider/BookSlider';
+
 import MoreButton from '../../../components/common/morebutton/MoreButton';
 import BoardBox from '../../../components/common/boardbox/BoardBox';
+import BookAndConstBox from '../../../components/common/BookAndContest/BookAndConstBox';
 
 const Group = () => {
   return (
@@ -22,15 +22,15 @@ const Group = () => {
           <BoardBox />
           <BoardBox />
           <BoardBox />
-          <MoreButton />
+          <MoreButton to="/group/list">더보기</MoreButton>
         </GR.HotGroup>
 
         <GR.BookContestTitle>
           주기적인 독서토론 모임으로 공모전도 도전 해 봐🔥
         </GR.BookContestTitle>
-        <BookSlider />
+        <BookAndConstBox />
       </GR.BookContest>
-      <MoreButton />
+      <MoreButton to="/contest">더보기</MoreButton>
     </GR.Wrapper>
   );
 };
