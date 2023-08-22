@@ -25,9 +25,18 @@ const LiteracyTestResult: React.FC<LiteracyTestResultProps> = ({
     );
   }, 0);
 
+  const getResultMessage = () => {
+    if (correctAnswers <= 3) return '돼지 입니다.';
+    if (correctAnswers <= 6) return '꽤나 똑똑합니다.';
+    if (correctAnswers <= 9) return 'iq 146 입니다.';
+    if (correctAnswers === 10) return '신 입니다';
+    return ''; // 다른 경우에 대한 처리 (필요하다면)
+  };
+
   return (
     <Container>
       <ResultText>{`정답 수: ${correctAnswers} / ${questions.questions.length}`}</ResultText>
+      <ResultText>{getResultMessage()}</ResultText> {/* 결과 메시지 출력 */}
       <SocialIcons>
         <SocialIcon href="https://facebook.com">
           <SocialIconImage src={facebookIcon} alt="Facebook" />
