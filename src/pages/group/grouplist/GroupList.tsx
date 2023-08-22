@@ -3,7 +3,6 @@ import SearchInput from '../../../components/common/searchinput/SearchInput';
 import Slider from '../../../components/common/slider/Slider';
 import * as GL from './GroupList.Styled';
 import BoardBox from '../../../components/common/boardbox/BoardBox';
-import MoreButton from '../../../components/common/morebutton/MoreButton';
 
 const GroupList = () => {
   return (
