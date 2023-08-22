@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
+  margin-top: 30px;
 `;
 
 export const BoxTitleBox = styled.div`

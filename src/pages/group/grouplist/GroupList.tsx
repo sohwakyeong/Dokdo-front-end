@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SearchInput from '../../../components/common/searchinput/SearchInput';
-import Slider from '../../../components/common/slider/Slider';
+import Slider4 from '../../../components/common/slider/Slider4';
 import * as GL from './GroupList.Styled';
 import BoardBox from '../../../components/common/boardbox/BoardBox';
 import SelectBox from '../../../components/common/selectbox/SelectBox';
@@ -83,7 +83,7 @@ const GroupList = () => {
   return (
     <GL.Wrapper>
       <SearchInput />
-      <Slider />
+      <Slider4 />
       <GL.ChoiceBox>
         <GL.ChoiceBoxTitle>
           내게 맞는 독서 <br />
@@ -137,7 +137,7 @@ const GroupList = () => {
               <GL.ClickedInfoWrapper key={index}>
                 {info}
                 <GL.DeleteButton onClick={() => handleDeleteClick(index)}>
-                X
+                  X
                 </GL.DeleteButton>
               </GL.ClickedInfoWrapper>
             ))}
