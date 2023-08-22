@@ -9,13 +9,19 @@ import LiteracyTestResult from '../pages/literacytest/LiteracytestResult';
 import Layout1 from '../components/layout/layout1/Layout1';
 
 const LiteracytestRoute = () => {
-  // 사용자 답변을 관리할 상태
-  const [userAnswers, setUserAnswers] = useState<number[]>([]);
+  // Literacy Test 사용자 답변을 관리할 상태
+  const [literacyUserAnswers, setLiteracyUserAnswers] = useState<number[]>([]);
+  // OX Test 사용자 답변을 관리할 상태
+  const [oxUserAnswers, setOXUserAnswers] = useState<string[]>([]);
+
   const results = ['O', 'X', 'O', 'O', 'X'];
 
-  // 답변을 설정하는 함수
-  const handleSetUserAnswers = (answers: number[]) => {
-    setUserAnswers(answers);
+  const handleSetLiteracyUserAnswers = (answers: number[]) => {
+    setLiteracyUserAnswers(answers);
+  };
+
+  const handleSetOXUserAnswers = (answers: string[]) => {
+    setOXUserAnswers(answers);
   };
 
   return (
@@ -32,7 +38,7 @@ const LiteracytestRoute = () => {
         path="/literacy-test/screen"
         element={
           <Layout1>
-            <LiteracyTestScreen setUserAnswers={handleSetUserAnswers} />
+            <LiteracyTestScreen setUserAnswers={handleSetLiteracyUserAnswers} />
           </Layout1>
         }
       />
@@ -40,12 +46,10 @@ const LiteracytestRoute = () => {
         path="/literacy-test/screen/result"
         element={
           <Layout1>
-            <LiteracyTestResult userAnswers={userAnswers} />
+            <LiteracyTestResult userAnswers={literacyUserAnswers} />
           </Layout1>
         }
       />
-
-      {/* 결과 화면 라우트 추가 */}
       <Route
         path="/ox-quiz"
         element={
@@ -58,7 +62,7 @@ const LiteracytestRoute = () => {
         path="/ox-quiz/screen"
         element={
           <Layout1>
-            <OXTestScreen />
+            <OXTestScreen setUserAnswers={handleSetOXUserAnswers} />
           </Layout1>
         }
       />
@@ -66,7 +70,7 @@ const LiteracytestRoute = () => {
         path="/ox-quiz/screen/result"
         element={
           <Layout1>
-            <OXTestResult results={results} />
+            <OXTestResult userAnswers={oxUserAnswers} /> {/* 이 부분 수정 */}
           </Layout1>
         }
       />
