@@ -5,37 +5,16 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 474px;
   min-height: 79.5vh;
 `;
 
-export const QuestionNumber = styled.div`
-  font-weight: bold;
-  margin: 50px;
-  padding: 15px;
-  background-color: #b0e57c;
-  border-radius: 10px;
-  position: relative;
-  display: inline-block;
-
-  // 말풍선 꼬리 부분
-  &::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    border-width: 10px;
-    border-style: solid;
-    border-color: #b0e57c transparent transparent transparent;
-  }
-`;
-
 export const QuestionText = styled.div`
-  font-size: 20px;
+  font-size: 25px;
   margin: 20px;
+  font-weight: bold;
+  margin-bottom: 50px;
 `;
 
 export const Options = styled.div`
@@ -45,18 +24,20 @@ export const Options = styled.div`
 `;
 
 export const OptionButton = styled.button`
-  padding: 20px 20px;
-  margin: 5px;
+  padding: 12px 10px;
+  margin: 10px;
   cursor: pointer;
   font-size: 16px;
   color: #333;
-  border: none;
-  background: #f0f0f0;
-  border-radius: 8px;
+  border: 0.5px solid #aeaeae;
+  background: #fff;
+  border-radius: 50px;
   transition: background 0.3s ease;
 
   &:hover {
-    background: #e0e0e0;
+    font-weight: bold;
+    color: #84614b;
+    background: #fdf8ef; // 기존에 있던 hover에 대한 배경색 변경
   }
 
   &:active {
@@ -70,36 +51,34 @@ export const OptionButton = styled.button`
 `;
 
 export const CurrentPosition = styled.div`
-  font-size: 16px;
+  font-size: 20px;
   margin: 10px;
+  font-weight: bold;
 `;
 export const Navigation = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 300px;
+  justify-content: space-between; /* 항목 간의 공간 균등하게 분배 */
 `;
 
 export const BackButton = styled.button`
-  padding: 10px;
   cursor: pointer;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
+  border: none;
+  background: none; // 버튼 스타일 제거
+  img {
+    width: 10px;
+    height: 20px;
   }
 `;
 export const ProgressBarContainer = styled.div`
-  width: 100%;
+  width: 90%;
   height: 10px;
   background-color: #f0f0f0;
-  margin: 10px 0;
-  bottom: 0;
+  margin-bottom: 100px;
 `;
 
 export const ProgressBarFiller = styled.div<{ progress: number }>`
   width: ${props => props.progress}%;
   height: 100%;
-  background-color: #59c4fc;
+  border-radius: 20px;
+  background-color: #84614b;
 `;
