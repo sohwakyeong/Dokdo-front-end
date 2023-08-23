@@ -54,16 +54,20 @@ export const CurrentPosition = styled.div`
   font-size: 20px;
   margin: 10px;
   font-weight: bold;
+  margin-left: auto; // 왼쪽 여백으로 자동 설정
+  margin-right: 210px; // 오른쪽 여백으로 자동 설정
 `;
 export const Navigation = styled.div`
   display: flex;
-  justify-content: space-between; /* 항목 간의 공간 균등하게 분배 */
+  align-items: center; // 수직 중앙 정렬
+  width: 100%; // 전체 너비 사용
 `;
-
 export const BackButton = styled.button`
   cursor: pointer;
   border: none;
-  background: none; // 버튼 스타일 제거
+  background: none;
+  margin-right: auto;
+  margin-left: 25px; // 나머지 오른쪽 공간을 모두 마진으로 사용
   img {
     width: 10px;
     height: 20px;
