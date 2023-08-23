@@ -28,7 +28,7 @@ export const menu = styled.div`
   border-radius: 18px;
   border: 1px solid #a8a8a8;
   background-color: #fff;
-  margin-top: 15px;
+  margin-top: 5px;
 `;
 
 interface MenuItemProps {
@@ -49,11 +49,45 @@ export const menuItem = styled.a<MenuItemProps>`
   margin-bottom: 2px;
   margin-left: 2px;
 `;
+export const MenuText = styled.div`
+  color: #000;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 35px;
+  font-weight: 700;
+  line-height: normal;
+  margin-top: 40px;
+
+  span {
+    color: #84614b;
+    font-weight: 900;
+  }
+`;
+export const TestInstructions = styled.p`
+  color: #000;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 2;
+  white-space: pre-line;
+  margin-top: 25px;
+
+  span.strongHighlight {
+    font-weight: bold;
+    background-color: yellow;
+  }
+
+  span.strong {
+    font-weight: bold;
+  }
+`;
 
 export const image = styled.img`
   width: 460px;
   max-width: 356px;
   margin: 20px auto;
+  margin-top: 50px;
 `;
 
 export const startButton = styled.button`
@@ -69,6 +103,7 @@ export const startButton = styled.button`
   font-weight: bold;
   letter-spacing: 1px;
   outline: none;
+  margin-top: 40px;
 
   &:hover {
     background-color: #84614b;
