@@ -18,7 +18,11 @@ const Group = () => {
       </div>
       <GR.BookContest>
         <GR.HotGroup>
-          <GR.HotGroupTitle>떠오르고 있는 독서 토론 모임✨</GR.HotGroupTitle>
+          <GR.HotGroupTitle>
+            <GR.StyledLink to="/group/list">
+              떠오르고 있는 독서 토론 모임✨
+            </GR.StyledLink>
+          </GR.HotGroupTitle>
           <BoardBox />
           <BoardBox />
           <BoardBox />

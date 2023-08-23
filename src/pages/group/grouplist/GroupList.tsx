@@ -55,8 +55,7 @@ const keywords = [
 ];
 
 const sortOptions = [
-  { value: '', label: '선택' },
-
+  { value: '', label: '좋아요' },
   { value: '좋아요', label: '좋아요' },
   { value: '최근순', label: '최근순' },
 ];

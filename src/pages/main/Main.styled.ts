@@ -52,6 +52,19 @@ export const GroupTopTitle = styled.div`
   font-weight: bold;
   padding: 10px;
   margin: 10px 0 5px 0;
+  text-align: center;
+`;
+
+export const StyledGroupLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+
+  & div {
+    font-size: 14px;
+    padding-top: 15px;
+    font-weight: normal;
+  }
 `;
 
 export const BooksTop10 = styled.div`
@@ -65,7 +78,19 @@ export const BooksTop10 = styled.div`
 
 export const BooksTitle = styled.div`
   font-size: 20px;
-  font-weight: bold;
   padding: 10px;
   margin: 10px 0 5px 0;
+  text-align: center;
+`;
+
+export const StyledBookLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+
+  & div {
+    font-size: 14px;
+    padding-top: 15px;
+    font-weight: normal;
+  }
 `;

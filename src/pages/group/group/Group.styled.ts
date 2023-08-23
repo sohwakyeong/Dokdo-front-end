@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -45,7 +46,7 @@ export const BookContestTitle = styled.div`
 `;
 
 export const HotGroupTitle = styled.div`
-  width: 100%;
+  width: 90%;
   padding: 20px 0 20px 20px;
   font-size: 20px;
   font-weight: bold;
@@ -56,4 +57,9 @@ export const HotGroup = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black;
 `;
