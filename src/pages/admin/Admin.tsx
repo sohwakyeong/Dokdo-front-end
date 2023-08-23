@@ -1,39 +1,34 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React,{ ReactNode } from "react";
 import * as A from './Admin.styled';
 
-function AdminComponent() {
+interface AdminProps {
+   children: ReactNode;
+}
+
+function Admin({children}: AdminProps) {
     return (
+    <A.Background>
     <A.Wrapper>
         <A.SideBar>
-        <A.Info>
-            <div>Logo</div>
-            <div>adminInfo</div>
-        </A.Info>
         <A.SideNav>
-                <Link to="/">홈</Link>
-                <Link to="/admin">대시보드</Link>
-                <Link to="/admin/user">사용자 목록</Link>
-                <Link to="/admin/post">게시글 관리</Link>
-                <Link to="/admin/group">모임 목록</Link>
-                <Link to="/admin/inquirylist">문의 사항</Link>
-        </A.SideNav>    
-        <A.Button>로그아웃</A.Button>
-
+                <A.Logo>Logo</A.Logo> 
+                <div></div>
+                <A.AdminLink to="/">홈</A.AdminLink>
+                <div></div>
+                <A.AdminLink to="/admin/user">회원 정보 관리</A.AdminLink>
+                <div></div>
+                <A.AdminLink to="/admin/post">게시글 관리</A.AdminLink>
+                <div></div>
+                <A.AdminLink to="/admin/group">모임 관리</A.AdminLink>
+                <div></div>
+                <A.AdminLink to="/admin/inquirylist">문의사항</A.AdminLink>
+        </A.SideNav> 
+        <A.LogoutButton >로그아웃</A.LogoutButton>
         </A.SideBar>
-        <A.Main>
-        <A.Input type='text' placeholder='검색어를 입력하세요.' />
-        <A.Todo>오늘의 할 일</A.Todo>
-        <A.Nav>
-            <div>신규 가입</div>
-            <div>신규 모임</div>
-            <div>신규 게시글</div>
-            <div>답변 대기 문의</div>
-        <A.Content></A.Content>
-        </A.Nav>
-        </A.Main>
+        <A.Children>{children}</A.Children>
     </A.Wrapper>
+    </A.Background>
     );
 }
 
-export default AdminComponent;
+export default Admin;

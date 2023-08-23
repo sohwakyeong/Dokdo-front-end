@@ -1,14 +1,12 @@
 import React from "react";
 import * as A from './Admin.styled';
-import AdminComponent from "./Admin";
 
 function AdminUser() {
     return (
         <div>
-        <AdminComponent></AdminComponent>
-        <A.Content>
             <A.Headline>회원 정보 관리</A.Headline>
-            <A.Table>
+            <A.Total>총 100 명</A.Total>
+            <A.Table> 
                 <thead>
                 <tr>
                     <th>닉네임</th>
@@ -23,8 +21,8 @@ function AdminUser() {
                     <td>010-1234-1234</td>
                     <td>abcabd@test.com</td>
                     <td>
-                        <button>수정</button>
-                        <button>사용정지</button>
+                        <A.AdminButton>수정</A.AdminButton>
+                        <A.AdminButton>삭제</A.AdminButton>
                     </td>
                 </tr>
                 <tr>
@@ -32,8 +30,8 @@ function AdminUser() {
                     <td>010-1234-1234</td>
                     <td>abcabd@test.com</td>
                     <td>
-                        <button>수정</button>
-                        <button>사용정지</button>
+                        <A.AdminButton>수정</A.AdminButton>
+                        <A.AdminButton>삭제</A.AdminButton>
                     </td>
                 </tr>
                 <tr>
@@ -41,8 +39,8 @@ function AdminUser() {
                     <td>010-1234-1234</td>
                     <td>abcabd@test.com</td>
                     <td>
-                        <button>수정</button>
-                        <button>사용정지</button>
+                        <A.AdminButton>수정</A.AdminButton>
+                        <A.AdminButton>삭제</A.AdminButton>
                     </td>
                 </tr>
                 <tr>
@@ -50,8 +48,8 @@ function AdminUser() {
                     <td>010-1234-1234</td>
                     <td>abcabd@test.com</td>
                     <td>
-                        <button>수정</button>
-                        <button>사용정지</button>
+                        <A.AdminButton>수정</A.AdminButton>
+                        <A.AdminButton>삭제</A.AdminButton>    
                     </td>
                 </tr>
                 <tr>
@@ -59,8 +57,8 @@ function AdminUser() {
                     <td>010-1234-1234</td>
                     <td>abcabd@test.com</td>
                     <td>
-                        <button>수정</button>
-                        <button>사용정지</button>
+                        <A.AdminButton>수정</A.AdminButton>
+                        <A.AdminButton>삭제</A.AdminButton>
                     </td>
                 </tr>
                 <tr>
@@ -68,8 +66,8 @@ function AdminUser() {
                     <td>010-1234-1234</td>
                     <td>abcabd@test.com</td>
                     <td>
-                        <button>수정</button>
-                        <button>사용정지</button>
+                        <A.AdminButton>수정</A.AdminButton>
+                        <A.AdminButton>삭제</A.AdminButton>
                     </td>
                 </tr>
                 <tr>
@@ -77,13 +75,48 @@ function AdminUser() {
                     <td>010-1234-1234</td>
                     <td>abcabd@test.com</td>
                     <td>
-                        <button>수정</button>
-                        <button>사용정지</button>
+                        <A.AdminButton>수정</A.AdminButton>
+                        <A.AdminButton>삭제</A.AdminButton>
+                    </td>
+                </tr>
+                <tr>
+                    <td>강낭콩</td>
+                    <td>010-1234-1234</td>
+                    <td>abcabd@test.com</td>
+                    <td>
+                        <A.AdminButton>수정</A.AdminButton>
+                        <A.AdminButton>삭제</A.AdminButton>
+                    </td>
+                </tr>
+                <tr>
+                    <td>강낭콩</td>
+                    <td>010-1234-1234</td>
+                    <td>abcabd@test.com</td>
+                    <td>
+                        <A.AdminButton>수정</A.AdminButton>
+                        <A.AdminButton>삭제</A.AdminButton>
+                    </td>
+                </tr>
+                <tr>
+                    <td>강낭콩</td>
+                    <td>010-1234-1234</td>
+                    <td>abcabd@test.com</td>
+                    <td>
+                        <A.AdminButton>수정</A.AdminButton>
+                        <A.AdminButton>삭제</A.AdminButton>
+                    </td>
+                </tr>
+                <tr>
+                    <td>강낭콩</td>
+                    <td>010-1234-1234</td>
+                    <td>abcabd@test.com</td>
+                    <td>
+                        <A.AdminButton>수정</A.AdminButton>
+                        <A.AdminButton>삭제</A.AdminButton>
                     </td>
                 </tr>
                 </tbody>
-            </A.Table>        
-        </A.Content>
+            </A.Table>    
     </div>
     )
 }

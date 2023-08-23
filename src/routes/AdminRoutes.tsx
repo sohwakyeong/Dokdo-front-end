@@ -8,16 +8,16 @@ import InquiryList from '../pages/admin/InquiryList';
 import InquiryReply from '../pages/admin/InquiryReply';
 import AdminUser from '../pages/admin/AdminUser';
 
-function AdminRoutes() {
-  return (
-    <Routes>
-      <Route path="/admin/user" element={<AdminUser />} />
-      <Route path="/admin/post" element={<AdminPost />} />
-      <Route path="/admin/group" element={<AdminGroup />} />
-      <Route path="/admin/inquirylist" element={<InquiryList />} />
-      <Route path="/admin/inquiryreply" element={<InquiryReply />} />
-      <Route path="/admin" element={<Admin />} />
-    </Routes>
-  );
+function AdminRoutes () {
+    return (
+        <Routes>
+            <Route path="/admin/user" element={<Admin><AdminUser /></Admin>} />
+            <Route path="/admin/post" element={<Admin><AdminPost /></Admin>} />
+            <Route path="/admin/group" element={<Admin><AdminGroup /></Admin>} />
+            <Route path="/admin/inquirylist" element={<Admin><InquiryList /></Admin>} />
+            <Route path="/admin/inquiryreply" element={<InquiryReply />} />
+            <Route path="/admin" element={<Admin><></></Admin> } />
+        </Routes>
+    )
 }
 export default AdminRoutes;

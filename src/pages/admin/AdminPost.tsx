@@ -1,14 +1,17 @@
 import React from "react";
 import * as A from "./Admin.styled";
-import AdminComponent from "./Admin";
 
 function AdminPost (){
     return (
         <div>
-        <AdminComponent></AdminComponent>
         <section>
-            <A.Headline>게시글 관리</A.Headline>
-            <A.Toggle>토글수정</A.Toggle>
+            <A.MenuTop>
+            <A.Headline> 회원 게시글 관리</A.Headline>
+            <A.Select>
+                <option value="groupboard">토론 모임 공고</option>
+                <option value="freeboard">자유 게시글</option> 
+            </A.Select>
+            </A.MenuTop>
             <A.Table>
                 <thead>
                 <tr>
@@ -21,43 +24,103 @@ function AdminPost (){
                 </thead>
                 <tbody>
                 <tr>
-                    <td>100</td>
+                    <td>101</td>
                     <td>가나다라마바사</td>
                     <td>싹난 감자</td>
                     <td>23.01.12</td>
                     <td>
-                        <button>수정</button>
-                        <button>삭제</button>
+                        <A.AdminButton>수정</A.AdminButton>
+                        <A.AdminButton>삭제</A.AdminButton>
                     </td>
                 </tr>
                 <tr>
-                    <td>100</td>
+                    <td>102</td>
                     <td>가나다라마바사</td>
                     <td>싹난 감자</td>
                     <td>23.01.12</td>
                     <td>
-                        <button>수정</button>
-                        <button>삭제</button>
+                        <A.AdminButton>수정</A.AdminButton>
+                        <A.AdminButton>삭제</A.AdminButton>
                     </td>
                 </tr>
                 <tr>
-                    <td>100</td>
+                    <td>103</td>
                     <td>가나다라마바사</td>
                     <td>싹난 감자</td>
                     <td>23.01.12</td>
                     <td>
-                        <button>수정</button>
-                        <button>삭제</button>
+                        <A.AdminButton>수정</A.AdminButton>
+                        <A.AdminButton>삭제</A.AdminButton>
                     </td>
                 </tr>
                 <tr>
-                    <td>100</td>
+                    <td>104</td>
                     <td>가나다라마바사</td>
                     <td>싹난 감자</td>
                     <td>23.01.12</td>
                     <td>
-                        <button>수정</button>
-                        <button>삭제</button>
+                        <A.AdminButton>수정</A.AdminButton>
+                        <A.AdminButton>삭제</A.AdminButton>
+                    </td>
+                </tr>
+                <tr>
+                    <td>105</td>
+                    <td>가나다라마바사</td>
+                    <td>싹난 감자</td>
+                    <td>23.01.12</td>
+                    <td>
+                        <A.AdminButton>수정</A.AdminButton>
+                        <A.AdminButton>삭제</A.AdminButton>
+                    </td>
+                </tr>
+                <tr>
+                    <td>106</td>
+                    <td>가나다라마바사</td>
+                    <td>싹난 감자</td>
+                    <td>23.01.12</td>
+                    <td>
+                        <A.AdminButton>수정</A.AdminButton>
+                        <A.AdminButton>삭제</A.AdminButton>
+                    </td>
+                </tr>
+                <tr>
+                    <td>107</td>
+                    <td>가나다라마바사</td>
+                    <td>싹난 감자</td>
+                    <td>23.01.12</td>
+                    <td>
+                        <A.AdminButton>수정</A.AdminButton>
+                        <A.AdminButton>삭제</A.AdminButton>
+                    </td>
+                </tr>
+                <tr>
+                    <td>108</td>
+                    <td>가나다라마바사</td>
+                    <td>싹난 감자</td>
+                    <td>23.01.12</td>
+                    <td>
+                        <A.AdminButton>수정</A.AdminButton>
+                        <A.AdminButton>삭제</A.AdminButton>
+                    </td>
+                </tr>
+                <tr>
+                    <td>109</td>
+                    <td>가나다라마바사</td>
+                    <td>싹난 감자</td>
+                    <td>23.01.12</td>
+                    <td>
+                        <A.AdminButton>수정</A.AdminButton>
+                        <A.AdminButton>삭제</A.AdminButton>
+                    </td>
+                </tr>
+                <tr>
+                    <td>110</td>
+                    <td>가나다라마바사</td>
+                    <td>싹난 감자</td>
+                    <td>23.01.12</td>
+                    <td>
+                        <A.AdminButton>수정</A.AdminButton>
+                        <A.AdminButton>삭제</A.AdminButton>
                     </td>
                 </tr>
                 </tbody>
