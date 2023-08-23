@@ -18,14 +18,17 @@ export const container = styled.div`
   align-items: center;
   justify-content: center;
   width: 474px;
-  background-color: #59c4fc;
+  background-color: #fff;
 `;
 export const menu = styled.div`
   display: flex;
   justify-content: space-around;
-  width: 100%;
-  background-color: #f3f3f3;
-  border-bottom: 1px solid #ffffff; // 메뉴 전체에 하단 테두리 추가
+  width: 274px;
+  height: 48px;
+  border-radius: 15px;
+  border: 1px solid #a8a8a8;
+  background-color: #fff;
+  margin-top: 15px;
 `;
 
 interface MenuItemProps {
@@ -38,13 +41,14 @@ export const menuItem = styled.a<MenuItemProps>`
   cursor: pointer;
   font-weight: bold;
   width: 50%;
+  border-radius: 15px;
   text-align: center;
   padding: 10px 0;
 `;
 
 export const image = styled.img`
-  width: 100%;
-  max-width: 600px;
+  width: 460px;
+  max-width: 356px;
   margin: 20px auto;
 `;
 

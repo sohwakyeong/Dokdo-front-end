@@ -38,13 +38,13 @@ const LiteracyTestMain: React.FC = () => {
           style={{
             backgroundColor:
               location.pathname === '/literacy-test'
-                ? '#59C4FC'
+                ? '#84614B'
                 : 'transparent',
           }}
         >
           <StyledLink
             to="/literacy-test"
-            style={{ textDecoration: 'none', color: '#000' }}
+            style={{ textDecoration: 'none', color: '#FFF' }}
           >
             문해력 테스트
           </StyledLink>
@@ -53,12 +53,12 @@ const LiteracyTestMain: React.FC = () => {
           rightBorder
           style={{
             backgroundColor:
-              location.pathname === '/ox-quiz' ? '#59C4FC' : 'transparent',
+              location.pathname === '/ox-quiz' ? '#84614B' : 'transparent',
           }}
         >
           <StyledLink
             to="/ox-quiz"
-            style={{ textDecoration: 'none', color: '#000' }}
+            style={{ textDecoration: 'none', color: '#FFF' }}
           >
             OX 퀴즈
           </StyledLink>
