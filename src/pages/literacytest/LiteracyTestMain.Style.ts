@@ -25,10 +25,10 @@ export const menu = styled.div`
   justify-content: space-around;
   width: 274px;
   height: 48px;
-  border-radius: 15px;
+  border-radius: 18px;
   border: 1px solid #a8a8a8;
   background-color: #fff;
-  margin-top: 15px;
+  margin-top: 5px;
 `;
 
 interface MenuItemProps {
@@ -36,14 +36,18 @@ interface MenuItemProps {
 }
 
 export const menuItem = styled.a<MenuItemProps>`
-  text-decoration: none;
   color: #000;
   cursor: pointer;
   font-weight: bold;
+  line-height: 27px;
   width: 50%;
-  border-radius: 15px;
+  border-radius: 18px;
   text-align: center;
   padding: 10px 0;
+  font-size: 18px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: 2px;
 `;
 
 export const image = styled.img`
@@ -53,13 +57,13 @@ export const image = styled.img`
 `;
 
 export const startButton = styled.button`
-  padding: 15px 30px;
-  font-size: 18px;
+  padding: 20px 66px;
+  font-size: 20px;
   cursor: pointer;
-  background-color: #007bff;
+  background-color: #84614b;
   color: #fff;
   border: none;
-  border-radius: 25px;
+  border-radius: 50px;
   transition: 0.3s;
   text-transform: uppercase;
   font-weight: bold;
@@ -67,7 +71,7 @@ export const startButton = styled.button`
   outline: none;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: #84614b;
     transform: scale(1.05);
   }
 
