@@ -55,7 +55,7 @@ export const CurrentPosition = styled.div`
   margin: 10px;
   font-weight: bold;
   margin-left: auto; // 왼쪽 여백으로 자동 설정
-  margin-right: 210px; // 오른쪽 여백으로 자동 설정
+  margin-right: 205px; // 오른쪽 여백으로 자동 설정
 `;
 export const Navigation = styled.div`
   display: flex;
