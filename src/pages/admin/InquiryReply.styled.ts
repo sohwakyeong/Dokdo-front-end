@@ -51,13 +51,14 @@ export const Detail = styled.input`
     width: 700px;
     height:200px;
     padding: 0 30px;
-    border-radius: 5px;
     border: none;
+    border-radius: 5px;
 
     &::placeholder{
         color: gray;
         font-size: 15px;
         text-align:center;
+    }
 `
 
 export const Button = styled.button`
