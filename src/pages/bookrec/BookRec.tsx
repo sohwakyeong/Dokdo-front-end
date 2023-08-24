@@ -1,10 +1,8 @@
 import React from 'react';
-import BookAndContest from '../../components/pagemodule/bookandcontest/BookAndContest';
+import BookAndContest from '../../components/bookContest/bookandcontest/BookAndContest';
 
 const BookRec = () => {
-  return (
-   <BookAndContest />
-  );
+  return <BookAndContest />;
 };
 
 export default BookRec;

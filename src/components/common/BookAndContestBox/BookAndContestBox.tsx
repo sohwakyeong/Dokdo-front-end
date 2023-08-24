@@ -1,9 +1,9 @@
 import React from 'react';
-import * as BC from '../../pagemodule/bookandcontest/BookAndContest.styled';
+import * as BC from '../../bookContest/bookandcontest/BookAndContest.styled';
 
 // BookAndContestBox 컴포넌트의 props 타입 정의
 
-function  BookAndContestBox  ()  {
+function BookAndContestBox() {
   return (
     <BC.Wrapper>
       {Array(1)
@@ -34,6 +34,6 @@ function  BookAndContestBox  ()  {
         ))}
     </BC.Wrapper>
   );
-};
+}
 
 export default BookAndContestBox;
