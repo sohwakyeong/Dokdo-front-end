@@ -31,7 +31,7 @@ const GroupBoardWrite = () => {
       </GBW.TitleWrite>
       <GBW.WriteBox>
         <textarea
-          placeholder="내용을 입력해주세요. (1000자)"
+          placeholder="하고있던건데 다 지우고 다시 하셔도 됩니다"
           value={content}
           onChange={e => setContent(e.target.value)}
           rows={15}
@@ -41,27 +41,30 @@ const GroupBoardWrite = () => {
           <GBW.UploadImage key={index} src={image} alt="업로드된 이미지" />
         ))}
       </GBW.WriteBox>
+      <GBW.ImgFileTitle>
+        <div>파일선택</div>
+        <div>500MB 이하의 jpg, gif 파일만 3개까지 업로드 가능합니다</div>
+        </GBW.ImgFileTitle>
       <GBW.ImgUpload>
-        <div>
+        <label htmlFor="image-upload">
           <GBW.CameraBox>
-          <GBW.CameraImg>
-            <img src={Camera} alt="카메라 이미지" />
-          </GBW.CameraImg>
-          <GBW.CameraImg>
-            <img src={Camera} alt="카메라 이미지" />
-          </GBW.CameraImg>
-          <GBW.CameraImg>
-            <img src={Camera} alt="카메라 이미지" />
-          </GBW.CameraImg>
+            <GBW.CameraImg>
+              <img src={Camera} alt="카메라 이미지" />
+            </GBW.CameraImg>
+            <GBW.CameraImg>
+              <img src={Camera} alt="카메라 이미지" />
+            </GBW.CameraImg>
+            <GBW.CameraImg>
+              <img src={Camera} alt="카메라 이미지" />
+            </GBW.CameraImg>
           </GBW.CameraBox>
-          <input
-            type="file"
-            id="image-upload"
-            accept="image/*"
-            onChange={handleImageUpload}
-          />
-        </div>
-
+        </label>
+        <input
+          type="file"
+          id="image-upload"
+          accept="image/*"
+          onChange={handleImageUpload}
+        />
         <div>{content.length}/1000자</div>
       </GBW.ImgUpload>
     </GBW.Wrapper>

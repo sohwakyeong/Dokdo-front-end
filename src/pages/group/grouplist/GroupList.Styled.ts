@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 474px;
 `;
 
@@ -13,6 +14,7 @@ export const ChoiceBox = styled.div`
   align-items: center;
   margin: 20px 0;
   text-align: center;
+  width: 100%;
 `;
 
 export const HashTagBox = styled.div`
@@ -28,7 +30,7 @@ export const HashTagBox = styled.div`
 `;
 export const HashTag = styled.ul`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   width: 90%;
   height: 40px;
@@ -36,11 +38,10 @@ export const HashTag = styled.ul`
 `;
 
 export const ClickBox = styled.div`
-  height: 100px;
   box-sizing: border-box;
   border: solid 1px #ddd;
   width: 90%;
-  height: 200px;
+  height: 80px;
   padding: 10px;
   margin: 20px;
 `;
@@ -55,8 +56,9 @@ export const ChoiceImageGroup = styled.div`
 export const ChoiceSelect = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 90%;
-  padding: 10px;
+  padding-top: 10px;
 `;
 
 export const ChoiceGroupBoard = styled.div`
@@ -69,7 +71,6 @@ export const ChoiceGroupBoard = styled.div`
 export const ChoiceBoxTitle = styled.div`
   font-size: 20px;
   padding: 10px;
-  width: 55%;
   font-weight: bold;
 `;
 
@@ -79,11 +80,12 @@ export const ChoiceTitle = styled.div`
 
 export const ClickedInfoWrapper = styled.div`
   display: inline-block;
-  margin-right: 10px;
+  margin: 10px 0 0 10px;
   padding: 5px 10px;
   border: 1px solid #ccc;
   border-radius: 15px;
-  font-size: 14px;
+  font-size: 13px;
+  height: 18px;
 `;
 
 export const DeleteButton = styled.button`
@@ -93,4 +95,17 @@ export const DeleteButton = styled.button`
   color: black;
   border: none;
   cursor: pointer;
+`;
+export const GridContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 90%;
+`;
+export const ImageRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 15px;
+  width: 90%;
 `;

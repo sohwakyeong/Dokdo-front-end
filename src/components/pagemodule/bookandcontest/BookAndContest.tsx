@@ -1,12 +1,10 @@
 import React from 'react';
 import * as BC from './BookAndContest.styled';
-import SearchInput from '../../common/searchinput/SearchInput';
-import BookAndConstBox from '../../common/BookAndContest/BookAndConstBox';
+import BookAndConstBox from '../../common/BookAndContestBox/BookAndContestBox';
 
 const BookAndContest = () => {
   return (
     <BC.Wrapper>
-      <SearchInput />
       <BC.Box>
         <BC.BoxTitleBox>
           <BC.BoxTitle>도서를 추천합니다</BC.BoxTitle>
@@ -21,6 +19,9 @@ const BookAndContest = () => {
           <BookAndConstBox />
           <BookAndConstBox />
           <BookAndConstBox />
+          <BookAndConstBox />
+          <BookAndConstBox />
+
         </BC.SliederBox>
       </BC.Box>
     </BC.Wrapper>

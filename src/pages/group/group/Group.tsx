@@ -5,7 +5,7 @@ import GroupTitleImg from '../../../assets/img/독서토론타이틀이미지예
 
 import MoreButton from '../../../components/common/morebutton/MoreButton';
 import BoardBox from '../../../components/common/boardbox/BoardBox';
-import BookAndConstBox from '../../../components/common/BookAndContest/BookAndConstBox';
+import Slider2 from '../../../components/common/slider/Slider2';
 
 const Group = () => {
   return (
@@ -20,7 +20,7 @@ const Group = () => {
         <GR.HotGroup>
           <GR.HotGroupTitle>
             <GR.StyledLink to="/group/list">
-              떠오르고 있는 독서 토론 모임✨
+              독서 토론 겁먹지 말고 도전 해 봐✨
             </GR.StyledLink>
           </GR.HotGroupTitle>
           <BoardBox />
@@ -28,12 +28,13 @@ const Group = () => {
           <BoardBox />
           <MoreButton to="/group/list">더보기</MoreButton>
         </GR.HotGroup>
-
-        <GR.BookContestTitle>
-          주기적인 독서 토론 모임으로 공모전도 도전 해 봐🔥
-        </GR.BookContestTitle>
-        <BookAndConstBox />
       </GR.BookContest>
+      <GR.ContestBox>
+        <GR.ContestTitle>
+          주기적인 독서 토론 모임으로 공모전도 도전 해 봐🔥
+        </GR.ContestTitle>
+        <Slider2 />
+      </GR.ContestBox>
       <MoreButton to="/contest">더보기</MoreButton>
     </GR.Wrapper>
   );

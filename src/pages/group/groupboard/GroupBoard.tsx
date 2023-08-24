@@ -7,6 +7,9 @@ const GroupBoard = () => {
     <GB.Wrapper>
       <SearchInput />
       <GB.GroupBoardList>
+        <GB.GroupBoardTitle>
+         <div>모임 이름</div>
+        </GB.GroupBoardTitle>
         {Array(5)
           .fill('')
           .map((v, i) => (

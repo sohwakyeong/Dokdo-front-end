@@ -22,21 +22,14 @@ export default function Slider3() {
         modules={[Navigation, Pagination]}
         className="mySwiper"
       >
-        <SwiperSlide>
-          <MidleBoardBox />
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <MidleBoardBox />
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <MidleBoardBox />
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <MidleBoardBox />
-        </SwiperSlide>
+        {Array(10)
+          .fill('')
+          .map((v, i) => (
+            <SwiperSlide key={i}>
+            <MidleBoardBox />
+          </SwiperSlide>
+          ))}
+        
       </Swiper>
     </>
   );

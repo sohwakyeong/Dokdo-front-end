@@ -1,5 +1,6 @@
 import React from 'react';
 import * as GBD from './GroupBoaderDetail.styled';
+import Slider from '../../../components/common/slider/Slider';
 
 const GroupBoardDetail = () => {
   return (
@@ -11,25 +12,25 @@ const GroupBoardDetail = () => {
         <GBD.Desc>
           <GBD.DescDisplay>
             <div>
-            <div>최형욱</div>
-            <div>글쓴 시간</div>
+              <div>최형욱</div>
+              <div>글쓴 시간</div>
             </div>
-          <div>수정아이콘</div>
+            <GBD.EditButton>●●●</GBD.EditButton>
           </GBD.DescDisplay>
-
         </GBD.Desc>
       </GBD.User>
       <GBD.UserWriteBox>
         <div>
-          게시글 내용게시글 내용게시글 내용게시글 내용게시글 내용게시글
-          내용게시글 내용게시글 내용게시글 내용게시글 내용게시글 내용게시글
-          내용게시글 내용게시글 내용게시글 내용게시글 내용게시글 내용게시글
-          내용게시글 내용게시글 내용게시글 내용
+          사진이 있으면 이미지 슬라이드 개수에 맞게 (최대3장) 사진이 있으면
+          이미지 슬라이드 개수에 맞게 (최대3장) 사진이 있으면 이미지 슬라이드
+          개수에 맞게 (최대3장) 사진이 있으면 이미지 슬라이드 개수에 맞게
+          (최대3장)
+          <Slider />
         </div>
       </GBD.UserWriteBox>
       <GBD.Button>
-        <button>좋아요버튼</button>
-        <button>댓글 달기</button>
+        <button>(아이콘)좋아요 숫자</button>
+        <button>(아이콘)공유하기</button>
       </GBD.Button>
       <GBD.Comment>
         <li>
@@ -43,8 +44,9 @@ const GroupBoardDetail = () => {
                 <GBD.UserReply>
                   <div>최형욱</div>
                   <div>
-                    오 좋은 글입니다. 이러쿠저러쿠이러주저러쿠그러쿠알았쿠
+                    대댓글 기능 대댓글 기능 대댓글 기능 대댓글 기능 대댓글 기능
                   </div>
+                  <div>시간 답글달기 삭제하기 등</div>
                 </GBD.UserReply>
               </GBD.UserCommentBox>
             ))}

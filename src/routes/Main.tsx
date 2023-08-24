@@ -146,7 +146,7 @@ const MainRoutes = () => {
           </Layout1>
         }
       />
-        <Route
+      <Route
         path="/bookrec/detail"
         element={
           <Layout1>
@@ -154,7 +154,7 @@ const MainRoutes = () => {
           </Layout1>
         }
       />
-      
+
       <Route
         path="/contest"
         element={
@@ -163,11 +163,11 @@ const MainRoutes = () => {
           </Layout1>
         }
       />
-        <Route
+      <Route
         path="/contest/detail"
         element={
           <Layout1>
-           <ContestDetail />
+            <ContestDetail />
           </Layout1>
         }
       />
@@ -187,7 +187,6 @@ const MainRoutes = () => {
           </Layout1>
         }
       />
-      
     </Routes>
   );
 };

@@ -38,16 +38,17 @@ export const BookContest = styled.div`
   flex-direction: column;
 `;
 
-export const BookContestTitle = styled.div`
+export const ContestTitle = styled.div`
   width: 55%;
   padding: 20px;
   font-size: 20px;
   font-weight: bold;
+  text-align: left;
 `;
 
 export const HotGroupTitle = styled.div`
   width: 90%;
-  padding: 20px 0 20px 20px;
+  padding: 20px 0 20px;
   font-size: 20px;
   font-weight: bold;
 `;
@@ -57,9 +58,14 @@ export const HotGroup = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 20px 0;
 `;
 
 export const StyledLink = styled(Link)`
   text-decoration: none;
   color: black;
+`;
+
+export const ContestBox = styled.div`
+  width: 100%;
 `;

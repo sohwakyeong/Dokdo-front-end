@@ -48,8 +48,9 @@ export const WriteBox = styled.div`
 `;
 
 export const UploadImage = styled.img`
-  max-width: 95%;
-  max-height: 100%;
+  max-width: 100%; /* 이미지의 최대 너비를 100%로 설정 */
+  height: auto; /* 높이 자동 조정 */
+  margin: 10px 0; /* 이미지 간격을 조절할 수 있습니다. */
 `;
 
 export const ImgUpload = styled.div`
@@ -57,12 +58,21 @@ export const ImgUpload = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 20px 0;
-  width: 90%;
+  width: 95%;
 
-  & input[type='file'] {
+  & input {
     display: none;
-    width: 100px;
-    height: 100px;
+  }
+`;
+
+export const ImgFileTitle = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  width: 90%;
+  font-size: 13px;
+  & div {
+    padding: 5px;
   }
 `;
 
@@ -75,7 +85,7 @@ export const CameraImg = styled.div`
   height: 60px;
   border-radius: 10px;
   border: 1px solid black;
-  padding: 20px;
+  padding: 10px; /* 패딩 조정 */
 `;
 
 export const CameraBox = styled.div`
@@ -85,6 +95,10 @@ export const CameraBox = styled.div`
 `;
 
 export const FileInput = styled.input`
+  display: none;
+`;
+
+export const Label = styled.label`
   background-color: white;
   color: #ddd;
   font-size: 12px;

@@ -11,9 +11,15 @@ export const User = styled.div`
   margin: 20px 10px;
 `;
 
+export const EditButton = styled.div`
+  font-size: 10px;
+  cursor: pointer;
+`;
+
 export const DescDisplay = styled.div`
   display: flex;
   justify-content: space-between;
+  padding: 0 10px;
 `;
 
 export const ProfileImg = styled.div`

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import SearchInput from '../../../components/common/searchinput/SearchInput';
-import Slider4 from '../../../components/common/slider/Slider4';
 import * as GL from './GroupList.Styled';
 import BoardBox from '../../../components/common/boardbox/BoardBox';
 import SelectBox from '../../../components/common/selectbox/SelectBox';
+import ImageBox from '../../../components/common/imagebox/ImageBox';
 
 const regions = [
   { value: '', label: '지역' },
@@ -27,7 +27,6 @@ const regions = [
 
 const durations = [
   { value: '', label: '모임기간' },
-
   { value: '3일', label: '3일' },
   { value: '7일', label: '7일' },
   { value: '10일', label: '10일' },
@@ -35,11 +34,15 @@ const durations = [
 
 const ages = [
   { value: '', label: '연령' },
+  { value: '연령무관', label: '연령무관' },
 
   { value: '청소년', label: '청소년' },
   { value: '20대', label: '20대' },
   { value: '30대', label: '30대' },
-  { value: '40대이상', label: '40대이상' },
+  { value: '40대', label: '40대' },
+  { value: '50대', label: '50대' },
+  { value: '60대', label: '60대' },
+  { value: '70대', label: '70대' },
 ];
 
 const keywords = [
@@ -70,7 +73,15 @@ const GroupList = () => {
   const [clickedInfo, setClickedInfo] = useState<string[]>([]);
 
   const handleOptionClick = (optionLabel: string) => {
-    setClickedInfo([...clickedInfo, optionLabel]);
+    const updatedInfo = [...clickedInfo];
+
+    if (updatedInfo.length < 5) {
+      updatedInfo.push(optionLabel);
+    } else {
+      alert('태그는 5개까지만 선택 가능합니다');
+    }
+
+    setClickedInfo(updatedInfo);
   };
 
   const handleDeleteClick = (index: number) => {
@@ -82,11 +93,25 @@ const GroupList = () => {
   return (
     <GL.Wrapper>
       <SearchInput />
-      <Slider4 />
+      <GL.GridContainer>
+        <GL.ImageRow>
+          {Array(4)
+            .fill('')
+            .map((v, i) => (
+              <ImageBox key={i} />
+            ))}
+        </GL.ImageRow>
+        <GL.ImageRow>
+          {Array(4)
+            .fill('')
+            .map((v, i) => (
+              <ImageBox key={i} />
+            ))}
+        </GL.ImageRow>
+      </GL.GridContainer>
       <GL.ChoiceBox>
         <GL.ChoiceBoxTitle>
-          내게 맞는 독서 <br />
-          토론 모임을 찾아보세요!
+          내게 맞는 독서 <br /> 토론 모임을 찾아보세요
         </GL.ChoiceBoxTitle>
         <GL.HashTagBox>
           <GL.HashTag>
