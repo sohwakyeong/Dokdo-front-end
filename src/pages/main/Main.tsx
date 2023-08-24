@@ -12,7 +12,7 @@ import axios from 'axios';
 // API 요청 함수 추가
 async function fetchAllGroupData() {
   try {
-    const response = await axios.get('http://localhost:3001/api/v1/group');
+    const response = await axios.get('http://localhost:3001/api/v1/group?orderBy=random');// 최신순 정렬
     return response.data.data; // 서버 응답에서 실제 그룹 데이터를 반환
   } catch (error) {
     throw error;
@@ -75,7 +75,9 @@ function Main() {
           </M.StyledHotGroupLink>
         </M.GroupTopTitle>
       </M.GroupTop10>
+
       <Slider3 />
+
       <M.BooksTop10>
         <M.BooksTitle>
           <M.StyledBookLink to="/bookrec">

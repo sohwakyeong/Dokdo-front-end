@@ -27,7 +27,15 @@ export const TextBox = styled.div`
     font-size: 15px;
     padding: 3px;
     width: 95%;
-    overflow: hidden; /* 넘치는 부분은 숨김 */
+    overflow: hidden; 
     text-overflow: ellipsis;
   }
+`;
+
+export const ImgBox = styled.div`
+  width: 104px;
+  height: 104px;
+  background-color: #fff7ec;
+  object-fit: cover;
+  border-radius: 20px;
 `;

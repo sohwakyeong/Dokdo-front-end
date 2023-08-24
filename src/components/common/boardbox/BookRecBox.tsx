@@ -1,5 +1,8 @@
 import React from 'react';
 import * as BC from './BookRecBox.styled';
+
+
+// 책, 공모전 용 2줄 정렬 리스트
 const BookRecBox = () => {
   return (
     <BC.Wrapper>

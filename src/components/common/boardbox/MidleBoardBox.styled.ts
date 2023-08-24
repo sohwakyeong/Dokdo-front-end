@@ -15,21 +15,29 @@ export const Border = styled.div`
   align-items: center;
   box-sizing: border-box;
   border: solid 1px #ddd;
-  box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.15);
-  border-radius: 15px;
-  padding: 10px;
-  width: 50%;
-
+  box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  width: 45%;
 `;
 
 export const TextBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  width: 100%;
+  height: 230px;
   & div {
     padding: 5px 0;
     font-size: 15px;
-    width: 100%;
   }
+`;
+
+export const ImgBox = styled.div`
+  width: 100%;
+  height: 99px;
+  background-color: #fff7ec;
+  object-fit: cover;
+  border-radius: 20px;
+  margin-bottom: 7px;
+  box-sizing: border-box;
 `;

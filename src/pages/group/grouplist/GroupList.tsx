@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchInput from '../../../components/common/searchinput/SearchInput';
 import * as GL from './GroupList.Styled';
 import BoardBox from '../../../components/common/boardbox/BoardBox';
 import SelectBox from '../../../components/common/selectbox/SelectBox';
 import ImageBox from '../../../components/common/imagebox/ImageBox';
+import axios from 'axios';
 
 const regions = [
   { value: '', label: '지역' },
@@ -63,14 +64,37 @@ const sortOptions = [
   { value: '최근순', label: '최근순' },
 ];
 
+// API 요청 함수 추가
+async function fetchAllGroupData() {
+  try {
+    const response = await axios.get('http://localhost:3001/api/v1/group?orderBy=popularity');
+    return response.data.data; // 서버 응답에서 실제 그룹 데이터를 반환
+  } catch (error) {
+    throw error;
+  }
+}
+
 const GroupList = () => {
   const [selectedRegion, setSelectedRegion] = useState('');
   const [selectedDuration, setSelectedDuration] = useState('');
   const [selectedAge, setSelectedAge] = useState('');
   const [selectedKeyword, setSelectedKeyword] = useState('');
   const [selectedSort, setSelectedSort] = useState('');
-
   const [clickedInfo, setClickedInfo] = useState<string[]>([]);
+  const [groupData, setGroupData] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await fetchAllGroupData();
+        setGroupData(data);
+      } catch (error) {
+        console.error('데이터를 가져오는 중 에러 발생:', error);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   const handleOptionClick = (optionLabel: string) => {
     const updatedInfo = [...clickedInfo];
@@ -180,11 +204,9 @@ const GroupList = () => {
           />
         </GL.ChoiceSelect>
         <GL.ChoiceGroupBoard>
-          {Array(10)
-            .fill('')
-            .map((v, i) => (
-              <BoardBox key={i} />
-            ))}
+          {groupData.map((groupItem, index) => (
+            <BoardBox key={index} data={groupItem} />
+          ))}
         </GL.ChoiceGroupBoard>
       </GL.ChoiceImageGroup>
     </GL.Wrapper>
