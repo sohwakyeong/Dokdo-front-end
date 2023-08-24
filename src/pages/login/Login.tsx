@@ -1,41 +1,57 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { useDispatch } from 'react-redux';
-// import { useCookies } from 'react-cookie';
-
 import LogoIcon from '../../assets/icon/samplelogo.jpeg';
 import * as LoginStyle from './Login.styled';
 
 function LoginComponent() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
- // const [cookies, setCookie] = useCookies(['email']);
-
- // const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const onSubmitHandler = async (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-    try {
-      if (!(email && password)) {
-        return alert('빈칸 없이 입력해주세요.');
-      }
-      const response = await axios.post(
-        'http://localhost:3001/api/auth/login',
-        {
-          email,
-          password,
-        },
-      );
-      console.log(response.data.token);
-     // setCookie('email', response.data.token); // 쿠키에 토큰 저장
-      console.log('로그인');
-      navigate('/');
-    } catch (e) {
-      console.error(e);
-    }
+  const onEmailHandler = (e: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setEmail(e.target.value);
   };
+
+  const onPasswordHanlder = (e: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setPassword(e.target.value);
+  };
+  
+const onClickLogin = async (e: { preventDefault: () => void; }) => {
+// 이메일과 비밀번호가 비어 있는지 확인
+    e.preventDefault();
+    if (!(email && password)) {
+      alert('이메일과 비밀번호를 모두 입력하세요.');
+      return;
+    }
+// 조건을 통과한 경우에만 요청 보내기
+try {
+  const response = await axios.post(
+    'http://localhost:3001/api/v1/auth/login',
+    {
+      email,
+      password,
+    },
+    { withCredentials: true },
+  );
+
+  if(response.status === 200){
+    navigate('/');
+  } else {
+    alert('인증 실패: 아이디와 비밀번호를 확인해주세요.');
+    return;
+  }
+} catch (e) {
+console.error('로그인 에러:', e);
+alert('서버 오류: 다시 시도해주세요.');
+}
+};
+
+
 
   return (
     <LoginStyle.Container>
@@ -47,19 +63,19 @@ function LoginComponent() {
           id="email"
           placeholder="아이디를 입력해주세요."
           value={email}
-          onChange={e => setEmail(e.target.value)}
+          onChange={onEmailHandler}
         />
         <LoginStyle.Input
           type="password"
           placeholder="비밀번호를 입력해주세요."
           value={password}
-          onChange={e => setPassword(e.target.value)}
+          onChange={onPasswordHanlder}
         />
         <LoginStyle.Save htmlFor="check1">
           <LoginStyle.SaveId type="checkbox" id="check1" />
           아이디 저장하기
         </LoginStyle.Save>
-        <LoginStyle.Button type="submit" onClick={onSubmitHandler}>
+        <LoginStyle.Button type="submit" onClick={onClickLogin}>
           로그인
         </LoginStyle.Button>
         <LoginStyle.JoinLink to="/signup">회원가입</LoginStyle.JoinLink>
