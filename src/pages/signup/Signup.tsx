@@ -60,7 +60,7 @@ const SignupComponent = () => {
     setPassword(currPwd);
 
     if (!validatePwd(currPwd)) {
-      setPwdMsg('영문, 숫자, 특수기호 조합으로 8자리 이상 입력해주세요.');
+      setPwdMsg('영문, 숫자, 특수기호 조합으로 10자리 이상 입력해주세요.');
     } else {
       setPwdMsg('안전한 비밀번호입니다.');
     }
@@ -146,6 +146,14 @@ const SignupComponent = () => {
   const onSubmitHandler = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     try {
+
+      if (
+        !(emailMsg === '올바른 이메일 형식입니다.' &&
+        pwdMsg === '안전한 비밀번호입니다.' &&
+        confirmPwdMsg === '일치하는 비밀번호입니다.'
+      )) {
+        return alert('유효한 아이디와 비밀번호를 입력해주세요.');
+      }
       if (!(email && password && confirmPwd)) {
         return alert('빈칸 없이 입력해주세요.');
       }
@@ -205,8 +213,8 @@ const SignupComponent = () => {
             type="password"
             name="is_Password"
             // minLength 나중에 2에서 8로 바꾸기
-            minLength={2}
-            placeholder="영문, 숫자, 특수문자 포함 2자 이상을 입력해주세요."
+            minLength={10}
+            placeholder="영문, 숫자, 특수문자 포함 10자 이상을 입력해주세요."
             autoComplete="off"
             value={password}
             onChange={onChangePwd}
@@ -227,7 +235,7 @@ const SignupComponent = () => {
             type="password"
             name="is_Password"
             // minLength 나중에 2에서 8로 바꾸기
-            minLength={2}
+            minLength={10}
             placeholder="비밀번호를 다시 입력해주세요."
             autoComplete="off"
             value={confirmPwd}
