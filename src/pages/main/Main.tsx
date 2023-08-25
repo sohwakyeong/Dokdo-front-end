@@ -8,11 +8,12 @@ import MoreButton from '../../components/common/morebutton/MoreButton';
 import BoardBox from '../../components/common/boardbox/BoardBox';
 import axios from 'axios';
 
-
 // API 요청 함수 추가
 async function fetchAllGroupData() {
   try {
-    const response = await axios.get('http://localhost:3001/api/v1/group?orderBy=random');// 최신순 정렬
+    const response = await axios.get(
+      'http://localhost:3001/api/v1/group?orderBy=random',
+    ); // 최신순 정렬
     return response.data.data; // 서버 응답에서 실제 그룹 데이터를 반환
   } catch (error) {
     throw error;
@@ -36,7 +37,6 @@ function Main() {
     fetchData();
   }, []);
 
-  
   return (
     <M.Wrapper>
       <Slider />
@@ -60,8 +60,8 @@ function Main() {
         <M.GroupBoxTitle>모집 중인 독서 토론 모임 ⭐️</M.GroupBoxTitle>
       </M.StyledGroupLink>
 
-     <M.GroupList>
-        {groupData.map((groupItem, index) => (
+      <M.GroupList>
+        {groupData.slice(0, 3).map((groupItem, index) => (
           <BoardBox key={index} data={groupItem} />
         ))}
         <MoreButton to="/group/list">더보기</MoreButton>

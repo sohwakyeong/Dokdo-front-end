@@ -30,14 +30,14 @@ function Footer() {
           <img src={userIcon} alt="로그인/가입 아이콘" />
           <div>로그인/가입</div>
         </FT.StyledLink>
-        <FT.StyledLink to="/user/mypage">
+        {/* <FT.StyledLink to="/user/mypage">
           <img src={userIcon} alt="로그인/가입 아이콘" />
           <div>마이페이지</div>
         </FT.StyledLink>
         <FT.StyledLink to="/admin/user">
           <img src={userIcon} alt="로그인/가입 아이콘" />
           <div>관리자</div>
-        </FT.StyledLink>
+        </FT.StyledLink> */}
       </FT.MenuItem>
     </FT.StyledFooter>
   );
