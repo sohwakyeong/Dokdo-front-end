@@ -1,12 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 function CancleCompleteHeader() {
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1);
+  };
+
   return (
     <Wrapper>
       <Display>
         <BackBtn>
-          <button>←</button>
+          <button onClick={goBack}>←</button>
         </BackBtn>
 
         <div>props</div>

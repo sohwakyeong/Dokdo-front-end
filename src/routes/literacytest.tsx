@@ -71,7 +71,7 @@ const LiteracytestRoute = () => {
         path="/ox-quiz/screen/result"
         element={
           <Layout8>
-            <OXTestResult userAnswers={oxUserAnswers} /> {/* 이 부분 수정 */}
+            <OXTestResult userAnswers={oxUserAnswers} />
           </Layout8>
         }
       />

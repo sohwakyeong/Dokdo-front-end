@@ -186,7 +186,7 @@ const MainRoutes = () => {
         }
       />
       <Route
-        path="/*"
+        path="/"
         element={
           <Layout1>
             <Main />
