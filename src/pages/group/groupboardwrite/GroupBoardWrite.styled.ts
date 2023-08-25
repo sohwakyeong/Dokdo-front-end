@@ -106,3 +106,6 @@ export const Label = styled.label`
   border: none;
   cursor: pointer;
 `;
+export const TypeSelect = styled.select`
+  // 필요한 스타일 속성을 여기에 추가
+`;
