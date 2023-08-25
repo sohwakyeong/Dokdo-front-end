@@ -8,7 +8,6 @@ import Favorite from '../../assets/icon/Favorite.png';
 import Plus from  '../../assets/icon/Plus.png';
 import Bell from '../../assets/icon/Bell.png';
 
-
 interface AdminProps {
    children: ReactNode;
 }

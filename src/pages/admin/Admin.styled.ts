@@ -54,7 +54,7 @@ export const Table = styled.table`
         width: 100%;
         font-size: 14px;
         table-layout: fixed;
-
+    
     th {
         padding-bottom: 15px;
         border-bottom: 1px grey solid;
@@ -64,6 +64,7 @@ export const Table = styled.table`
     tr{
         text-align: center;
     }
+
     td {
         padding: 10px 3px;
         text-align: center;

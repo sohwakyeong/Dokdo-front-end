@@ -1,7 +1,33 @@
-import React from "react";
+import React,{useState, useEffect} from "react";
 import * as A from "./Admin.styled";
+import axios from "axios";
+import PostData from './PostData';
+
+async function fetchAllPost() {
+    try{
+        const response = await axios.get('http://localhost:3001/api/v1/admin/posts')
+        return response.data.data;  // 서버 응답에서 실제 그룹 데이터를 반환
+    } catch (error) {
+        throw error;
+    }
+}
+
 
 function AdminPost (){
+    const [postData, setPostData] = useState([]);
+
+    useEffect(()=>{
+        async function fetchData() {
+            try {
+                const data = await fetchAllPost(); 
+                setPostData(data);
+            } catch(error) {
+                console.error('데이터를 가져오는 중 에러 발생:', error);
+            }
+        }
+        fetchData();
+    },[]);
+
     return (
         <A.Wrapper>
             <A.Menu>
@@ -17,110 +43,13 @@ function AdminPost (){
                 <tr>
                     <th>글 번호</th>
                     <th>제목</th>
-                    <th>작성자</th>
-                    <th>작성 일자</th>
+                    <th>생성 일자</th>
+                    <th>업데이트 일자</th>
                     <th>관리</th>
                 </tr>
-                <tr>
-                    <td>101</td>
-                    <td>가나다라마바사</td>
-                    <td>싹난 감자</td>
-                    <td>23.01.12</td>
-                    <td>
-                        <A.AdminButton>수정</A.AdminButton>
-                        <A.AdminButton>삭제</A.AdminButton>
-                    </td>
-                </tr>
-                <tr>
-                    <td>100</td>
-                    <td>가나다라마바사</td>
-                    <td>싹난 감자</td>
-                    <td>23.01.12</td>
-                    <td>
-                        <A.AdminButton>수정</A.AdminButton>
-                        <A.AdminButton>삭제</A.AdminButton>
-                    </td>
-                </tr>
-                <tr>
-                    <td>101</td>
-                    <td>가나다라마바사</td>
-                    <td>싹난 감자</td>
-                    <td>23.01.12</td>
-                    <td>
-                        <A.AdminButton>수정</A.AdminButton>
-                        <A.AdminButton>삭제</A.AdminButton>
-                    </td>
-                </tr>
-                <tr>
-                    <td>100</td>
-                    <td>가나다라마바사</td>
-                    <td>싹난 감자</td>
-                    <td>23.01.12</td>
-                    <td>
-                        <A.AdminButton>수정</A.AdminButton>
-                        <A.AdminButton>삭제</A.AdminButton>
-                    </td>
-                </tr>
-                <tr>
-                    <td>101</td>
-                    <td>가나다라마바사</td>
-                    <td>싹난 감자</td>
-                    <td>23.01.12</td>
-                    <td>
-                        <A.AdminButton>수정</A.AdminButton>
-                        <A.AdminButton>삭제</A.AdminButton>
-                    </td>
-                </tr>
-                <tr>
-                    <td>100</td>
-                    <td>가나다라마바사</td>
-                    <td>싹난 감자</td>
-                    <td>23.01.12</td>
-                    <td>
-                        <A.AdminButton>수정</A.AdminButton>
-                        <A.AdminButton>삭제</A.AdminButton>
-                    </td>
-                </tr>
-                <tr>
-                    <td>101</td>
-                    <td>가나다라마바사</td>
-                    <td>싹난 감자</td>
-                    <td>23.01.12</td>
-                    <td>
-                        <A.AdminButton>수정</A.AdminButton>
-                        <A.AdminButton>삭제</A.AdminButton>
-                    </td>
-                </tr>
-                <tr>
-                    <td>100</td>
-                    <td>가나다라마바사</td>
-                    <td>싹난 감자</td>
-                    <td>23.01.12</td>
-                    <td>
-                        <A.AdminButton>수정</A.AdminButton>
-                        <A.AdminButton>삭제</A.AdminButton>
-                    </td>
-                </tr>
-                <tr>
-                    <td>101</td>
-                    <td>가나다라마바사</td>
-                    <td>싹난 감자</td>
-                    <td>23.01.12</td>
-                    <td>
-                        <A.AdminButton>수정</A.AdminButton>
-                        <A.AdminButton>삭제</A.AdminButton>
-                    </td>
-                </tr>
-                <tr>
-                    <td>100</td>
-                    <td>가나다라마바사</td>
-                    <td>싹난 감자</td>
-                    <td>23.01.12</td>
-                    <td>
-                        <A.AdminButton>수정</A.AdminButton>
-                        <A.AdminButton>삭제</A.AdminButton>
-                    </td>
-                </tr>
+                {postData.map((content, post_id) => ( 
+            <PostData key={post_id} data={content} />   
+           ))}
             </A.Table>
             </A.Layout>
             </A.Menu>     
