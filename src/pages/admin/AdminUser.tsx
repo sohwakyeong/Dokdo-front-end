@@ -3,121 +3,85 @@ import * as A from './Admin.styled';
 
 function AdminUser() {
     return (
-        <div>
+        <A.Wrapper>
+            <A.Menu>
             <A.Headline>회원 정보 관리</A.Headline>
             <A.Total>총 100 명</A.Total>
-            <A.Table> 
-                <thead>
+            <A.Layout> 
+                <A.Table>
                 <tr>
                     <th>닉네임</th>
-                    <th>전화번호</th>
                     <th>이메일</th>
                     <th>관리</th>
                 </tr>
-                </thead>
-                <tbody>
                 <tr>
                     <td>강낭콩</td>
-                    <td>010-1234-1234</td>
                     <td>abcabd@test.com</td>
                     <td>
                         <A.AdminButton>수정</A.AdminButton>
                         <A.AdminButton>삭제</A.AdminButton>
                     </td>
-                </tr>
+	            </tr>
                 <tr>
                     <td>강낭콩</td>
-                    <td>010-1234-1234</td>
                     <td>abcabd@test.com</td>
                     <td>
                         <A.AdminButton>수정</A.AdminButton>
                         <A.AdminButton>삭제</A.AdminButton>
                     </td>
-                </tr>
+	            </tr>
                 <tr>
                     <td>강낭콩</td>
-                    <td>010-1234-1234</td>
                     <td>abcabd@test.com</td>
                     <td>
                         <A.AdminButton>수정</A.AdminButton>
                         <A.AdminButton>삭제</A.AdminButton>
                     </td>
-                </tr>
+	            </tr>
                 <tr>
                     <td>강낭콩</td>
-                    <td>010-1234-1234</td>
-                    <td>abcabd@test.com</td>
-                    <td>
-                        <A.AdminButton>수정</A.AdminButton>
-                        <A.AdminButton>삭제</A.AdminButton>    
-                    </td>
-                </tr>
-                <tr>
-                    <td>강낭콩</td>
-                    <td>010-1234-1234</td>
                     <td>abcabd@test.com</td>
                     <td>
                         <A.AdminButton>수정</A.AdminButton>
                         <A.AdminButton>삭제</A.AdminButton>
                     </td>
-                </tr>
+	            </tr>
                 <tr>
                     <td>강낭콩</td>
-                    <td>010-1234-1234</td>
                     <td>abcabd@test.com</td>
                     <td>
                         <A.AdminButton>수정</A.AdminButton>
                         <A.AdminButton>삭제</A.AdminButton>
                     </td>
-                </tr>
+	            </tr>
                 <tr>
                     <td>강낭콩</td>
-                    <td>010-1234-1234</td>
                     <td>abcabd@test.com</td>
                     <td>
                         <A.AdminButton>수정</A.AdminButton>
                         <A.AdminButton>삭제</A.AdminButton>
                     </td>
-                </tr>
-                <tr>
+	            </tr>
+                 <tr>
                     <td>강낭콩</td>
-                    <td>010-1234-1234</td>
                     <td>abcabd@test.com</td>
                     <td>
                         <A.AdminButton>수정</A.AdminButton>
                         <A.AdminButton>삭제</A.AdminButton>
                     </td>
-                </tr>
+	            </tr>
                 <tr>
                     <td>강낭콩</td>
-                    <td>010-1234-1234</td>
                     <td>abcabd@test.com</td>
                     <td>
                         <A.AdminButton>수정</A.AdminButton>
                         <A.AdminButton>삭제</A.AdminButton>
                     </td>
-                </tr>
-                <tr>
-                    <td>강낭콩</td>
-                    <td>010-1234-1234</td>
-                    <td>abcabd@test.com</td>
-                    <td>
-                        <A.AdminButton>수정</A.AdminButton>
-                        <A.AdminButton>삭제</A.AdminButton>
-                    </td>
-                </tr>
-                <tr>
-                    <td>강낭콩</td>
-                    <td>010-1234-1234</td>
-                    <td>abcabd@test.com</td>
-                    <td>
-                        <A.AdminButton>수정</A.AdminButton>
-                        <A.AdminButton>삭제</A.AdminButton>
-                    </td>
-                </tr>
-                </tbody>
-            </A.Table>    
-    </div>
+	            </tr>
+                </A.Table>    
+            </A.Layout> 
+            </A.Menu>    
+    </A.Wrapper>
     )
 }
 
