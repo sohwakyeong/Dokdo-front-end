@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react';
 import LeftScreen from '../leftscreen/LeftScreen';
 import { LayoutContainer, Children, Left, Right } from './Layout1.styled';
-import CancleHeader from '../header/BackHeader';
 import BackHeader from '../header/BackHeader';
 
 interface Layout8Props {

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-
 import Main from '../pages/main/Main';
 import Search from '../pages/search/Search';
 import Group from '../pages/group/group/Group';
@@ -21,7 +20,6 @@ import Notifications from '../pages/notifications/Notifications';
 import Likes from '../pages/likes/Likes';
 import Layout1 from '../components/layout/layout1/Layout1';
 import Layout2 from '../components/layout/layout1/Layout2';
-
 import ContestDetail from '../pages/contestdetail/ContestDetail';
 import BookRecDetail from '../pages/bookrecdetail/BookRecDetail';
 import Layout4 from '../components/layout/layout1/Layout4';
@@ -34,14 +32,6 @@ const MainRoutes = () => {
   return (
     <Routes>
       <Route
-        path="/"
-        element={
-          <Layout1>
-            <Main />
-          </Layout1>
-        }
-      />
-      <Route
         path="/search"
         element={
           <Layout8>
@@ -49,14 +39,7 @@ const MainRoutes = () => {
           </Layout8>
         }
       />
-      <Route
-        path="/group"
-        element={
-          <Layout1>
-            <Group />
-          </Layout1>
-        }
-      />
+
       <Route
         path="/group/list"
         element={
@@ -73,14 +56,7 @@ const MainRoutes = () => {
           </Layout2>
         }
       />
-      <Route
-        path="/group/board"
-        element={
-          <Layout4>
-            <GroupBoard />
-          </Layout4>
-        }
-      />
+
       <Route
         path="/group/board/detail/:id"
         element={
@@ -98,10 +74,10 @@ const MainRoutes = () => {
         }
       />
       <Route
-        path="/group/photo"
+        path="/group/board"
         element={
           <Layout4>
-            <PhotoAlbum />
+            <GroupBoard />
           </Layout4>
         }
       />
@@ -119,6 +95,22 @@ const MainRoutes = () => {
           <Layout6>
             <PhotoAlbumWrite />
           </Layout6>
+        }
+      />
+      <Route
+        path="/group/photo"
+        element={
+          <Layout4>
+            <PhotoAlbum />
+          </Layout4>
+        }
+      />
+      <Route
+        path="/group"
+        element={
+          <Layout1>
+            <Group />
+          </Layout1>
         }
       />
       <Route
@@ -161,12 +153,11 @@ const MainRoutes = () => {
           </Layout1>
         }
       />
-
       <Route
-        path="/contest"
+        path="/notifications"
         element={
           <Layout1>
-            <Contest />
+            <Notifications />
           </Layout1>
         }
       />
@@ -179,10 +170,10 @@ const MainRoutes = () => {
         }
       />
       <Route
-        path="/notifications"
+        path="/contest"
         element={
           <Layout1>
-            <Notifications />
+            <Contest />
           </Layout1>
         }
       />
@@ -192,6 +183,14 @@ const MainRoutes = () => {
           <Layout3>
             <Likes />
           </Layout3>
+        }
+      />
+      <Route
+        path="/*"
+        element={
+          <Layout1>
+            <Main />
+          </Layout1>
         }
       />
     </Routes>

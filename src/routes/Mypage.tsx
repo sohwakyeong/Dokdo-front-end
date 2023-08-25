@@ -15,8 +15,6 @@ import DeleteAccountComponent from '../pages/mypage/deleteaccount/DeleteAccount'
 import Layout1 from '../components/layout/layout1/Layout1';
 import Layout6 from '../components/layout/layout1/Layout6';
 import Layout8 from '../components/layout/layout1/Layout8';
-import Layout5 from '../components/layout/layout1/Layout5';
-import Layout4 from '../components/layout/layout1/Layout4';
 import Layout3 from '../components/layout/layout1/Layout3';
 
 const MypageRoutes = () => {
@@ -49,13 +47,13 @@ const MypageRoutes = () => {
           </Layout1>
         }
       />
-      {/* 마이페이지 */}
+      {/* 마이페이지/회원탈퇴 */}
       <Route
-        path="/user/mypage"
+        path="/user/deleteaccount"
         element={
-          <Layout3>
-            <MyPageComponent />
-          </Layout3>
+          <Layout8>
+            <DeleteAccountComponent />
+          </Layout8>
         }
       />
       {/* 마이페이지/내모임 */}
@@ -82,7 +80,7 @@ const MypageRoutes = () => {
         element={
           <Layout3>
             <MyPostsComponent />
-          </Layout3>       
+          </Layout3>
         }
       />
       {/* 마이페이지/나의정보수정 */}
@@ -94,13 +92,14 @@ const MypageRoutes = () => {
           </Layout6>
         }
       />
-      {/* 마이페이지/회원탈퇴 */}
+
+      {/* 마이페이지/문의하기성공페이지 */}
       <Route
-        path="/user/deleteaccount"
+        path="/user/mypage/inquiredsuccess"
         element={
-          <Layout8>
-            <DeleteAccountComponent />
-          </Layout8>
+          <Layout1>
+            <InquiredSuccessComponent />
+          </Layout1>
         }
       />
       {/* 마이페이지/문의하기 */}
@@ -112,13 +111,13 @@ const MypageRoutes = () => {
           </Layout6>
         }
       />
-      {/* 마이페이지/문의하기성공페이지 */}
+      {/* 마이페이지 */}
       <Route
-        path="/user/mypage/inquiredsuccess"
+        path="/user/mypage"
         element={
-          <Layout1>
-            <InquiredSuccessComponent />
-          </Layout1>
+          <Layout3>
+            <MyPageComponent />
+          </Layout3>
         }
       />
     </Routes>
