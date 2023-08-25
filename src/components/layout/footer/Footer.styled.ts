@@ -7,8 +7,10 @@ export const StyledFooter = styled.footer`
   height: 60px;
   font-size: 13px;
   background-color: white;
-  width: 474px;
+  width: 472px;
   z-index: 9999;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
 `;
 
 export const MenuItem = styled.div`
