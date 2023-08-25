@@ -30,16 +30,20 @@ const onClickLogin = async (e: { preventDefault: () => void; }) => {
     }
 // 조건을 통과한 경우에만 요청 보내기
 try {
-  const response = await axios.post(
-    'http://localhost:3001/api/v1/auth/login',
-    {
-      email,
-      password,
-    },
-    { withCredentials: true },
-  );
-
+  const response = await axios
+    .post(
+      'http://localhost:3001/api/v1/auth/login',
+      {
+        email,
+        password,
+      },
+      { withCredentials: true },
+    );
   if(response.status === 200){
+    // token이 필요한 API 요청 시 header Authorization에 token 담아서 보내는 거
+    axios.defaults.headers.common[
+      'Authorization'
+    ] = `Bearer ${response.data.access_token}`;
     navigate('/');
   } else {
     alert('인증 실패: 아이디와 비밀번호를 확인해주세요.');
@@ -50,8 +54,6 @@ console.error('로그인 에러:', e);
 alert('서버 오류: 다시 시도해주세요.');
 }
 };
-
-
 
   return (
     <LoginStyle.Container>
