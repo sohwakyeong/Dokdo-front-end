@@ -7,6 +7,7 @@ import OXTestScreen from '../pages/literacytest/OXTestScreen';
 import OXTestResult from '../pages/literacytest/OXTestResult';
 import LiteracyTestResult from '../pages/literacytest/LiteracytestResult';
 import Layout1 from '../components/layout/layout1/Layout1';
+import Layout8 from '../components/layout/layout1/Layout8';
 
 const LiteracytestRoute = () => {
   // Literacy Test 사용자 답변을 관리할 상태
@@ -37,17 +38,17 @@ const LiteracytestRoute = () => {
       <Route
         path="/literacy-test/screen"
         element={
-          <Layout1>
+          <Layout8>
             <LiteracyTestScreen setUserAnswers={handleSetLiteracyUserAnswers} />
-          </Layout1>
+          </Layout8>
         }
       />
       <Route
         path="/literacy-test/screen/result"
         element={
-          <Layout1>
+          <Layout8>
             <LiteracyTestResult userAnswers={literacyUserAnswers} />
-          </Layout1>
+          </Layout8>
         }
       />
       <Route
@@ -61,17 +62,17 @@ const LiteracytestRoute = () => {
       <Route
         path="/ox-quiz/screen"
         element={
-          <Layout1>
+          <Layout8>
             <OXTestScreen setUserAnswers={handleSetOXUserAnswers} />
-          </Layout1>
+          </Layout8>
         }
       />
       <Route
         path="/ox-quiz/screen/result"
         element={
-          <Layout1>
+          <Layout8>
             <OXTestResult userAnswers={oxUserAnswers} /> {/* 이 부분 수정 */}
-          </Layout1>
+          </Layout8>
         }
       />
     </Routes>

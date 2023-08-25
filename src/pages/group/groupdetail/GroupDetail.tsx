@@ -1,14 +1,19 @@
 import React from 'react';
 import * as GD from './GroupDetail.styled';
 // import MoreButton from '../../../components/common/morebutton/MoreButton';
+import GroupImg from '../../../assets/img/독서모임1.jpeg';
 
 const GroupDetail = () => {
   return (
     <GD.Wrapper>
       <GD.GroupImage>
-        <img src="/" alt="모임 설정 이미지" />
+        <img src={GroupImg} alt="모임 설정 이미지" />
+        <GD.EditButton>
+          <div>●●●</div>
+        </GD.EditButton>
       </GD.GroupImage>
       <GD.GroupInfo>
+        <GD.GroupName>●시좋아하는 모임</GD.GroupName>
         <GD.GroupInfoTitle>
           좋아하는 시집 한권씩 챙겨서 피크닉겸 독서 토론해요{' '}
         </GD.GroupInfoTitle>
@@ -22,9 +27,12 @@ const GroupDetail = () => {
         <GD.GroupInfoBox>모임 소개 내용</GD.GroupInfoBox>
       </GD.GroupInfo>
       <GD.Schedule>
-        <GD.ScheduleTitle>일정</GD.ScheduleTitle>
+        <GD.ScheduleTop>
+          <GD.ScheduleTitle>일정</GD.ScheduleTitle>
+          <button>일정 등록</button>
+        </GD.ScheduleTop>
 
-        {Array(3)
+        {Array(2)
           .fill('')
           .map((v, i) => (
             <GD.ScheduleBox key={i}>
@@ -54,11 +62,10 @@ const GroupDetail = () => {
               </GD.MemberList>
             ))}
         </ul>
-        <GD.ButtonDisplay>
-        {/* <MoreButton /> */}
-        </GD.ButtonDisplay>
+        <GD.ButtonDisplay></GD.ButtonDisplay>
       </GD.MemberBox>
     </GD.Wrapper>
+    //더보기 버튼 필요 -> 무한스크롤
   );
 };
 

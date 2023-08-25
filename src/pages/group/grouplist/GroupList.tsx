@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchInput from '../../../components/common/searchinput/SearchInput';
-import Slider4 from '../../../components/common/slider/Slider4';
 import * as GL from './GroupList.Styled';
 import BoardBox from '../../../components/common/boardbox/BoardBox';
 import SelectBox from '../../../components/common/selectbox/SelectBox';
+import ImageBox from '../../../components/common/imagebox/ImageBox';
+import axios from 'axios';
 
 const regions = [
   { value: '', label: '지역' },
@@ -27,7 +28,6 @@ const regions = [
 
 const durations = [
   { value: '', label: '모임기간' },
-
   { value: '3일', label: '3일' },
   { value: '7일', label: '7일' },
   { value: '10일', label: '10일' },
@@ -35,11 +35,15 @@ const durations = [
 
 const ages = [
   { value: '', label: '연령' },
+  { value: '연령무관', label: '연령무관' },
 
   { value: '청소년', label: '청소년' },
   { value: '20대', label: '20대' },
   { value: '30대', label: '30대' },
-  { value: '40대이상', label: '40대이상' },
+  { value: '40대', label: '40대' },
+  { value: '50대', label: '50대' },
+  { value: '60대', label: '60대' },
+  { value: '70대', label: '70대' },
 ];
 
 const keywords = [
@@ -60,17 +64,48 @@ const sortOptions = [
   { value: '최근순', label: '최근순' },
 ];
 
+// API 요청 함수 추가
+async function fetchAllGroupData() {
+  try {
+    const response = await axios.get('http://localhost:3001/api/v1/group?orderBy=popularity');
+    return response.data.data; // 서버 응답에서 실제 그룹 데이터를 반환
+  } catch (error) {
+    throw error;
+  }
+}
+
 const GroupList = () => {
   const [selectedRegion, setSelectedRegion] = useState('');
   const [selectedDuration, setSelectedDuration] = useState('');
   const [selectedAge, setSelectedAge] = useState('');
   const [selectedKeyword, setSelectedKeyword] = useState('');
   const [selectedSort, setSelectedSort] = useState('');
-
   const [clickedInfo, setClickedInfo] = useState<string[]>([]);
+  const [groupData, setGroupData] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await fetchAllGroupData();
+        setGroupData(data);
+      } catch (error) {
+        console.error('데이터를 가져오는 중 에러 발생:', error);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   const handleOptionClick = (optionLabel: string) => {
-    setClickedInfo([...clickedInfo, optionLabel]);
+    const updatedInfo = [...clickedInfo];
+
+    if (updatedInfo.length < 5) {
+      updatedInfo.push(optionLabel);
+    } else {
+      alert('태그는 5개까지만 선택 가능합니다');
+    }
+
+    setClickedInfo(updatedInfo);
   };
 
   const handleDeleteClick = (index: number) => {
@@ -82,11 +117,25 @@ const GroupList = () => {
   return (
     <GL.Wrapper>
       <SearchInput />
-      <Slider4 />
+      <GL.GridContainer>
+        <GL.ImageRow>
+          {Array(4)
+            .fill('')
+            .map((v, i) => (
+              <ImageBox key={i} />
+            ))}
+        </GL.ImageRow>
+        <GL.ImageRow>
+          {Array(4)
+            .fill('')
+            .map((v, i) => (
+              <ImageBox key={i} />
+            ))}
+        </GL.ImageRow>
+      </GL.GridContainer>
       <GL.ChoiceBox>
         <GL.ChoiceBoxTitle>
-          내게 맞는 독서 <br />
-          토론 모임을 찾아보세요!
+          내게 맞는 독서 <br /> 토론 모임을 찾아보세요
         </GL.ChoiceBoxTitle>
         <GL.HashTagBox>
           <GL.HashTag>
@@ -155,11 +204,9 @@ const GroupList = () => {
           />
         </GL.ChoiceSelect>
         <GL.ChoiceGroupBoard>
-          {Array(10)
-            .fill('')
-            .map((v, i) => (
-              <BoardBox key={i} />
-            ))}
+          {groupData.map((groupItem, index) => (
+            <BoardBox key={index} data={groupItem} />
+          ))}
         </GL.ChoiceGroupBoard>
       </GL.ChoiceImageGroup>
     </GL.Wrapper>

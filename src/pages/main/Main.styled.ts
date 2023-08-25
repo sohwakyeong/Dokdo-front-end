@@ -8,13 +8,7 @@ export const Wrapper = styled.div`
   width: 474px;
 `;
 
-export const GridContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-  width: 90%;
-`;
+
 
 export const StyledGroupLink = styled(Link)`
   width: 90%;
@@ -24,7 +18,13 @@ export const StyledGroupLink = styled(Link)`
   font-size: 20px;
   text-align: left;
 `;
-
+export const GridContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 90%;
+`;
 export const ImageRow = styled.div`
   display: flex;
   justify-content: space-between;

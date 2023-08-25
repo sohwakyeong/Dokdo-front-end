@@ -7,10 +7,13 @@ export const StyleHeader = styled.div`
   flex-direction: column;
   align-items: center;
   height: 100px;
-  width: 474px;
+  width: 472px;
   margin-bottom: 10px;
   position: fixed;
   z-index: 9999;
+border-left: 1px solid #ddd;
+border-right: 1px solid #ddd;
+
 `;
 
 export const Logo = styled.h1`
@@ -25,6 +28,7 @@ export const StyleLogo = styled.img`
   width: 58px;
   height: 32px;
 `;
+
 export const Nav = styled.nav`
   display: flex;
   justify-content: space-between;

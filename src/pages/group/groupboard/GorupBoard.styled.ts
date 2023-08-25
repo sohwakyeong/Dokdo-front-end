@@ -3,7 +3,18 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 474px;
+`;
+
+export const GroupBoardTitle = styled.div`
+  height: 40px;
+  width: 100%;
+  background-color: #84614b;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const GroupBoardList = styled.ul`
@@ -11,6 +22,7 @@ export const GroupBoardList = styled.ul`
   flex-direction: column;
   align-items: center;
   margin: 10px 0;
+  width: 100%;
 `;
 
 export const Boardbox = styled.div`

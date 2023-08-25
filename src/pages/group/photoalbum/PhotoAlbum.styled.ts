@@ -7,10 +7,17 @@ export const Wrapper = styled.div`
   width: 474px;
 `;
 
-export const PhotoListTitle = styled.div`
-  font-size: 25px;
+export const GroupPhotoTitle = styled.div`
+  height: 40px;
+  width: 100%;
+  background-color: #84614b;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 20px 0;
 `;
+
 
 export const PhotoList = styled.div`
   width: 90%;
