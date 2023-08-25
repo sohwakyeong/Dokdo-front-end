@@ -1,28 +1,26 @@
 import React, { ReactNode } from 'react';
-import Header from '../header/Header';
-import Footer from '../footer/Footer';
 import LeftScreen from '../leftscreen/LeftScreen';
 import { LayoutContainer, Children, Left, Right } from './Layout1.styled';
+import CancleHeader from '../header/BackHeader';
+import BackHeader from '../header/BackHeader';
 
-
-
-interface Layout1Props {
+interface Layout8Props {
   children: ReactNode;
 }
-//기본 헤더, 기본 푸터
-function Layout1({ children }: Layout1Props) {
+
+// 취소버튼, 중앙프롭스 하단 푸터 X
+function Layout8({ children }: Layout8Props) {
   return (
     <LayoutContainer>
       <Left>
         <LeftScreen />
       </Left>
       <Right>
-        <Header />
+        <BackHeader />
         <Children>{children}</Children>
-        <Footer />
       </Right>
     </LayoutContainer>
   );
 }
 
-export default Layout1;
+export default Layout8;

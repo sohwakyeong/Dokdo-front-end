@@ -1,28 +1,26 @@
 import React, { ReactNode } from 'react';
-import Header from '../header/Header';
-import Footer from '../footer/Footer';
 import LeftScreen from '../leftscreen/LeftScreen';
 import { LayoutContainer, Children, Left, Right } from './Layout1.styled';
+import GroupApplyFooter from '../footer/GroupApplyFooter';
+import GroupHeader from '../header/GroupHeader';
 
-
-
-interface Layout1Props {
+interface Layout2Props {
   children: ReactNode;
 }
-//기본 헤더, 기본 푸터
-function Layout1({ children }: Layout1Props) {
+// 그룹 상세 페이지 -> 그룹헤더 + 그룹 생성 푸터
+function Layout2({ children }: Layout2Props) {
   return (
     <LayoutContainer>
       <Left>
         <LeftScreen />
       </Left>
       <Right>
-        <Header />
+        <GroupHeader />
         <Children>{children}</Children>
-        <Footer />
+        <GroupApplyFooter />
       </Right>
     </LayoutContainer>
   );
 }
 
-export default Layout1;
+export default Layout2;

@@ -1,8 +1,7 @@
 import React from 'react';
-import GroupApplyFooter from '../../components/layout/footer/GroupApplyFooter';
 
 const Likes = () => {
-  return <div><GroupApplyFooter /> </div>;
+  return <div>좋아요페이지</div>;
 };
 
 export default Likes;

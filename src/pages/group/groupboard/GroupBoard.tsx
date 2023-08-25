@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import * as GB from './GorupBoard.styled';
 import SearchInput from '../../../components/common/searchinput/SearchInput';
 import axios from 'axios';
+import PenFooter from '../../../components/layout/footer/PenFooter';
 
 interface GroupBoardProps {
   data?: {
@@ -41,6 +42,7 @@ function GroupBoard({ data }: GroupBoardProps) {
 
   return (
     <GB.Wrapper>
+      <PenFooter />
       <SearchInput />
       <GB.GroupBoardList>
         <GB.GroupBoardTitle>

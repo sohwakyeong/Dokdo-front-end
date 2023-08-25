@@ -1,23 +1,24 @@
 import React, { ReactNode } from 'react';
-import Header from '../header/Header';
 import Footer from '../footer/Footer';
 import LeftScreen from '../leftscreen/LeftScreen';
 import { LayoutContainer, Children, Left, Right } from './Layout1.styled';
 
+import BackSearchHeader from '../header/BackSearchHeader';
+import CancleHeader from '../header/BackHeader';
 
-
-interface Layout1Props {
+interface Layout3Props {
   children: ReactNode;
 }
-//기본 헤더, 기본 푸터
-function Layout1({ children }: Layout1Props) {
+// 헤더 : 뒤로가기 중앙 우측 검색알림아이콘 / 푸터 기본푸터 : 쓰는곳 마이페이지,
+function Layout3({ children }: Layout3Props) {
   return (
     <LayoutContainer>
       <Left>
         <LeftScreen />
       </Left>
       <Right>
-        <Header />
+        <BackSearchHeader />
+        <CancleHeader />
         <Children>{children}</Children>
         <Footer />
       </Right>
@@ -25,4 +26,4 @@ function Layout1({ children }: Layout1Props) {
   );
 }
 
-export default Layout1;
+export default Layout3;

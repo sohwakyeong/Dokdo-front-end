@@ -1,23 +1,22 @@
 import React, { ReactNode } from 'react';
-import Header from '../header/Header';
-import Footer from '../footer/Footer';
 import LeftScreen from '../leftscreen/LeftScreen';
 import { LayoutContainer, Children, Left, Right } from './Layout1.styled';
 
+import GroupHeader from '../header/GroupHeader';
+import Footer from '../footer/Footer';
 
-
-interface Layout1Props {
+interface Layout4Props {
   children: ReactNode;
 }
-//기본 헤더, 기본 푸터
-function Layout1({ children }: Layout1Props) {
+//그룹헤더 // 기본 푸터
+function Layout4({ children }: Layout4Props) {
   return (
     <LayoutContainer>
       <Left>
         <LeftScreen />
       </Left>
       <Right>
-        <Header />
+        <GroupHeader />
         <Children>{children}</Children>
         <Footer />
       </Right>
@@ -25,4 +24,4 @@ function Layout1({ children }: Layout1Props) {
   );
 }
 
-export default Layout1;
+export default Layout4;

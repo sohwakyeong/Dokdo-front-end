@@ -21,9 +21,11 @@ const Wrapper = styled.div`
   height: 70px;
   font-size: 13px;
   background-color: white;
-  width: 474px;
+  width: 472px;
   z-index: 9999;
   border-top: 0.5px solid #d7d7d7;
+  border-left: 1px solid #ddd;
+border-right: 1px solid #ddd;
 `;
 
 const Display = styled.div`
@@ -41,14 +43,14 @@ const NextBtn = styled.div`
   width: 80%;
   background-color: #84614b;
   width: 380px;
-  height: 60px;
+  height: 55px;
   border-radius: 20px;
 
   & button {
     border: none;
     color: white;
     background-color: transparent;
-    font-size: 21px;
+    font-size: 19px;
     font-weight: 700;
     cursor: pointer;
 

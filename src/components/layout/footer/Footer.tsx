@@ -8,7 +8,7 @@ import userIcon from '../../../assets/icon/User.png';
 
 function Footer() {
   return (
-    <FT.StyledFooter>
+      <FT.StyledFooter>
       <FT.MenuItem>
         <FT.StyledLink to="/">
           <img src={homeIcon} alt="홈 아이콘" />
@@ -40,6 +40,7 @@ function Footer() {
         </FT.StyledLink> */}
       </FT.MenuItem>
     </FT.StyledFooter>
+    
   );
 }
 

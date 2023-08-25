@@ -1,28 +1,28 @@
 import React, { ReactNode } from 'react';
-import Header from '../header/Header';
-import Footer from '../footer/Footer';
 import LeftScreen from '../leftscreen/LeftScreen';
 import { LayoutContainer, Children, Left, Right } from './Layout1.styled';
 
+import BackHeader from '../header/BackSearchHeader';
+import BoardAndPhotoFooter from '../footer/BoardAndPhotoFooter';
 
-
-interface Layout1Props {
+interface Layout7Props {
   children: ReactNode;
 }
-//기본 헤더, 기본 푸터
-function Layout1({ children }: Layout1Props) {
+
+// 헤더 뒤로가기 / 푸터 댓글 작성
+function Layout7({ children }: Layout7Props) {
   return (
     <LayoutContainer>
       <Left>
         <LeftScreen />
       </Left>
       <Right>
-        <Header />
+        <BackHeader />
         <Children>{children}</Children>
-        <Footer />
+        <BoardAndPhotoFooter />
       </Right>
     </LayoutContainer>
   );
 }
 
-export default Layout1;
+export default Layout7;

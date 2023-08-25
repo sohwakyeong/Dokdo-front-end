@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import searchIcon from '../../../assets/icon/Search.png';
+import notificationIcon from '../../../assets/icon/Bell.png';
 
-function BackHeader() {
+function BackSearchHeader() {
   const navigate = useNavigate();
 
   const goBack = () => {
-    navigate(-1);
+    navigate(-1); 
   };
 
   return (
@@ -15,13 +17,22 @@ function BackHeader() {
         <BackBtn>
           <button onClick={goBack}>←</button>
         </BackBtn>
-        <Props>props</Props>
+
+        <div>props</div>
+        <Nav>
+          <Link to="/search">
+            <StlyedImg src={searchIcon} alt="돋보기 아이콘" />
+          </Link>
+          <Link to="/notifications">
+            <StlyedImg src={notificationIcon} alt="알림 아이콘" />
+          </Link>
+        </Nav>
       </Display>
     </Wrapper>
   );
 }
 
-export default BackHeader;
+export default BackSearchHeader;
 
 const Wrapper = styled.div`
   background-color: white;
@@ -46,6 +57,12 @@ const Display = styled.div`
   padding: 0 10px;
 `;
 
+const Nav = styled.nav`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 65px;
+`;
 const BackBtn = styled.div`
   & button {
     border: none;
@@ -55,8 +72,7 @@ const BackBtn = styled.div`
   }
 `;
 
-const Props = styled.div`
-  text-align: center;
-  width: 95%;
-  padding-right: 30px;
+const StlyedImg = styled.img`
+  width: 27px;
+  height: 27px;
 `;

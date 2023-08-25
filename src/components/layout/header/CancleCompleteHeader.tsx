@@ -26,10 +26,12 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   height: 50px;
-  width: 474px;
+  width: 472px;
   position: fixed;
   z-index: 9999;
   border-bottom: 0.5px solid #d7d7d7;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
 `;
 
 const Display = styled.div`

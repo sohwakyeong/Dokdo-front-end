@@ -1,25 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
-import LikeIcon from '../../../assets/icon/Favorite.png';
 
-function GroupApplyFooter() {
+function BoardAndPhotoFooter() {
   return (
     <Wrapper>
       <Display>
-        <LikeBtn>
-          <button>
-            <img src={LikeIcon} alt="" />
-          </button>
-        </LikeBtn>
-        <ApplyBtn>
-          <button>가입 신청하기</button>
-        </ApplyBtn>
+        <Input>
+          <input type="text" placeholder="댓글을 입력하세요." />
+        </Input>
+        <Button>
+          <button>등록</button>
+        </Button>
       </Display>
     </Wrapper>
   );
 }
 
-export default GroupApplyFooter;
+export default BoardAndPhotoFooter;
 
 const Wrapper = styled.div`
   position: fixed;
@@ -30,8 +27,6 @@ const Wrapper = styled.div`
   width: 472px;
   z-index: 9999;
   border-top: 0.5px solid #d7d7d7;
-  display: flex;
-  align-items: center;
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
 `;
@@ -40,38 +35,42 @@ const Display = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 5px;
+  height: 100%;
+  width: 100%;
 `;
 
-const LikeBtn = styled.div`
-  width: 15%;
+const Button = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  & button {
-    width: 40px;
-    height: 40px;
-    border: none;
-    background-color: transparent;
-  }
-`;
-
-const ApplyBtn = styled.div`
-  width: 380px;
+  width: 20%;
+  background-color: #84614b;
   height: 50px;
   border-radius: 20px;
-  background-color: #84614b;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   & button {
     border: none;
     color: white;
     background-color: transparent;
-    font-size: 21px;
+    font-size: 20px;
     font-weight: 700;
     cursor: pointer;
+  }
+`;
+
+const Input = styled.div`
+  width: 74%;
+
+  & input {
+    width: 100%;
+    height: 45px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+
+    &::placeholder {
+      padding-left: 10px;
+      font-size: 15px;
+      color: #a8a8a8;
+    }
   }
 `;
