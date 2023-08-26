@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 
 interface GroupCreatePage3Data {
   genre: string;
-  dateTime: string;
-  location: string;
+  day: string; // 변경: dateTime -> day
+  place: string; // 변경: location -> place
 }
 
 interface GroupCreatePage3Props {
@@ -18,14 +18,14 @@ const GroupCreatePage3: React.FC<GroupCreatePage3Props> = ({
   handleNext,
 }) => {
   const [genre, setGenre] = useState(data.genre);
-  const [dateTime, setDateTime] = useState(data.dateTime);
-  const [location, setLocation] = useState(data.location);
+  const [day, setDay] = useState(data.day); // 변경: dateTime -> day
+  const [place, setPlace] = useState(data.place); // 변경: location -> place
 
   const handleSubmit = () => {
     updateData({
       genre,
-      dateTime,
-      location,
+      day, // 변경: dateTime -> day
+      place, // 변경: location -> place
     });
     handleNext();
   };
@@ -41,13 +41,13 @@ const GroupCreatePage3: React.FC<GroupCreatePage3Props> = ({
       />
       <input
         type="datetime-local"
-        value={dateTime}
-        onChange={e => setDateTime(e.target.value)}
+        value={day} // 변경: dateTime -> day
+        onChange={e => setDay(e.target.value)} // 변경: setDateTime -> setDay
       />
       <input
         type="text"
-        value={location}
-        onChange={e => setLocation(e.target.value)}
+        value={place} // 변경: location -> place
+        onChange={e => setPlace(e.target.value)} // 변경: setLocation -> setPlace
         placeholder="장소를 입력하세요."
       />
       <button onClick={handleSubmit}>다음</button>

@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 
 interface GroupCreatePage1Data {
-  title: string;
-  description: string;
+  name: string; // 변경: title -> name
+  introduction: string; // 변경: description -> introduction
   image: File | null;
 }
 
@@ -18,8 +18,8 @@ const GroupCreatePage1: React.FC<GroupCreatePage1Props> = ({
   updateData,
   handleNext,
 }) => {
-  const [title, setTitle] = useState(data.title);
-  const [description, setDescription] = useState(data.description);
+  const [name, setName] = useState(data.name); // 변경: title -> name
+  const [introduction, setIntroduction] = useState(data.introduction); // 변경: description -> introduction
   const [image, setImage] = useState<File | null>(data.image);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -27,8 +27,8 @@ const GroupCreatePage1: React.FC<GroupCreatePage1Props> = ({
 
     // 모임 정보 제출 로직
     updateData({
-      title,
-      description,
+      name, // 변경: title -> name
+      introduction, // 변경: description -> introduction
       image,
     });
 
@@ -50,16 +50,16 @@ const GroupCreatePage1: React.FC<GroupCreatePage1Props> = ({
           <label>모임명: </label>
           <input
             type="text"
-            value={title}
-            onChange={e => setTitle(e.target.value)}
+            value={name} // 변경: title -> name
+            onChange={e => setName(e.target.value)} // 변경: setTitle -> setName
             placeholder="모임명을 입력하세요."
           />
         </div>
         <div>
           <label>모임소개: </label>
           <textarea
-            value={description}
-            onChange={e => setDescription(e.target.value)}
+            value={introduction} // 변경: description -> introduction
+            onChange={e => setIntroduction(e.target.value)} // 변경: setDescription -> setIntroduction
             placeholder="모임소개를 입력하세요."
           />
         </div>

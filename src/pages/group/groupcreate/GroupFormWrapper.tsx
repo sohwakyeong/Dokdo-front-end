@@ -3,36 +3,31 @@ import axios, { AxiosError } from 'axios';
 import GroupCreatePage1 from './GroupCreatePage1';
 import GroupCreatePage2 from './GroupCreatePage2';
 import GroupCreatePage3 from './GroupCreatePage3';
-import GroupCreatePage4 from './GroupCreatePage4';
 
 type FormData = {
-  title: string;
-  description: string;
+  name: string;
+  introduction: string;
   image: File | null;
-  region: string;
-  age: string;
-  keyword: string;
-  genre: string;
-  dateTime: string;
   location: string;
-  postTitle: string;
-  postImages: File[];
+  age: string;
+  tag: string;
+  genre: string;
+  day: string;
+  place: string;
 };
 
 const GroupFormWrapper: React.FC = () => {
   const [page, setPage] = useState(1);
   const [data, setData] = useState<FormData>({
-    title: '',
-    description: '',
+    name: '',
+    introduction: '',
     image: null,
-    region: '',
-    age: '',
-    keyword: '',
-    genre: '',
-    dateTime: '',
     location: '',
-    postTitle: '',
-    postImages: [],
+    age: '',
+    tag: '',
+    genre: '',
+    day: '',
+    place: '',
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<{ message: string } | null>(null);
@@ -42,7 +37,7 @@ const GroupFormWrapper: React.FC = () => {
   };
 
   const handleNext = () => {
-    if (page < 4) setPage(page + 1);
+    if (page < 3) setPage(page + 1); // 최대 페이지를 3으로 제한
   };
 
   const handleSubmit = async () => {
@@ -88,17 +83,10 @@ const GroupFormWrapper: React.FC = () => {
         <GroupCreatePage3
           data={data}
           updateData={updateData}
-          handleNext={handleNext}
+          handleNext={handleSubmit} // 마지막 페이지에서 '다음' 버튼을 누르면 제출되게 함
         />
       )}
-      {page === 4 && (
-        <GroupCreatePage4
-          data={data}
-          updateData={updateData}
-          handleSubmit={handleSubmit}
-        />
-      )}
-      {page > 4 && <div>Invalid page</div>}
+      {page > 3 && <div>Invalid page</div>}
     </div>
   );
 };

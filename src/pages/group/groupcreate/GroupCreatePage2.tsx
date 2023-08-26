@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
 interface GroupCreatePage2Data {
-  region: string;
+  location: string; // 변경: region -> location
   age: string;
-  keyword: string;
+  tag: string; // 변경: keyword -> tag
 }
 
 interface GroupCreatePage2Props {
@@ -17,15 +17,15 @@ const GroupCreatePage2: React.FC<GroupCreatePage2Props> = ({
   updateData,
   handleNext,
 }) => {
-  const [region, setRegion] = useState(data.region);
+  const [location, setLocation] = useState(data.location); // 변경: region -> location
   const [age, setAge] = useState(data.age);
-  const [keyword, setKeyword] = useState(data.keyword);
+  const [tag, setTag] = useState(data.tag); // 변경: keyword -> tag
 
   const handleSubmit = () => {
     updateData({
-      region,
+      location, // 변경: region -> location
       age,
-      keyword,
+      tag, // 변경: keyword -> tag
     });
     handleNext();
   };
@@ -35,8 +35,8 @@ const GroupCreatePage2: React.FC<GroupCreatePage2Props> = ({
       {/* ... 생략 ... */}
       <input
         type="text"
-        value={region}
-        onChange={e => setRegion(e.target.value)}
+        value={location} // 변경: region -> location
+        onChange={e => setLocation(e.target.value)} // 변경: setRegion -> setLocation
         placeholder="모임지역을 입력하세요."
       />
       <input
@@ -47,8 +47,8 @@ const GroupCreatePage2: React.FC<GroupCreatePage2Props> = ({
       />
       <input
         type="text"
-        value={keyword}
-        onChange={e => setKeyword(e.target.value)}
+        value={tag} // 변경: keyword -> tag
+        onChange={e => setTag(e.target.value)} // 변경: setKeyword -> setTag
         placeholder="키워드를 등록하세요."
       />
       <button onClick={handleSubmit}>다음</button>
