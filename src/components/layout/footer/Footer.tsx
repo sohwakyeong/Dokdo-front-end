@@ -12,6 +12,14 @@ const cookies = new Cookies();
 function Footer() {
   const isLoggedIn = cookies.get('loginToken');
 
+  // 로그아웃 함수
+  const handleLogout = () => {
+    // 쿠키를 제거하고 홈 페이지로 이동
+    cookies.remove('loginToken');
+    window.location.href = '/'; // 홈 페이지로 리다이렉트
+  };
+
+  
   return (
     <FT.StyledFooter>
       <FT.MenuItem>
