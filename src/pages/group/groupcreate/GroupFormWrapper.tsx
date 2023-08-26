@@ -50,21 +50,17 @@ const GroupFormWrapper: React.FC = () => {
     setError(null);
 
     try {
-      // Adjust the endpoint URL and headers as per your API requirements
       const response = await axios.post('YOUR_API_ENDPOINT', data);
       console.log('Response from the server:', response.data);
-      // Additional logic after successful API call can go here (e.g. redirection, user feedback)
     } catch (err) {
       console.error('Error while sending data to the API:', err);
 
-      // Check if the error is an AxiosError
       if ((err as AxiosError).isAxiosError) {
         const axiosError = err as AxiosError;
         setError({ message: axiosError.message });
       } else {
         setError({ message: 'An unknown error occurred.' });
       }
-      // Logic for error handling can be added here
     } finally {
       setLoading(false);
     }
