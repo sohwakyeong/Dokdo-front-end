@@ -1,14 +1,38 @@
-// DiscussionForm.tsx
+// GroupCreatePage1.tsx
 import React, { useState } from 'react';
 
-const GroupCreatePage1: React.FC = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [image, setImage] = useState<File | null>(null);
+interface GroupCreatePage1Data {
+  title: string;
+  description: string;
+  image: File | null;
+}
+
+interface GroupCreatePage1Props {
+  data: GroupCreatePage1Data;
+  updateData: (newData: Partial<GroupCreatePage1Data>) => void;
+  handleNext: () => void;
+}
+
+const GroupCreatePage1: React.FC<GroupCreatePage1Props> = ({
+  data,
+  updateData,
+  handleNext,
+}) => {
+  const [title, setTitle] = useState(data.title);
+  const [description, setDescription] = useState(data.description);
+  const [image, setImage] = useState<File | null>(data.image);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
     // 모임 정보 제출 로직
+    updateData({
+      title,
+      description,
+      image,
+    });
+
+    handleNext();
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
