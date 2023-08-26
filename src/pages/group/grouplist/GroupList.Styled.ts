@@ -109,3 +109,7 @@ export const ImageRow = styled.div`
   margin: 15px;
   width: 90%;
 `;
+
+export const SearchButton = styled.div`
+  width: 150px;
+`;

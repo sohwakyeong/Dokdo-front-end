@@ -19,6 +19,10 @@ interface BoardData {
   meeting: number;
   leader: number;
   like: number;
+  location: string;
+  day: string;
+  genre: string;
+  age: number;
 }
 
 interface BoardBoxProps {
