@@ -30,6 +30,7 @@ import Layout3 from '../components/layout/layout1/Layout3';
 import Layout7 from '../components/layout/layout1/Layout7';
 import Layout8 from '../components/layout/layout1/Layout8';
 import Layout6 from '../components/layout/layout1/Layout6';
+import Layout5 from '../components/layout/layout1/Layout5';
 
 const MainRoutes = () => {
   // Group creation data
@@ -54,31 +55,37 @@ const MainRoutes = () => {
       <Route
         path="/create-group/step1"
         element={
-          <GroupCreatePage1
-            data={groupData}
-            updateData={updateGroupData}
-            handleNext={() => {
-              /*...some logic...*/
-            }}
-          />
+          <Layout8>
+            <GroupCreatePage1
+              data={groupData}
+              updateData={updateGroupData}
+              handleNext={() => {
+                /*...some logic...*/
+              }}
+            />
+          </Layout8>
         }
       />
       <Route
         path="/create-group/step2"
         element={
-          <GroupCreatePage2
-            data={groupData}
-            updateData={updateGroupData}
-            handleNext={() => {
-              /*...some logic...*/
-            }}
-          />
+          <Layout8>
+            <GroupCreatePage2
+              data={groupData}
+              updateData={updateGroupData}
+              handleNext={() => {
+                /*...some logic...*/
+              }}
+            />
+          </Layout8>
         }
       />
       <Route
         path="/create-group/step3"
         element={
-          <GroupCreatePage3 data={groupData} updateData={updateGroupData} />
+          <Layout8>
+            <GroupCreatePage3 data={groupData} updateData={updateGroupData} />
+          </Layout8>
         }
       />
       <Route

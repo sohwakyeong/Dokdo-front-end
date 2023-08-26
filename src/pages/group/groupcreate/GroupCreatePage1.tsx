@@ -1,6 +1,15 @@
 // GroupCreatePage1.tsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // 추가
+import {
+  Container,
+  Title,
+  FormGroup,
+  FileInputContainer,
+  StepsContainer,
+  StepCircle,
+  Input,
+} from './GroupCreatePage1.Styled';
 
 interface GroupCreatePage1Data {
   name: string; // 변경: title -> name
@@ -43,36 +52,42 @@ const GroupCreatePage1: React.FC<GroupCreatePage1Props> = ({
       //(e.target.files[0]);
     }
   };
-
   return (
-    <div>
-      <div>1 2 3 4</div>
-      <h1>새로운 독서 토론 모임을 시작해볼까요?</h1>
+    <Container>
+      <StepsContainer>
+        <StepCircle>1</StepCircle>
+        <StepCircle>2</StepCircle>
+        <StepCircle>3</StepCircle>
+        <StepCircle>4</StepCircle>
+      </StepsContainer>
+      <Title>
+        새로운 독서 토론 모임을 <br /> 시작해볼까요?
+      </Title>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>모임명: </label>
-          <input
+        <FormGroup>
+          <label>모임명 </label>
+          <Input
             type="text"
-            value={name} // 변경: title -> name
-            onChange={e => setName(e.target.value)} // 변경: setTitle -> setName
+            value={name}
+            onChange={e => setName(e.target.value)}
             placeholder="모임명을 입력하세요."
           />
-        </div>
-        <div>
-          <label>모임소개: </label>
+        </FormGroup>
+        <FormGroup>
+          <label>모임소개 </label>
           <textarea
-            value={introduction} // 변경: description -> introduction
-            onChange={e => setIntroduction(e.target.value)} // 변경: setDescription -> setIntroduction
+            value={introduction}
+            onChange={e => setIntroduction(e.target.value)}
             placeholder="모임소개를 입력하세요."
           />
-        </div>
-        <div>
+        </FormGroup>
+        <FileInputContainer>
           <label>사진 업로드: </label>
           <input type="file" onChange={handleImageChange} />
-        </div>
+        </FileInputContainer>
         <button type="submit">확인</button>
       </form>
-    </div>
+    </Container>
   );
 };
 
