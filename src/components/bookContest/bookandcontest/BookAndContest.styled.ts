@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -41,6 +42,11 @@ export const ImgBox = styled.div`
   padding: 8px;
 `;
 
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+`;
+
 export const Img = styled.div`
   width: 180px;
   height: 280px;
@@ -56,6 +62,7 @@ export const Img = styled.div`
 export const Info = styled.div`
   margin: 15px 0 25px 0;
   width: 100%;
+  text-decoration: none;
 
   & div {
     padding: 3px;

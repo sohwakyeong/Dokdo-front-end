@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom';
 import searchIcon from '../../../assets/icon/Search.png';
 import notificationIcon from '../../../assets/icon/Bell.png';
 import logo from '../../../assets/icon/RightLogo.png';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-
 
 function GroupHeader() {
   return (
@@ -37,21 +36,17 @@ function GroupHeader() {
 
 export default GroupHeader;
 
-
-
 export const StyleHeader = styled.div`
   background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100px;
+  height: 110px;
   width: 472px;
-  margin-bottom: 10px;
   position: fixed;
   z-index: 9999;
-border-left: 1px solid #ddd;
-border-right: 1px solid #ddd;
-
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
 `;
 
 export const Logo = styled.h1`
@@ -87,11 +82,11 @@ export const Up = styled.div`
 export const Down = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 90%;
+  width: 100%;
   height: 60px;
-  padding: 10px;
   background-color: white;
   color: black;
+  margin-bottom: 10px;
 `;
 
 export const StyledLink = styled(NavLink)`
@@ -103,6 +98,11 @@ export const StyledLink = styled(NavLink)`
   color: black;
   border-bottom: 2px solid transparent;
   height: 100%;
+  width: 33%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &.active {
     border-bottom: 5px solid #7c6250;

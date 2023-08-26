@@ -10,24 +10,28 @@ function BcBox4() {
     <BC.Wrapper>
       <BC.List>
         <BC.ImgBox>
-          <BC.Img>
-            <img src={bookImg1} alt="도서이미지" />
-          </BC.Img>
-          <BC.Info>
-            <div>아메리칸 프로메테우스</div>
-            <div>카이버드외/사이언스북스</div>
-            <div>2023.06.12</div>
-          </BC.Info>
+          <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000202687816">
+            <BC.Img>
+              <img src={bookImg1} alt="도서이미지" />
+            </BC.Img>
+            <BC.Info>
+              <div>아메리칸 프로메테우스</div>
+              <div>카이버드외/사이언스북스</div>
+              <div>2023.06.12</div>
+            </BC.Info>
+          </BC.StyledLink>
         </BC.ImgBox>
         <BC.ImgBox>
-          <BC.Img>
-            <img src={bookImg2} alt="도서이미지" />
-          </BC.Img>
-          <BC.Info>
-            <div>1%를 읽는 힘</div>
-            <div>메르토네이도</div>
-            <div>2023.08.30</div>
-          </BC.Info>
+          <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000208590459">
+            <BC.Img>
+              <img src={bookImg2} alt="도서이미지" />
+            </BC.Img>
+            <BC.Info>
+              <div>1%를 읽는 힘</div>
+              <div>메르토네이도</div>
+              <div>2023.08.30</div>
+            </BC.Info>
+          </BC.StyledLink>
         </BC.ImgBox>
       </BC.List>
     </BC.Wrapper>
