@@ -66,17 +66,8 @@ const sortOptions = [
   { value: '최근순', label: '최근순' },
 ];
 
-// API 요청 함수 추가
-async function fetchAllGroupData(orderBy: string) {
-  try {
-    const response = await axios.get(
-      `http://localhost:3001/api/v1/group?orderBy=${orderBy}`
-    );
-    return response.data.data;
-  } catch (error) {
-    throw error;
-  }
-}
+
+
 
 const GroupList = () => {
   const [selectedRegion, setSelectedRegion] = useState('');
@@ -90,15 +81,30 @@ const GroupList = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await fetchAllGroupData(selectedSort);
+        let apiUrl = 'http://localhost:3001/api/v1/group?orderBy=popularity'; // 기본적으로 인기순 API 호출
+
+        if (selectedSort === '최근순') {
+          apiUrl = 'http://localhost:3001/api/v1/group'; // 최신순 API 호출
+        }
+
+        const data = await fetchAllGroupData(apiUrl); // API 요청 호출
         setGroupData(data);
       } catch (error) {
         console.error('데이터를 가져오는 중 에러 발생:', error);
       }
     }
-  
+
     fetchData();
   }, [selectedSort]);
+
+  async function fetchAllGroupData(apiUrl: string) {
+    try {
+      const response = await axios.get(apiUrl);
+      return response.data.data;
+    } catch (error) {
+      throw error;
+    }
+  }
 
   const handleOptionClick = (optionLabel: string) => {
     const updatedInfo = [...clickedInfo];
@@ -131,7 +137,7 @@ const GroupList = () => {
               <SelectBox
                 options={regions}
                 value={selectedRegion}
-                onChange={(event) => {
+                onChange={event => {
                   setSelectedRegion(event.target.value);
                   handleOptionClick(event.target.value);
                 }}
@@ -141,7 +147,7 @@ const GroupList = () => {
               <SelectBox
                 options={durations}
                 value={selectedDuration}
-                onChange={(event) => {
+                onChange={event => {
                   setSelectedDuration(event.target.value);
                   handleOptionClick(event.target.value);
                 }}
@@ -151,7 +157,7 @@ const GroupList = () => {
               <SelectBox
                 options={Genre}
                 value={selectedGenre}
-                onChange={(event) => {
+                onChange={event => {
                   setSelectedGenre(event.target.value);
                   handleOptionClick(event.target.value);
                 }}
@@ -161,7 +167,7 @@ const GroupList = () => {
               <SelectBox
                 options={ages}
                 value={selectedAge}
-                onChange={(event) => {
+                onChange={event => {
                   setSelectedAge(event.target.value);
                   handleOptionClick(event.target.value);
                 }}
@@ -186,7 +192,7 @@ const GroupList = () => {
           <SelectBox
             options={sortOptions}
             value={selectedSort}
-            onChange={(event) => {
+            onChange={event => {
               setSelectedSort(event.target.value);
             }}
           />

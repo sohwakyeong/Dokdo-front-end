@@ -18,6 +18,7 @@ interface BoardData {
   maxMember: number;
   meeting: number;
   leader: number;
+  like: number;
 }
 
 interface BoardBoxProps {
@@ -45,14 +46,14 @@ function BoardBox({ data }: BoardBoxProps) {
     return null;
   }
 
-  const { name, group_id, post_id, profile } = data;
+  const { name, group_id, like, profile } = data;
 
   return (
     <BB.Border onClick={handleClick}>
       <BB.TextBox>
         <div>Name: {name}</div>
         <div>Group ID: {group_id}</div>
-        <div>Post ID: {post_id}</div>
+        <div>like: {like}</div>
       </BB.TextBox>
       <BB.ImgBox>
         <BoardImgBox data={{ profile }} />
