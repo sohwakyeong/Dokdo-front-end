@@ -1,7 +1,8 @@
 import React from 'react';
+import BookAndContest from '../../components/bookContest/bookandcontest/BookAndContest';
 
 const Contest = () => {
-  return <div>책 공모전 페이지</div>;
+  return <BookAndContest />;
 };
 
 export default Contest;

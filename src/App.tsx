@@ -1,16 +1,19 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import GlobalStyles from './styles/GlobalStyles';
-import Layout1 from './components/layout/layout1/Layout1';
+import MypageRoutes from './routes/Mypage';
+import LiteracytestRoute from './routes/literacytest';
+import AdminRoutes from './routes/AdminRoutes';
 import MainRoutes from './routes/Main';
 
 function App() {
   return (
     <Router>
       <GlobalStyles />
-      <Layout1>
-        <MainRoutes />
-      </Layout1>
+      <MypageRoutes />
+      <AdminRoutes />
+      <LiteracytestRoute />
+      <MainRoutes />
     </Router>
   );
 }

@@ -1,13 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import * as MB from './MoreButton.styled';
 
-function MoreButton() {
+
+interface MoreButtonProps {
+  to: string;
+  children: React.ReactNode;
+}
+
+function MoreButton({ to, children }: MoreButtonProps) {
   return (
-    <MB.Container>
-      <MB.Border>
-        <MB.Button>더보기</MB.Button>
-      </MB.Border>
-    </MB.Container>
+    <MB.Border>
+      <Link to={to}>
+        <MB.Button>{children}</MB.Button>
+      </Link>
+    </MB.Border>
   );
 }
+
 export default MoreButton;

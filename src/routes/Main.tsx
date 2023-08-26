@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-
 import Main from '../pages/main/Main';
 import Search from '../pages/search/Search';
 import Group from '../pages/group/group/Group';
@@ -15,32 +14,185 @@ import PhotoAlbumWrite from '../pages/group/photoalbumwrite/PhotoAlbumWrite';
 import FreeBoardList from '../pages/freeboard/freeboardlist/FreeBoardList';
 import FreeBoardDetail from '../pages/freeboard/freeboardDetail/FreeBoardDetail';
 import FreeBoardWrite from '../pages/freeboard/freeboardwrite/FreeBoardWrite';
-import BookRecommendation from '../pages/bookrecommendation/BookRecommendation';
+import BookRec from '../pages/bookrec/BookRec';
 import Contest from '../pages/contest/Contest';
 import Notifications from '../pages/notifications/Notifications';
 import Likes from '../pages/likes/Likes';
+import Layout1 from '../components/layout/layout1/Layout1';
+import Layout2 from '../components/layout/layout1/Layout2';
+import ContestDetail from '../pages/contestdetail/ContestDetail';
+import BookRecDetail from '../pages/bookrecdetail/BookRecDetail';
+import Layout4 from '../components/layout/layout1/Layout4';
+import Layout3 from '../components/layout/layout1/Layout3';
+import Layout7 from '../components/layout/layout1/Layout7';
+import Layout8 from '../components/layout/layout1/Layout8';
+import Layout6 from '../components/layout/layout1/Layout6';
 
 const MainRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Main />} />
-      <Route path="/search" element={<Search />} />
-      <Route path="/group" element={<Group />} />
-      <Route path="/group/list" element={<GroupList />} />
-      <Route path="/group/detail/:id" element={<GroupDetail />} />
-      <Route path="/group/board" element={<GroupBoard />} />
-      <Route path="/group/board/detail/:id" element={<GroupBoardDetail />} />
-      <Route path="/group/board/write/:id" element={<GroupBoardWrite />} />
-      <Route path="/group/photo" element={<PhotoAlbum />} />
-      <Route path="/group/photo/detail/:id" element={<PhotoAlbumDetail />} />
-      <Route path="/group/photo/write/:id" element={<PhotoAlbumWrite />} />
-      <Route path="/freeboard/list" element={<FreeBoardList />} />
-      <Route path="/freeboard/detail" element={<FreeBoardDetail />} />
-      <Route path="/freeboard/write/:id" element={<FreeBoardWrite />} />
-      <Route path="/books" element={<BookRecommendation />} />
-      <Route path="/contest" element={<Contest />} />
-      <Route path="/notifications" element={<Notifications />} />
-      <Route path="/likes" element={<Likes />} />
+      <Route
+        path="/search"
+        element={
+          <Layout8>
+            <Search />
+          </Layout8>
+        }
+      />
+
+      <Route
+        path="/group/list"
+        element={
+          <Layout1>
+            <GroupList />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/group/detail/:id"
+        element={
+          <Layout2>
+            <GroupDetail />
+          </Layout2>
+        }
+      />
+
+      <Route
+        path="/group/board/detail/:id"
+        element={
+          <Layout7>
+            <GroupBoardDetail />
+          </Layout7>
+        }
+      />
+      <Route
+        path="/group/board/write/:id"
+        element={
+          <Layout6>
+            <GroupBoardWrite />
+          </Layout6>
+        }
+      />
+      <Route
+        path="/group/board"
+        element={
+          <Layout4>
+            <GroupBoard />
+          </Layout4>
+        }
+      />
+      <Route
+        path="/group/photo/detail/:id"
+        element={
+          <Layout7>
+            <PhotoAlbumDetail />
+          </Layout7>
+        }
+      />
+      <Route
+        path="/group/photo/write/:id"
+        element={
+          <Layout6>
+            <PhotoAlbumWrite />
+          </Layout6>
+        }
+      />
+      <Route
+        path="/group/photo"
+        element={
+          <Layout4>
+            <PhotoAlbum />
+          </Layout4>
+        }
+      />
+      <Route
+        path="/group"
+        element={
+          <Layout1>
+            <Group />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/freeboard/list"
+        element={
+          <Layout1>
+            <FreeBoardList />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/freeboard/detail"
+        element={
+          <Layout1>
+            <FreeBoardDetail />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/freeboard/write/:id"
+        element={
+          <Layout1>
+            <FreeBoardWrite />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/bookrec"
+        element={
+          <Layout1>
+            <BookRec />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/bookrec/detail"
+        element={
+          <Layout1>
+            <BookRecDetail />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/notifications"
+        element={
+          <Layout1>
+            <Notifications />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/contest/detail"
+        element={
+          <Layout1>
+            <ContestDetail />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/contest"
+        element={
+          <Layout1>
+            <Contest />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/likes"
+        element={
+          <Layout3>
+            <Likes />
+          </Layout3>
+        }
+      />
+      <Route
+        path="/"
+        element={
+          <Layout1>
+            <Main />
+          </Layout1>
+        }
+      />
     </Routes>
   );
 };

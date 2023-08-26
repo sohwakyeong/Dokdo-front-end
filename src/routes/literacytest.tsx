@@ -1,30 +1,81 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import LiteracyTestMain from '../pages/literacytest/LiteracyTestMain';
 import OXTestMain from '../pages/literacytest/OXTestMain';
 import LiteracyTestScreen from '../pages/literacytest/LiteracyTestScreen';
 import OXTestScreen from '../pages/literacytest/OXTestScreen';
 import OXTestResult from '../pages/literacytest/OXTestResult';
+import LiteracyTestResult from '../pages/literacytest/LiteracytestResult';
+import Layout1 from '../components/layout/layout1/Layout1';
+import Layout8 from '../components/layout/layout1/Layout8';
 
 const LiteracytestRoute = () => {
-    // 임의의 결과 배열
-    const results = ['O', 'X', 'O', 'O', 'X'];
+  // Literacy Test 사용자 답변을 관리할 상태
+  const [literacyUserAnswers, setLiteracyUserAnswers] = useState<number[]>([]);
+  // OX Test 사용자 답변을 관리할 상태
+  const [oxUserAnswers, setOXUserAnswers] = useState<string[]>([]);
 
-    return (
-        <Routes>
-            <Route path="/literacy-test" element={<LiteracyTestMain />} />
-            <Route
-                path="/literacy-test/screen"
-                element={<LiteracyTestScreen />}
-            />
-            <Route path="/ox-quiz" element={<OXTestMain />} />
-            <Route path="/ox-quiz/screen" element={<OXTestScreen />} />
-            <Route
-                path="/ox-quiz/screen/result"
-                element={<OXTestResult results={results} />} // 여기서 results prop을 전달합니다.
-            />
-            <Route path="*" element={<LiteracyTestMain />} />
-        </Routes>
-    );
+  const results = ['O', 'X', 'O', 'O', 'X'];
+
+  const handleSetLiteracyUserAnswers = (answers: number[]) => {
+    setLiteracyUserAnswers(answers);
+  };
+
+  const handleSetOXUserAnswers = (answers: string[]) => {
+    setOXUserAnswers(answers);
+  };
+
+  return (
+    <Routes>
+      <Route
+        path="/literacy-test"
+        element={
+          <Layout1>
+            <LiteracyTestMain />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/literacy-test/screen"
+        element={
+          <Layout8>
+            <LiteracyTestScreen setUserAnswers={handleSetLiteracyUserAnswers} />
+          </Layout8>
+        }
+      />
+      <Route
+        path="/literacy-test/screen/result"
+        element={
+          <Layout8>
+            <LiteracyTestResult userAnswers={literacyUserAnswers} />
+          </Layout8>
+        }
+      />
+      <Route
+        path="/ox-quiz"
+        element={
+          <Layout1>
+            <OXTestMain />
+          </Layout1>
+        }
+      />
+      <Route
+        path="/ox-quiz/screen"
+        element={
+          <Layout8>
+            <OXTestScreen setUserAnswers={handleSetOXUserAnswers} />
+          </Layout8>
+        }
+      />
+      <Route
+        path="/ox-quiz/screen/result"
+        element={
+          <Layout8>
+            <OXTestResult userAnswers={oxUserAnswers} />
+          </Layout8>
+        }
+      />
+    </Routes>
+  );
 };
 export default LiteracytestRoute;

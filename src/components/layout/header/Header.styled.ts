@@ -1,12 +1,19 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export const StyleHeader = styled.div`
   background-color: white;
   display: flex;
   flex-direction: column;
+  align-items: center;
   height: 100px;
-  border-bottom: solid 1px black;
+  width: 472px;
+  margin-bottom: 10px;
+  position: fixed;
+  z-index: 9999;
+border-left: 1px solid #ddd;
+border-right: 1px solid #ddd;
+
 `;
 
 export const Logo = styled.h1`
@@ -17,6 +24,11 @@ export const Logo = styled.h1`
   white-space: normal;
 `;
 
+export const StyleLogo = styled.img`
+  width: 58px;
+  height: 32px;
+`;
+
 export const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
@@ -25,30 +37,40 @@ export const Nav = styled.nav`
 `;
 
 export const Up = styled.div`
-  padding: 5px 10px;
+  width: 90%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: solid 1px black;
   height: 40px;
-  background-color: red;
+  background-color: white;
+  margin: 5px 0;
 `;
 
 export const Down = styled.div`
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: space-between;
+  width: 90%;
   height: 60px;
   padding: 10px;
-  background-color: blue;
-  color: white;
+  background-color: white;
+  color: black;
 `;
 
-export const StyledLink = styled(Link)`
+export const StyledLink = styled(NavLink)`
   padding: 0;
   margin: 0;
   text-decoration: none;
   color: #333;
   list-style: none;
-  color: white;
+  color: black;
+  border-bottom: 2px solid transparent;
+  height: 100%;
+
+  &.active {
+    border-bottom: 5px solid #7c6250;
+  }
+`;
+export const StlyedImg = styled.img`
+  width: 27px;
+  height: 27px;
 `;

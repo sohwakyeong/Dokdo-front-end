@@ -1,33 +1,48 @@
 import styled from 'styled-components';
 
 export const LayoutContainer = styled.div`
-  display: grid;
-  grid-template-columns: 50% 474px auto;
-  height: 100vh;
-  overflow: hidden;
-`;
-
-
-export const HeaderWrapper = styled.div`
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-`;
-
-export const FooterWrapper = styled.div`
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-  left: 0;
-`;
-
-export const ContentWrapper = styled.div`
-  grid-column: 2 / span 1;
   display: flex;
-  flex-direction: column;
-  height: 100vh;
-  width: 474px;
-  min-width: 474px;
+  height: 100%;
+`;
+
+export const Left = styled.div`
+  flex: 1;
+  background-color: #fff7ec;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+export const haeder = styled.header`
+  width: 100%;
+`;
+
+export const footer = styled.footer`
+  width: 100%;
+`;
+
+export const Right = styled.div`
+  flex: 1;
+  height: 100%;
+  background-color: #fff7ec;
+
+  @media (max-width: 1024px) {
+    display: flex;
+    justify-content: center;
+  }
+`;
+
+export const Children = styled.div`
+  max-width: 474px;
+  padding: 100px 0 70px 0;
+  background-color: white;
+  min-height: calc(100vh - 2px);
   box-sizing: border-box;
+  border: 1px solid #ddd;
+  overflow: hidden;
+
+  @media (min-width: 475px) and (max-width: 1024px) {
+    width: 474px;
+  }
 `;

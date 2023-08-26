@@ -1,9 +1,105 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
+import * as GBW from './GroupBoardWrite.styled';
+import BoardWriteSection from '../../../components/common/boardwritesection/BoardWriteSection';
+import Camera from '../../../assets/icon/Camera.png';
 
+const GroupBoardWrite: React.FC = () => {
+  const [responseMessage, setResponseMessage] = useState('');
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [images, setImages] = useState<string[]>([]);
 
-const GroupBoardWrite = () => {
+  const handleCreatePost = async () => {
+    const tokenCookie = document.cookie
+      .split('; ')
+      .find(row => row.startsWith('loginToken'));
+    const loginToken = tokenCookie ? tokenCookie.split('=')[1] : undefined;
+
+    if (!loginToken) {
+      setResponseMessage('로그인 토큰이 없습니다. 다시 로그인해주세요.');
+      return; // loginToken이 없으면 여기서 반환
+    }
+
+    const payload = {
+      title,
+      content,
+    };
+
+    console.log('Payload:', payload);
+
+    try {
+      const response = await axios.post(
+        'http://localhost:3001/api/v1/group/2/posts',
+        payload,
+        { withCredentials: true },
+      );
+
+      console.log('Response:', response);
+
+      if (response.status === 200) {
+        setResponseMessage('성공적으로 작성되었습니다!');
+      } else {
+        setResponseMessage(`오류 발생: ${response.statusText}`);
+      }
+    } catch (error: any) {
+      console.error('Error:', error);
+      setResponseMessage(`요청 실패: ${error.message}`);
+    }
+  };
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      const file = files[0];
+      const imageUrl = URL.createObjectURL(file);
+      setImages([...images, imageUrl]);
+    }
+  };
+
   return (
-    <div>토론모임 게시판 작성 페이지</div>
+    <GBW.Wrapper>
+      <BoardWriteSection />
+      <GBW.TitleWrite>
+        <textarea
+          placeholder="제목을 입력해주세요. (40자)"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+          rows={2}
+          maxLength={40}
+        />
+      </GBW.TitleWrite>
+      <GBW.WriteBox>
+        <textarea
+          placeholder="하고있던건데 다 지우고 다시 하셔도 됩니다"
+          value={content}
+          onChange={e => setContent(e.target.value)}
+          rows={15}
+          maxLength={1000}
+        />
+        {images.map((image, index) => (
+          <GBW.UploadImage key={index} src={image} alt="업로드된 이미지" />
+        ))}
+      </GBW.WriteBox>
+      <GBW.ImgFileTitle>
+        <div>파일선택</div>
+        <div>500MB 이하의 jpg, gif 파일만 3개까지 업로드 가능합니다</div>
+        </GBW.ImgFileTitle>
+      <GBW.ImgUpload>
+        <div>
+          <GBW.CameraBox>{/* ... */}</GBW.CameraBox>
+          <input
+            type="file"
+            id="image-upload"
+            accept="image/*"
+            onChange={handleImageUpload}
+          />
+        </div>
+        <div>{content.length}/1000자</div>
+      </GBW.ImgUpload>
+      <button onClick={handleCreatePost}>포스트 작성</button>
+      <p>{responseMessage}</p>
+    </GBW.Wrapper>
   );
 };
 

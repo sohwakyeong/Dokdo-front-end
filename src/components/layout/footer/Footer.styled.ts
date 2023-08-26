@@ -1,13 +1,16 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 
 export const StyledFooter = styled.footer`
-  display: flex;
-  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
   height: 60px;
-  border-top: 1px solid black;
   font-size: 13px;
-  background-color: yellow;
+  background-color: white;
+  width: 472px;
+  z-index: 9999;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
 `;
 
 export const MenuItem = styled.div`
@@ -27,7 +30,7 @@ export const StyledLink = styled(Link)`
   flex-direction: column;
   align-items: center;
   text-decoration: none;
-  color: #333; 
+  color: #333;
   font-size: 14px;
   margin: 8px;
 

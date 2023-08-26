@@ -1,59 +1,104 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
-    container as Container,
-    menu as Menu,
-    menuItem as MenuItem,
-    image as Image,
-    startButton as StartButton,
-    socialIcons as SocialIcons,
-    socialIcon as SocialIcon,
-    socialIconImage as SocialIconImage,
+  container as Container,
+  menu as Menu,
+  menuItem as MenuItem,
+  image as Image,
+  startButton as StartButton,
+  socialIcons as SocialIcons,
+  socialIcon as SocialIcon,
+  socialIconImage as SocialIconImage,
+  participantsContainer as ParticipantsContainer,
+  StyledLink,
+  MenuText,
+  TestInstructions,
 } from './LiteracyTestMain.Style';
 import { useNavigate } from 'react-router-dom';
 import literacyTestImage from '../../assets/img/문해력.png';
 import facebookIcon from '../../assets/img/facebook.png';
 import twitterIcon from '../../assets/img/twitter.png';
 import kakaoIcon from '../../assets/img/카카오톡아이콘.png';
-import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const LiteracyTestMain: React.FC = () => {
-    const navigate = useNavigate(); // 이것을 추가합니다.
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [participants, setParticipants] = useState(0);
 
-    const handleStartTest = () => {
-        // 이 함수를 추가합니다.
-        navigate('/literacy-test/screen'); // 여기에 이동하고자 하는 경로를 적습니다.
-    };
+  useEffect(() => {
+    setParticipants(376);
+  }, []);
 
-    return (
-        <Container>
-            <Menu>
-                <MenuItem>
-                    <Link to="/literacy-test">문해력 테스트</Link>
-                </MenuItem>
-                <MenuItem>
-                    <Link to="/ox-quiz">OX 퀴즈</Link>
-                </MenuItem>
-            </Menu>
-            <Image src={literacyTestImage} alt="Description" />{' '}
-            {/* import한 이미지를 사용합니다. */}
-            <StartButton onClick={handleStartTest}>
-                테스트 시작하기
-            </StartButton>{' '}
-            {/* 여기에 onClick을 추가합니다. */}
-            <SocialIcons>
-                <SocialIcon href="https://facebook.com">
-                    <SocialIconImage src={facebookIcon} alt="Facebook" />
-                </SocialIcon>
-                <SocialIcon href="https://twitter.com">
-                    <SocialIconImage src={twitterIcon} alt="Twitter" />
-                </SocialIcon>
-                <SocialIcon href="https://www.kakaocorp.com">
-                    <SocialIconImage src={kakaoIcon} alt="Facebook" />
-                </SocialIcon>
-                {/* 여기에 더 많은 소셜 아이콘 추가 가능 */}
-            </SocialIcons>
-        </Container>
-    );
+  const handleStartTest = () => {
+    navigate('/literacy-test/screen');
+  };
+
+  return (
+    <Container>
+      <Menu>
+        <MenuItem
+          style={{
+            backgroundColor:
+              location.pathname === '/literacy-test'
+                ? '#84614B'
+                : 'transparent',
+          }}
+        >
+          <StyledLink
+            to="/literacy-test"
+            style={{ textDecoration: 'none', color: '#FFF' }}
+          >
+            문해력 테스트
+          </StyledLink>
+        </MenuItem>
+        <MenuItem
+          rightBorder
+          style={{
+            backgroundColor:
+              location.pathname === '/ox-quiz' ? '#84614B' : 'transparent',
+          }}
+        >
+          <StyledLink
+            to="/ox-quiz"
+            style={{ textDecoration: 'none', color: '#818181' }}
+          >
+            OX 퀴즈
+          </StyledLink>
+        </MenuItem>
+      </Menu>
+      <MenuText>
+        내 <span>문해력</span>은 몇 점?
+      </MenuText>
+      <Image src={literacyTestImage} alt="Description" />
+      <TestInstructions>
+        테스트는 <span className="strongHighlight">10개의 문항</span>으로
+        구성되어 있습니다.
+        {'\n'}
+        문제를 읽고 정답을 체크해주세요.
+        {'\n'}
+        클릭시 다음 문제로 바로 넘어가니,
+        {'\n'}
+        <span className="strong">신중하게 선택</span>해주세요.
+      </TestInstructions>
+      <TestInstructions>
+        마음의 준비가 되셨나요?
+        {'\n'}
+        바로 테스트 시작하기 버튼을 눌러주세요 !
+      </TestInstructions>
+      <StartButton onClick={handleStartTest}>테스트 시작하기</StartButton>
+      <SocialIcons>
+        <SocialIcon href="https://facebook.com">
+          <SocialIconImage src={facebookIcon} alt="Facebook" />
+        </SocialIcon>
+        <SocialIcon href="https://twitter.com">
+          <SocialIconImage src={twitterIcon} alt="Twitter" />
+        </SocialIcon>
+        <SocialIcon href="https://www.kakaocorp.com">
+          <SocialIconImage src={kakaoIcon} alt="Kakao" />
+        </SocialIcon>
+      </SocialIcons>
+    </Container>
+  );
 };
 
 export default LiteracyTestMain;
