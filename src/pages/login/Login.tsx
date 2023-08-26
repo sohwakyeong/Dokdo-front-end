@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { setCookie, removeCookie } from '../../helper/Cookie';
 
-import LogoIcon from '../../assets/icon/samplelogo.jpeg';
+import LogoIcon from '../../assets/img/Logo1.png'
 import * as LoginStyle from './Login.styled';
 
 function LoginComponent() {
@@ -81,13 +81,15 @@ function LoginComponent() {
       <LoginStyle.LogoImg src={LogoIcon} alt="logo" />
 
       <LoginStyle.Form>
+        <LoginStyle.Title>이메일 주소</LoginStyle.Title>
         <LoginStyle.Input
           type="text"
           id="email"
-          placeholder="아이디를 입력해주세요."
+          placeholder="이메일을 입력해주세요."
           value={email}
           onChange={onEmailHandler}
         />
+        <LoginStyle.Title>비밀번호</LoginStyle.Title>
         <LoginStyle.Input
           type="password"
           placeholder="비밀번호를 입력해주세요."
@@ -107,15 +109,6 @@ function LoginComponent() {
         <LoginStyle.JoinLink to="/signup">회원가입</LoginStyle.JoinLink>
       </LoginStyle.Form>
 
-      <LoginStyle.OtherLogin>
-        <LoginStyle.SubTitle>sns계정으로 바로 로그인</LoginStyle.SubTitle>
-        <LoginStyle.Button>
-          <LoginStyle.Kakao to="">카카오톡으로 시작</LoginStyle.Kakao>
-        </LoginStyle.Button>
-        <LoginStyle.Button>
-          <LoginStyle.Google to="">구글아이디로 시작</LoginStyle.Google>
-        </LoginStyle.Button>
-      </LoginStyle.OtherLogin>
     </LoginStyle.Container>
   );
 }
