@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Main from '../pages/main/Main';
 import Search from '../pages/search/Search';
@@ -14,6 +14,10 @@ import PhotoAlbumWrite from '../pages/group/photoalbumwrite/PhotoAlbumWrite';
 import FreeBoardList from '../pages/freeboard/freeboardlist/FreeBoardList';
 import FreeBoardDetail from '../pages/freeboard/freeboardDetail/FreeBoardDetail';
 import FreeBoardWrite from '../pages/freeboard/freeboardwrite/FreeBoardWrite';
+import GroupCreatePage1 from '../pages/group/groupcreate/GroupCreatePage1';
+import GroupCreatePage2 from '../pages/group/groupcreate/GroupCreatePage2';
+import GroupCreatePage3 from '../pages/group/groupcreate/GroupCreatePage3';
+import GroupFormWrapper from '../pages/group/groupcreate/GroupFormWrapper';
 import BookRec from '../pages/bookrec/BookRec';
 import Contest from '../pages/contest/Contest';
 import Notifications from '../pages/notifications/Notifications';
@@ -29,8 +33,56 @@ import Layout8 from '../components/layout/layout1/Layout8';
 import Layout6 from '../components/layout/layout1/Layout6';
 
 const MainRoutes = () => {
+  // Group creation data
+  const [groupData, setGroupData] = useState({
+    name: '',
+    introduction: '',
+    image: null,
+    location: '',
+    age: '',
+    tag: [],
+    genre: '',
+    day: '',
+    place: '',
+  });
+
+  const updateGroupData = (newData: any) => {
+    setGroupData(prevData => ({ ...prevData, ...newData }));
+  };
+
   return (
     <Routes>
+      <Route
+        path="/create-group/step1"
+        element={
+          <GroupCreatePage1
+            data={groupData}
+            updateData={updateGroupData}
+            handleNext={() => {
+              /*...some logic...*/
+            }}
+          />
+        }
+      />
+      <Route
+        path="/create-group/step2"
+        element={
+          <GroupCreatePage2
+            data={groupData}
+            updateData={updateGroupData}
+            handleNext={() => {
+              /*...some logic...*/
+            }}
+          />
+        }
+      />
+      <Route
+        path="/create-group/step3"
+        element={
+          <GroupCreatePage3 data={groupData} updateData={updateGroupData} />
+        }
+      />
+      <Route path="/create-group" element={<GroupFormWrapper />} />
       <Route
         path="/search"
         element={

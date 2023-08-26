@@ -1,33 +1,42 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface GroupCreatePage2Data {
-  location: string; // 변경: region -> location
+  location: string;
   age: string;
-  tag: string; // 변경: keyword -> tag
+  tag: string[];
 }
-
 interface GroupCreatePage2Props {
   data: GroupCreatePage2Data;
   updateData: (newData: Partial<GroupCreatePage2Data>) => void;
-  handleNext: () => void;
+  handleNext: () => void; // 이 줄을 추가합니다.
 }
 
 const GroupCreatePage2: React.FC<GroupCreatePage2Props> = ({
   data,
   updateData,
-  handleNext,
 }) => {
-  const [location, setLocation] = useState(data.location); // 변경: region -> location
+  const navigate = useNavigate();
+
+  const [location, setLocation] = useState(data.location);
   const [age, setAge] = useState(data.age);
-  const [tag, setTag] = useState(data.tag); // 변경: keyword -> tag
+  const [tag, setTag] = useState<string[]>(data.tag);
+  const [inputTag, setInputTag] = useState<string>('');
+
+  const handleAddTag = () => {
+    if (inputTag) {
+      setTag(prevTags => [...prevTags, inputTag]);
+      setInputTag('');
+    }
+  };
 
   const handleSubmit = () => {
-    updateData({
-      location, // 변경: region -> location
-      age,
-      tag, // 변경: keyword -> tag
-    });
+    updateData({ location, age, tag });
     handleNext();
+  };
+
+  const handleNext = () => {
+    navigate('/create-group/step3');
   };
 
   return (
@@ -35,8 +44,8 @@ const GroupCreatePage2: React.FC<GroupCreatePage2Props> = ({
       {/* ... 생략 ... */}
       <input
         type="text"
-        value={location} // 변경: region -> location
-        onChange={e => setLocation(e.target.value)} // 변경: setRegion -> setLocation
+        value={location}
+        onChange={e => setLocation(e.target.value)}
         placeholder="모임지역을 입력하세요."
       />
       <input
@@ -47,10 +56,11 @@ const GroupCreatePage2: React.FC<GroupCreatePage2Props> = ({
       />
       <input
         type="text"
-        value={tag} // 변경: keyword -> tag
-        onChange={e => setTag(e.target.value)} // 변경: setKeyword -> setTag
-        placeholder="키워드를 등록하세요."
+        value={inputTag}
+        onChange={e => setInputTag(e.target.value)}
+        placeholder="키워드를 입력하세요."
       />
+      <button onClick={handleAddTag}>태그 추가</button>
       <button onClick={handleSubmit}>다음</button>
     </div>
   );

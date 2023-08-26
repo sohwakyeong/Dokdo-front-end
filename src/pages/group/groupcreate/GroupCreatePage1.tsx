@@ -1,10 +1,11 @@
 // GroupCreatePage1.tsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // 추가
 
 interface GroupCreatePage1Data {
   name: string; // 변경: title -> name
   introduction: string; // 변경: description -> introduction
-  image: File | null;
+  //image: File | null;
 }
 
 interface GroupCreatePage1Props {
@@ -20,8 +21,8 @@ const GroupCreatePage1: React.FC<GroupCreatePage1Props> = ({
 }) => {
   const [name, setName] = useState(data.name); // 변경: title -> name
   const [introduction, setIntroduction] = useState(data.introduction); // 변경: description -> introduction
-  const [image, setImage] = useState<File | null>(data.image);
-
+  //const [image, setImage] = useState<File | null>(data.image);
+  const navigate = useNavigate(); // 추가
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -29,15 +30,17 @@ const GroupCreatePage1: React.FC<GroupCreatePage1Props> = ({
     updateData({
       name, // 변경: title -> name
       introduction, // 변경: description -> introduction
-      image,
+      //image,
     });
 
     handleNext();
+
+    navigate('/create-group/step2');
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      setImage(e.target.files[0]);
+      //(e.target.files[0]);
     }
   };
 
