@@ -46,6 +46,8 @@ export const Img = styled.div`
   height: 180px;
 
   background-color: #fff7ec;
+
+
 `;
 
 export const Info = styled.div`

@@ -1,11 +1,11 @@
 import React from 'react';
 import * as BC from '../../bookContest/bookandcontest/BookAndContest.styled';
-import bookImg1 from '../../../assets/img/bookImg/책추천13.jpeg';
-import bookImg2 from '../../../assets/img/bookImg/책추천12.jpeg';
+import bookImg1 from '../../../assets/img/bookImg/책추천4.jpeg';
+import bookImg2 from '../../../assets/img/bookImg/책추천3.jpeg';
 
 // BookAndContestBox 컴포넌트의 props 타입 정의
 
-function BookAndContestBox() {
+function BcBox4() {
   return (
     <BC.Wrapper>
       <BC.List>
@@ -14,9 +14,9 @@ function BookAndContestBox() {
             <img src={bookImg1} alt="도서이미지" />
           </BC.Img>
           <BC.Info>
-            <div>H마트에서 울다</div>
-            <div>미셀자우너/문학동네</div>
-            <div>2022.02.28</div>
+            <div>아메리칸 프로메테우스</div>
+            <div>카이버드외/사이언스북스</div>
+            <div>2023.06.12</div>
           </BC.Info>
         </BC.ImgBox>
         <BC.ImgBox>
@@ -24,9 +24,9 @@ function BookAndContestBox() {
             <img src={bookImg2} alt="도서이미지" />
           </BC.Img>
           <BC.Info>
-            <div>메리골드 마음 세탁소</div>
-            <div>윤정은/북로망스</div>
-            <div>2023.03.06</div>
+            <div>1%를 읽는 힘</div>
+            <div>메르토네이도</div>
+            <div>2023.08.30</div>
           </BC.Info>
         </BC.ImgBox>
       </BC.List>
@@ -34,4 +34,4 @@ function BookAndContestBox() {
   );
 }
 
-export default BookAndContestBox;
+export default BcBox4;

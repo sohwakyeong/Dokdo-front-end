@@ -42,15 +42,16 @@ export const ImgBox = styled.div`
 `;
 
 export const Img = styled.div`
-  width: 180px;
-  height: 280px;
-  background-color: #fff7ec;
-  box-sizing: border-box;
-  border: 1px solid #ddd;
+  width: 200px;
+  height: 100%;
+
   & img {
     width: 100%;
     height: 100%;
+
   }
+
+  background-color: #fff7ec;
 `;
 
 export const Info = styled.div`
@@ -66,7 +67,5 @@ export const Info = styled.div`
 
 export const SliederBox = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 100%;
 `;
