@@ -83,6 +83,7 @@ export const ManageList2 = styled.div`
   color: black;
   flex-direction: column;
   width: 100%;
+  
 
   & p {
     font-size: 20px;
@@ -91,6 +92,7 @@ export const ManageList2 = styled.div`
 `;
 
 export const ManageTitle = styled.p`
+  
   margin-bottom: 20px;
   font-weight: bold;
 `;
@@ -109,6 +111,7 @@ export const ManageLink2 = styled(Link)`
   font-size: 12px;
   color: black;
   & p {
+
     font-size: 18px;
   }
 `;

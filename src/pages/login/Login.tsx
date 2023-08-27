@@ -31,7 +31,6 @@ setEmail(e.target.value);
       alert('이메일과 비밀번호를 모두 입력하세요.');
       return;
     }
-
     // 조건을 통과한 경우에만 요청 보내기
     try {
       const response = await AxiosC.post(
@@ -62,6 +61,7 @@ setEmail(e.target.value);
       <LoginStyle.LogoImg src={LogoIcon} alt="logo" />
 
       <LoginStyle.Form>
+        <LoginStyle.Title>이메일 주소</LoginStyle.Title>
         <LoginStyle.Input
           type="text"
           id="email"

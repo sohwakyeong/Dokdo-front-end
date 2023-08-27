@@ -8,13 +8,9 @@ export const Container = styled.div`
   align-items: center;
   width: 474px;
   margin: 65px auto 0 auto;
-  margin: 65px auto 0 auto;
 `;
 
 export const LogoImg = styled.img`
-  width: 30%;
-  height: 30%;
-  padding-bottom: 65px;
   width: 30%;
   height: 30%;
   padding-bottom: 65px;
@@ -24,9 +20,6 @@ export const JoinLink = styled(Link)`
   font-size: 15px;
   text-decoration: none;
   color: black;
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
   display: flex;
   justify-content: center;
   margin-top: 20px;
@@ -59,13 +52,6 @@ export const Input = styled.input`
   cursor: pointer;
 
   margin-bottom: 0.5rem;
-
-  &::placeholder {
-    color: #c4c4c4;
-    font-size: 16px;
-    display: flex;
-    font-weight: 400;
-  }
 
   &::placeholder {
     color: #c4c4c4;
