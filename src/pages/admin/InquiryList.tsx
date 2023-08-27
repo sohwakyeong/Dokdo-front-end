@@ -3,6 +3,7 @@ import * as S from './SideBar.styled';
 import * as A from './Admin.styled';
 
 function InquiryList(){
+   
     return (
         <A.Wrapper>
             <A.Menu>
@@ -59,7 +60,7 @@ function InquiryList(){
                     <td>싹난 감자</td>
                     <td>23.08.31</td>
                     <td>
-                        <A.CheckButton>완료</A.CheckButton>
+                        <A.CheckButton >완료</A.CheckButton>
                         <A.AdminButton>삭제</A.AdminButton>
                     </td>
                 </tr>

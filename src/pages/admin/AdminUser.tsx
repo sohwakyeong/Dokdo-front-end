@@ -14,6 +14,7 @@ async function fetchAllUser() {
 
 function AdminUser() {
     const [userData, setUserData] = useState([]);
+
     useEffect(()=>{
         async function fetchData() {
             try {
@@ -30,7 +31,9 @@ function AdminUser() {
         <A.Wrapper>
             <A.Menu>
             <A.Headline>회원 정보 관리</A.Headline>
-            <A.Total>총 {UserData.name.length} 명</A.Total>
+            <A.Total>
+                총 {userData.length} 명
+            </A.Total>
             <A.Layout> 
                 <A.Table>
                 <tr>
@@ -39,7 +42,7 @@ function AdminUser() {
                     <th>관리</th>
                 </tr>
 
-                {userData.map((email, name) => ( 
+                {userData.map((email,name) => ( 
             <UserData key={name} data={email} />   
            ))}
             </A.Table>
