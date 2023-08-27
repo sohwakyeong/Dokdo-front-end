@@ -1,34 +1,39 @@
-// Header.js
 import React from 'react';
-import { Link } from 'react-router-dom';
-import searchIcon from '../../../assets/icon/Search.png';
-import notificationIcon from '../../../assets/icon/Bell.png';
-import logo from '../../../assets/icon/RightLogo.png';
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-function GroupHeader() {
+
+interface GroupHeaderData {
+  group_id: number;
+}
+interface GroupHeaderProps {
+  data?: GroupHeaderData;
+}
+
+function GroupHeader({ data }: GroupHeaderProps) {
+  const navigate = useNavigate();
+
+  const generateGroupDetailURL = (sequence: string): string => {
+    return `/group/detail/${sequence}`;
+  };
+
+  const handleClick = () => {
+    if (data) {
+      const groupDetailURL = generateGroupDetailURL(data.group_id.toString());
+      navigate(groupDetailURL);
+    }
+  };
+
+  if (!data) {
+    return null;
+  }
+
   return (
     <StyleHeader>
-      <Up>
-        <Logo>
-          <Link to="/">
-            <StyleLogo src={logo} alt="독도 로고" />
-          </Link>
-        </Logo>
-        <Nav>
-          <Link to="/search">
-            <StlyedImg src={searchIcon} alt="돋보기 아이콘" />
-          </Link>
-          <Link to="/notifications">
-            <StlyedImg src={notificationIcon} alt="알림 아이콘" />
-          </Link>
-        </Nav>
-      </Up>
       <Down>
-        <StyledLink to="/group/detail/id:">HOME</StyledLink>
-        <StyledLink to="/group/board">게시판</StyledLink>
-        <StyledLink to="/group/photo">사진첩</StyledLink>
+        <Button onClick={handleClick}>HOME</Button>
+        <Button onClick={handleClick}>게시판</Button>
+        <Button onClick={handleClick}>사진첩</Button>
       </Down>
     </StyleHeader>
   );
@@ -36,50 +41,18 @@ function GroupHeader() {
 
 export default GroupHeader;
 
-export const StyleHeader = styled.div`
+ const StyleHeader = styled.div`
   background-color: white;
   display: flex;
-  flex-direction: column;
+
   align-items: center;
-  height: 110px;
-  width: 472px;
-  position: fixed;
+  height: 60px;
+  width: 471px;
   z-index: 9999;
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
+  position: fixed;
 `;
 
-export const Logo = styled.h1`
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  height: 40px;
-  white-space: normal;
-`;
-
-export const StyleLogo = styled.img`
-  width: 58px;
-  height: 32px;
-`;
-
-export const Nav = styled.nav`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 65px;
-`;
-
-export const Up = styled.div`
-  width: 90%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 40px;
-  background-color: white;
-  margin: 5px 0;
-`;
-
-export const Down = styled.div`
+const Down = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -89,16 +62,16 @@ export const Down = styled.div`
   margin-bottom: 10px;
 `;
 
-export const StyledLink = styled(NavLink)`
+ const Button = styled.button`
   padding: 0;
   margin: 0;
   text-decoration: none;
   color: #333;
   list-style: none;
   color: black;
-  border-bottom: 2px solid transparent;
   height: 100%;
-  width: 33%;
+  background-color: black;
+  width: 500px;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -108,7 +81,5 @@ export const StyledLink = styled(NavLink)`
     border-bottom: 5px solid #7c6250;
   }
 `;
-export const StlyedImg = styled.img`
-  width: 27px;
-  height: 27px;
-`;
+
+

@@ -20,13 +20,16 @@ interface BoardData {
   meeting: number;
   leader: number;
   like: number;
-  location: string;
-  day: string;
-  genre: string;
-  age: number;
+
   tags: object;
   introduction: string;
   place: string;
+  search: {
+    location: string;
+    day: string;
+    genre: string;
+    age: number;
+  };
 }
 
 interface BoardBoxProps {
@@ -52,8 +55,8 @@ function BoardBox({ data, isMainPage }: BoardBoxProps) {
     return null;
   }
 
-  const { introduction, tags, name, like, location } = data;
-
+  const { search, introduction, tags, name, like } = data;
+  const location = search.location;
   // 이미지 데이터가 있는 경우 데이터의 이미지를 출력, 그렇지 않으면 내가 설정한 이미지를 출력
   const imageSource = data.profile || defaultImage;
 
@@ -67,7 +70,7 @@ function BoardBox({ data, isMainPage }: BoardBoxProps) {
             <BB.Intro>{introduction}</BB.Intro>
             <BB.Members>☺︎ {like}명 참여중</BB.Members>
             <BB.HashTagDisplay>
-              <BB.Place>{location}</BB.Place>
+              <BB.Place>🇰🇷{location}</BB.Place>
               {Array.isArray(tags) &&
                 tags.map((tag, index) => (
                   <BB.HashTags key={index}>{tag}</BB.HashTags>

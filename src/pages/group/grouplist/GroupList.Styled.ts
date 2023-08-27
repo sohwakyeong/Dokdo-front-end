@@ -50,7 +50,7 @@ export const ChoiceImageGroup = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #dedede;
+  background-color: white;
 `;
 
 export const ChoiceSelect = styled.div`
@@ -111,5 +111,17 @@ export const ImageRow = styled.div`
 `;
 
 export const SearchButton = styled.div`
-  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 130px;
+  background-color: white;
+  border: 1px solid #ddd;
+  height: 38px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+
+  & div {
+    font-size: 15px;
+  }
 `;

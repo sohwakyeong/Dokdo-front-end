@@ -50,7 +50,6 @@ const ages = [
 
 const Genre = [
   { value: '', label: '도서 장르' },
-
   { value: '철학', label: '철학' },
   { value: '인문학', label: '인문학' },
   { value: '소설', label: '소설' },
@@ -58,6 +57,8 @@ const Genre = [
   { value: '시/수필', label: '시/수필' },
   { value: '경제', label: '경제' },
   { value: '사회과학', label: '사회과학' },
+  { value: '취미', label: '취미' },
+
 ];
 
 const sortOptions = [
@@ -73,104 +74,101 @@ const GroupList = () => {
   const [selectedSort, setSelectedSort] = useState('');
   const [clickedInfo, setClickedInfo] = useState<string[]>([]);
   const [groupData, setGroupData] = useState([]);
-  
+
   useEffect(() => {
-  async function fetchData() {
-  try {
-  let apiUrl = 'http://localhost:3001/api/v1/group?orderBy=popularity'; // 기본적으로 인기순 API 호출
-  
-      if (selectedSort === '최근순') {
-        apiUrl = 'http://localhost:3001/api/v1/group'; // 최신순 API 호출
-      }
-  
-      const data = await fetchAllGroupData(apiUrl); // API 요청 호출
-      setGroupData(data);
-    } catch (error) {
-      console.error('데이터를 가져오는 중 에러 발생:', error);
-    }
-  }
-  
-  fetchData();
-  }, [selectedSort]);
-  
-  async function fetchAllGroupData(apiUrl: string) {
-  try {
-  const response = await axios.get(apiUrl);
-  return response.data.data;
-  } catch (error) {
-  throw error;
-  }
-  }
-  
-  const handleOptionClick = (optionLabel: string) => {
-  const updatedInfo = [...clickedInfo];
-  
-  if (updatedInfo.length < 5) {
-    updatedInfo.push(optionLabel);
-  } else {
-    alert('태그는 5개까지만 선택 가능합니다');
-  }
-  setClickedInfo(updatedInfo);
-  };
-  
+    async function fetchData() {
+      try {
+        let apiUrl = 'http://localhost:3001/api/v1/group?orderBy=popularity'; // 기본적으로 인기순 API 호출
 
-const handleDeleteClick = (index: number) => {
-  const updatedInfo = [...clickedInfo];
-  updatedInfo.splice(index, 1);
-  setClickedInfo(updatedInfo);
-  
-  // 검색 결과와 선택된 정렬 기준 초기화
-  setGroupData([]);
-  setSelectedSort('');
-};
-
-const handleSearchButtonClick = async () => {
-  try {
-    let apiUrl = 'http://localhost:3001/api/v1/group';
-  
-    if (selectedSort === '최근순') {
-      apiUrl += '?orderBy=oldest';
-    } else {
-      apiUrl += '?orderBy=popularity';
-    }
-  
-    const params = {
-      location: selectedRegion,
-      day: selectedDuration,
-      genre: selectedGenre,
-      age: selectedAge,
-    };
-  
-    // 선택된 값이 있는 경우에만 추가적인 쿼리 파라미터를 포함한 URL을 사용하여 API 요청 호출
-    if (Object.values(params).some(Boolean)) {
-      Object.entries(params).forEach(([key, value]) => {
-        if (value) {
-          apiUrl += `&${key}=${encodeURIComponent(value)}`;
+        if (selectedSort === '최근순') {
+          apiUrl = 'http://localhost:3001/api/v1/group'; // 최신순 API 호출
         }
-      });
-  
-      const data = await fetchAllGroupData(apiUrl);
-      
-      if (data.length === 0) { 
-        alert('검색 결과가 없습니다.');
+
+        const data = await fetchAllGroupData(apiUrl); // API 요청 호출
+        setGroupData(data);
+      } catch (error) {
+        console.error('데이터를 가져오는 중 에러 발생:', error);
+      }
+    }
+
+    fetchData();
+  }, [selectedSort]);
+
+  async function fetchAllGroupData(apiUrl: string) {
+    try {
+      const response = await axios.get(apiUrl);
+      return response.data.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  const handleOptionClick = (optionLabel: string) => {
+    const updatedInfo = [...clickedInfo];
+
+    if (updatedInfo.length < 5) {
+      updatedInfo.push(optionLabel);
+    } else {
+      alert('태그는 5개까지만 선택 가능합니다');
+    }
+    setClickedInfo(updatedInfo);
+  };
+
+  const handleDeleteClick = (index: number) => {
+    const updatedInfo = [...clickedInfo];
+    updatedInfo.splice(index, 1);
+    setClickedInfo(updatedInfo);
+
+    // 검색 결과와 선택된 정렬 기준 초기화
+    setGroupData([]);
+    setSelectedSort('');
+  };
+
+  const handleSearchButtonClick = async () => {
+    try {
+      let apiUrl = 'http://localhost:3001/api/v1/group';
+
+      if (selectedSort === '최근순') {
+        apiUrl += '?orderBy=oldest';
+      } else {
+        apiUrl += '?orderBy=popularity';
+      }
+
+      const params = {
+        location: selectedRegion,
+        day: selectedDuration,
+        genre: selectedGenre,
+        age: selectedAge,
+      };
+
+      // 선택된 값이 있는 경우에만 추가적인 쿼리 파라미터를 포함한 URL을 사용하여 API 요청 호출
+      if (Object.values(params).some(Boolean)) {
+        Object.entries(params).forEach(([key, value]) => {
+          if (value) {
+            apiUrl += `&${key}=${encodeURIComponent(value)}`;
+          }
+        });
+
+        const data = await fetchAllGroupData(apiUrl);
+
+        if (data.length === 0) {
+          alert('검색 결과가 없습니다.');
+          setGroupData([]); // 검색 결과 초기화
+          return;
+        }
+
+        setGroupData(data);
+      } else {
+        alert('검색 조건을 선택해주세요.');
         setGroupData([]); // 검색 결과 초기화
         return;
       }
-      
-      setGroupData(data);
-      
-    } else {
-       alert('검색 조건을 선택해주세요.');
-       setGroupData([]); // 검색 결과 초기화
-       return;
-     }
-    
-     setSelectedSort(''); // 선택된 정렬 기준 초기화
-    
-   } catch (error) { 
-     console.error('데이터를 가져오는 중 에러 발생:', error);
-   }
-};
+
+      setSelectedSort(''); // 선택된 정렬 기준 초기화
+    } catch (error) {
+      console.error('데이터를 가져오는 중 에러 발생:', error);
+    }
+  };
   return (
     <GL.Wrapper>
       <SearchInput />
@@ -231,10 +229,10 @@ const handleSearchButtonClick = async () => {
               </GL.ClickedInfoWrapper>
             ))}
           </GL.ClickBox>
+          <GL.SearchButton onClick={handleSearchButtonClick}>
+            <div>조건검색</div>
+          </GL.SearchButton>
         </GL.HashTagBox>
-        <GL.SearchButton onClick={handleSearchButtonClick}>
-          검색
-        </GL.SearchButton>
       </GL.ChoiceBox>
       <GL.ChoiceImageGroup>
         <GL.ChoiceSelect>

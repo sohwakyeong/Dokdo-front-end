@@ -79,5 +79,11 @@ export const Members = styled.div`
 `;
 
 export const Place = styled.div`
-  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 18%;
+  color: #7e7e7e;
+  font-size: 14px;
+  font-weight: 500;
 `;

@@ -46,6 +46,7 @@ function Main() {
     <M.Wrapper>
       <Slider />
       <M.GridContainer>
+
         어떤 도서 장르의
         <br />
         토론 모임을 찾으세요?📖
