@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios, { AxiosError } from 'axios';
+import SelectBox from '../../../components/common/selectbox/SelectBox2';
 import {
   Container,
   Title,
@@ -9,6 +10,7 @@ import {
   Input,
   SubmitButton,
 } from './GroupCreatePage3.Styled';
+
 interface GroupCreatePage3Data {
   name: string;
   introduction: string;
@@ -25,6 +27,17 @@ interface GroupCreatePage3Props {
   updateData: (newData: Partial<GroupCreatePage3Data>) => void;
 }
 
+const dayOptions = [
+  { value: '', label: '모임 일정' },
+  { value: '월요일', label: '월요일' },
+  { value: '화요일', label: '화요일' },
+  { value: '수요일', label: '수요일' },
+  { value: '목요일', label: '목요일' },
+  { value: '금요일', label: '금요일' },
+  { value: '토요일', label: '토요일' },
+  { value: '일요일', label: '일요일' },
+];
+
 const GroupCreatePage3: React.FC<GroupCreatePage3Props> = ({
   data,
   updateData,
@@ -34,6 +47,11 @@ const GroupCreatePage3: React.FC<GroupCreatePage3Props> = ({
   const [place, setPlace] = useState(data.place);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<{ message: string } | null>(null);
+
+  const handleDayChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedValue = event.target.value;
+    setDay(selectedValue);
+  };
 
   const handlePageSubmit = async () => {
     console.log('GroupCreatePage3: handlePageSubmit is called');
@@ -98,11 +116,10 @@ const GroupCreatePage3: React.FC<GroupCreatePage3Props> = ({
       </FormGroup>
       <FormGroup>
         <label>요일 </label>
-        <Input
-          type="text"
+        <SelectBox
+          options={dayOptions}
           value={day}
-          onChange={e => setDay(e.target.value)}
-          placeholder="요일을 입력해주세요."
+          onChange={handleDayChange}
         />
       </FormGroup>
       <FormGroup>
