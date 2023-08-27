@@ -249,7 +249,7 @@ const handleSearchButtonClick = async () => {
         </GL.ChoiceSelect>
         <GL.ChoiceGroupBoard>
           {groupData.map((groupItem, index) => (
-            <BoardBox key={index} data={groupItem} />
+            <BoardBox key={index} data={groupItem} isMainPage={true} />
           ))}
         </GL.ChoiceGroupBoard>
       </GL.ChoiceImageGroup>

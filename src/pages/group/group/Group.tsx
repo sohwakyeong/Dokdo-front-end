@@ -49,8 +49,8 @@ const Group = () => {
             </GR.StyledLink>
           </GR.HotGroupTitle>
           {groupData.slice(0, 3).map((groupItem, index) => (
-            <BoardBox key={index} data={groupItem} />
-          ))}
+          <BoardBox key={index} data={groupItem} isMainPage={true}/>
+        ))}
           <MoreButton to="/group/list">더보기</MoreButton>
         </GR.HotGroup>
       </GR.BookContest>
