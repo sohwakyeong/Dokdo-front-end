@@ -1,10 +1,62 @@
-import React from 'react';
+
+import React, { useEffect, useState } from 'react';
 import * as EditStyle from './EditProfile.styled';
 import UserIcon from '../../../assets/img/userprofile.png';
+import { getCookie } from '../../../helper/Cookie';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-// id나 type같은 값들은 수정해야됨
+// 데이터 API. fetchData할 때는 axios를 써야함
+// 여기서는 get 요청으로 이메일만 받아오면 됨
 
 function EditProfileComponent() {
+// 유저 정보 가져옴
+  const navigate = useNavigate();
+
+  const [userData, setUserData] = useState<{
+    email: string;
+    password: string;
+    profilePic: string;
+    introduction: string;
+    user_id:number;
+  } | null>(null);
+
+  const loginToken = getCookie('loginToken'); // getCookie 함수로 'loginToken' 쿠키 값을 가져옵니다.
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/api/v1/auth/me', {
+        headers: {
+          Authorization: `Bearer ${loginToken}`,
+        },
+        withCredentials: true,
+      })
+      .then(response => {
+        if (response.status === 200) {
+          setUserData(response.data.data.getUser);
+        } else {
+          navigate('/signup');
+        }
+      })
+      .catch(error => {
+        console.error('유저 정보 가져오기 에러:', error);
+        navigate('/login');
+      });
+  }, [navigate, loginToken]);
+
+  if (!userData) {
+    // userData가 없으면 로딩 또는 에러 메시지 표시
+    return <div>로딩 중...</div>;
+  }
+
+
+  // 저장하기 함수
+const onClickSubmit = () => {
+
+
+
+}
+  
   return (
     <EditStyle.Container>
       <EditStyle.Wrapper>
@@ -29,6 +81,7 @@ function EditProfileComponent() {
             id="email_val"
             type="text"
             name="is_Useremail"
+            value={userData.email}
           />
         </EditStyle.FormInput>
         <EditStyle.FormTag>
@@ -67,7 +120,12 @@ function EditProfileComponent() {
           <EditStyle.Tag>닉네임</EditStyle.Tag>
         </EditStyle.FormTag>
         <EditStyle.FormInput>
-          <EditStyle.Input id="name_val" type="text" name="is_Username" />
+          <EditStyle.Input
+            id="name_val"
+            type="text"
+            name="is_Username"
+           
+          />
         </EditStyle.FormInput>
 
         {/* 한줄 소개 띄우는 곳이 없는데 이거 어디에 띄워지는 건지?? 만약 띄운다면 마이페이지의 닉네임 하단과 모임가입 신청할 때 개인의 프로필도 같이 보내지는 건지?? 회의때 물어보기 */}
@@ -79,18 +137,19 @@ function EditProfileComponent() {
             id="introduce_val"
             type="text"
             name="is_Introduce"
-            placeholder="10문자 이상 입력해주세요."
+            placeholder="15문자 이내로 입력해주세요."
           />
         </EditStyle.FormInput>
       </EditStyle.Wrapper>
       {/* 나중에 Link to="" 지우고 navigate로 이동? */}
-      <EditStyle.SubmitButton>
-        <EditStyle.SubmitLink to="/user/mypage">저장하기</EditStyle.SubmitLink>
+      <EditStyle.SubmitButton onClick={onClickSubmit}>
+        저장하기
       </EditStyle.SubmitButton>
-<EditStyle.DeleteWrap>
-      <EditStyle.DeleteAccount to="/user/deleteaccount">
-        탈퇴하기
-      </EditStyle.DeleteAccount></EditStyle.DeleteWrap>
+      <EditStyle.DeleteWrap>
+        <EditStyle.DeleteAccount to="/user/deleteaccount">
+          탈퇴하기
+        </EditStyle.DeleteAccount>
+      </EditStyle.DeleteWrap>
     </EditStyle.Container>
   );
 }

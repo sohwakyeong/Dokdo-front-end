@@ -1,44 +1,49 @@
 import React, { useEffect, useState } from 'react';
 import * as MyPageStyle from './MyPage.styled';
 import UserIcon from '../../../assets/img/userprofile.png';
-import { removeCookie } from '../../../helper/Cookie';
+import { getCookie, removeCookie } from '../../../helper/Cookie';
 import { useNavigate } from 'react-router-dom';
 import AxiosC from '../../../helper/AxiosC';
 import axios from 'axios';
-
-import Slider5 from '../../../components/common/slider/Slider3'
-
-// 데이터 API. fetchData할 때는 axios를 써야함
-async function fetchUserData() {
-  try {
-    const response = await axios.get(
-      'http://localhost:3001/api/v1/auth/user/2?name=true',
-    );
-    return response.data.data; // 서버 응답에서 실제 그룹 데이터를 반환
-  } catch (error) {
-    throw error;
-  }
-}
+import Slider5 from '../../../components/common/slider/Slider3';
 
 function MyPageComponent() {
   const navigate = useNavigate();
 
-const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState<{
+    name: string;
+    profilePic: string;
+    introduction: string;
+  } | null>(null);
 
-useEffect(() => {
-  async function fetchData() {
-    try {
-      const data = await fetchUserData();
-      setUserData(data);
-    } catch (error) {
-      console.error('데이터를 가져오는 중 에러 발생:', error);
-    }
+  const loginToken = getCookie('loginToken'); // getCookie 함수로 'loginToken' 쿠키 값을 가져옵니다.
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/api/v1/auth/me', {
+        headers: {
+          Authorization: `Bearer ${loginToken}`,
+        },
+        withCredentials: true,
+      })
+      .then(response => {
+        if (response.status === 200) {
+          setUserData(response.data.data.getUser);
+        } else {
+          navigate('/signup');
+        }
+      })
+      .catch(error => {
+        console.error('유저 정보 가져오기 에러:', error);
+        navigate('/login');
+      });
+  }, [navigate, loginToken]);
+
+  if (!userData) {
+    // userData가 없으면 로딩 또는 에러 메시지 표시
+    return <div>로딩 중...</div>;
   }
 
-  fetchData();
-}, []);
-console.log(userData);
-  
   // 로그아웃 버튼의 onClick Event
   // 이 함수에서 AxiosC를 axios로 바꾸면 로그아웃이 안된다
   const handleLogout = async () => {
@@ -62,10 +67,8 @@ console.log(userData);
       <MyPageStyle.Wrapper>
         <MyPageStyle.UserIcon src={UserIcon} alt="유저 설정 이미지" />
         <MyPageStyle.Introduce>
-          <MyPageStyle.NickName>{userData}</MyPageStyle.NickName>
-          <MyPageStyle.SimpleIntro>
-            안녕하세요 저는 에세이가 좋아요
-          </MyPageStyle.SimpleIntro>
+          <MyPageStyle.NickName>{userData.name}</MyPageStyle.NickName>
+          <MyPageStyle.SimpleIntro>{userData.introduction}</MyPageStyle.SimpleIntro>
         </MyPageStyle.Introduce>
       </MyPageStyle.Wrapper>
 
