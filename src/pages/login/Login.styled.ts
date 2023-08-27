@@ -35,13 +35,15 @@ export const Title = styled.p`
   font-size: 16px;
   font-weight: 600;
   margin: 15px 0 13px 10px;
+
+
 `;
 
 export const Input = styled.input`
   size: 420px;
   height: 57px;
   text-align: left;
-  padding-left: 15px;
+ padding-left: 15px;
   border: none;
   border-radius: 15px;
   background-color: #f0f0f0;
@@ -96,20 +98,6 @@ export const Button = styled.button`
   cursor: pointer;
   border: none;
   background-color: #84614b;
-`;
-
-export const GotoHome = styled(Link)`
   text-decoration: none;
   color: white;
-`;
-export const Kakao = styled(Link)`
-  text-decoration: none;
-  background-color: yellow;
-  color: brown;
-`;
-
-export const Google = styled(Link)`
-  text-decoration: none;
-  background-color: white;
-  color: navy;
 `;

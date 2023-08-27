@@ -11,7 +11,7 @@ const cookies = new Cookies();
 
 function Footer() {
   const isLoggedIn = cookies.get('loginToken');
-
+  
   return (
     <FT.StyledFooter>
       <FT.MenuItem>
