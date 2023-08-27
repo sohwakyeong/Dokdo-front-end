@@ -55,7 +55,7 @@ export const Layout = styled.div`
 
 export const Table = styled.table`
         width: 100%;
-        font-size: 14px;
+        font-size: 12px;
         table-layout: fixed;
     
     th {

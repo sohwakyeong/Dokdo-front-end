@@ -2,18 +2,54 @@ import React,{useState, useEffect} from "react";
 import * as A from "./Admin.styled";
 import axios from 'axios';
 import GroupData from './GroupData';
+import SelectBox2 from "../../components/common/selectbox/SelectBox2";
 
-async function fetchAllGroup() {
-    try{
-        const response = await axios.get('http://localhost:3001/api/v1/admin/groups')
-        return response.data.data; 
-    } catch (error) {
-        throw error;
-    }
-}
-
+const sortOptions = [
+    { value: '좋아요', label: '좋아요' },
+    { value: '최근순', label: '최근순' },
+  ];
+  
+    
 function AdminGroup (){
     const [groupData, setGroupData] = useState([]);
+    const [selectedSort, setSelectedSort] = useState('');
+
+    useEffect(() => {
+        async function fetchData() {
+        try {
+        let apiUrl = 'http://localhost:3001/api/v1/group?orderBy=popularity'; // 기본적으로 인기순 API 호출
+        
+            if (selectedSort === '최근순') {
+              apiUrl = 'http://localhost:3001/api/v1/group'; // 최신순 API 호출
+            }
+        
+            const data = await fetchAllGroupData(apiUrl); // API 요청 호출
+            setGroupData(data);
+          } catch (error) {
+            console.error('데이터를 가져오는 중 에러 발생:', error);
+          }
+        }
+        
+        fetchData();
+        }, [selectedSort]);
+        
+        async function fetchAllGroupData(apiUrl: string) {
+        try {
+        const response = await axios.get(apiUrl);
+        return response.data.data;
+        } catch (error) {
+        throw error;
+        }
+        }
+    
+    async function fetchAllGroup() {
+        try{
+            const response = await axios.get('http://localhost:3001/api/v1/admin/groups')
+            return response.data.data; 
+        } catch (error) {
+            throw error;
+        }  
+    }
 
     useEffect(()=>{
         async function fetchData() {
@@ -27,15 +63,19 @@ function AdminGroup (){
         }
         fetchData();
     },[]);
+
     return (
         <A.Wrapper>
             <A.Menu>
             <A.Top>
             <A.Headline>토론 모임 관리</A.Headline>
-            <A.Select>
-                <option value="popularity">좋아요</option>
-                <option value="조회">최신순</option>
-            </A.Select>
+            <SelectBox2
+                options={sortOptions}
+                value={selectedSort}
+                onChange={event => {
+              setSelectedSort(event.target.value);
+            }}
+            />
             </A.Top>
             <A.Layout> 
                 <A.Table>
@@ -53,7 +93,6 @@ function AdminGroup (){
             </A.Layout>
             </A.Menu>       
         </A.Wrapper>
-    )
-}
-
+    );
+};
 export default AdminGroup;
