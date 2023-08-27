@@ -18,8 +18,6 @@ async function fetchAllGroupData() {
 
 
 
-
-
 function GroupDetail() {
 
   const [groupData, setGroupData] = useState([]);
@@ -40,6 +38,7 @@ function GroupDetail() {
 
   return (
     <GD.Wrapper>
+        <GroupHeader />
         <GroupHeader />
       <GD.GroupImage>
         <GD.EditButton>
