@@ -4,7 +4,7 @@ import BoardImgBox from './BoardImgBox';
 import { useNavigate } from 'react-router-dom';
 import defaultImage from '../../../assets/img/Logo1.png';
 
-interface MidleBoardData {
+export interface MidleBoardData {
   _id: string;
   group_id: number;
   post_id: number;

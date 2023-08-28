@@ -6,58 +6,50 @@ import PenFooter from '../../../components/layout/footer/PenFooter';
 import { getCookie } from '../../../helper/Cookie';
 import GroupHeader from '../../../components/layout/header/GroupHeader';
 
-
 interface GroupData {
   _id: string;
   group_id: number;
-  post_id: number;
-  user_id: number;
-  createdAt: string;
-  updatedAt: string;
+  // ... 나머지 GroupData의 속성들
 }
 
 interface GroupBoardProps {
   data?: GroupData;
 }
 
-
-const loginToken = getCookie('loginToken'); // getCookie 함수는 쿠키를 읽어오는 함수로 적절한 코드로 대체해야 합니다.
-
-if (loginToken) {
-// 로그인 토큰이 존재하면 API 요청 시 헤더에 추가
-axios.defaults.headers.common['Authorization'] = `Bearer ${loginToken}`;
-}
-
-// API 요청 함수 수정
-async function fetchAllGroupBoardData(group_id: number) {
-  try {
-    const response = await axios.get(
-      `http://localhost:3001/api/v1/group/{group_id}/posts`, // 백틱 사용
-    );
-    return response.data.data;
-  } catch (error) {
-    throw error;
-  }
+interface GroupBoardItem {
+  _id: string;
+  name: string;
+  createdAt: string;
+  content: string;
+  image: string;
+  // ... 나머지 GroupBoardItem의 속성들
 }
 
 function GroupBoard({ data }: GroupBoardProps) {
-  const [groupBoardData, setGroupBoardData] = useState<any[]>([]);
+  const [groupBoardData, setGroupBoardData] = useState<GroupBoardItem[]>([]);
+
 
   useEffect(() => {
-    async function fetchData(group_id: number) {
-      // group_id 인자로 받도록 수정
+    async function fetchData(sequence: string) {
       try {
-        const fetchedData = await fetchAllGroupBoardData(group_id); // data.group_id 대신 group_id 사용
-        setGroupBoardData(fetchedData);
+        const loginToken = getCookie('loginToken');
+        const headers = loginToken ? { Authorization: `Bearer ${loginToken}` } : {};
+
+        const response = await axios.get(
+          `http://localhost:3001/api/v1/group/${sequence}/posts`,
+          { headers }
+        );
+
+        setGroupBoardData(response.data.data);
       } catch (error) {
-        console.error('데이터를 가져오는 중 에러 발생:', error);
+        console.error('Error fetching data:', error);
       }
     }
 
-    if (data?.group_id) {
-      fetchData(data.group_id); // data.group_id를 그대로 전달
+    if (data?._id) {
+      fetchData(data._id);
     }
-  }, [data?.group_id]);
+  }, [data?._id]);
 
   return (
     <GB.Wrapper>

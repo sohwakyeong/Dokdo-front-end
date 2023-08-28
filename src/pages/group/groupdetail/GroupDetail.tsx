@@ -1,45 +1,61 @@
-import * as GD from './GroupDetail.styled';
-import GroupImg from '../../../assets/img/독서모임1.jpeg';
-import GroupHeader from '../../../components/layout/header/GroupHeader';
 import React, { useState, useEffect } from 'react';
+import GroupImg from '../../../assets/img/독서모임1.jpeg';
 import axios from 'axios';
-
-
-async function fetchAllGroupData() {
-  try {
-    const response = await axios.get(
-      'http://localhost:3001/api/v1/group/',
-    ); // 최신순 정렬
-    return response.data.data; // 서버 응답에서 실제 그룹 데이터를 반환
-  } catch (error) {
-    throw error;
-  }
-}
-
-
+import { getCookie } from '../../../helper/Cookie';
+import * as GD from './GroupDetail.styled';
 
 function GroupDetail() {
+  const [groupData, setGroupData] = useState<{
+    group_id: number;
+    name: string;
+    tags: object;
+    _id: string;
+    location: string;
+    day: string;
+    genre: string;
+    age: string;
+    place: string;
+    introduction: string;
+  } | null>(null);
 
-  const [groupData, setGroupData] = useState([]);
+  const loginToken = getCookie('loginToken');
 
   useEffect(() => {
-    async function fetchData() {
+    // API 요청 함수 정의
+    async function fetchGroupData(groupId: number) {
       try {
-        const data = await fetchAllGroupData(); // API 요청 호출
-        // 데이터 가공 및 저장
-        setGroupData(data);
+        const response = await axios.get(
+          `http://localhost:3001/api/v1/group/${groupId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${loginToken}`,
+            },
+            withCredentials: true,
+          }
+        );
+        if (response.status === 200) {
+          setGroupData(response.data.data);
+        } else {
+          console.error('그룹 정보 가져오기 에러:', response.status);
+        }
       } catch (error) {
-        console.error('데이터를 가져오는 중 에러 발생:', error);
+        console.error('그룹 정보 가져오기 에러:', error);
       }
     }
 
-    fetchData();
-  }, []);
+    // 미리 정의한 API 요청 함수를 호출하여 데이터를 가져옴
+    fetchGroupData(17); // 여기에 원하는 group_id 값을 넣어 호출
+
+  }, [loginToken]);
+
+  if (!groupData) {
+    return <div>로딩 중...</div>;
+  }
+
 
   return (
     <GD.Wrapper>
-        <GroupHeader />
-        <GroupHeader />
+      {/* <GroupHeader /> */}
       <GD.GroupImage>
         <GD.EditButton>
           <div>●●●</div>
@@ -47,16 +63,14 @@ function GroupDetail() {
         <img src={GroupImg} alt="모임 설정 이미지" />
       </GD.GroupImage>
       <GD.GroupInfo>
-        <GD.GroupName>●시좋아하는 모임</GD.GroupName>
-        <GD.GroupInfoTitle>
-          좋아하는 시집 한권씩 챙겨서 피크닉겸 독서 토론해요{' '}
-        </GD.GroupInfoTitle>
+        <GD.GroupName>{groupData.name}</GD.GroupName>
+        <GD.GroupInfoTitle>{groupData.introduction}</GD.GroupInfoTitle>
         <GD.GroupInfoTP>
-          <div>반포한강공원</div>
-          <div>매주 목요일 오후 2시</div>
+          <div>{groupData.place}</div>
+          <div>매주 {groupData.day}</div>
         </GD.GroupInfoTP>
         <GD.HashTag>
-          <div>해시태그</div>
+          <div></div>
         </GD.HashTag>
         <GD.GroupInfoBox>모임 소개 내용</GD.GroupInfoBox>
       </GD.GroupInfo>
