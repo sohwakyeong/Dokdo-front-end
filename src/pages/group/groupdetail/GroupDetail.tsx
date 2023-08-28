@@ -3,6 +3,7 @@ import GroupImg from '../../../assets/img/독서모임1.jpeg';
 import axios from 'axios';
 import { getCookie } from '../../../helper/Cookie';
 import * as GD from './GroupDetail.styled';
+import { useParams } from 'react-router-dom'; // useParams 임포트
 
 function GroupDetail() {
   const [groupData, setGroupData] = useState<{
@@ -19,6 +20,7 @@ function GroupDetail() {
   } | null>(null);
 
   const loginToken = getCookie('loginToken');
+  const { groupId } = useParams<{ groupId: string }>(); // useParams 사용하여 groupId 얻기
 
   useEffect(() => {
     // API 요청 함수 정의
@@ -31,7 +33,7 @@ function GroupDetail() {
               Authorization: `Bearer ${loginToken}`,
             },
             withCredentials: true,
-          }
+          },
         );
         if (response.status === 200) {
           setGroupData(response.data.data);
@@ -44,18 +46,15 @@ function GroupDetail() {
     }
 
     // 미리 정의한 API 요청 함수를 호출하여 데이터를 가져옴
-    fetchGroupData(17); // 여기에 원하는 group_id 값을 넣어 호출
-
-  }, [loginToken]);
+    fetchGroupData(Number(groupId)); // groupId를 숫자로 변환하여 함수에 전달
+  }, [loginToken, groupId]);
 
   if (!groupData) {
     return <div>로딩 중...</div>;
   }
 
-
   return (
     <GD.Wrapper>
-      {/* <GroupHeader /> */}
       <GD.GroupImage>
         <GD.EditButton>
           <div>●●●</div>
@@ -113,7 +112,6 @@ function GroupDetail() {
         <GD.ButtonDisplay></GD.ButtonDisplay>
       </GD.MemberBox>
     </GD.Wrapper>
-    //더보기 버튼 필요 -> 무한스크롤
   );
 }
 

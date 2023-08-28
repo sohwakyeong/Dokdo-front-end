@@ -92,7 +92,7 @@ const MainRoutes = () => {
         }
       />
       <Route
-        path="/group/:id/detail"
+        path="/group/:groupId/detail"
         element={
           <Layout3>
             <GroupDetail />
