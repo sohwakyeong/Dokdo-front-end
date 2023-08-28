@@ -4,6 +4,7 @@ import axios from 'axios';
 import { getCookie } from '../../../helper/Cookie';
 import * as GD from './GroupDetail.styled';
 import { useParams } from 'react-router-dom'; // useParams 임포트
+import GroupHeader from '../../../components/layout/header/GroupHeader';
 
 function GroupDetail() {
   const [groupData, setGroupData] = useState<{
@@ -55,6 +56,9 @@ function GroupDetail() {
 
   return (
     <GD.Wrapper>
+      <GD.GroupHeader>
+        <GroupHeader data={{ group: Number(groupId) }} />
+      </GD.GroupHeader>
       <GD.GroupImage>
         <GD.EditButton>
           <div>●●●</div>

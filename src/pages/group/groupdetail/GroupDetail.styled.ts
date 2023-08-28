@@ -7,6 +7,13 @@ export const Wrapper = styled.div`
   width: 474px;
 `;
 
+export const GroupHeader = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+`;
+
 export const GroupName = styled.div`
   width: 90%;
   padding: 10px;

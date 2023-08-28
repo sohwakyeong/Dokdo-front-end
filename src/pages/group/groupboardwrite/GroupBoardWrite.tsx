@@ -59,6 +59,7 @@ const GroupBoardWrite: React.FC = () => {
 
   return (
     <GBW.Wrapper>
+
       <BoardWriteSection />
       <GBW.TitleWrite>
         <textarea

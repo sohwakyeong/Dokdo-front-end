@@ -63,6 +63,7 @@ const GroupBoardDetail = ({ data }: GroupBoardDetailDataProps) => {
   };
   return (
     <GBD.Wrapper>
+
       <GBD.GroupBoardTitle>
         <div>모임 이름</div>
       </GBD.GroupBoardTitle>

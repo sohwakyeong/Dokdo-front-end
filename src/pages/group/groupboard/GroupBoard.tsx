@@ -53,7 +53,7 @@ function GroupBoard({ data }: GroupBoardProps) {
 
   return (
     <GB.Wrapper>
-      <GroupHeader />
+
       <PenFooter />
       <SearchInput />
       <GB.GroupBoardList>
