@@ -64,7 +64,10 @@ const GroupBoardWrite: React.FC = () => {
       <GBW.GroupHeader>
         <GroupHeader data={{ group: Number(groupId) }} />
       </GBW.GroupHeader>
+
       <BoardWriteSection />
+
+
       <GBW.TitleWrite>
         <textarea
           placeholder="제목을 입력해주세요. (40자)"
@@ -74,6 +77,9 @@ const GroupBoardWrite: React.FC = () => {
           maxLength={40}
         />
       </GBW.TitleWrite>
+
+
+
       <GBW.WriteBox>
         <textarea
           placeholder="하고있던건데 다 지우고 다시 하셔도 됩니다"
@@ -86,6 +92,11 @@ const GroupBoardWrite: React.FC = () => {
           <GBW.UploadImage key={index} src={image} alt="업로드된 이미지" />
         ))}
       </GBW.WriteBox>
+
+
+
+
+
       <GBW.ImgFileTitle>
         <div>사진  등록(선택)</div>
         <div>500MB 이하의 jpg, gif 파일만 3개까지 업로드 가능합니다</div>

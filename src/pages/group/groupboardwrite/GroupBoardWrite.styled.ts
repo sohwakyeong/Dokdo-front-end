@@ -15,6 +15,7 @@ export const GroupHeader = styled.div`
 `;
 
 
+
 export const TitleWrite = styled.div`
   display: flex;
   justify-content: start;
