@@ -54,7 +54,6 @@ function PostData({data}: AdminPostProps) {
                     {deleted && <p>게시글이 삭제되었습니다.</p>}
                 </td>
                 )}
-
         </tr>
     );
 }

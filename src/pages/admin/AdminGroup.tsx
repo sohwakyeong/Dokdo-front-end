@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from "react";
+import React,{useState, useEffect, useRef} from "react";
 import * as A from "./Admin.styled";
 import axios from 'axios';
 import GroupData from './GroupData';
@@ -12,6 +12,11 @@ const sortOptions = [
     
 function AdminGroup (){
     const [groupData, setGroupData] = useState([]);
+    const element = useRef<HTMLDivElement>(null);
+    const onMoveBox = () => {
+        element.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      };
+    
     const [selectedSort, setSelectedSort] = useState('');
 
     useEffect(() => {
@@ -44,7 +49,7 @@ function AdminGroup (){
     
     async function fetchAllGroup() {
         try{
-            const response = await axios.get('http://localhost:3001/api/v1/admin/groups')
+            const response = await axios.get('http://localhost:3001/api/v1/group')
             return response.data.data; 
         } catch (error) {
             throw error;
@@ -78,12 +83,13 @@ function AdminGroup (){
             />
             </A.Top>
             <A.Layout> 
+                <div ref={element}></div>
                 <A.Table>
                 <tr>
                     <th>번호</th>
                     <th>모임명</th>
-                    <th>모임장</th>
-                    <th>인원</th>
+                    <th>장소</th>
+                    <th>생성 일자</th>
                     <th>관리</th>
                 </tr>
                 {groupData.map((name, group_id) => ( 
@@ -91,6 +97,9 @@ function AdminGroup (){
             ))}  
                </A.Table>
             </A.Layout>
+            <A.TopConteiner>
+                <A.ScrollToTop onClick={onMoveBox}>Top</A.ScrollToTop>
+            </A.TopConteiner> 
             </A.Menu>       
         </A.Wrapper>
     );

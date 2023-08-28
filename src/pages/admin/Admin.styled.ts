@@ -125,3 +125,21 @@ export const CheckButton = styled.button`
     cursor: not-allowed;
 `;
 
+export const TopConteiner = styled.div`
+    position: fixed;
+    right: 23%;
+    bottom: 1.5%;
+    z-index: 1;
+`
+
+export const ScrollToTop = styled.button`
+    font-weight: bold;
+    font-size: 13px;
+    padding :12px 8px;
+    background-color: grey;
+    color:#fff;
+    border: 1px solid rgb(210, 204, 193);
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+`
