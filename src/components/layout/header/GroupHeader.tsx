@@ -96,6 +96,7 @@ const StyleHeader = styled.div`
   position: fixed;
   padding-right:2px;
   border-right:1px solid #ddd ;
+  z-index: 9999;
 `;
 
 const Down = styled.div`

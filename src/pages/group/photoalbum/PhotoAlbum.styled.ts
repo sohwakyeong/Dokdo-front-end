@@ -18,6 +18,10 @@ export const GroupPhotoTitle = styled.div`
   margin: 15px;
 `;
 
+export const InputDisplay = styled.div`
+  margin-top: 62px;
+`;
+
 export const PhotoList = styled.div`
   width: 90%;
   height: 100%;

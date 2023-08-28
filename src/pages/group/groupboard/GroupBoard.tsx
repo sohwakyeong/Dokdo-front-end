@@ -5,76 +5,91 @@ import axios from 'axios';
 import PenFooter from '../../../components/layout/footer/PenFooter';
 import { getCookie } from '../../../helper/Cookie';
 import GroupHeader from '../../../components/layout/header/GroupHeader';
+import { useParams } from 'react-router-dom';
 
-interface GroupData {
+interface GroupItem {
   _id: string;
   group_id: number;
-  // ... 나머지 GroupData의 속성들
-}
-
-interface GroupBoardProps {
-  data?: GroupData;
-}
-
-interface GroupBoardItem {
-  _id: string;
-  name: string;
+  post_id: number;
+  user_id: number;
   createdAt: string;
+  updateAt: string;
   content: string;
   image: string;
-  // ... 나머지 GroupBoardItem의 속성들
 }
 
-function GroupBoard({ data }: GroupBoardProps) {
-  const [groupBoardData, setGroupBoardData] = useState<GroupBoardItem[]>([]);
+function GroupBoard() {
+  const initialGroupData: GroupItem = {
+    _id: '',
+    group_id: 0,
+    post_id: 0,
+    user_id: 0,
+    createdAt: '',
+    updateAt: '',
+    content: '',
+    image: '',
+  };
 
+  const [groupData, setGroupData] = useState<GroupItem[]>([initialGroupData]);
+
+  const loginToken = getCookie('loginToken');
+  const { groupId } = useParams<{ groupId: string }>();
 
   useEffect(() => {
-    async function fetchData(sequence: string) {
+    async function fetchGroupData(groupId: number) {
       try {
-        const loginToken = getCookie('loginToken');
-        const headers = loginToken ? { Authorization: `Bearer ${loginToken}` } : {};
-
         const response = await axios.get(
-          `http://localhost:3001/api/v1/group/${sequence}/posts`,
-          { headers }
+          `http://localhost:3001/api/v1/group/${groupId}/posts`,
+          {
+            headers: {
+              Authorization: `Bearer ${loginToken}`,
+            },
+            withCredentials: true,
+          },
         );
-
-        setGroupBoardData(response.data.data);
+        if (response.status === 200) {
+          setGroupData(response.data.data);
+        } else {
+          console.error('그룹 리스트 가져오기 에러:', response.status);
+        }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('그룹 정보 가져오기 에러:', error);
       }
     }
 
-    if (data?._id) {
-      fetchData(data._id);
-    }
-  }, [data?._id]);
+    fetchGroupData(Number(groupId));
+  }, [loginToken, groupId]);
+
+  if (groupData.length === 0) {
+    return <div>로딩 중...</div>;
+  }
 
   return (
     <GB.Wrapper>
-
+        <GroupHeader data={{ group: Number(groupId) }} />
+      <GB.InputDisplay>
+        <SearchInput />
+      </GB.InputDisplay>
       <PenFooter />
-      <SearchInput />
       <GB.GroupBoardList>
         <GB.GroupBoardTitle>
-          <div>모임 이름</div>
+          <div>{groupData[0].group_id}</div>
         </GB.GroupBoardTitle>
-        {groupBoardData.map((groupBoardItem, index) => (
+        {groupData.map((groupItem, index) => (
           <GB.Boardbox key={index}>
             <GB.BoardLeft>
               <GB.User>
                 <img src="/" alt="게시자 이름" />
                 <div>
-                  {groupBoardItem.name}
+                  {groupItem.user_id}
                   <br />
-                  {groupBoardItem.createdAt}
+                  {groupItem.createdAt}
                 </div>
               </GB.User>
-              <GB.BoardContent>{groupBoardItem.content}</GB.BoardContent>
+              <GB.BoardContent>{groupItem.content}</GB.BoardContent>
             </GB.BoardLeft>
             <GB.BoardImg>
-              <img src={groupBoardItem.image} alt="게시된 이미지" />
+              <img src={groupItem.image} alt="게시된 이미지" />
             </GB.BoardImg>
           </GB.Boardbox>
         ))}

@@ -117,7 +117,7 @@ const MainRoutes = () => {
         }
       />
       <Route
-        path="/group/:id/board"
+        path="/group/:groupId/board"
         element={
           <Layout3>
             <GroupBoard />
@@ -141,7 +141,7 @@ const MainRoutes = () => {
         }
       />
       <Route
-        path="/group/:id/photodetail"
+        path="/group/:groupId/photo"
         element={
           <Layout3>
             <PhotoAlbum />

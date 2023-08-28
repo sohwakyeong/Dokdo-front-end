@@ -17,6 +17,10 @@ export const GroupBoardTitle = styled.div`
   align-items: center;
 `;
 
+export const InputDisplay = styled.div`
+  margin-top: 62px;
+`;
+
 export const GroupBoardList = styled.ul`
   display: flex;
   flex-direction: column;
