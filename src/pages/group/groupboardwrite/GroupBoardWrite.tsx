@@ -11,7 +11,7 @@ const GroupBoardWrite: React.FC = () => {
   const [content, setContent] = useState('');
   const [images, setImages] = useState<string[]>([]);
 
-  const { id: groupId } = useParams<{ id: string }>(); // useParams로 groupId 가져오기
+  const { groupId } = useParams<{ groupId: string }>(); // useParams로 groupId 가져오기
 
   const handleCreatePost = async () => {
     const tokenCookie = document.cookie

@@ -1,17 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import PenIcon from '../../../assets/icon/PenIcon.png';
-import { Link, useParams } from 'react-router-dom'; // useParams를 임포트
+import { Link, useParams } from 'react-router-dom';
 
 function PenFooter() {
-  const { id: groupId } = useParams<{ id: string }>(); // useParams로 groupId 가져오기
+  const { groupId } = useParams<{ groupId: string }>(); // 파라미터 이름을 groupId로 변경
 
   return (
     <Wrapper>
       <Display>
         <Link to={`/group/${groupId}/boardwrite`}>
-          {' '}
-          {/* groupId를 동적으로 사용 */}
           <Button>
             <img src={PenIcon} alt="" />
           </Button>

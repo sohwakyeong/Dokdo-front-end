@@ -109,7 +109,7 @@ const MainRoutes = () => {
         }
       />
       <Route
-        path="/group/:id/boardwrite"
+        path="/group/:groupId/boardwrite"
         element={
           <Layout3>
             <GroupBoardWrite />
@@ -133,7 +133,7 @@ const MainRoutes = () => {
         }
       />
       <Route
-        path="/group/:id/photowrite"
+        path="/group/:groupId/photowrite"
         element={
           <Layout3>
             <PhotoAlbumWrite />

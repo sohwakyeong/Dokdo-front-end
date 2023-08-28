@@ -58,10 +58,10 @@ function GroupBoard() {
   return (
     <GB.Wrapper>
         <GroupHeader data={{ group: Number(groupId) }} />
+      <PenFooter />
       <GB.InputDisplay>
         <SearchInput />
       </GB.InputDisplay>
-      <PenFooter />
       <GB.GroupBoardList>
         <GB.GroupBoardTitle>
           <div></div>
