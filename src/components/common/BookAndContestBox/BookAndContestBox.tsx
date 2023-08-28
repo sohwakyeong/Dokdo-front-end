@@ -1,37 +1,38 @@
 import React from 'react';
 import * as BC from '../../bookContest/bookandcontest/BookAndContest.styled';
-
+import bookImg1 from '../../../assets/img/bookImg/책추천13.jpeg';
+import bookImg2 from '../../../assets/img/bookImg/책추천12.jpeg';
 // BookAndContestBox 컴포넌트의 props 타입 정의
 
 function BookAndContestBox() {
   return (
     <BC.Wrapper>
-      {Array(1)
-        .fill('')
-        .map((v, i) => (
-          <BC.List key={i}>
-            <BC.ImgBox>
-              <BC.Img>
-                <img src="" alt="도서이미지" />
-              </BC.Img>
-              <BC.Info>
-                <div>책제목</div>
-                <div>저자/출판사</div>
-                <div>출판일</div>
-              </BC.Info>
-            </BC.ImgBox>
-            <BC.ImgBox>
-              <BC.Img>
-                <img src="" alt="도서이미지" />
-              </BC.Img>
-              <BC.Info>
-                <div>책제목</div>
-                <div>저자/출판사</div>
-                <div>출판일</div>
-              </BC.Info>
-            </BC.ImgBox>
-          </BC.List>
-        ))}
+      <BC.List>
+        <BC.ImgBox>
+          <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000000781176">
+            <BC.Img>
+              <img src={bookImg1} alt="도서이미지" />
+            </BC.Img>
+            <BC.Info>
+              <div>H마트에서 울다</div>
+              <div>미셀자우너/문학동네</div>
+              <div>2022.02.28</div>
+            </BC.Info>
+          </BC.StyledLink>
+        </BC.ImgBox>
+        <BC.ImgBox>
+          <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000201142283">
+            <BC.Img>
+              <img src={bookImg2} alt="도서이미지" />
+            </BC.Img>
+            <BC.Info>
+              <div>메리골드 마음 세탁소</div>
+              <div>윤정은/북로망스</div>
+              <div>2023.03.06</div>
+            </BC.Info>
+          </BC.StyledLink>
+        </BC.ImgBox>
+      </BC.List>
     </BC.Wrapper>
   );
 }

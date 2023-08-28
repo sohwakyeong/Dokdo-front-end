@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Main from '../pages/main/Main';
 import Search from '../pages/search/Search';
@@ -14,32 +14,75 @@ import PhotoAlbumWrite from '../pages/group/photoalbumwrite/PhotoAlbumWrite';
 import FreeBoardList from '../pages/freeboard/freeboardlist/FreeBoardList';
 import FreeBoardDetail from '../pages/freeboard/freeboardDetail/FreeBoardDetail';
 import FreeBoardWrite from '../pages/freeboard/freeboardwrite/FreeBoardWrite';
+import GroupCreatePage1 from '../pages/group/groupcreate/GroupCreatePage1';
+import GroupCreatePage2 from '../pages/group/groupcreate/GroupCreatePage2';
+import GroupCreatePage3 from '../pages/group/groupcreate/GroupCreatePage3';
 import BookRec from '../pages/bookrec/BookRec';
 import Contest from '../pages/contest/Contest';
 import Notifications from '../pages/notifications/Notifications';
 import Likes from '../pages/likes/Likes';
 import Layout1 from '../components/layout/layout1/Layout1';
-import Layout2 from '../components/layout/layout1/Layout2';
 import ContestDetail from '../pages/contestdetail/ContestDetail';
 import BookRecDetail from '../pages/bookrecdetail/BookRecDetail';
-import Layout4 from '../components/layout/layout1/Layout4';
 import Layout3 from '../components/layout/layout1/Layout3';
-import Layout7 from '../components/layout/layout1/Layout7';
 import Layout8 from '../components/layout/layout1/Layout8';
-import Layout6 from '../components/layout/layout1/Layout6';
 
 const MainRoutes = () => {
+  // Group creation data
+  const [groupData, setGroupData] = useState({
+    name: '',
+    introduction: '',
+    image: null,
+    location: '',
+    age: '',
+    tag: [],
+    genre: '',
+    day: '',
+    place: '',
+  });
+
+  const updateGroupData = (newData: any) => {
+    setGroupData(prevData => ({ ...prevData, ...newData }));
+  };
+
   return (
     <Routes>
       <Route
-        path="/search"
+        path="/create-group/step1"
         element={
           <Layout8>
-            <Search />
+            <GroupCreatePage1
+              data={groupData}
+              updateData={updateGroupData}
+              handleNext={() => {
+                /*...some logic...*/
+              }}
+            />
           </Layout8>
         }
       />
-
+      <Route
+        path="/create-group/step2"
+        element={
+          <Layout8>
+            <GroupCreatePage2
+              data={groupData}
+              updateData={updateGroupData}
+              handleNext={() => {
+                /*...some logic...*/
+              }}
+            />
+          </Layout8>
+        }
+      />
+      <Route
+        path="/create-group/step3"
+        element={
+          <Layout8>
+            <GroupCreatePage3 data={groupData} updateData={updateGroupData} />
+          </Layout8>
+        }
+      />
       <Route
         path="/group/list"
         element={
@@ -51,58 +94,58 @@ const MainRoutes = () => {
       <Route
         path="/group/detail/:id"
         element={
-          <Layout2>
+          <Layout3>
             <GroupDetail />
-          </Layout2>
+          </Layout3>
         }
       />
 
       <Route
         path="/group/board/detail/:id"
         element={
-          <Layout7>
+          <Layout3>
             <GroupBoardDetail />
-          </Layout7>
+          </Layout3>
         }
       />
       <Route
         path="/group/board/write/:id"
         element={
-          <Layout6>
+          <Layout3>
             <GroupBoardWrite />
-          </Layout6>
+          </Layout3>
         }
       />
       <Route
         path="/group/board"
         element={
-          <Layout4>
+          <Layout3>
             <GroupBoard />
-          </Layout4>
+          </Layout3>
         }
       />
       <Route
         path="/group/photo/detail/:id"
         element={
-          <Layout7>
+          <Layout3>
             <PhotoAlbumDetail />
-          </Layout7>
+          </Layout3>
         }
       />
       <Route
         path="/group/photo/write/:id"
         element={
-          <Layout6>
+          <Layout3>
             <PhotoAlbumWrite />
-          </Layout6>
+          </Layout3>
         }
       />
       <Route
         path="/group/photo"
         element={
-          <Layout4>
+          <Layout3>
             <PhotoAlbum />
-          </Layout4>
+          </Layout3>
         }
       />
       <Route
@@ -185,6 +228,15 @@ const MainRoutes = () => {
           </Layout3>
         }
       />
+      <Route
+        path="/search"
+        element={
+          <Layout1>
+            <Search />
+          </Layout1>
+        }
+      />
+
       <Route
         path="/"
         element={
