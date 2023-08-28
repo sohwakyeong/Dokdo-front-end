@@ -106,7 +106,7 @@ function GroupDetail() {
 
   //그룹 가입 버튼
   async function handleJoinGroup(e: { preventDefault: () => void }) {
-    e.preventDefault(); 
+    e.preventDefault();
 
     try {
       const response = await axios.put(
@@ -136,29 +136,30 @@ function GroupDetail() {
       <GD.GroupHeader>
         <GroupHeader data={{ group: Number(groupId) }} />
       </GD.GroupHeader>
+
       <GD.GroupImage>
-        <GD.EditButton>
-          <div>●●●</div>
-        </GD.EditButton>
         <img src={GroupImg} alt="모임 설정 이미지" />
       </GD.GroupImage>
       <GD.GroupInfo>
-        <GD.GroupName>{groupData.name}</GD.GroupName>
+        <GD.EditButton>
+          <div>▪︎▪︎▪︎</div>
+        </GD.EditButton>
+        <GD.GroupName>📚{groupData.name}</GD.GroupName>
         <GD.GroupInfoTitle>{groupData.introduction}</GD.GroupInfoTitle>
         <GD.GroupInfoTP>
-          <div>{groupData.place}</div>
-          <div>매주 {groupData.search.day}</div>
+          <div>🏖️ {groupData.place}</div>
+          <div>⏰ 매주 {groupData.search.day}</div>
         </GD.GroupInfoTP>
-        <GD.HashTag>
-          <div>
-            <GD.HashTag>
-              {groupData.tags.map((tag, index) => (
-                <div key={index}>{tag}</div>
-              ))}
-            </GD.HashTag>
-          </div>
-        </GD.HashTag>
-        <GD.GroupInfoBox>{groupData.introduction}</GD.GroupInfoBox>
+        <GD.HashTagDisplay>
+          <GD.HashTag>
+            {groupData.tags.map((tag, index) => (
+              <div key={index}>{tag}</div>
+            ))}
+          </GD.HashTag>
+        </GD.HashTagDisplay>
+        <GD.GroupInfoBox>
+          <div>{groupData.introduction}</div>
+        </GD.GroupInfoBox>
       </GD.GroupInfo>
       <GD.Schedule>
         <GD.ScheduleTop>
@@ -167,14 +168,14 @@ function GroupDetail() {
         </GD.ScheduleTop>
 
         {schedules.length === 0 ? (
-          <div>등록된 일정이 없습니다</div>
+          <GD.NotScheduleBox>등록된 일정이 없습니다.</GD.NotScheduleBox>
         ) : (
           schedules.map((schedule, index) => (
             <GD.ScheduleBox key={index}>
-              <div>{schedule.title}</div>
-              <div>{schedule.date}</div>
-              <div>{schedule.location}</div>
-              <div>{schedule.amount}</div>
+              <GD.SDTitle>{schedule.title}</GD.SDTitle>
+              <GD.SDDate>🍀 일시 {schedule.date}</GD.SDDate>
+              <GD.SDPlace>❣️ 위치 {schedule.location}</GD.SDPlace>
+              <GD.SDDues>🤑 회비 {schedule.amount}</GD.SDDues>
             </GD.ScheduleBox>
           ))
         )}

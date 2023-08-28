@@ -57,35 +57,44 @@ function GroupBoard() {
 
   return (
     <GB.Wrapper>
-        <GroupHeader data={{ group: Number(groupId) }} />
-      <PenFooter />
-      <GB.InputDisplay>
-        <SearchInput />
-      </GB.InputDisplay>
-      <GB.GroupBoardList>
-        <GB.GroupBoardTitle>
-          <div></div>
-        </GB.GroupBoardTitle>
-        {groupData.map((groupItem, index) => (
-          <GB.Boardbox key={index}>
-            <GB.BoardLeft>
-              <GB.User>
-                <img src="/" alt="게시자 이름" />
-                <div>
-                  {groupItem.user_id}
-                  <br />
-                  {groupItem.createdAt}
-                </div>
-              </GB.User>
-              <GB.BoardContent>{groupItem.content}</GB.BoardContent>
-            </GB.BoardLeft>
-            <GB.BoardImg>
-              <img src={groupItem.image} alt="게시된 이미지" />
-            </GB.BoardImg>
-          </GB.Boardbox>
-        ))}
-      </GB.GroupBoardList>
-    </GB.Wrapper>
+  <GroupHeader data={{ group: Number(groupId) }} />
+  <PenFooter />
+  <GB.InputDisplay>
+    <SearchInput />
+  </GB.InputDisplay>
+  <GB.GroupBoardList>
+    <GB.GroupBoardTitle>
+      <div>모임명</div>
+    </GB.GroupBoardTitle>
+    {groupData.length === 0 ? (
+
+
+      <div>게시글이 없습니다.</div>
+
+
+      
+    ) : (
+      groupData.map((groupItem, index) => (
+        <GB.Boardbox key={index}>
+          <GB.BoardLeft>
+            <GB.User>
+              <img src="/" alt="게시자 이름" />
+              <div>
+                {groupItem.user_id}
+                <br />
+                {groupItem.createdAt}
+              </div>
+            </GB.User>
+            <GB.BoardContent>{groupItem.content}</GB.BoardContent>
+          </GB.BoardLeft>
+          <GB.BoardImg>
+            <img src={groupItem.image} alt="게시된 이미지" />
+          </GB.BoardImg>
+        </GB.Boardbox>
+      ))
+    )}
+  </GB.GroupBoardList>
+</GB.Wrapper>
   );
 }
 

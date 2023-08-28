@@ -4,7 +4,9 @@ import * as GBW from './GroupBoardWrite.styled';
 import BoardWriteSection from '../../../components/common/boardwritesection/BoardWriteSection';
 import Camera from '../../../assets/icon/Camera.png';
 import { useParams } from 'react-router-dom'; // useParams를 임포트
-import { GroupHeader } from '../groupdetail/GroupDetail.styled';
+import GroupHeader from '../../../components/layout/header/GroupHeader';
+
+
 
 const GroupBoardWrite: React.FC = () => {
   const [responseMessage, setResponseMessage] = useState('');
@@ -59,7 +61,9 @@ const GroupBoardWrite: React.FC = () => {
 
   return (
     <GBW.Wrapper>
-      <GroupHeader />
+      <GBW.GroupHeader>
+        <GroupHeader data={{ group: Number(groupId) }} />
+      </GBW.GroupHeader>
       <BoardWriteSection />
       <GBW.TitleWrite>
         <textarea
@@ -83,12 +87,14 @@ const GroupBoardWrite: React.FC = () => {
         ))}
       </GBW.WriteBox>
       <GBW.ImgFileTitle>
-        <div>파일선택</div>
+        <div>사진  등록(선택)</div>
         <div>500MB 이하의 jpg, gif 파일만 3개까지 업로드 가능합니다</div>
       </GBW.ImgFileTitle>
       <GBW.ImgUpload>
         <div>
-          <GBW.CameraBox>{/* 카메라 아이콘 */}</GBW.CameraBox>
+          <GBW.CameraBox>
+            <img src={Camera} alt="" />
+            </GBW.CameraBox>
           <input
             type="file"
             id="image-upload"

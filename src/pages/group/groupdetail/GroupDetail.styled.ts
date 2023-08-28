@@ -40,18 +40,35 @@ export const EditButton = styled.button`
   border: none;
   cursor: pointer;
   background-color: transparent;
-  margin: 10px;
+  margin-bottom: 10px;
   padding: 10px;
+  width: 95%;
+  text-align: right;
 
   & div {
     background-color: transparent;
   }
 `;
+
+export const HashTagDisplay = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 export const HashTag = styled.div`
   display: flex;
+  justify-content: space-around;
   align-items: center;
   text-align: center;
-  height: auto; /* 수정 */
+  padding: 20px 0;
+  width: 380px;
+  & div {
+    padding: 8px;
+    background-color: #fff7ec;
+    border-radius: 20px;
+    width: 70px;
+    color: #84614b;
+  }
 `;
 export const GroupInfo = styled.div`
   display: flex;
@@ -68,7 +85,13 @@ export const GroupInfo = styled.div`
 export const GroupInfoBox = styled.div`
   width: 100%;
   height: 300px;
-  background-color: #fff7ec;
+  background-color: white;
+  border-top: 1px solid #eeeeee;
+  margin: 5px;
+
+  & div {
+    padding: 20px;
+  }
 `;
 
 export const GroupInfoTitle = styled.div`
@@ -84,13 +107,16 @@ export const GroupInfoTP = styled.div`
   padding: 5px;
 
   & div {
-    padding: 0 10px;
+    padding: 10px 0 0 20px;
+    color: #7e7e7e;
+    font-weight: 500;
   }
 `;
 
 export const Schedule = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 90%;
 `;
 
@@ -103,6 +129,7 @@ export const ScheduleTop = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 95%;
 
   & button {
     border: none;
@@ -110,17 +137,18 @@ export const ScheduleTop = styled.div`
     box-sizing: border-box;
     border: 1px solid #ddd;
     border-radius: 20px;
-    height: 30px;
-    width: 80px;
-    font-size: 13px;
+    height: 35px;
+    width: 90px;
+    font-size: 14px;
   }
 `;
 export const ScheduleBox = styled.div`
   box-sizing: border-box;
+
   border: solid 1px #ddd;
-  width: 100%;
+  width: 95%;
   height: 100%;
-  padding: 10px;
+  padding: 20px;
   border-radius: 10px;
   margin: 15px 0;
 
@@ -128,6 +156,35 @@ export const ScheduleBox = styled.div`
     line-height: 20px;
     padding: 3px;
   }
+`;
+
+export const SDTitle = styled.div`
+  font-size: 18px;
+  font-weight: 700;
+  padding: 10px;
+`;
+export const SDDate = styled.div`
+  font-size: 15px;
+  padding: 2px;
+`;
+export const SDPlace = styled.div`
+  font-size: 15px;
+  padding: 2px;
+`;
+export const SDDues = styled.div`
+  font-size: 15px;
+  padding: 2px;
+`;
+
+export const NotScheduleBox = styled.div`
+  margin: 15px 0;
+  width: 405px;
+  height: 230px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
 `;
 
 export const MemberBox = styled.div`
