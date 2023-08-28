@@ -47,14 +47,12 @@ export const EditButton = styled.button`
     background-color: transparent;
   }
 `;
-
 export const HashTag = styled.div`
   display: flex;
   align-items: center;
   text-align: center;
-  height: 50px;
+  height: auto; /* 수정 */
 `;
-
 export const GroupInfo = styled.div`
   display: flex;
   flex-direction: column;
@@ -174,4 +172,34 @@ export const Desc = styled.div`
 export const ButtonDisplay = styled.div`
   display: flex;
   justify-content: center;
+`;
+export const ModalWrapper = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 20%; // 화면의 좌측으로 이동
+  transform: translateY(-50%);
+  width: 30%; // Modal의 폭 설정
+  background-color: #f5f5f5; // Modal의 배경색 변경
+  border: 1px solid #ccc;
+  boxshadow: '0 4px 8px rgba(0, 0, 0, 0.1)'; // 그림자 효과 추가
+  borderradius: '8px'; // 모서리 둥글게
+  z-index: 1000;
+`;
+
+export const ModalHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+  border-bottom: 1px solid #ccc;
+`;
+
+export const ModalContent = styled.div`
+  padding: 15px;
+`;
+
+export const CloseButton = styled.button`
+  border: none;
+  background-color: transparent;
+  font-size: 24px;
+  cursor: pointer;
 `;
