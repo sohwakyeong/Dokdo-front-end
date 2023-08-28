@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import GroupImg from '../../../assets/img/독서모임1.jpeg';
+import GroupImg from '../../../assets/img/독서모임3.jpg';
 import axios from 'axios';
 import { getCookie } from '../../../helper/Cookie';
 import * as GD from './GroupDetail.styled';
@@ -75,7 +75,7 @@ function GroupDetail() {
         <GD.HashTag>
           <div></div>
         </GD.HashTag>
-        <GD.GroupInfoBox>모임 소개 내용</GD.GroupInfoBox>
+        <GD.GroupInfoBox>{groupData.introduction}</GD.GroupInfoBox>
       </GD.GroupInfo>
       <GD.Schedule>
         <GD.ScheduleTop>

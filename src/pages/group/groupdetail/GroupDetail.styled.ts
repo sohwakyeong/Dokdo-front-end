@@ -18,18 +18,21 @@ export const GroupName = styled.div`
   width: 90%;
   padding: 10px;
   display: flex;
-  font-size: 13px;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
 `;
 
 // 이미지 유압프레스로 들어가게 해야 함
 export const GroupImage = styled.div`
   text-align: right;
-  height: 100%;
-  width: 474px;
+  height: 200px;
+  width: 100%;
   overflow: hidden;
 
   & img {
     width: 100%;
+    height: 100%;
   }
 `;
 
