@@ -19,18 +19,9 @@ interface GroupItem {
 }
 
 function GroupBoard() {
-  const initialGroupData: GroupItem = {
-    _id: '',
-    group_id: 0,
-    post_id: 0,
-    user_id: 0,
-    createdAt: '',
-    updateAt: '',
-    content: '',
-    image: '',
-  };
 
-  const [groupData, setGroupData] = useState<GroupItem[]>([initialGroupData]);
+
+  const [groupData, setGroupData] = useState<GroupItem[]>([]);
 
   const loginToken = getCookie('loginToken');
   const { groupId } = useParams<{ groupId: string }>();
@@ -60,7 +51,7 @@ function GroupBoard() {
     fetchGroupData(Number(groupId));
   }, [loginToken, groupId]);
 
-  if (groupData.length === 0) {
+  if (!groupData) {
     return <div>로딩 중...</div>;
   }
 
@@ -73,7 +64,7 @@ function GroupBoard() {
       <PenFooter />
       <GB.GroupBoardList>
         <GB.GroupBoardTitle>
-          <div>{groupData[0].group_id}</div>
+          <div></div>
         </GB.GroupBoardTitle>
         {groupData.map((groupItem, index) => (
           <GB.Boardbox key={index}>

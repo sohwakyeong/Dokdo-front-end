@@ -18,17 +18,9 @@ interface PhotoItem {
 }
 
 function PhotoAlbum() {
-  const initialPhotoData: PhotoItem = {
-    _id: '',
-    group_id: 0,
-    post_id: 0,
-    user_id: 0,
-    createdAt: '',
-    updateAt: '',
-    image: '',
-  };
 
-  const [photoData, setPhotoData] = useState<PhotoItem[]>([initialPhotoData]);
+
+  const [photoData, setPhotoData] = useState<PhotoItem[]>([]);
 
   const loginToken = getCookie('loginToken');
   const { groupId } = useParams<{ groupId: string }>();
@@ -57,7 +49,7 @@ function PhotoAlbum() {
     fetchPhotoData(Number(groupId));
   }, [loginToken, groupId]);
 
-  if (photoData.length === 0) {
+  if (!photoData) {
     return <div>로딩 중...</div>;
   }
 
