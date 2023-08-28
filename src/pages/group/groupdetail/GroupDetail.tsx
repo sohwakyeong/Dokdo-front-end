@@ -104,6 +104,33 @@ function GroupDetail() {
     return <div>로딩 중...</div>;
   }
 
+  //그룹 가입 버튼
+  async function handleJoinGroup(e: { preventDefault: () => void }) {
+    e.preventDefault(); 
+
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/api/v1/auth/group/${groupId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${loginToken}`,
+          },
+          withCredentials: true,
+        },
+      );
+
+      if (response.status === 200) {
+        console.log('그룹 가입 성공:', response.data);
+        alert('그룹에 가입되었습니다!');
+      } else {
+        console.error('그룹 가입 실패:', response.status);
+      }
+    } catch (error) {
+      console.error('그룹 가입 에러:', error);
+    }
+  }
+
   return (
     <GD.Wrapper>
       <GD.GroupHeader>
@@ -224,7 +251,16 @@ function GroupDetail() {
               </GD.MemberList>
             ))}
         </ul>
-        <GD.ButtonDisplay></GD.ButtonDisplay>
+        <GD.ButtonDisplay>
+          {' '}
+          <GD.NFWrapper>
+            <GD.NFDisplay>
+              <GD.NFNextBtn>
+                <button onClick={handleJoinGroup}>모임 가입하기</button>
+              </GD.NFNextBtn>
+            </GD.NFDisplay>
+          </GD.NFWrapper>
+        </GD.ButtonDisplay>
       </GD.MemberBox>
     </GD.Wrapper>
   );

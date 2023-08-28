@@ -88,14 +88,12 @@ function GroupHeader({ data }: GroupHeaderProps) {
 export default GroupHeader;
 
 const StyleHeader = styled.div`
-  background-color: white;
   display: flex;
   align-items: center;
   height: 50px;
-  width: 471px;
+  width: 472px;
   position: fixed;
   padding-right:2px;
-  border-right:1px solid #ddd ;
   z-index: 9999;
 `;
 

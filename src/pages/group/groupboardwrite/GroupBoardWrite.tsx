@@ -4,6 +4,7 @@ import * as GBW from './GroupBoardWrite.styled';
 import BoardWriteSection from '../../../components/common/boardwritesection/BoardWriteSection';
 import Camera from '../../../assets/icon/Camera.png';
 import { useParams } from 'react-router-dom'; // useParams를 임포트
+import { GroupHeader } from '../groupdetail/GroupDetail.styled';
 
 const GroupBoardWrite: React.FC = () => {
   const [responseMessage, setResponseMessage] = useState('');
@@ -58,6 +59,7 @@ const GroupBoardWrite: React.FC = () => {
 
   return (
     <GBW.Wrapper>
+      <GroupHeader />
       <BoardWriteSection />
       <GBW.TitleWrite>
         <textarea

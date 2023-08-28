@@ -181,8 +181,8 @@ export const ModalWrapper = styled.div`
   width: 30%; // Modal의 폭 설정
   background-color: #f5f5f5; // Modal의 배경색 변경
   border: 1px solid #ccc;
-  boxshadow: '0 4px 8px rgba(0, 0, 0, 0.1)'; // 그림자 효과 추가
-  borderradius: '8px'; // 모서리 둥글게
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // 그림자 효과 추가
+  border-radius: 8px; // 모서리 둥글게
   z-index: 1000;
 `;
 
@@ -202,4 +202,45 @@ export const CloseButton = styled.button`
   background-color: transparent;
   font-size: 24px;
   cursor: pointer;
+`;
+export const NFWrapper = styled.div`
+  position: fixed;
+  bottom: 0;
+  height: 60px;
+  font-size: 13px;
+  width: 470px;
+  border-top: 0.5px solid #d7d7d7;
+  margin-bottom: 58px;
+  z-index: 9999;
+`;
+
+export const NFDisplay = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+`;
+
+export const NFNextBtn = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  background-color: #84614b;
+  width: 380px;
+  height: 45px;
+  border-radius: 20px;
+
+  & button {
+    border: none;
+    color: white;
+    background-color: transparent;
+    font-size: 19px;
+    font-weight: 700;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
 `;
