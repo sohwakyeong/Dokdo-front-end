@@ -7,7 +7,7 @@ function PenFooter() {
   return (
     <Wrapper>
       <Display>
-        <Link to="/group/board/write/:id">
+        <Link to="/group/:id/boardwrite">
           <Button>
             <img src={PenIcon} alt="" />
           </Button>
