@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import * as MyPostsStyle from './MyPosts.styled';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { getCookie } from '../../../helper/Cookie';
 
 interface PostData {
   _id: string;
-  group_id: number;
-  post_id: number;
-  user_id: number;
   createdAt: string;
   updatedAt: string;
   __v: number;
+  content: string;
+  images: string[]; // 이미지 파일명 배열
 }
 
 interface PostBoxProps {
-  data?: PostData;
 }
 
 interface UserData {
@@ -25,13 +21,12 @@ interface UserData {
 
 function MyPostsComponent({ data }: PostBoxProps) {
   const navigate = useNavigate();
-  const [myPosts, setMyPosts] = useState<PostData[]>([]);
-  const [selectedPosts, setSelectedPosts] = useState<any[]>([]); // 추가: 선택된 포스트 정보를 저장할 상태
-  const [userData, setUserData] = useState<UserData | null>(null); // 추가: 유저 정보 상태
-  
-   useEffect(() => {
-     // 먼저 유저 정보를 가져옵니다.
-     const loginToken = getCookie('loginToken');
+  const [_myPosts, setMyPosts] = useState<PostData[]>([]);
+  const [selectedPosts, setSelectedPosts] = useState<PostData[]>([]);
+  const [userData, setUserData] = useState<UserData | null>(null);
+
+  useEffect(() => {
+    const loginToken = getCookie('loginToken');
 
     axios
       .get('http://localhost:3001/api/v1/auth/me', {
@@ -55,25 +50,21 @@ function MyPostsComponent({ data }: PostBoxProps) {
 
   useEffect(() => {
     const loginToken = getCookie('loginToken');
-    const loginToken = getCookie('loginToken');
     axios
       .get(`http://localhost:3001/api/v1/auth/me/posts`, {
         headers: {
-          Authorization: `Bearer ${loginToken}`,
-        },
-        withCredentials: true,
       })
       .then(postsResponse => {
         if (postsResponse.data.error === null) {
           const userPosts: PostData[] = postsResponse.data.data;
           setMyPosts(userPosts);
-          
-          // 모든 포스트를 가져오기 위한 함수
+
           const fetchAllPosts = async () => {
+            const selectedPostsWithImages: PostData[] = [];
+
             for (const post of userPosts) {
               try {
                 const postResponse = await axios.get(
-                  `http://localhost:3001/api/v1/group/${post.group_id}/posts/${post.post_id}`,
                 );
 
                 if (postResponse.data.error === null) {
@@ -95,14 +86,6 @@ function MyPostsComponent({ data }: PostBoxProps) {
           fetchAllPosts();
         } else {
           console.error('게시글 가져오기 오류:', postsResponse.data.error);
-        }
-      })
-      .catch(error => {
-        console.error('게시글 가져오기 에러:', error);
-      });
-  }, []);
-
-  return (
     <MyPostsStyle.Container>
       <MyPostsStyle.Wrapper>
         <MyPostsStyle.GroupBoardList>
