@@ -31,7 +31,6 @@ function MyPostsComponent({ data }: PostBoxProps) {
   const [userData, setUserData] = useState<UserData | null>(null); // 추가: 유저 정보 상태
   
    useEffect(() => {
-     // 먼저 유저 정보를 가져옵니다.
      const loginToken = getCookie('loginToken');
 
      axios
@@ -49,14 +48,13 @@ function MyPostsComponent({ data }: PostBoxProps) {
          }
        })
        .catch(error => {
-         console.error('유저 정보 가져오기 에러:', error);
+         console.error('myposts유저 정보 가져오기 에러:', error);
          navigate('/');
        });
-   }, []);
+   }, [navigate]);
 
   useEffect(() => {
-    // 먼저 유저 정보를 가져옵니다.
-    const loginToken = getCookie('loginToken'); // getCookie 함수로 'loginToken' 쿠키 값을 가져옵니다.
+    const loginToken = getCookie('loginToken');
     axios
       .get(`http://localhost:3001/api/v1/auth/me/posts`, {
         headers: {
@@ -66,41 +64,36 @@ function MyPostsComponent({ data }: PostBoxProps) {
       })
       .then(postsResponse => {
         if (postsResponse.data.error === null) {
-          // 수정: 오류 확인
           const userPosts: PostData[] = postsResponse.data.data;
           setMyPosts(userPosts);
           
-          // 모든 포스트를 가져오기 위한 함수
-          const fetchAllPosts = async () => {
-            for (const post of userPosts) {
-              try {
-                const postResponse = await axios.get(
-                  `http://localhost:3001/api/v1/group/${post.group_id}/posts/${post.post_id}`,
-                );
+const fetchAllPosts = async () => {
+  for (const post of userPosts) {
+    try {
+      const postResponse = await axios.get(
+        `http://localhost:3001/api/v1/group/${post.group_id}/posts/${post.post_id}`,
+      );
 
-                if (postResponse.data.error === null) {
-                  // 포스트 정보 처리
-                  const postData = {
-                    ...postResponse.data.data,
-                    // 여기에 원하는 추가 데이터를 저장할 수 있습니다.
-                  };
-                  setSelectedPosts(prevSelectedPosts => [
-                    ...prevSelectedPosts,
-                    postData,
-                  ]);
-                } else {
-                  console.error(
-                    '포스트 가져오기 오류:',
-                    postResponse.data.error,
-                  );
-                }
-              } catch (error) {
-                console.error('포스트 가져오기 에러:', error);
-              }
-            }
-          };
+      if (postResponse.data.error === null) {
+        const postData = {
+          ...postResponse.data.data,
+        };
 
-          // fetchAllPosts 함수 실행
+// 여기가 문제 문제 문제 문제 문제!!!!!!!!!!!!!!!
+
+//  여기까지
+
+
+        setSelectedPosts(prevSelectedPosts => [...prevSelectedPosts, postData]);
+      } else {
+        console.error('포스트 가져오기 오류:', postResponse.data.error);
+      }
+    } catch (error) {
+      console.error('포스트 가져오기 에러:', error);
+    }
+  }
+};
+
           fetchAllPosts();
         } else {
           console.error('게시글 가져오기 오류:', postsResponse.data.error);
@@ -134,14 +127,7 @@ function MyPostsComponent({ data }: PostBoxProps) {
                 <MyPostsStyle.Content>
                   {selectedPost.content}
                 </MyPostsStyle.Content>
-                <MyPostsStyle.GroupDes>
-                  <MyPostsStyle.ContentLikes>
-                    좋아요 수
-                  </MyPostsStyle.ContentLikes>
-                  <MyPostsStyle.ContentComment>
-                    댓글 수
-                  </MyPostsStyle.ContentComment>
-                </MyPostsStyle.GroupDes>
+             
               </MyPostsStyle.BoardLeft>
               <MyPostsStyle.BoardImg src="" alt="게시된 이미지" />
             </MyPostsStyle.Boardbox>

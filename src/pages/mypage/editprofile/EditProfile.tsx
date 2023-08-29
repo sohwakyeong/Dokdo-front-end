@@ -4,6 +4,7 @@ import UserIcon from '../../../assets/img/userprofile.png';
 import { getCookie } from '../../../helper/Cookie';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Modal from '../../../components/common/modal/modal';
 
 function EditProfileComponent() {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ function EditProfileComponent() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [pwdMsg, setPwdMsg] = useState('');
   const [confirmPwdMsg, setConfirmPwdMsg] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // 데이터 API. fetchData할 때는 axios를 써야함
   // 유저 정보 가져오기 위한 값 타입 지정
@@ -40,7 +42,7 @@ function EditProfileComponent() {
     setNewPassword(currPwd);
 
     if (!validatePwd(currPwd)) {
-      setPwdMsg('영문, 숫자, 특수기호 조합으로 10자리 이상 입력해주세요.');
+      setPwdMsg('');
     } else {
       setPwdMsg('안전한 비밀번호입니다.');
     }
@@ -87,15 +89,12 @@ function EditProfileComponent() {
     // userData가 없으면 로딩 또는 에러 메시지 표시
     return <div>로딩 중...</div>;
   }
-
   // 저장하기 함수
-  const onClickSubmit = () => {
+  const onClickModalSubmit = () => {
     if (
       !(
         newPassword &&
-        confirmPassword &&
-        userData.name &&
-        userData.introduction
+        confirmPassword
       )
     ) {
       return alert('빈칸 없이 입력해주세요.');
@@ -106,6 +105,39 @@ function EditProfileComponent() {
 
     const updatedUserData = {
       password: newPassword, // 변경할 패스워드
+      
+    };
+
+    axios
+      .put('http://localhost:3001/api/v1/auth/me', updatedUserData, {
+        headers: {
+          Authorization: `Bearer ${loginToken}`,
+        },
+        withCredentials: true,
+      })
+      .then(response => {
+        if (response.status === 200) {
+          navigate(-1);
+        } else {
+          console.error('프로필 업데이트 실패:', response.data.error);
+        }
+      })
+      .catch(error => {
+        console.error('프로필 업데이트 에러:', error);
+      });
+  };
+  // 저장하기 함수
+  const onClickSubmit = () => {
+    if (
+      !(
+        userData.name &&
+        userData.introduction
+      )
+    ) {
+      return alert('빈칸 없이 입력해주세요.');
+    }
+
+    const updatedUserData = {
       name: userData.name, // 변경할 닉네임
       introduction: userData.introduction, // 변경할 한 줄 소개
     };
@@ -156,42 +188,67 @@ function EditProfileComponent() {
             value={userData.email}
           />
         </EditStyle.FormInput>
+
         <EditStyle.FormTag>
           <EditStyle.Tag>비밀번호</EditStyle.Tag>
-          <EditStyle.TagPlus className={isPwdValid ? 'success' : 'error'}>
-            {pwdMsg}
-          </EditStyle.TagPlus>
         </EditStyle.FormTag>
         <EditStyle.FormInput>
           <EditStyle.Input
+            readOnly
             id="pwd_val"
             type="password"
             name="is_Password"
-            minLength={8}
-            maxLength={20}
             value={newPassword}
-            onChange={onChangePwd}
-            placeholder="사용하실 비밀번호를 입력해주세요."
           />
+          <EditStyle.PwdInputBtn onClick={() => setIsModalOpen(true)}>
+            변경
+          </EditStyle.PwdInputBtn>
         </EditStyle.FormInput>
-        <EditStyle.FormTag>
-          <EditStyle.Tag>비밀번호 확인</EditStyle.Tag>
-          <EditStyle.TagPlus className={isConfirmPwd ? 'success' : 'error'}>
-            {confirmPwdMsg}
-          </EditStyle.TagPlus>
-        </EditStyle.FormTag>
-        <EditStyle.FormInput>
-          <EditStyle.Input
-            id="pwd_cnf_val"
-            type="password"
-            name="is_Password"
-            minLength={8}
-            maxLength={20}
-            value={confirmPassword}
-            onChange={onChangeConfirmPwd}
-            placeholder="사용하실 비밀번호를 다시 입력해주세요."
-          />
-        </EditStyle.FormInput>
+
+        {isModalOpen && (
+          <Modal onClose={() => setIsModalOpen(false)}>
+            <h1>비밀번호 변경하기</h1>
+            <EditStyle.FormTag>
+              <EditStyle.Tag>새 비밀번호</EditStyle.Tag>
+              <EditStyle.TagPlus className={isPwdValid ? 'success' : 'error'}>
+                {pwdMsg}
+              </EditStyle.TagPlus>
+            </EditStyle.FormTag>
+            <EditStyle.FormInput>
+              <EditStyle.Input
+                id="pwd_val"
+                type="password"
+                name="is_Password"
+                minLength={8}
+                maxLength={20}
+                value={newPassword}
+                onChange={onChangePwd}
+                placeholder="영문, 숫자, 특수기호 조합으로 10자리 이상 입력해주세요."
+              />
+            </EditStyle.FormInput>
+            <EditStyle.FormTag>
+              <EditStyle.Tag>새 비밀번호 확인</EditStyle.Tag>
+              <EditStyle.TagPlus className={isConfirmPwd ? 'success' : 'error'}>
+                {confirmPwdMsg}
+              </EditStyle.TagPlus>
+            </EditStyle.FormTag>
+            <EditStyle.FormInput>
+              <EditStyle.Input
+                id="pwd_cnf_val"
+                type="password"
+                name="is_Password"
+                minLength={8}
+                maxLength={20}
+                value={confirmPassword}
+                onChange={onChangeConfirmPwd}
+                placeholder="사용하실 비밀번호를 다시 입력해주세요."
+              />
+            </EditStyle.FormInput>
+            <EditStyle.ModalSubmitButton onClick={onClickModalSubmit}>
+              변경하기
+            </EditStyle.ModalSubmitButton>
+          </Modal>
+        )}
 
         {/* 닉네임 수정하고싶으면 일단 관리자한테 연락하라고 햇음 회의때 물어보기 */}
         <EditStyle.FormTag>
