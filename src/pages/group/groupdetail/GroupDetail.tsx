@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import GroupImg from '../../../assets/img/독서모임3.jpg';
 import axios from 'axios';
 import { getCookie } from '../../../helper/Cookie';
 import * as GD from './GroupDetail.styled';
@@ -12,7 +11,6 @@ import {
 import { useParams } from 'react-router-dom'; // useParams 임포트
 import GroupHeader from '../../../components/layout/header/GroupHeader';
 import Modal from 'react-modal';
-import { group } from 'console';
 Modal.setAppElement('#root');
 
 function GroupDetail() {
@@ -141,7 +139,7 @@ function GroupDetail() {
       </GD.GroupHeader>
 
       <GD.GroupImage>
-        <img src={groupData.profile} alt="모임 설정 이미지" />
+        <img src={groupData.profile[0]} alt="모임 설정 이미지" />
       </GD.GroupImage>
       <GD.GroupInfo>
         <GD.EditButton>

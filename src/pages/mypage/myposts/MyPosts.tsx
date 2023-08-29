@@ -1,9 +1,14 @@
+import React, { useEffect, useState } from 'react';
+import * as MyPostsStyle from './MyPosts.styled';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { getCookie } from '../../../helper/Cookie';
 
 interface PostData {
   _id: string;
+  group_id: number;
+  post_id: number;
+  user_id: number;
   createdAt: string;
   updatedAt: string;
   __v: number;
@@ -12,6 +17,7 @@ interface PostData {
 }
 
 interface PostBoxProps {
+  data?: PostData;
 }
 
 interface UserData {
@@ -21,7 +27,7 @@ interface UserData {
 
 function MyPostsComponent({ data }: PostBoxProps) {
   const navigate = useNavigate();
-  const [_myPosts, setMyPosts] = useState<PostData[]>([]);
+  const [myPosts, setMyPosts] = useState<PostData[]>([]);
   const [selectedPosts, setSelectedPosts] = useState<PostData[]>([]);
   const [userData, setUserData] = useState<UserData | null>(null);
 
@@ -53,6 +59,9 @@ function MyPostsComponent({ data }: PostBoxProps) {
     axios
       .get(`http://localhost:3001/api/v1/auth/me/posts`, {
         headers: {
+          Authorization: `Bearer ${loginToken}`,
+        },
+        withCredentials: true,
       })
       .then(postsResponse => {
         if (postsResponse.data.error === null) {
@@ -65,6 +74,7 @@ function MyPostsComponent({ data }: PostBoxProps) {
             for (const post of userPosts) {
               try {
                 const postResponse = await axios.get(
+                  `http://localhost:3001/api/v1/group/${post.group_id}/posts/${post.post_id}`,
                 );
 
                 if (postResponse.data.error === null) {
@@ -86,37 +96,45 @@ function MyPostsComponent({ data }: PostBoxProps) {
           fetchAllPosts();
         } else {
           console.error('게시글 가져오기 오류:', postsResponse.data.error);
-    <MyPostsStyle.Container>
-      <MyPostsStyle.Wrapper>
-        <MyPostsStyle.GroupBoardList>
-          {userData &&
-            selectedPosts.map(selectedPost => (
-              <MyPostsStyle.Boardbox key={selectedPost._id}>
-                <MyPostsStyle.BoardLeft>
-                  <MyPostsStyle.ProfileData>
-                    <MyPostsStyle.ProfileImg
-                      src={userData.profilePic}
-                      alt={`${userData.name}의 프로필 사진`}
-                    />
-                    <MyPostsStyle.UpdatedProfile>
-                      <MyPostsStyle.Writer>{userData.name}</MyPostsStyle.Writer>
-                      <MyPostsStyle.PostedDate>
-                        {selectedPost.createdAt}
-                      </MyPostsStyle.PostedDate>
-                    </MyPostsStyle.UpdatedProfile>
-                  </MyPostsStyle.ProfileData>
+        }
+      })
+      .catch(error => {
+        console.error('게시글 가져오기 에러:', error);
+      });
+  }, []);
 
-                  <MyPostsStyle.Content>{selectedPost.content}</MyPostsStyle.Content>
-                </MyPostsStyle.BoardLeft>
-                <MyPostsStyle.BoardImg
-                  src={`http://localhost:3001/api/v1/image/post/${selectedPost.images[0]}`} // 이미지 URL 설정
-                  alt="게시된 이미지"
-                />
-              </MyPostsStyle.Boardbox>
-            ))}
-        </MyPostsStyle.GroupBoardList>
-      </MyPostsStyle.Wrapper>
-    </MyPostsStyle.Container>
+  return (
+    <MyPostsStyle.Container>
+    <MyPostsStyle.Wrapper>
+      <MyPostsStyle.GroupBoardList>
+        {userData &&
+          selectedPosts.map(selectedPost => (
+            <MyPostsStyle.Boardbox key={selectedPost._id}>
+              <MyPostsStyle.BoardLeft>
+                <MyPostsStyle.ProfileData>
+                  <MyPostsStyle.ProfileImg
+                    src={userData.profilePic}
+                    alt={`${userData.name}의 프로필 사진`}
+                  />
+                  <MyPostsStyle.UpdatedProfile>
+                    <MyPostsStyle.Writer>{userData.name}</MyPostsStyle.Writer>
+                    <MyPostsStyle.PostedDate>
+                      {selectedPost.createdAt}
+                    </MyPostsStyle.PostedDate>
+                  </MyPostsStyle.UpdatedProfile>
+                </MyPostsStyle.ProfileData>
+  
+                <MyPostsStyle.Content>{selectedPost.content}</MyPostsStyle.Content>
+              </MyPostsStyle.BoardLeft>
+              <MyPostsStyle.BoardImg
+                src={`http://localhost:3001/api/v1/image/post/${selectedPost.images[0]}`} // 이미지 URL 설정
+                alt="게시된 이미지"
+              />
+            </MyPostsStyle.Boardbox>
+          ))}
+      </MyPostsStyle.GroupBoardList>
+    </MyPostsStyle.Wrapper>
+  </MyPostsStyle.Container>
   );
 }
 
