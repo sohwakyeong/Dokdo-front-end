@@ -32,7 +32,7 @@ export const GroupBoardList = styled.ul`
 
 export const Boardbox = styled.div`
   width: 90%;
-  height: 100%;
+  height: 141px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -49,18 +49,19 @@ export const BoardLeft = styled.div`
   justify-content: space-around;
   padding: 5px;
   width: 285px;
-  height: auto;
+  height: 100px;
   overflow: hidden;
 
   & div {
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 5px;
+    padding: 2px;
   }
 `;
 
 export const User = styled.div`
   display: flex;
+  align-items: center;
 
   & img {
     width: 30px;
@@ -70,9 +71,14 @@ export const User = styled.div`
   }
   & div {
     display: flex;
-    align-items: center;
     padding-left: 10px;
+    font-size: 15px;
   }
+`;
+
+export const UserName = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 export const BoardImg = styled.div`
@@ -82,12 +88,19 @@ export const BoardImg = styled.div`
   border-radius: 15px;
   overflow: hidden;
 `;
-
 export const BoardTitle = styled.div`
   font-size: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 2px;
 `;
 
 export const BoardContent = styled.div`
   font-size: 13px;
   color: gray;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 2px;
 `;
