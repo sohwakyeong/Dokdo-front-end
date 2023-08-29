@@ -85,6 +85,10 @@ export const PostedDate = styled.div`
   color: #727272;
   font-size: 12px;
 `;
+export const Title = styled.div`
+font-weight: 500;
+
+` 
 
 export const Content = styled.div`
   font-size: 14px;

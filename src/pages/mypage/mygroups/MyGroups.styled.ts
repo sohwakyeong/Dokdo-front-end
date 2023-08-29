@@ -17,12 +17,12 @@ export const Wrapper = styled.div`
   margin: 0 auto 40px auto;
   box-sizing: border-box;
   width: 420px;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 export const MyGroupBoardBox = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   margin: 20px auto;
   width: 100%;
   height: 100%;
@@ -41,6 +41,7 @@ export const GroupBoardBox = styled.div`
   height: 100px;
   border-radius: 20px;
   align-items: center;
+  margin-bottom: 20px;
 `;
 export const BoardImg = styled.img`
   width: 75px;
@@ -80,3 +81,4 @@ export const GroupIntro = styled.div`
 export const GroupTag = styled.div`
   font-size: 11px;
 `;
+
