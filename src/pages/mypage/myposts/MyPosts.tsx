@@ -3,7 +3,6 @@ import * as MyPostsStyle from './MyPosts.styled';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { getCookie } from '../../../helper/Cookie';
-// import UserIcon from '../../../assets/img/userprofile.png';
 
 interface PostData {
   _id: string;
@@ -13,6 +12,8 @@ interface PostData {
   createdAt: string;
   updatedAt: string;
   __v: number;
+  content: string;
+  images: string[]; // 이미지 파일명 배열
 }
 
 interface PostBoxProps {
@@ -20,7 +21,7 @@ interface PostBoxProps {
 }
 
 interface UserData {
-  name: any;
+  name: string;
   profilePic: string;
 }
 
@@ -75,28 +76,31 @@ function MyPostsComponent({ data }: PostBoxProps) {
         if (postsResponse.data.error === null) {
           const userPosts: PostData[] = postsResponse.data.data;
           setMyPosts(userPosts);
-          
-const fetchAllPosts = async () => {
-  for (const post of userPosts) {
-    try {
-      const postResponse = await axios.get(
-        `http://localhost:3001/api/v1/group/${post.group_id}/posts/${post.post_id}`,
-      );
 
-      if (postResponse.data.error === null) {
-        const postData = {
-          ...postResponse.data.data,
-        };
+          const fetchAllPosts = async () => {
+            const selectedPostsWithImages: PostData[] = [];
 
-        setSelectedPosts(prevSelectedPosts => [...prevSelectedPosts, postData]);
-      } else {
-        console.error('포스트 가져오기 오류:', postResponse.data.error);
-      }
-    } catch (error) {
-      console.error('포스트 가져오기 에러:', error);
-    }
-  }
-};
+            for (const post of userPosts) {
+              try {
+                const postResponse = await axios.get(
+                  `http://localhost:3001/api/v1/group/${post.group_id}/posts/${post.post_id}`,
+                );
+
+                if (postResponse.data.error === null) {
+                  const postData: PostData = {
+                    ...postResponse.data.data,
+                  };
+                  selectedPostsWithImages.push(postData);
+                } else {
+                  console.error('포스트 가져오기 오류:', postResponse.data.error);
+                }
+              } catch (error) {
+                console.error('포스트 가져오기 에러:', error);
+              }
+            }
+
+            setSelectedPosts(selectedPostsWithImages);
+          };
 
           fetchAllPosts();
         } else {
@@ -124,18 +128,17 @@ const fetchAllPosts = async () => {
                     <MyPostsStyle.UpdatedProfile>
                       <MyPostsStyle.Writer>{userData.name}</MyPostsStyle.Writer>
                       <MyPostsStyle.PostedDate>
-                        {formatCreatedAt(selectedPost.createdAt)}
+                        {selectedPost.createdAt}
                       </MyPostsStyle.PostedDate>
                     </MyPostsStyle.UpdatedProfile>
                   </MyPostsStyle.ProfileData>
-                  <MyPostsStyle.Title>
-                    {selectedPost.title}
-                  </MyPostsStyle.Title>
-                  <MyPostsStyle.Content>
-                    {selectedPost.content}
-                  </MyPostsStyle.Content>
+
+                  <MyPostsStyle.Content>{selectedPost.content}</MyPostsStyle.Content>
                 </MyPostsStyle.BoardLeft>
-                <MyPostsStyle.BoardImg src="" alt="게시된 이미지" />
+                <MyPostsStyle.BoardImg
+                  src={`http://localhost:3001/api/v1/image/post/${selectedPost.images[0]}`} // 이미지 URL 설정
+                  alt="게시된 이미지"
+                />
               </MyPostsStyle.Boardbox>
             ))}
         </MyPostsStyle.GroupBoardList>
