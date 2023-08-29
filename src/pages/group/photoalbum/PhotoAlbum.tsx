@@ -11,7 +11,7 @@ interface PhotoItem {
   _id: string;
   title: string;
   content: string;
-  images: string[]; // Change 'image' to 'images'
+  images: string[]; 
   createdAt: string;
   updateAT: string;
   post_id: number;

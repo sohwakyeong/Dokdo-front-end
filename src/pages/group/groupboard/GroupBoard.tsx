@@ -6,7 +6,7 @@ import PenFooter from '../../../components/layout/footer/PenFooter';
 import GroupHeader from '../../../components/layout/header/GroupHeader';
 import { useParams } from 'react-router-dom';
 import { getCookie } from '../../../helper/Cookie';
-
+import { useNavigate } from 'react-router-dom';
 interface GroupData {
   _id: string;
   title: string;
@@ -37,6 +37,9 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
   const { groupId } = useParams<{ groupId: string }>();
   const [groupBoardData, setGroupBoardData] = useState<GroupData[]>([]);
   const loginToken = getCookie('loginToken');
+  const navigate = useNavigate();
+
+
 
   const formatDate = (dateString: string | number | Date) => {
     const options = { month: '2-digit', day: '2-digit' };
@@ -86,14 +89,14 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
   return (
     <GB.Wrapper>
       <GroupHeader data={{ group: Number(groupId) }} />
+      <GB.GroupBoardList>
       <PenFooter />
       <SearchInput />
-      <GB.GroupBoardList>
         <GB.GroupBoardTitle>
           <div>모임 이름</div>
         </GB.GroupBoardTitle>
         {groupBoardData.map((groupBoardItem, index) => (
-          <GB.Boardbox key={index}>
+          <GB.Boardbox key={index} onClick={() => navigate(`/group/${groupId}/board/${groupBoardItem.post._id}`)}>
             <GB.BoardLeft>
               <GB.User>
                 <img src={groupBoardItem.user.profilePic} alt="게시자 프로필" />
@@ -108,12 +111,10 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
               </div>
             </GB.BoardLeft>
             <GB.BoardImg>
-              {groupBoardItem.images && groupBoardItem.images.length > 0 && (
-                <img
-                  src={`http://localhost:3001/${groupBoardItem.images[0]}`}
-                  alt="게시된 이미지"
-                />
-              )}
+              <img
+                src={`http://localhost:3001/api/v1/image/post/${groupBoardItem.post.images[0]}`}
+                alt="게시된 이미지"
+              />
             </GB.BoardImg>
           </GB.Boardbox>
         ))}
