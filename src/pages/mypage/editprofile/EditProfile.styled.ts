@@ -70,13 +70,25 @@ export const Input = styled.input`
   font-size: 12px;
   width: 100%;
   height: 37px;
-  border: none;
+  border: 1px solid #858585;
   border-radius: 8px;
-  background-color: #a8a8a8;
+  background-color: white;
   padding-left: 10px;
+
 `;
 
+export const PwdInput = styled(Input)`
+width: 80%;
 
+`;
+
+export const PwdInputBtn = styled.button`
+  width: 15%;
+  margin-left: 10px;
+  border: 1px solid #858585;
+  border-radius: 8px;
+  background-color: white;
+`;
 
 export const Email = styled(Input)`
   width: 100%;
@@ -97,6 +109,11 @@ export const SubmitButton = styled.button`
   margin: 30px auto 10px auto;
 `;
 
+export const ModalSubmitButton = styled(SubmitButton)`
+width: 100%;
+  height: 40px;
+  margin: 20px auto 0 auto;
+`;
 export const SubmitLink = styled(Link)`
   text-decoration: none;
   color: #ffffff;

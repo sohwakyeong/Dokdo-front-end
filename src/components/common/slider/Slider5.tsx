@@ -5,59 +5,86 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './5.styles.css';
-import MidleBoardBox from '../boardbox/MidleBoardBox';
-import axios from 'axios'; // Axios를 사용하여 API 요청을 하기 위해 가져옵니다.
+import MiddleBoardBox2 from '../boardbox/MiddleBoard2';
+import axios from 'axios';
+import { MiddleBoardData2 } from '../boardbox/MiddleBoard2';
+import { getCookie } from '../../../helper/Cookie';
 
-// 서버에서 내가 좋아요한 그룹을 가져오는 함수
-async function myfavoriteGroupList() {
-  try {
-    const response = await axios.get(
-      'http://localhost:3001/api/v1/auth/user/likes/groups',
-    );
-    return response.data.data;
-  } catch {
-    console.log('error');
-    return [];
-  }
+interface UserData {
+  group: number[]; // group 필드는 숫자 배열로 정의
 }
 
-// 수정된 Slider5 컴포넌트
-export default function Slider5() {
-  const [favoriteData, setFavoriteData] = useState([]);
+export default function Slider3() {
+  const [popularData, setPopularData] = useState<MiddleBoardData2[]>([]);
+  const [userData, setUserData] = useState<UserData | null>(null); // 초기에는 null로 설정
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await myfavoriteGroupList();
-        setFavoriteData(data);
-      } catch (error) {
-        console.error('내가 좋아요한 모임을 가져오던 중 에러 발생:', error);
-      }
-    }
+    const loginToken = getCookie('loginToken');
 
-    fetchData();
+    axios
+      .get('http://localhost:3001/api/v1/auth/me', {
+        headers: {
+          Authorization: `Bearer ${loginToken}`,
+        },
+        withCredentials: true,
+      })
+      .then(response => {
+        if (response.status === 200) {
+          const userData: UserData = response.data.data;
+          setUserData(userData);
+
+          if (userData.group && userData.group.length > 0) {
+            // 사용자의 그룹 데이터를 가져옵니다.
+            fetchMyGroups(userData.group);
+          }
+        } else {
+          console.error('사용자 데이터를 가져오지 못했습니다.');
+        }
+      })
+      .catch(error => {
+        console.error('사용자 데이터를 가져오는 중 에러 발생:', error);
+      });
   }, []);
 
+  const fetchMyGroups = async (groupIds: number[]) => {
+    for (const groupId of groupIds) {
+      try {
+        const groupResponse = await axios.get(
+          `http://localhost:3001/api/v1/group/${groupId}`,
+        );
+
+        if (groupResponse.data.error === null) {
+          // 그룹 데이터 처리
+          const groupInfo: MiddleBoardData2 = groupResponse.data.data;
+          setPopularData(prevpopularData => [...prevpopularData, groupInfo]);
+        } else {
+          console.error(
+            '그룹 슬라이드 가져오기 오류:',
+            groupResponse.data.error,
+          );
+        }
+      } catch (error) {
+        console.error('그룹 슬라이드 가져오기 에러:', error);
+      }
+    }
+  };
+
   return (
-    <>
-      <Swiper
-        //@ts-ignore
-        keyboard={true}
-        mousewheel={true}
-        cssMode={true}
-        navigation={true}
-        pagination={{
-          clickable: true,
-        }}
-        modules={[Navigation, Pagination]}
-        className="mySwiper"
-      >
-        {favoriteData.slice(0, 5).map((item, index) => (
-          <SwiperSlide key={index}>
-            <MidleBoardBox data={item} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </>
+    <Swiper
+      //@ts-ignore
+      keyboard={true}
+      mousewheel={true}
+      cssMode={true}
+      navigation={true}
+      pagination={{ clickable: true }}
+      modules={[Navigation, Pagination]}
+      className="mySwiper"
+    >
+      {popularData.map((item, index) => (
+        <SwiperSlide key={index}>
+          {item.name && <MiddleBoardBox2 data={item} />}
+        </SwiperSlide>
+      ))}
+    </Swiper>
   );
 }

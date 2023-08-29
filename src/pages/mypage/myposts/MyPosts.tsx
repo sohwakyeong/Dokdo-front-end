@@ -12,8 +12,6 @@ interface PostData {
   createdAt: string;
   updatedAt: string;
   __v: number;
-  content: string;
-  images: string[]; // 이미지 파일명 배열
 }
 
 interface PostBoxProps {
@@ -27,12 +25,13 @@ interface UserData {
 
 function MyPostsComponent({ data }: PostBoxProps) {
   const navigate = useNavigate();
-  const [_myPosts, setMyPosts] = useState<PostData[]>([]);
-  const [selectedPosts, setSelectedPosts] = useState<PostData[]>([]);
-  const [userData, setUserData] = useState<UserData | null>(null);
-
-  useEffect(() => {
-    const loginToken = getCookie('loginToken');
+  const [myPosts, setMyPosts] = useState<PostData[]>([]);
+  const [selectedPosts, setSelectedPosts] = useState<any[]>([]); // 추가: 선택된 포스트 정보를 저장할 상태
+  const [userData, setUserData] = useState<UserData | null>(null); // 추가: 유저 정보 상태
+  
+   useEffect(() => {
+     // 먼저 유저 정보를 가져옵니다.
+     const loginToken = getCookie('loginToken');
 
     axios
       .get('http://localhost:3001/api/v1/auth/me', {
@@ -56,6 +55,7 @@ function MyPostsComponent({ data }: PostBoxProps) {
 
   useEffect(() => {
     const loginToken = getCookie('loginToken');
+    const loginToken = getCookie('loginToken');
     axios
       .get(`http://localhost:3001/api/v1/auth/me/posts`, {
         headers: {
@@ -67,10 +67,9 @@ function MyPostsComponent({ data }: PostBoxProps) {
         if (postsResponse.data.error === null) {
           const userPosts: PostData[] = postsResponse.data.data;
           setMyPosts(userPosts);
-
+          
+          // 모든 포스트를 가져오기 위한 함수
           const fetchAllPosts = async () => {
-            const selectedPostsWithImages: PostData[] = [];
-
             for (const post of userPosts) {
               try {
                 const postResponse = await axios.get(
