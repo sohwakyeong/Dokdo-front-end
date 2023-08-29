@@ -57,7 +57,7 @@ export const HashTagDisplay = styled.div`
 
 export const HashTag = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   text-align: center;
   padding: 20px 0;
@@ -66,8 +66,10 @@ export const HashTag = styled.div`
     padding: 8px;
     background-color: #fff7ec;
     border-radius: 20px;
-    width: 70px;
+    width: 80px;
     color: #84614b;
+    margin-left: 15px;
+    font-size: 14px;
   }
 `;
 export const GroupInfo = styled.div`
