@@ -10,7 +10,7 @@ interface GroupHeaderProps {
   data: GroupHeaderData; // data가 필수 필드로 지정됨
 }
 
-function GroupHeader({ data }: GroupHeaderProps) {
+const GroupHeader: React.FC<GroupHeaderProps> = ({ data }) => {
   const navigate = useNavigate();
 
   const generateGroupDetailURL = (sequence: string): string => {

@@ -30,7 +30,7 @@ function MyPostsComponent({ data }: PostBoxProps) {
   const [myPosts, setMyPosts] = useState<PostData[]>([]);
   const [selectedPosts, setSelectedPosts] = useState<any[]>([]); // 추가: 선택된 포스트 정보를 저장할 상태
   const [userData, setUserData] = useState<UserData | null>(null); // 추가: 유저 정보 상태
-  
+
   function formatCreatedAt(createdAt: string | number | Date) {
     const date = new Date(createdAt);
     const year = date.getFullYear();
@@ -40,28 +40,28 @@ function MyPostsComponent({ data }: PostBoxProps) {
     return `${year}년 ${month}월 ${day}일`;
   }
 
-   useEffect(() => {
-     const loginToken = getCookie('loginToken');
+  useEffect(() => {
+    const loginToken = getCookie('loginToken');
 
-     axios
-       .get('http://localhost:3001/api/v1/auth/me', {
-         headers: {
-           Authorization: `Bearer ${loginToken}`,
-         },
-         withCredentials: true,
-       })
-       .then(response => {
-         if (response.status === 200) {
-           setUserData(response.data.data.getUser);
-         } else {
-           navigate('/signup');
-         }
-       })
-       .catch(error => {
-         console.error('myposts유저 정보 가져오기 에러:', error);
-         navigate('/');
-       });
-   }, [navigate]);
+    axios
+      .get('http://localhost:3001/api/v1/auth/me', {
+        headers: {
+          Authorization: `Bearer ${loginToken}`,
+        },
+        withCredentials: true,
+      })
+      .then(response => {
+        if (response.status === 200) {
+          setUserData(response.data.data.getUser);
+        } else {
+          navigate('/signup');
+        }
+      })
+      .catch(error => {
+        console.error('myposts유저 정보 가져오기 에러:', error);
+        navigate('/');
+      });
+  }, [navigate]);
 
   useEffect(() => {
     const loginToken = getCookie('loginToken');
@@ -92,7 +92,10 @@ function MyPostsComponent({ data }: PostBoxProps) {
                   };
                   selectedPostsWithImages.push(postData);
                 } else {
-                  console.error('포스트 가져오기 오류:', postResponse.data.error);
+                  console.error(
+                    '포스트 가져오기 오류:',
+                    postResponse.data.error,
+                  );
                 }
               } catch (error) {
                 console.error('포스트 가져오기 에러:', error);

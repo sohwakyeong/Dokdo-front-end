@@ -2,32 +2,52 @@ import React, { useState, useEffect } from 'react';
 import * as PA from './PhotoAlbum.styled';
 import SearchInput from '../../../components/common/searchinput/SearchInput';
 import axios from 'axios';
-import PenFooter from '../../../components/layout/footer/PenFooter';
+import PenFooter2 from '../../../components/layout/footer/PenFooter2';
 import { getCookie } from '../../../helper/Cookie';
 import { useParams } from 'react-router-dom';
 import GroupHeader from '../../../components/layout/header/GroupHeader';
 
 interface PhotoItem {
-  _id: string;
-  group_id: number;
-  post_id: number;
-  user_id: number;
-  createdAt: string;
-  updateAt: string;
-  image: string;
+  post: {
+    _id: string;
+    title: string;
+    content: string;
+    images: string[];
+    createdAt: string;
+    updateAT: string;
+    post_id: number;
+  };
+  user: {
+    name: string;
+    profilePic: string;
+  };
 }
 
-function PhotoAlbum() {
-  const [photoData, setPhotoData] = useState<PhotoItem[]>([]);
+interface PhotoItemProps {
+  data?: PhotoItem;
+}
 
-  const loginToken = getCookie('loginToken');
+const PhotoAlbum: React.FC<PhotoItemProps> = ({ data }) => {
   const { groupId } = useParams<{ groupId: string }>();
+  const [photoItems, setPhotoItems] = useState<PhotoItem[]>([]);
+  const loginToken = getCookie('loginToken');
+
+  async function fetchAllGroupPhotoData(groupId: number) {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/api/v1/group/${groupId}/albums`,
+      );
+      return response.data.data;
+    } catch (error) {
+      throw error;
+    }
+  }
 
   useEffect(() => {
-    async function fetchPhotoData(groupId: number) {
+    async function fetchData() {
       try {
-        const response = await axios.get(
-          `http://localhost:3001/api/v1/group/${groupId}/albums`,
+        const groupDataResponse = await axios.get(
+          `http://localhost:3001/api/v1/group/${groupId}`,
           {
             headers: {
               Authorization: `Bearer ${loginToken}`,
@@ -35,66 +55,67 @@ function PhotoAlbum() {
             withCredentials: true,
           },
         );
-        if (response.status === 200) {
-          setPhotoData(response.data.data);
+        if (groupDataResponse.status === 200) {
+          const fetchedGroupData = groupDataResponse.data.data;
+          setPhotoItems(
+            await fetchAllGroupPhotoData(fetchedGroupData.group_id),
+          );
         } else {
-          console.error('모임 사진첩 가져오기 에러:', response.status);
+          console.error('그룹 정보 가져오기 에러:', groupDataResponse.status);
         }
       } catch (error) {
-        console.error('모임 사진첩 정보 가져오기 에러:', error);
+        console.error('그룹 정보 가져오기 에러:', error);
       }
     }
-    fetchPhotoData(Number(groupId));
-  }, [loginToken, groupId]);
 
-  if (!photoData) {
-    return <div>로딩 중...</div>;
-  }
+    fetchData();
+  }, [loginToken, groupId]);
 
   return (
     <PA.Wrapper>
-  <GroupHeader data={{ group: Number(groupId) }} />
-  <PenFooter />
-  <PA.InputDisplay>
-    <SearchInput />
-  </PA.InputDisplay>
-  <PA.GroupPhotoTitle>모임 사진첩</PA.GroupPhotoTitle>
+      <GroupHeader data={{ group: Number(groupId) }} />
+      <PenFooter2 />
+      <PA.InputDisplay>
+        <SearchInput />
+      </PA.InputDisplay>
+      <PA.GroupPhotoTitle>모임 사진첩</PA.GroupPhotoTitle>
 
-  <PA.PhotoList>
-    <ul>
-      {photoData.length === 0 ? (
-        <div>
-          
-          
-          사진이 없습니다.
-          
-          
-          
-          </div>
-      ) : (
-        photoData.map((photoItem, index) => (
-          <li key={index}>
-            <PA.PhotoBoardBox>
-              <PA.PhotoImg>
-                <img src={photoItem.image} alt="업로드사진" />
-              </PA.PhotoImg>
-              <PA.PhotoBoxBottom>
-                <PA.PhotoBoardTitle>{photoItem.createdAt}</PA.PhotoBoardTitle>
-                <PA.Profile>
-                  <PA.ProfileImg>
-                    <img src={photoItem.image} alt="프로필" />
-                  </PA.ProfileImg>
-                  <div>{photoItem.user_id}</div>
-                </PA.Profile>
-              </PA.PhotoBoxBottom>
-            </PA.PhotoBoardBox>
-          </li>
-        ))
-      )}
-    </ul>
-  </PA.PhotoList>
-</PA.Wrapper>
+      <PA.PhotoList>
+        <ul>
+          {photoItems.length === 0 ? (
+            <div>사진이 없습니다.</div>
+          ) : (
+            photoItems.map((photoItem, index) => (
+              <li key={index}>
+                <PA.PhotoBoardBox>
+                  <PA.Profile>
+                    <PA.ProfileImg>
+                      <img src={photoItem.user.profilePic} alt="프로필" />
+                    </PA.ProfileImg>
+                    <PA.User>
+                      <div>{photoItem.user.name}</div>
+                      <div>{photoItem.post.createdAt}</div>
+                    </PA.User>
+                  </PA.Profile>
+                  <PA.PhotoImg>
+                    <img
+                      src={`http://localhost:3001/api/v1/image/post/${photoItem.post.images[0]}`}
+                      alt="업로드사진"
+                    />
+                  </PA.PhotoImg>
+                  <PA.PhotoBoxBottom>
+                    <PA.PhotoBoardTitle>
+                      {photoItem.post.title}
+                    </PA.PhotoBoardTitle>
+                  </PA.PhotoBoxBottom>
+                </PA.PhotoBoardBox>
+              </li>
+            ))
+          )}
+        </ul>
+      </PA.PhotoList>
+    </PA.Wrapper>
   );
-}
+};
 
 export default PhotoAlbum;
