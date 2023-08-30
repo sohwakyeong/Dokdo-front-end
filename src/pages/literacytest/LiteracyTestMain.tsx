@@ -5,19 +5,19 @@ import {
   menuItem as MenuItem,
   image as Image,
   startButton as StartButton,
-  socialIcons as SocialIcons,
-  socialIcon as SocialIcon,
-  socialIconImage as SocialIconImage,
-  participantsContainer as ParticipantsContainer,
+  // socialIcons as SocialIcons,
+  // socialIcon as SocialIcon,
+  // socialIconImage as SocialIconImage,
+  // participantsContainer as ParticipantsContainer,
   StyledLink,
   MenuText,
   TestInstructions,
 } from './LiteracyTestMain.Style';
 import { useNavigate } from 'react-router-dom';
 import literacyTestImage from '../../assets/img/문해력.png';
-import facebookIcon from '../../assets/img/facebook.png';
-import twitterIcon from '../../assets/img/twitter.png';
-import kakaoIcon from '../../assets/img/카카오톡아이콘.png';
+// import facebookIcon from '../../assets/img/facebook.png';
+// import twitterIcon from '../../assets/img/twitter.png';
+// import kakaoIcon from '../../assets/img/카카오톡아이콘.png';
 import { useLocation } from 'react-router-dom';
 
 const LiteracyTestMain: React.FC = () => {
@@ -69,7 +69,9 @@ const LiteracyTestMain: React.FC = () => {
       <MenuText>
         내 <span>문해력</span>은 몇 점?
       </MenuText>
+      <div>
       <Image src={literacyTestImage} alt="Description" />
+      </div>
       <TestInstructions>
         테스트는 <span className="strongHighlight">10개의 문항</span>으로
         구성되어 있습니다.
@@ -86,7 +88,7 @@ const LiteracyTestMain: React.FC = () => {
         바로 테스트 시작하기 버튼을 눌러주세요 !
       </TestInstructions>
       <StartButton onClick={handleStartTest}>테스트 시작하기</StartButton>
-      <SocialIcons>
+      {/* <SocialIcons>
         <SocialIcon href="https://facebook.com">
           <SocialIconImage src={facebookIcon} alt="Facebook" />
         </SocialIcon>
@@ -96,7 +98,7 @@ const LiteracyTestMain: React.FC = () => {
         <SocialIcon href="https://www.kakaocorp.com">
           <SocialIconImage src={kakaoIcon} alt="Kakao" />
         </SocialIcon>
-      </SocialIcons>
+      </SocialIcons> */}
     </Container>
   );
 };

@@ -17,6 +17,7 @@ import Layout6 from '../components/layout/layout1/Layout6';
 import Layout8 from '../components/layout/layout1/Layout8';
 import Layout3 from '../components/layout/layout1/Layout3';
 
+
 const MypageRoutes = () => {
   return (
     <Routes>
@@ -87,9 +88,9 @@ const MypageRoutes = () => {
       <Route
         path="/user/mypage/editprofile"
         element={
-          <Layout6>
+          <Layout8>
             <EditProfileComponent />
-          </Layout6>
+          </Layout8>
         }
       />
 
@@ -115,9 +116,9 @@ const MypageRoutes = () => {
       <Route
         path="/user/mypage"
         element={
-          <Layout3>
+          <Layout8>
             <MyPageComponent />
-          </Layout3>
+          </Layout8>
         }
       />
     </Routes>

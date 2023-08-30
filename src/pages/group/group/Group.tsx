@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import SearchInput from '../../../components/common/searchinput/SearchInput';
 import * as GR from './Group.styled';
-import GroupTitleImg from '../../../assets/img/독서토론타이틀이미지예시.jpeg';
+import GroupTitleImg from '../../../assets/img/독서장려이미지.jpeg';
 import MoreButton from '../../../components/common/morebutton/MoreButton';
 import BoardBox from '../../../components/common/boardbox/BoardBox';
-import Slider2 from '../../../components/common/slider/Slider2';
 import axios from 'axios';
+
+import Slider2 from '../../../components/common/slider/Slider2';
 
 // API 요청 함수 추가
 async function fetchAllGroupData() {
@@ -49,8 +50,8 @@ const Group = () => {
             </GR.StyledLink>
           </GR.HotGroupTitle>
           {groupData.slice(0, 3).map((groupItem, index) => (
-            <BoardBox key={index} data={groupItem} />
-          ))}
+          <BoardBox key={index} data={groupItem} isMainPage={true}/>
+        ))}
           <MoreButton to="/group/list">더보기</MoreButton>
         </GR.HotGroup>
       </GR.BookContest>

@@ -41,24 +41,28 @@ export const ClickBox = styled.div`
   box-sizing: border-box;
   border: solid 1px #ddd;
   width: 90%;
-  height: 80px;
+  height: 110px;
   padding: 10px;
   margin: 20px;
+`;
+
+export const NoResultText = styled.div`
+  color: blue;
 `;
 
 export const ChoiceImageGroup = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #dedede;
+  background-color: white;
 `;
 
 export const ChoiceSelect = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
-  padding-top: 10px;
+  width: 425px;
+  padding: 10px;
 `;
 
 export const ChoiceGroupBoard = styled.div`
@@ -66,6 +70,26 @@ export const ChoiceGroupBoard = styled.div`
   flex-direction: column;
   align-items: center;
   width: 90%;
+`;
+
+export const NoResultBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding: 30px 0;
+
+  & div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
 `;
 
 export const ChoiceBoxTitle = styled.div`
@@ -108,4 +132,20 @@ export const ImageRow = styled.div`
   justify-content: space-between;
   margin: 15px;
   width: 90%;
+`;
+
+export const SearchButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 130px;
+  background-color: white;
+  border: 1px solid #ddd;
+  height: 38px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+
+  & div {
+    font-size: 15px;
+  }
 `;

@@ -2,8 +2,8 @@ import React, { ReactNode } from 'react';
 import LeftScreen from '../leftscreen/LeftScreen';
 import { LayoutContainer, Children, Left, Right } from './Layout1.styled';
 
-import BackHeader from '../header/BackSearchHeader';
 import BoardAndPhotoFooter from '../footer/BoardAndPhotoFooter';
+import Header from '../header/Header';
 
 interface Layout7Props {
   children: ReactNode;
@@ -17,7 +17,7 @@ function Layout7({ children }: Layout7Props) {
         <LeftScreen />
       </Left>
       <Right>
-        <BackHeader />
+        <Header />
         <Children>{children}</Children>
         <BoardAndPhotoFooter />
       </Right>
