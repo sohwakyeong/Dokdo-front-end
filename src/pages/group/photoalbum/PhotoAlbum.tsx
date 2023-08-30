@@ -8,6 +8,8 @@ import { useParams } from 'react-router-dom';
 import GroupHeader from '../../../components/layout/header/GroupHeader';
 
 interface PhotoItem {
+  
+post : {
   _id: string;
   title: string;
   content: string;
@@ -15,6 +17,7 @@ interface PhotoItem {
   createdAt: string;
   updateAT: string;
   post_id: number;
+}
   user: {
     name: string;
     profilePic: string;
@@ -87,11 +90,14 @@ const PhotoAlbum: React.FC<PhotoItemProps> = ({ data }) => {
               <li key={index}>
                 <PA.PhotoBoardBox>
                   <PA.PhotoImg>
-                    <img src={photoItem.images[0]} alt="업로드사진" />
+                    <img
+                      src={`http://localhost:3001/api/v1/image/post/${photoItem.post.images[0]}`}
+                      alt="업로드사진"
+                    />
                   </PA.PhotoImg>
                   <PA.PhotoBoxBottom>
                     <PA.PhotoBoardTitle>
-                      {photoItem.createdAt}
+                      {photoItem.post.title} - {photoItem.post.createdAt}
                     </PA.PhotoBoardTitle>
                     <PA.Profile>
                       <PA.ProfileImg>
