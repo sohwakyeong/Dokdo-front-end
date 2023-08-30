@@ -5,19 +5,20 @@ import { getCookie } from '../../../helper/Cookie';
 import { useParams } from 'react-router-dom';
 
 interface GroupDetailData {
-  _id: string;
-  title: string;
-  content: string;
-  createdAt: string;
-  updatedAt: string;
-  post_id: number;
-  images: string[];
+  data: {
+    _id: string;
+    title: string;
+    content: string;
+    createdAt: string;
+    updatedAt: string;
+    post_id: number;
+    images: string[];
+    group_id: number;
+  };
 }
 
 interface GroupBoardDetailDataProps {
-  data?: {
-    data: GroupDetailData;
-  };
+  data?: GroupDetailData;
 }
 
 const GroupBoardDetail: React.FC<GroupBoardDetailDataProps> = ({ data }) => {
@@ -29,10 +30,44 @@ const GroupBoardDetail: React.FC<GroupBoardDetailDataProps> = ({ data }) => {
     post_id: string;
   }>();
 
-  async function fetchGroupDetail(groupID: string, postID: string) {
+ useEffect(() => {
+    async function fetchData() {
+      try {
+        const groupDataResponse = await axios.get(
+          `http://localhost:3001/api/v1/group/${group_id}`,
+          { 
+            headers: {
+              Authorization: `Bearer ${loginToken}`,
+            },
+            withCredentials: true,
+          },
+        );
+        if (groupDataResponse.status === 200) {
+          const fetchedGroupData = groupDataResponse.data.data;
+          fetchGroupDetail(
+            parseInt(fetchedGroupData.group_id),  // Parse the group_id to integer
+            parseInt(fetchedGroupData.post_id)    // Parse the post_id to integer
+          );
+        } else {
+          console.error(
+            '그룹 정보 가져오기 에러:',
+            groupDataResponse.data.status
+          );
+        }
+      } catch (error) {
+        console.error('그룹 정보 가져오기 에러:', error);
+      }
+    }
+    console.log('user_id:', group_id); // Add this line
+    console.log('post_id:', post_id);   // Add this line
+  
+    fetchData();
+  }, [loginToken, group_id]);
+
+  async function fetchGroupDetail(group_Id: number, post_Id: number) {
     try {
       const response = await axios.get(
-        `http://localhost:3001/api/v1/group/${groupID}/posts/${postID}`
+        `http://localhost:3001/api/v1/group/${group_Id}/posts/${post_Id}`
       );
 
       if (response.status === 200) {
@@ -46,41 +81,14 @@ const GroupBoardDetail: React.FC<GroupBoardDetailDataProps> = ({ data }) => {
     }
   }
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const groupDataResponse = await axios.get(
-          `http://localhost:3001/api/v1/group/${group_id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${loginToken}`,
-            },
-            withCredentials: true,
-          }
-        );
-        if (groupDataResponse.status === 200) {
-          const fetchedGroupData = groupDataResponse.data.data;
-          fetchGroupDetail(fetchedGroupData.group_id,fetchedGroupData.post_id);
-        } else {
-          console.error('그룹 정보 가져오기 에러:', groupDataResponse.status);
-        }
-      } catch (error) {
-        console.error('그룹 정보 가져오기 에러:', error);
-      }
-    }
-
-    fetchData();
-  }, [loginToken, group_id, post_id]);
-
   if (!groupDetail) {
     return <div>Loading...</div>;
   }
 
-
   return (
     <GBD.Wrapper>
       <GBD.GroupBoardTitle>
-        <div>{groupDetail.title}</div>
+        <div>{groupDetail.data.title}</div>
       </GBD.GroupBoardTitle>
       <GBD.User>
         <GBD.ProfileImg>
@@ -89,14 +97,14 @@ const GroupBoardDetail: React.FC<GroupBoardDetailDataProps> = ({ data }) => {
         <GBD.Desc>
           <GBD.DescDisplay>
             <div>
-              <div>{groupDetail.createdAt}</div>
+              <div>{groupDetail.data.createdAt}</div>
             </div>
             <GBD.EditButton>●●●</GBD.EditButton>
           </GBD.DescDisplay>
         </GBD.Desc>
       </GBD.User>
       <GBD.UserWriteBox>
-        <div>{groupDetail.content}</div>
+        <div>{groupDetail.data.content}</div>
       </GBD.UserWriteBox>
       <GBD.Button>
         <button>❤️ 좋아요 숫자</button>
@@ -106,11 +114,7 @@ const GroupBoardDetail: React.FC<GroupBoardDetailDataProps> = ({ data }) => {
       <GBD.CIWrapper>
         <GBD.CIDisplay>
           <GBD.CIInput>
-            <input
-              type="text"
-              placeholder="댓글을 입력하세요."
-          
-            />
+            <input type="text" placeholder="댓글을 입력하세요." />
           </GBD.CIInput>
           <GBD.CIButton>
             <button>등록</button>

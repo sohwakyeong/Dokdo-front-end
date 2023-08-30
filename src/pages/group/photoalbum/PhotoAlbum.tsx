@@ -8,16 +8,15 @@ import { useParams } from 'react-router-dom';
 import GroupHeader from '../../../components/layout/header/GroupHeader';
 
 interface PhotoItem {
-  
-post : {
-  _id: string;
-  title: string;
-  content: string;
-  images: string[];
-  createdAt: string;
-  updateAT: string;
-  post_id: number;
-}
+  post: {
+    _id: string;
+    title: string;
+    content: string;
+    images: string[];
+    createdAt: string;
+    updateAT: string;
+    post_id: number;
+  };
   user: {
     name: string;
     profilePic: string;
@@ -89,6 +88,15 @@ const PhotoAlbum: React.FC<PhotoItemProps> = ({ data }) => {
             photoItems.map((photoItem, index) => (
               <li key={index}>
                 <PA.PhotoBoardBox>
+                  <PA.Profile>
+                    <PA.ProfileImg>
+                      <img src={photoItem.user.profilePic} alt="프로필" />
+                    </PA.ProfileImg>
+                    <PA.User>
+                      <div>{photoItem.user.name}</div>
+                      <div>{photoItem.post.createdAt}</div>
+                    </PA.User>
+                  </PA.Profile>
                   <PA.PhotoImg>
                     <img
                       src={`http://localhost:3001/api/v1/image/post/${photoItem.post.images[0]}`}
@@ -97,14 +105,8 @@ const PhotoAlbum: React.FC<PhotoItemProps> = ({ data }) => {
                   </PA.PhotoImg>
                   <PA.PhotoBoxBottom>
                     <PA.PhotoBoardTitle>
-                      {photoItem.post.title} - {photoItem.post.createdAt}
+                      {photoItem.post.title}
                     </PA.PhotoBoardTitle>
-                    <PA.Profile>
-                      <PA.ProfileImg>
-                        <img src={photoItem.user.profilePic} alt="프로필" />
-                      </PA.ProfileImg>
-                      <div>{photoItem.user.name}</div>
-                    </PA.Profile>
                   </PA.PhotoBoxBottom>
                 </PA.PhotoBoardBox>
               </li>
