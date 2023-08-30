@@ -11,11 +11,7 @@ interface PhotoItem {
   _id: string;
   title: string;
   content: string;
-<<<<<<< HEAD
-  images: string[]; 
-=======
   images: string[];
->>>>>>> feature-mainWr
   createdAt: string;
   updateAT: string;
   post_id: number;
@@ -37,11 +33,7 @@ const PhotoAlbum: React.FC<PhotoItemProps> = ({ data }) => {
   async function fetchAllGroupPhotoData(groupId: number) {
     try {
       const response = await axios.get(
-<<<<<<< HEAD
-        `http://localhost:3001/api/v1/group/${groupId}/albums`
-=======
         `http://localhost:3001/api/v1/group/${groupId}/albums`,
->>>>>>> feature-mainWr
       );
       return response.data.data;
     } catch (error) {
@@ -59,17 +51,13 @@ const PhotoAlbum: React.FC<PhotoItemProps> = ({ data }) => {
               Authorization: `Bearer ${loginToken}`,
             },
             withCredentials: true,
-          }
+          },
         );
         if (groupDataResponse.status === 200) {
           const fetchedGroupData = groupDataResponse.data.data;
-<<<<<<< HEAD
-          setPhotoItems(await fetchAllGroupPhotoData(fetchedGroupData.group_id));
-=======
           setPhotoItems(
             await fetchAllGroupPhotoData(fetchedGroupData.group_id),
           );
->>>>>>> feature-mainWr
         } else {
           console.error('그룹 정보 가져오기 에러:', groupDataResponse.status);
         }
@@ -102,13 +90,9 @@ const PhotoAlbum: React.FC<PhotoItemProps> = ({ data }) => {
                     <img src={photoItem.images[0]} alt="업로드사진" />
                   </PA.PhotoImg>
                   <PA.PhotoBoxBottom>
-<<<<<<< HEAD
-                    <PA.PhotoBoardTitle>{photoItem.createdAt}</PA.PhotoBoardTitle>
-=======
                     <PA.PhotoBoardTitle>
                       {photoItem.createdAt}
                     </PA.PhotoBoardTitle>
->>>>>>> feature-mainWr
                     <PA.Profile>
                       <PA.ProfileImg>
                         <img src={photoItem.user.profilePic} alt="프로필" />

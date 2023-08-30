@@ -108,38 +108,6 @@ function MyPostsComponent({ data }: PostBoxProps) {
 
   return (
     <MyPostsStyle.Container>
-<<<<<<< HEAD
-    <MyPostsStyle.Wrapper>
-      <MyPostsStyle.GroupBoardList>
-        {userData &&
-          selectedPosts.map(selectedPost => (
-            <MyPostsStyle.Boardbox key={selectedPost._id}>
-              <MyPostsStyle.BoardLeft>
-                <MyPostsStyle.ProfileData>
-                  <MyPostsStyle.ProfileImg
-                    src={userData.profilePic}
-                    alt={`${userData.name}의 프로필 사진`}
-                  />
-                  <MyPostsStyle.UpdatedProfile>
-                    <MyPostsStyle.Writer>{userData.name}</MyPostsStyle.Writer>
-                    <MyPostsStyle.PostedDate>
-                      {selectedPost.createdAt}
-                    </MyPostsStyle.PostedDate>
-                  </MyPostsStyle.UpdatedProfile>
-                </MyPostsStyle.ProfileData>
-  
-                <MyPostsStyle.Content>{selectedPost.content}</MyPostsStyle.Content>
-              </MyPostsStyle.BoardLeft>
-              <MyPostsStyle.BoardImg
-                src={`http://localhost:3001/api/v1/image/post/${selectedPost.images[0]}`} // 이미지 URL 설정
-                alt="게시된 이미지"
-              />
-            </MyPostsStyle.Boardbox>
-          ))}
-      </MyPostsStyle.GroupBoardList>
-    </MyPostsStyle.Wrapper>
-  </MyPostsStyle.Container>
-=======
       <MyPostsStyle.Wrapper>
         <MyPostsStyle.GroupBoardList>
           {userData &&
@@ -172,7 +140,6 @@ function MyPostsComponent({ data }: PostBoxProps) {
         </MyPostsStyle.GroupBoardList>
       </MyPostsStyle.Wrapper>
     </MyPostsStyle.Container>
->>>>>>> feature-mainWr
   );
 }
 

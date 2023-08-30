@@ -102,14 +102,7 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
           >
             <GB.BoardLeft>
               <GB.User>
-<<<<<<< HEAD
-                <img
-                  src={groupBoardItem.user.profilePic}
-                  alt="게시자 프로필"
-                />
-=======
                 <img src={groupBoardItem.user.profilePic} alt="게시자 프로필" />
->>>>>>> feature-mainWr
                 <GB.UserName>
                   <div>{groupBoardItem.user.name}</div>
                   <div>{formatDate(groupBoardItem.post.createdAt)}</div>
@@ -133,8 +126,4 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
   );
 };
 
-<<<<<<< HEAD
 export default GroupBoard;
-=======
-export default GroupBoard;
->>>>>>> feature-mainWr
