@@ -7,16 +7,23 @@ import { useParams } from 'react-router-dom';
 interface GroupDetailData {
   error: null | string;
   data: {
-    _id: string;
-    title: string;
-    content: string;
-    createdAt: string;
-    updatedAt: string;
-    post_id: number;
-    images: string[];
-    __v: number;
+    post: {
+      _id: string;
+      title: string;
+      content: string;
+      images: string[];
+      createdAt: string;
+      updatedAt: string;
+      post_id: number;
+      __v: number;
+    };
+    user: {
+      name: string;
+      profilePic: string;
+    };
   };
 }
+
 interface Comment {
   text: string;
   isDeleted: boolean;
@@ -39,8 +46,8 @@ const GroupBoardDetail: React.FC<GroupBoardDetailDataProps> = ({ data }) => {
   const group_Id = groupId ? parseInt(groupId, 10) : undefined;
   const post_Id = postsId ? parseInt(postsId, 10) : undefined;
 
-  const [groupDetail, setGroupDetail] = useState<GroupDetailData | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [groupDetail, setGroupDetail] = useState<GroupDetailData | null>(data || null);
+  const [isLoading, setIsLoading] = useState(false);
   const [comments, setComments] = useState<Comment[]>([]);
   const [commentText, setCommentText] = useState('');
 
@@ -64,11 +71,7 @@ const GroupBoardDetail: React.FC<GroupBoardDetailDataProps> = ({ data }) => {
       );
 
       if (response.status === 200) {
-        const fetchedDetailData = {
-          error: null,
-          data: response.data.data,
-        };
-        setGroupDetail(fetchedDetailData);
+        setGroupDetail(response.data);
       } else {
         console.error('Error fetching detail data:', response.status);
       }
@@ -130,21 +133,21 @@ const GroupBoardDetail: React.FC<GroupBoardDetailDataProps> = ({ data }) => {
   return (
     <GBD.Wrapper>
       <GBD.GroupBoardTitle>
-        <div>{groupDetail?.data?.title || 'Loading...'}</div>
+        <div>{groupDetail?.data?.post.title || 'Loading...'}</div>
       </GBD.GroupBoardTitle>
       <GBD.User>
         <GBD.ProfileImg></GBD.ProfileImg>
         <GBD.Desc>
           <GBD.DescDisplay>
-            <div>{groupDetail?.data?.createdAt || 'Loading...'}</div>
+            <div>{groupDetail?.data?.post.createdAt || 'Loading...'}</div>
             <GBD.EditButton>●●●</GBD.EditButton>
           </GBD.DescDisplay>
         </GBD.Desc>
       </GBD.User>
       <GBD.UserWriteBox>
-        <div>{groupDetail?.data?.content || 'Loading...'}</div>
+        <div>{groupDetail?.data?.post.content || 'Loading...'}</div>
         <img
-          src={`http://localhost:3001/api/v1/image/post/${groupDetail?.data.images[0]}`}
+          src={`http://localhost:3001/api/v1/image/post/${groupDetail?.data.post.images[0]}`}
           alt="게시된 이미지"
         />
       </GBD.UserWriteBox>

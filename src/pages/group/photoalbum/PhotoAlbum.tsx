@@ -4,7 +4,7 @@ import SearchInput from '../../../components/common/searchinput/SearchInput';
 import axios from 'axios';
 import PenFooter2 from '../../../components/layout/footer/PenFooter2';
 import { getCookie } from '../../../helper/Cookie';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import GroupHeader from '../../../components/layout/header/GroupHeader';
 
 interface PhotoItem {
@@ -27,10 +27,18 @@ interface PhotoItemProps {
   data?: PhotoItem;
 }
 
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  return `${month}월 ${day}일`;
+}
+
 const PhotoAlbum: React.FC<PhotoItemProps> = ({ data }) => {
   const { groupId } = useParams<{ groupId: string }>();
   const [photoItems, setPhotoItems] = useState<PhotoItem[]>([]);
   const loginToken = getCookie('loginToken');
+  const navigate = useNavigate();
 
   async function fetchAllGroupPhotoData(groupId: number) {
     try {
@@ -83,10 +91,15 @@ const PhotoAlbum: React.FC<PhotoItemProps> = ({ data }) => {
       <PA.PhotoList>
         <ul>
           {photoItems.length === 0 ? (
-            <div>사진이 없습니다.</div>
+            <div> 등록된 사진이 없습니다.</div>
           ) : (
             photoItems.map((photoItem, index) => (
-              <li key={index}>
+              <li
+                key={index}
+                onClick={() =>
+                  navigate(`/group/${groupId}/photo/${photoItem.post.post_id}`)
+                }
+              >
                 <PA.PhotoBoardBox>
                   <PA.Profile>
                     <PA.ProfileImg>
@@ -94,7 +107,7 @@ const PhotoAlbum: React.FC<PhotoItemProps> = ({ data }) => {
                     </PA.ProfileImg>
                     <PA.User>
                       <div>{photoItem.user.name}</div>
-                      <div>{photoItem.post.createdAt}</div>
+                      <div>{formatDate(photoItem.post.createdAt)}</div>
                     </PA.User>
                   </PA.Profile>
                   <PA.PhotoImg>
