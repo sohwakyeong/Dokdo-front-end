@@ -27,7 +27,7 @@ interface UserData {
 
 function MyPostsComponent({ data }: PostBoxProps) {
   const navigate = useNavigate();
-  const [_myPosts, setMyPosts] = useState<PostData[]>([]);
+  const [myPosts, setMyPosts] = useState<PostData[]>([]);
   const [selectedPosts, setSelectedPosts] = useState<PostData[]>([]);
   const [userData, setUserData] = useState<UserData | null>(null);
 
@@ -83,7 +83,10 @@ function MyPostsComponent({ data }: PostBoxProps) {
                   };
                   selectedPostsWithImages.push(postData);
                 } else {
-                  console.error('포스트 가져오기 오류:', postResponse.data.error);
+                  console.error(
+                    '포스트 가져오기 오류:',
+                    postResponse.data.error,
+                  );
                 }
               } catch (error) {
                 console.error('포스트 가져오기 에러:', error);
@@ -124,7 +127,9 @@ function MyPostsComponent({ data }: PostBoxProps) {
                     </MyPostsStyle.UpdatedProfile>
                   </MyPostsStyle.ProfileData>
 
-                  <MyPostsStyle.Content>{selectedPost.content}</MyPostsStyle.Content>
+                  <MyPostsStyle.Content>
+                    {selectedPost.content}
+                  </MyPostsStyle.Content>
                 </MyPostsStyle.BoardLeft>
                 <MyPostsStyle.BoardImg
                   src={`http://localhost:3001/api/v1/image/post/${selectedPost.images[0]}`} // 이미지 URL 설정

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import * as PA from './PhotoAlbum.styled';
 import SearchInput from '../../../components/common/searchinput/SearchInput';
 import axios from 'axios';
-import PenFooter from '../../../components/layout/footer/PenFooter';
+import PenFooter2 from '../../../components/layout/footer/PenFooter2';
 import { getCookie } from '../../../helper/Cookie';
 import { useParams } from 'react-router-dom';
 import GroupHeader from '../../../components/layout/header/GroupHeader';
@@ -53,47 +53,42 @@ function PhotoAlbum() {
 
   return (
     <PA.Wrapper>
-  <GroupHeader data={{ group: Number(groupId) }} />
-  <PenFooter />
-  <PA.InputDisplay>
-    <SearchInput />
-  </PA.InputDisplay>
-  <PA.GroupPhotoTitle>모임 사진첩</PA.GroupPhotoTitle>
+      <GroupHeader data={{ group: Number(groupId) }} />
+      <PenFooter2 />
+      <PA.InputDisplay>
+        <SearchInput />
+      </PA.InputDisplay>
+      <PA.GroupPhotoTitle>모임 사진첩</PA.GroupPhotoTitle>
 
-  <PA.PhotoList>
-    <ul>
-      {photoData.length === 0 ? (
-        <div>
-          
-          
-          사진이 없습니다.
-          
-          
-          
-          </div>
-      ) : (
-        photoData.map((photoItem, index) => (
-          <li key={index}>
-            <PA.PhotoBoardBox>
-              <PA.PhotoImg>
-                <img src={photoItem.image} alt="업로드사진" />
-              </PA.PhotoImg>
-              <PA.PhotoBoxBottom>
-                <PA.PhotoBoardTitle>{photoItem.createdAt}</PA.PhotoBoardTitle>
-                <PA.Profile>
-                  <PA.ProfileImg>
-                    <img src={photoItem.image} alt="프로필" />
-                  </PA.ProfileImg>
-                  <div>{photoItem.user_id}</div>
-                </PA.Profile>
-              </PA.PhotoBoxBottom>
-            </PA.PhotoBoardBox>
-          </li>
-        ))
-      )}
-    </ul>
-  </PA.PhotoList>
-</PA.Wrapper>
+      <PA.PhotoList>
+        <ul>
+          {photoData.length === 0 ? (
+            <div>사진이 없습니다.</div>
+          ) : (
+            photoData.map((photoItem, index) => (
+              <li key={index}>
+                <PA.PhotoBoardBox>
+                  <PA.PhotoImg>
+                    <img src={photoItem.image} alt="업로드사진" />
+                  </PA.PhotoImg>
+                  <PA.PhotoBoxBottom>
+                    <PA.PhotoBoardTitle>
+                      {photoItem.createdAt}
+                    </PA.PhotoBoardTitle>
+                    <PA.Profile>
+                      <PA.ProfileImg>
+                        <img src={photoItem.image} alt="프로필" />
+                      </PA.ProfileImg>
+                      <div>{photoItem.user_id}</div>
+                    </PA.Profile>
+                  </PA.PhotoBoxBottom>
+                </PA.PhotoBoardBox>
+              </li>
+            ))
+          )}
+        </ul>
+      </PA.PhotoList>
+    </PA.Wrapper>
   );
 }
 

@@ -72,23 +72,22 @@ function GroupBoard() {
     fetchData(Number(groupId));
   }, [loginToken, groupId]);
 
-
   const [sortBy, setSortBy] = useState('like');
 
   function sortGroupData(groupData: GroupItem[]) {
     switch (sortBy) {
       case 'like':
-        return groupData.sort((a, b) => likeCounts[b.post_id] - likeCounts[a.post_id]);
+        return groupData.sort(
+          (a, b) => likeCounts[b.post_id] - likeCounts[a.post_id],
+        );
       case 'comment':
-        return groupData.sort((a, b) => commentCounts[b.post_id] - commentCounts[a.post_id]);
+        return groupData.sort(
+          (a, b) => commentCounts[b.post_id] - commentCounts[a.post_id],
+        );
       default:
         return groupData;
     }
   }
-
-
-
-
 
   async function fetchAdditionalData(groupData: GroupItem[]) {
     const promises = groupData.map(async item => {
@@ -169,8 +168,6 @@ function GroupBoard() {
 
     await Promise.all(promises);
   }
-
-  
 
   if (!groupData) {
     return <div>로딩 중...</div>;
