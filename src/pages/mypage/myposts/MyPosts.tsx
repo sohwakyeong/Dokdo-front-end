@@ -28,8 +28,17 @@ interface UserData {
 function MyPostsComponent({ data }: PostBoxProps) {
   const navigate = useNavigate();
   const [myPosts, setMyPosts] = useState<PostData[]>([]);
-  const [selectedPosts, setSelectedPosts] = useState<PostData[]>([]);
-  const [userData, setUserData] = useState<UserData | null>(null);
+  const [selectedPosts, setSelectedPosts] = useState<any[]>([]); // 추가: 선택된 포스트 정보를 저장할 상태
+  const [userData, setUserData] = useState<UserData | null>(null); // 추가: 유저 정보 상태
+
+  function formatCreatedAt(createdAt: string | number | Date) {
+    const date = new Date(createdAt);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+    return `${year}년 ${month}월 ${day}일`;
+  }
 
   useEffect(() => {
     const loginToken = getCookie('loginToken');
@@ -116,7 +125,7 @@ function MyPostsComponent({ data }: PostBoxProps) {
                 <MyPostsStyle.BoardLeft>
                   <MyPostsStyle.ProfileData>
                     <MyPostsStyle.ProfileImg
-                      src={userData.profilePic}
+                      src={`http://localhost:3001/api/v1/image/profile/${userData.profilePic}`}
                       alt={`${userData.name}의 프로필 사진`}
                     />
                     <MyPostsStyle.UpdatedProfile>
@@ -128,7 +137,7 @@ function MyPostsComponent({ data }: PostBoxProps) {
                   </MyPostsStyle.ProfileData>
 
                   <MyPostsStyle.Content>
-                    {selectedPost.content}
+                    {formatCreatedAt(selectedPost.content)}
                   </MyPostsStyle.Content>
                 </MyPostsStyle.BoardLeft>
                 <MyPostsStyle.BoardImg
