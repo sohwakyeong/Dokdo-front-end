@@ -42,7 +42,6 @@ export const GroupBoardList = styled.ul`
 
 export const Boardbox = styled.div`
   width: 90%;
-  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;

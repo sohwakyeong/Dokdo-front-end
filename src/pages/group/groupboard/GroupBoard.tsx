@@ -8,12 +8,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { getCookie } from '../../../helper/Cookie';
 
 interface GroupData {
-  _id: string;
-  title: string;
-  content: string;
-  images: string[];
-  createdAt: string;
-  updatedAt: string;
   group_id: number;
   user: {
     name: string;
@@ -26,6 +20,7 @@ interface GroupData {
     images: string[];
     createdAt: string;
     post_id: number;
+    updatedAt: string;
   };
 }
 

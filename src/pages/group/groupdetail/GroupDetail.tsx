@@ -14,32 +14,58 @@ import GroupHeader from '../../../components/layout/header/GroupHeader';
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
-function GroupDetail() {
-  const [groupData, setGroupData] = useState<{
-    group_id: number;
-    name: string;
-    tags: string[];
+interface MemberType {
+  post: {
     _id: string;
+    title: string;
+    content: string;
+    images: string[];
+    // ... 나머지 필드들
+  };
+  user: {
+    name: string;
+    profilePic: string;
+  };
+  // ... 나머지 필드들
+}
+interface GroupData {
+  group_id: number;
+  name: string;
+  isRecruit: boolean;
+  profile: string;
+  leader: number;
+  like: number;
+  mem: Array<{
+    _id: string;
+    group_id: number;
+    user_id: number;
+    createdAt: string;
+    // 필요한 다른 항목들 추가...
+  }>;
+  introduction: string;
+  place: string;
+  search: {
+    _id: string;
+    group_id: number;
     location: string;
     day: string;
     genre: string;
     age: string;
-    place: string;
-    introduction: string;
-    search: {
-      _id: string;
-      location: string;
-      day: string;
-      genre: string;
-      age: string;
-    };
-  } | null>(null);
+    __v: number;
+  };
+  tags: string[];
+  error: any;
+  createdAt: string;
+}
 
+function GroupDetail() {
+  const [groupData, setGroupData] = useState<GroupData | null>(null);
+  const { groupId } = useParams<{ groupId: string }>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [schedules, setSchedules] = useState<Array<any>>([]);
   const loginToken = getCookie('loginToken');
-  const { groupId } = useParams<{ groupId: string }>();
   const getLocalStorageKey = () => `schedules_${groupId}`;
+  const [members, setMembers] = useState<Array<any>>([]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -61,6 +87,27 @@ function GroupDetail() {
       console.log('Schedule limit reached!');
     }
   };
+
+  useEffect(() => {
+    // API 요청 함수 정의
+    async function fetchAllGroupBoardData(groupId: number) {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/api/v1/group/${groupId}/posts`,
+        );
+        if (response.status === 200) {
+          setMembers(response.data.data);
+        } else {
+          console.error('멤버 정보 가져오기 에러:', response.status);
+        }
+      } catch (error) {
+        console.error('멤버 정보 가져오기 에러:', error);
+      }
+    }
+
+    // 함수 호출
+    fetchAllGroupBoardData(Number(groupId));
+  }, [groupId]);
   useEffect(() => {
     // 페이지 로드 시 로컬 스토리지에서 해당 groupId의 일정 데이터 불러오기
     const savedSchedules = JSON.parse(
@@ -236,24 +283,23 @@ function GroupDetail() {
         )}
       </GD.Schedule>
       <GD.MemberBox>
-        <GD.Member>모집멤버 (25)</GD.Member>
+        <GD.Member>모집멤버 {members.length}</GD.Member>{' '}
+        {/* Displaying count of members here */}
         <ul>
-          {Array(5)
-            .fill('')
-            .map((v, i) => (
-              <GD.MemberList key={i}>
+          {members.map((member: MemberType, index: number) => (
+            <li key={index}>
+              <GD.MemberList>
                 <GD.MemberImg>
-                  <img src="" alt="프로필" />
+                  <img src={member.post.images[0]} alt="프로필" />
                 </GD.MemberImg>
                 <GD.Desc>
-                  <div>최형욱</div>
-                  <div>한줄 소개 블라브라브라브라ㅡ르바르</div>
+                  <div>{member.user.name}</div>
                 </GD.Desc>
               </GD.MemberList>
-            ))}
+            </li>
+          ))}
         </ul>
         <GD.ButtonDisplay>
-          {' '}
           <GD.NFWrapper>
             <GD.NFDisplay>
               <GD.NFNextBtn>

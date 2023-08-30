@@ -124,7 +124,7 @@ export const CIWrapper = styled.div`
   font-size: 13px;
   background-color: white;
   width: 472px;
-  z-index: 9999;
+  z-index: 9998;
   border-top: 0.5px solid #d7d7d7;
   margin-bottom: 58px;
 `;

@@ -60,10 +60,14 @@ export const Profile = styled.div`
   display: flex;
   align-items: center;
   height: 100%;
-
+  margin: 5px 0;
   & div {
-    margin: 15px 5px;
+    margin: 7px 5px;
   }
+`;
+
+export const User = styled.div`
+  font-size: 14px;
 `;
 
 export const PhotoBoxBottom = styled.div`
@@ -76,4 +80,6 @@ export const PhotoBoxBottom = styled.div`
 
 export const PhotoBoardTitle = styled.div`
   margin-top: 10px;
+  font-size: 19px;
+  font-
 `;
