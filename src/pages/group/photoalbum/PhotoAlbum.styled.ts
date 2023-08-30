@@ -17,12 +17,10 @@ export const GroupPhotoTitle = styled.div`
   align-items: center;
   margin: 15px;
   font-weight: 700;
-    box-sizing: border-box;
+  box-sizing: border-box;
   border-top: 0.5 solid #dbdbdb;
   border-bottom: 0.5 solid #dbdbdb;
 `;
-
-
 
 export const InputDisplay = styled.div`
   margin-top: 62px;
