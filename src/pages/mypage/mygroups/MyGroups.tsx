@@ -3,18 +3,18 @@ import * as MyGroupsStyle from './MyGroups.styled';
 import { useNavigate } from 'react-router-dom';
 import { getCookie } from '../../../helper/Cookie';
 import axios from 'axios';
-import MoreButton from '../../../components/common/morebutton/MoreButton';
+// import MoreButton from '../../../components/common/morebutton/MoreButton';
 
 interface UserData {
   
-  group: number[]; // group 필드는 숫자 배열로 정의
+  group: number[];
 }
 
 interface GroupData {
   name: string;
   introduction: string;
   tags: string[];
-  // 그룹의 다른 필드를 여기에 추가할 수 있습니다.
+
 }
 
 export default function MyGroupsComponent() {
@@ -38,7 +38,6 @@ export default function MyGroupsComponent() {
           setUserData(userData);
 
           if (userData.group && userData.group.length > 0) {
-            // 사용자의 그룹 데이터를 가져옵니다.
             fetchMyGroups(userData.group);
           }
         } else {
@@ -95,14 +94,18 @@ export default function MyGroupsComponent() {
                 <MyGroupsStyle.GroupIntro>
                   {group.introduction}
                 </MyGroupsStyle.GroupIntro>
-                <MyGroupsStyle.GroupTag>
-                  {group.tags.join(', ')}
-                </MyGroupsStyle.GroupTag>
+                <MyGroupsStyle.GroupTags>
+                  {group.tags.map((tag, tagIndex) => (
+                    <MyGroupsStyle.GroupTag key={tagIndex}>
+                      {tag}
+                    </MyGroupsStyle.GroupTag>
+                  ))}
+                </MyGroupsStyle.GroupTags>
               </MyGroupsStyle.RightSide>
             </MyGroupsStyle.GroupBoardBox>
           ))}
         </MyGroupsStyle.MyGroupBoardBox>
-        <MoreButton to="/group/list">더보기</MoreButton>
+        {/* <MoreButton to="/group/list">더보기</MoreButton> */}
       </MyGroupsStyle.Wrapper>
     </MyGroupsStyle.Container>
   );

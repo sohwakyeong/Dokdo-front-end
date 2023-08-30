@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import * as MyPageStyle from './MyPage.styled';
-import UserIcon from '../../../assets/img/userprofile.png';
 import { getCookie, removeCookie } from '../../../helper/Cookie';
 import { useNavigate } from 'react-router-dom';
 import AxiosC from '../../../helper/AxiosC';
@@ -67,7 +66,8 @@ function MyPageComponent() {
   return (
     <MyPageStyle.Container>
       <MyPageStyle.Wrapper>
-        <MyPageStyle.UserIcon src={UserIcon} alt="유저 설정 이미지" />
+        <MyPageStyle.UserIcon src={`http://localhost:3001/api/v1/image/profile/${userData.profilePic}`}
+ alt="유저 설정 이미지" />
         <MyPageStyle.Introduce>
           <MyPageStyle.NickName>{userData.name}</MyPageStyle.NickName>
           <MyPageStyle.SimpleIntro>
@@ -84,7 +84,7 @@ function MyPageComponent() {
       </MyPageStyle.Group>
 
       <Slider5 />
-
+<MyPageStyle.Section /> 
       <MyPageStyle.ManageList>
         <MyPageStyle.ManageTitle>나의 관리 목록</MyPageStyle.ManageTitle>
         <MyPageStyle.ManageLink2 to="/user/mypage/myposts">

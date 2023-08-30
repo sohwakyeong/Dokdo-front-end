@@ -28,31 +28,40 @@ interface UserData {
 function MyPostsComponent({ data }: PostBoxProps) {
   const navigate = useNavigate();
   const [myPosts, setMyPosts] = useState<PostData[]>([]);
-  const [selectedPosts, setSelectedPosts] = useState<PostData[]>([]);
-  const [userData, setUserData] = useState<UserData | null>(null);
+  const [selectedPosts, setSelectedPosts] = useState<any[]>([]); // 추가: 선택된 포스트 정보를 저장할 상태
+  const [userData, setUserData] = useState<UserData | null>(null); // 추가: 유저 정보 상태
+  
+  function formatCreatedAt(createdAt: string | number | Date) {
+    const date = new Date(createdAt);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
 
-  useEffect(() => {
-    const loginToken = getCookie('loginToken');
+    return `${year}년 ${month}월 ${day}일`;
+  }
 
-    axios
-      .get('http://localhost:3001/api/v1/auth/me', {
-        headers: {
-          Authorization: `Bearer ${loginToken}`,
-        },
-        withCredentials: true,
-      })
-      .then(response => {
-        if (response.status === 200) {
-          setUserData(response.data.data.getUser);
-        } else {
-          navigate('/signup');
-        }
-      })
-      .catch(error => {
-        console.error('myposts유저 정보 가져오기 에러:', error);
-        navigate('/');
-      });
-  }, [navigate]);
+   useEffect(() => {
+     const loginToken = getCookie('loginToken');
+
+     axios
+       .get('http://localhost:3001/api/v1/auth/me', {
+         headers: {
+           Authorization: `Bearer ${loginToken}`,
+         },
+         withCredentials: true,
+       })
+       .then(response => {
+         if (response.status === 200) {
+           setUserData(response.data.data.getUser);
+         } else {
+           navigate('/signup');
+         }
+       })
+       .catch(error => {
+         console.error('myposts유저 정보 가져오기 에러:', error);
+         navigate('/');
+       });
+   }, [navigate]);
 
   useEffect(() => {
     const loginToken = getCookie('loginToken');
@@ -105,6 +114,38 @@ function MyPostsComponent({ data }: PostBoxProps) {
 
   return (
     <MyPostsStyle.Container>
+      <MyPostsStyle.Wrapper>
+        <MyPostsStyle.GroupBoardList>
+          {userData &&
+            selectedPosts.map(selectedPost => (
+              <MyPostsStyle.Boardbox key={selectedPost._id}>
+                <MyPostsStyle.BoardLeft>
+                  <MyPostsStyle.ProfileData>
+                    <MyPostsStyle.ProfileImg
+                      src={`http://localhost:3001/api/v1/image/profile/${userData.profilePic}`}
+                      alt={`${userData.name}의 프로필 사진`}
+                    />
+                    <MyPostsStyle.UpdatedProfile>
+                      <MyPostsStyle.Writer>{userData.name}</MyPostsStyle.Writer>
+                      <MyPostsStyle.PostedDate>
+                        {selectedPost.createdAt}
+                      </MyPostsStyle.PostedDate>
+                    </MyPostsStyle.UpdatedProfile>
+                  </MyPostsStyle.ProfileData>
+
+                  <MyPostsStyle.Content>
+                    {selectedPost.content}
+                  </MyPostsStyle.Content>
+                </MyPostsStyle.BoardLeft>
+                <MyPostsStyle.BoardImg
+                  src={`http://localhost:3001/api/v1/image/post/${selectedPost.images[0]}`} // 이미지 URL 설정
+                  alt="게시된 이미지"
+                />
+              </MyPostsStyle.Boardbox>
+            ))}
+        </MyPostsStyle.GroupBoardList>
+      </MyPostsStyle.Wrapper>
+    </MyPostsStyle.Container>
     <MyPostsStyle.Wrapper>
       <MyPostsStyle.GroupBoardList>
         {userData &&
@@ -139,3 +180,4 @@ function MyPostsComponent({ data }: PostBoxProps) {
 }
 
 export default MyPostsComponent;
+
