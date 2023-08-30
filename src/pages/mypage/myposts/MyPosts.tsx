@@ -134,7 +134,7 @@ function MyPostsComponent({ data }: PostBoxProps) {
                   </MyPostsStyle.ProfileData>
 
                   <MyPostsStyle.Content>
-                    {selectedPost.content}
+                    {formatCreatedAt(selectedPost.content)}
                   </MyPostsStyle.Content>
                 </MyPostsStyle.BoardLeft>
                 <MyPostsStyle.BoardImg
