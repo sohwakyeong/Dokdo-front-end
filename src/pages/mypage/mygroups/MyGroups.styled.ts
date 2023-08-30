@@ -36,7 +36,7 @@ export const Title = styled.div`
 
 export const GroupBoardBox = styled.div`
   display: flex;
-  border: 1px solid #2e2e2e;
+  border: 1px solid #8e8e8e;
   width: 100%;
   height: 100px;
   border-radius: 20px;
@@ -78,7 +78,21 @@ export const GroupIntro = styled.div`
   font-size: 13px;
 `;
 
-export const GroupTag = styled.div`
-  font-size: 11px;
+export const GroupTags = styled.div`
+  display: flex;
+  
 `;
+export const GroupTag = styled.div`
+  font-size: 8px;
+  color: #84614b;
 
+  background-color: #fdf8ef;
+  border-radius: 15px;
+  align-items: center;
+  text-align: center;
+
+
+  & + & {
+    margin-left: 5px;
+  }
+`;

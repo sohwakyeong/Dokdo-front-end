@@ -13,6 +13,9 @@ function EditProfileComponent() {
   const [pwdMsg, setPwdMsg] = useState('');
   const [confirmPwdMsg, setConfirmPwdMsg] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isProfileImageModalOpen, setIsProfileImageModalOpen] = useState(false);
+  const [profilePic, setProfilePic] = useState('');
+  const [selectedFile, setSelectedFile] = useState<File | null>(null); // 선택한 파일을 상태로 관리
 
   // 데이터 API. fetchData할 때는 axios를 써야함
   // 유저 정보 가져오기 위한 값 타입 지정
@@ -62,7 +65,13 @@ function EditProfileComponent() {
     },
     [newPassword],
   );
-
+  // 파일 선택 시 호출되는 함수
+ const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+   const selectedFile = e.target.files?.[0]; // Get the first selected file
+   if (selectedFile) {
+     setSelectedFile(selectedFile);
+   }
+ };
   // logintoken 확인하고 유저 정보 가져옴
   useEffect(() => {
     axios
@@ -85,18 +94,47 @@ function EditProfileComponent() {
       });
   }, [navigate, loginToken]);
 
+  // 모달에서 파일 업로드 함수
+  const uploadFile = () => {
+    if (!selectedFile) {
+      alert('파일을 선택하세요.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('img', selectedFile);
+    const loginToken = getCookie('loginToken'); // getCookie 함수로 'loginToken' 쿠키 값을 가져옵니다.
+
+    axios
+      .put('http://localhost:3001/api/v1/auth/me/profilePic', formData, {
+        headers: {
+          Authorization: `Bearer ${loginToken}`,
+          'Content-Type': 'multipart/form-data',
+        },  
+        withCredentials: true,
+      })
+      .then(response => {
+        if (response.status === 200) {
+          // 업로드 성공 시, 프로필 이미지를 업데이트합니다.
+         setProfilePic(response.data.data);
+          setIsProfileImageModalOpen(false);
+        } else {
+          console.error('프로필 이미지 업로드 실패:', response.data.error);
+        }
+      })
+      .catch(error => {
+        console.error('프로필 이미지 업로드 에러:', error);
+      });
+  };
+
   if (!userData) {
-    // userData가 없으면 로딩 또는 에러 메시지 표시
+   
     return <div>로딩 중...</div>;
   }
-  // 저장하기 함수
+
+  // 모달에서 비밀번호 변경하기 함수
   const onClickModalSubmit = () => {
-    if (
-      !(
-        newPassword &&
-        confirmPassword
-      )
-    ) {
+    if (!(newPassword && confirmPassword)) {
       return alert('빈칸 없이 입력해주세요.');
     }
     if (newPassword !== confirmPassword) {
@@ -105,7 +143,6 @@ function EditProfileComponent() {
 
     const updatedUserData = {
       password: newPassword, // 변경할 패스워드
-      
     };
 
     axios
@@ -126,14 +163,10 @@ function EditProfileComponent() {
         console.error('프로필 업데이트 에러:', error);
       });
   };
+
   // 저장하기 함수
   const onClickSubmit = () => {
-    if (
-      !(
-        userData.name &&
-        userData.introduction
-      )
-    ) {
+    if (!(userData.name && userData.introduction)) {
       return alert('빈칸 없이 입력해주세요.');
     }
 
@@ -164,12 +197,42 @@ function EditProfileComponent() {
   return (
     <EditStyle.Container>
       <EditStyle.Wrapper>
-        <EditStyle.UserIcon src={UserIcon} alt="유저 설정 이미지" />
+        <EditStyle.UserIconBtn onClick={() => setIsProfileImageModalOpen(true)}>
+          <EditStyle.UserIcon
+            src={`http://localhost:3001/api/v1/image/profile/${
+              userData.profilePic
+            }?${Date.now()}`}
+            alt="유저 설정 이미지"
+          />
+        </EditStyle.UserIconBtn>
+        {isProfileImageModalOpen && (
+          <Modal onClose={() => setIsProfileImageModalOpen(false)}>
+            <h1>프로필 이미지 업로드</h1>
+            {/* 이미지 선택 부분을 추가하고 필요한 처리를 구현하세요. */}
+            <EditStyle.FormTag>
+              <EditStyle.Tag>이미지 선택</EditStyle.Tag>
+            </EditStyle.FormTag>
+            <EditStyle.FormInput>
+              <form encType="multipart/form-data">
+                <input
+                  type="file"
+                  id="chooseFile"
+                  name="chooseFile"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                />
+              </form>
+            </EditStyle.FormInput>
+            <EditStyle.ModalSubmitButton onClick={uploadFile}>
+              업로드
+            </EditStyle.ModalSubmitButton>
+          </Modal>
+        )}
         <EditStyle.IconDes>
-          5mb 이하의 크기로 파일을 첨부해주세요.
+          50MB 이하의 jpg 확장자 파일만
         </EditStyle.IconDes>
         <EditStyle.IconDes>
-          pdf, jpeg 파일만 업로드가 가능합니다.
+          업로드가 가능합니다.
         </EditStyle.IconDes>
       </EditStyle.Wrapper>
       <EditStyle.Wrapper2>
@@ -193,7 +256,7 @@ function EditProfileComponent() {
           <EditStyle.Tag>비밀번호</EditStyle.Tag>
         </EditStyle.FormTag>
         <EditStyle.FormInput>
-          <EditStyle.Input
+          <EditStyle.FixInput
             readOnly
             id="pwd_val"
             type="password"

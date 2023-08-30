@@ -122,7 +122,7 @@ function MyPostsComponent({ data }: PostBoxProps) {
                 <MyPostsStyle.BoardLeft>
                   <MyPostsStyle.ProfileData>
                     <MyPostsStyle.ProfileImg
-                      src={userData.profilePic}
+                      src={`http://localhost:3001/api/v1/image/profile/${userData.profilePic}`}
                       alt={`${userData.name}의 프로필 사진`}
                     />
                     <MyPostsStyle.UpdatedProfile>
@@ -133,7 +133,9 @@ function MyPostsComponent({ data }: PostBoxProps) {
                     </MyPostsStyle.UpdatedProfile>
                   </MyPostsStyle.ProfileData>
 
-                  <MyPostsStyle.Content>{selectedPost.content}</MyPostsStyle.Content>
+                  <MyPostsStyle.Content>
+                    {selectedPost.content}
+                  </MyPostsStyle.Content>
                 </MyPostsStyle.BoardLeft>
                 <MyPostsStyle.BoardImg
                   src={`http://localhost:3001/api/v1/image/post/${selectedPost.images[0]}`} // 이미지 URL 설정

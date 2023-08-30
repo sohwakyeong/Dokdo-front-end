@@ -80,7 +80,7 @@ export default function Slider3() {
       modules={[Navigation, Pagination]}
       className="mySwiper"
     >
-      {popularData.map((item, index) => (
+      {popularData.slice(0,3).map((item, index) => (
         <SwiperSlide key={index}>
           {item.name && <MiddleBoardBox2 data={item} />}
         </SwiperSlide>
