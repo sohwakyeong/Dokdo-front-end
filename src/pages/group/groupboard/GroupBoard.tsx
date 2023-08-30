@@ -4,9 +4,9 @@ import SearchInput from '../../../components/common/searchinput/SearchInput';
 import axios from 'axios';
 import PenFooter from '../../../components/layout/footer/PenFooter';
 import GroupHeader from '../../../components/layout/header/GroupHeader';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { getCookie } from '../../../helper/Cookie';
-import { useNavigate } from 'react-router-dom';
+
 interface GroupData {
   _id: string;
   title: string;
@@ -14,7 +14,6 @@ interface GroupData {
   images: string[];
   createdAt: string;
   updatedAt: string;
-  post_id: number;
   group_id: number;
   user: {
     name: string;
@@ -26,6 +25,7 @@ interface GroupData {
     content: string;
     images: string[];
     createdAt: string;
+    post_id: number;
   };
 }
 
@@ -38,8 +38,6 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
   const [groupBoardData, setGroupBoardData] = useState<GroupData[]>([]);
   const loginToken = getCookie('loginToken');
   const navigate = useNavigate();
-
-
 
   const formatDate = (dateString: string | number | Date) => {
     const options = { month: '2-digit', day: '2-digit' };
@@ -90,16 +88,24 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
     <GB.Wrapper>
       <GroupHeader data={{ group: Number(groupId) }} />
       <GB.GroupBoardList>
-      <PenFooter />
-      <SearchInput />
+        <PenFooter />
+        <SearchInput />
         <GB.GroupBoardTitle>
           <div>모임 이름</div>
         </GB.GroupBoardTitle>
         {groupBoardData.map((groupBoardItem, index) => (
-          <GB.Boardbox key={index} onClick={() => navigate(`/group/${groupId}/board/${groupBoardItem.post._id}`)}>
+          <GB.Boardbox
+            key={index}
+            onClick={() =>
+              navigate(`/group/${groupId}/board/${groupBoardItem.post.post_id}`)
+            }
+          >
             <GB.BoardLeft>
               <GB.User>
-                <img src={groupBoardItem.user.profilePic} alt="게시자 프로필" />
+                <img
+                  src={groupBoardItem.user.profilePic}
+                  alt="게시자 프로필"
+                />
                 <GB.UserName>
                   <div>{groupBoardItem.user.name}</div>
                   <div>{formatDate(groupBoardItem.post.createdAt)}</div>

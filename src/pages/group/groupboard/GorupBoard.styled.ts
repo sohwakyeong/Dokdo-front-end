@@ -1,11 +1,10 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 474px;
+  width: 100%;
   height: 100%;
 `;
 
@@ -18,7 +17,7 @@ export const GroupBoardTitle = styled.div`
   justify-content: center;
   align-items: center;
   font-weight: 700;
-  margin-top:20px;
+  margin-top: 20px;
 
   & div {
     height: 100%;
@@ -38,7 +37,7 @@ export const GroupBoardList = styled.ul`
   align-items: center;
   margin-top: 56px;
   width: 100%;
-  height: 141px;
+  height: 100%;
 `;
 
 export const Boardbox = styled.div`
@@ -48,20 +47,6 @@ export const Boardbox = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  margin: 10px 0;
-  box-sizing: border-box;
-  border-bottom: solid 1px #ddd;
-  background-color: white;
-`;
-
-export const StyledLink = styled(Link)`
-  width: 90%;
-  height: 141px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-  margin: 10px 0;
   box-sizing: border-box;
   border-bottom: solid 1px #ddd;
   background-color: white;
@@ -72,7 +57,7 @@ export const BoardLeft = styled.div`
   flex-direction: column;
   justify-content: space-around;
   padding: 5px;
-  width: 285px;
+  width: 70%;
   height: 100px;
   overflow: hidden;
 
