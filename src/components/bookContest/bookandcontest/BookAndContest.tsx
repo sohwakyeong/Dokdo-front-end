@@ -17,8 +17,6 @@ const BookAndContest = () => {
         </BC.BoxTitleBox>
         <BC.SliederBox>
           <BookAndConstBox />
-       
-
         </BC.SliederBox>
       </BC.Box>
     </BC.Wrapper>
