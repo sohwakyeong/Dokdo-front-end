@@ -1,18 +1,28 @@
-import React,{useState} from "react";
+import React, {useState} from "react";
 import axios from 'axios';
 import * as A from './Admin.styled';
 
 interface AdminPostData {
-        title: string;
-        content: string;
+    post : {
+        _id: string;
+        group_id: number;
+        post_id: number; 
+        user_id: number; 
         createdAt: string;
         updatedAt: string;
-        post_id: number;    
+    },
+    user : {
+        name: string;
+        profilePic: string; 
+    }
+    
 }
 
 interface AdminPostProps {
     data?:AdminPostData;
 }
+
+
 
 function PostData({data}: AdminPostProps) {
 
@@ -20,41 +30,48 @@ function PostData({data}: AdminPostProps) {
 
     async function handleDeletePost() {
         try{
-            await axios.delete(`http://localhost:3001/api/v1/admin/posts/${data?.post_id}`);
+            await axios.delete(`http://34.64.149.22:3001/api/v1/admin/posts/${data?.post.post_id}`);
             setDeleted(true);
         } catch (error) {
             throw error;
         }
     }
-    
-    if (!data){
+
+    if (!data ){
         return null;
     }
     
-    const {post_id, title, createdAt, updatedAt} = data;
+    const {
+        post: { post_id, group_id, createdAt },
+        user: { name },
+    } = data;
+
+    const utcDate = new Date(createdAt);
+    const localDate = utcDate.toLocaleDateString();
     
     return (
-        <tr>
-            {data && (
-                <td>{post_id}</td>
-                )}
-            {data && (
-                <td>{title}</td>
-                )}
-            {data && (
-                <td>{createdAt}</td>
-                )}
+        <tbody>
+            <tr>
                 {data && (
-                <td>{updatedAt}</td>
-                )}
-            {data && (
-                <td>
-                    <A.AdminButton>수정</A.AdminButton>
-                    <A.AdminButton onClick={handleDeletePost}>삭제</A.AdminButton>
-                    {deleted && <p>게시글이 삭제되었습니다.</p>}
-                </td>
-                )}
-        </tr>
+                    <td>{post_id}</td>
+                    )}
+                {data && (
+                    <td>{group_id}</td>
+                    )}
+                {data && (
+                    <td>{name}</td>
+                    )}
+                {data && (
+                    <td>{localDate}</td>
+                    )}
+                {data && (
+                    <td>
+                        <A.AdminButton onClick={handleDeletePost}>삭제</A.AdminButton>
+                        {deleted && <></>}
+                    </td>
+                    )}
+            </tr>
+        </tbody>
     );
 }
 

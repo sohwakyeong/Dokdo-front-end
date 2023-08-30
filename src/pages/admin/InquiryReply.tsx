@@ -5,23 +5,6 @@ import * as Reply from "./InquiryReply.styled";
 function InquiryReply (){
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-
- /*   const onSubmitHandler = async (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-    try {
-      const response = await Axios.post(
-        'http://localhost:3001/api',
-        {
-          title,
-          content,
-        },
-      );
-    } catch (e) {
-      console.error(e);
-    }
-  };
-  onClick={onSubmitHandler}
-*/
     return (
         <Reply.Container>
         <Reply.Wrapper>

@@ -7,6 +7,7 @@ import AdminGroup from '../pages/admin/AdminGroup';
 import InquiryList from '../pages/admin/InquiryList';
 import InquiryReply from '../pages/admin/InquiryReply';
 import AdminUser from '../pages/admin/AdminUser';
+import AdminAlbum from '../pages/admin/AdminAlbum';
 
 function AdminRoutes() {
   return (
@@ -27,6 +28,14 @@ function AdminRoutes() {
           </Admin>
         }
       />
+       <Route
+        path="/admin/album"
+        element={
+          <Admin>
+            <AdminAlbum />
+          </Admin>
+        }
+      />
       <Route
         path="/admin/group"
         element={
@@ -43,7 +52,10 @@ function AdminRoutes() {
           </Admin>
         }
       />
-      <Route path="/admin/inquiryreply" element={<InquiryReply />} />
+      <Route 
+        path="/admin/inquiryreply" 
+        element={<InquiryReply />} 
+        />
       <Route
         path="/admin"
         element={

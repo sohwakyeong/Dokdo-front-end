@@ -11,7 +11,8 @@ interface SelectBoxProps {
   value: string;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
-function SelectBox({ options, value, onChange }: SelectBoxProps) {
+
+function SelectBox2({ options, value, onChange }: SelectBoxProps) {
   return (
     <SBox.SelectWrapper>
       <SBox.StyledSelect value={value} onChange={onChange}>
@@ -24,4 +25,4 @@ function SelectBox({ options, value, onChange }: SelectBoxProps) {
     </SBox.SelectWrapper>
   );
 }
-export default SelectBox;
+export default SelectBox2;

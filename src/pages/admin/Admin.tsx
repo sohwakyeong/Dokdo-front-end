@@ -28,31 +28,41 @@ function Admin({children}: AdminProps) {
     <S.GreyWrapper>
         <S.SideBar>
             <S.SideNav>
-                <S.Logo><S.LogoImg src={Logo2} alt="로고 이미지" /></S.Logo> 
-                    <div></div>
-                <S.AdminLink to="/admin/user">
-                    <S.IconImg src={User} alt="사람 이미지" />회원 정보 관리
-                </S.AdminLink>
-                    <div></div>
-                <S.AdminLink to="/admin/post">
-                <S.IconImg src={Note} alt="게시글 이미지" />게시글 관리
-                </S.AdminLink>
-                    <div></div>
-                <S.AdminLink to="/admin/group">
-                    <S.IconImg src={Group} alt="모임 이미지" />모임 관리
-                </S.AdminLink>
-                    <div></div>
-                <S.AdminLink to="/admin/inquirylist">
-                <S.IconImg src={Favorite} alt="질문 이미지" />문의사항</S.AdminLink>
-                    <div></div>
-                <S.AdminLink to="/">
-                    <S.IconImg src={Plus} alt="문의사항 이미지" />도서 및 공모전 관리
-                </S.AdminLink>
+                    <S.Logo><S.LogoImg src={Logo2} alt="로고 이미지" /></S.Logo> 
+                <S.SideMenu>
+                    <S.AdminLink to="/">
+                        <S.IconImg src={Plus} alt="홈 이미지" />공모전/책 관리
+                    </S.AdminLink>
+                </S.SideMenu>
+                <S.SideMenu>
+                    <S.AdminLink to="/admin/user">
+                        <S.IconImg src={User} alt="사람 이미지" />회원 정보 관리
+                    </S.AdminLink>
+                </S.SideMenu>
+                <S.SideMenu>
+                    <S.AdminLink to="/admin/post">
+                    <S.IconImg src={Note} alt="게시글 이미지" />게시글 관리
+                    </S.AdminLink>
+                </S.SideMenu>
+                <S.SideMenu>
+                    <S.AdminLink to="/admin/album">
+                    <S.IconImg src={Note} alt="사진첩 이미지" />사진첩 관리
+                    </S.AdminLink>
+                </S.SideMenu>
+                <S.SideMenu>                
+                    <S.AdminLink to="/admin/group">
+                        <S.IconImg src={Group} alt="모임 이미지" />모임 관리
+                    </S.AdminLink>
+                </S.SideMenu>
+                <S.SideMenu>
+                    <S.AdminLink to="/admin/inquirylist">
+                    <S.IconImg src={Favorite} alt="질문 이미지" />문의사항</S.AdminLink>
+                </S.SideMenu>
             </S.SideNav> 
             {isLoggedIn ? (
-                <S.LogoutButton onClick={handleLogout}><S.IconImg src={Bell} alt="로그아웃 이미지" />로그아웃</S.LogoutButton>
+                <S.LogoutButton onClick={handleLogin}><S.IconImg src={Bell} alt="로그아웃 이미지" />로그아웃</S.LogoutButton>
                 ) : (
-                <S.LogoutButton onClick={handleLogin}><S.IconImg src={Bell} alt="로그인 이미지" />로그인</S.LogoutButton>
+                <S.LogoutButton onClick={handleLogout}><S.IconImg src={Bell} alt="로그인 이미지" />로그인</S.LogoutButton>
                 )}
             </S.SideBar>
         <S.Children>{children}</S.Children>
