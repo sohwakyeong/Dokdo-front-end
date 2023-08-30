@@ -125,7 +125,7 @@ const MainRoutes = () => {
         }
       />
       <Route
-        path="/group/:groupId/photo/:postsId"
+        path="/group/:group_id/photo/:post_id"
         element={
           <Layout3>
             <PhotoAlbumDetail />

@@ -5,6 +5,7 @@ import { getCookie } from '../../../helper/Cookie';
 import { useParams } from 'react-router-dom';
 
 interface GroupDetailData {
+  error: null | string;
   data: {
     _id: string;
     title: string;
@@ -13,8 +14,14 @@ interface GroupDetailData {
     updatedAt: string;
     post_id: number;
     images: string[];
-    group_id: number;
+    __v: number;
   };
+}
+interface Comment {
+  text: string;
+  isDeleted: boolean;
+  comment_id: number;
+  createdAt: string;
 }
 
 interface GroupBoardDetailDataProps {
@@ -24,100 +31,153 @@ interface GroupBoardDetailDataProps {
 const GroupBoardDetail: React.FC<GroupBoardDetailDataProps> = ({ data }) => {
   const loginToken = getCookie('loginToken');
 
-  const [groupDetail, setGroupDetail] = useState<GroupDetailData | null>(null);
-  const { group_id, post_id } = useParams<{
-    group_id: string;
-    post_id: string;
+  const { groupId, postsId } = useParams<{
+    groupId?: string;
+    postsId?: string;
   }>();
 
+  const group_Id = groupId ? parseInt(groupId, 10) : undefined;
+  const post_Id = postsId ? parseInt(postsId, 10) : undefined;
+
+  const [groupDetail, setGroupDetail] = useState<GroupDetailData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [commentText, setCommentText] = useState('');
+
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const groupDataResponse = await axios.get(
-          `http://localhost:3001/api/v1/group/${group_id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${loginToken}`,
-            },
-            withCredentials: true,
-          },
-        );
-        if (groupDataResponse.status === 200) {
-          const fetchedGroupData = groupDataResponse.data.data;
-          fetchGroupDetail(
-            parseInt(fetchedGroupData.group_id), // Parse the group_id to integer
-            parseInt(fetchedGroupData.post_id), // Parse the post_id to integer
-          );
-        } else {
-          console.error(
-            '그룹 정보 가져오기 에러:',
-            groupDataResponse.data.status,
-          );
-        }
-      } catch (error) {
-        console.error('그룹 정보 가져오기 에러:', error);
-      }
+    if (group_Id && post_Id) {
+      fetchGroupDetail(group_Id, post_Id);
+      fetchComments(group_Id, post_Id);
     }
-    console.log('user_id:', group_id); // Add this line
-    console.log('post_id:', post_id); // Add this line
+  }, [loginToken, group_Id, post_Id]);
 
-    fetchData();
-  }, [loginToken, group_id]);
-
-  async function fetchGroupDetail(group_Id: number, post_Id: number) {
+  const fetchGroupDetail = async (gId: number, pId: number) => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/api/v1/group/${group_Id}/posts/${post_Id}`,
+        `http://localhost:3001/api/v1/group/${gId}/posts/${pId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${loginToken}`,
+          },
+          withCredentials: true,
+        },
       );
 
       if (response.status === 200) {
-        const fetchedDetailData = response.data.data;
+        const fetchedDetailData = {
+          error: null,
+          data: response.data.data,
+        };
         setGroupDetail(fetchedDetailData);
       } else {
         console.error('Error fetching detail data:', response.status);
       }
     } catch (error) {
       console.error('Error fetching detail data:', error);
+    } finally {
+      setIsLoading(false);
     }
-  }
+  };
+  const postComment = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:3001/api/v1/group/${group_Id}/posts/${post_Id}/comments`,
+        { text: commentText },
+        {
+          headers: {
+            Authorization: `Bearer ${loginToken}`,
+          },
+          withCredentials: true,
+        },
+      );
 
-  if (!groupDetail) {
+      if (response.status === 200) {
+        window.location.reload(); // 페이지를 새로고침
+      } else {
+        console.error('Error posting comment:', response.status);
+      }
+    } catch (error) {
+      console.error('Error posting comment:', error);
+    }
+  };
+
+  const fetchComments = async (gId: number, pId: number) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/api/v1/group/${gId}/posts/${pId}/comments`,
+        {
+          headers: {
+            Authorization: `Bearer ${loginToken}`,
+          },
+          withCredentials: true,
+        },
+      );
+
+      if (response.status === 200) {
+        setComments(response.data.data);
+      } else {
+        console.error('Error fetching comments:', response.status);
+      }
+    } catch (error) {
+      console.error('Error fetching comments:', error);
+    }
+  };
+
+  if (isLoading) {
     return <div>Loading...</div>;
   }
 
   return (
     <GBD.Wrapper>
       <GBD.GroupBoardTitle>
-        <div>{groupDetail.data.title}</div>
+        <div>{groupDetail?.data?.title || 'Loading...'}</div>
       </GBD.GroupBoardTitle>
       <GBD.User>
-        <GBD.ProfileImg>
-          {/* <img src={groupDetail.user.profilePic} alt="작성자 프로필" /> */}
-        </GBD.ProfileImg>
+        <GBD.ProfileImg></GBD.ProfileImg>
         <GBD.Desc>
           <GBD.DescDisplay>
-            <div>
-              <div>{groupDetail.data.createdAt}</div>
-            </div>
+            <div>{groupDetail?.data?.createdAt || 'Loading...'}</div>
             <GBD.EditButton>●●●</GBD.EditButton>
           </GBD.DescDisplay>
         </GBD.Desc>
       </GBD.User>
       <GBD.UserWriteBox>
-        <div>{groupDetail.data.content}</div>
+        <div>{groupDetail?.data?.content || 'Loading...'}</div>
+        <img
+          src={`http://localhost:3001/api/v1/image/post/${groupDetail?.data.images[0]}`}
+          alt="게시된 이미지"
+        />
       </GBD.UserWriteBox>
       <GBD.Button>
         <button>❤️ 좋아요 숫자</button>
         <button>공유하기</button>
       </GBD.Button>
-      <GBD.Comment>{/* 댓글 표시 부분 */}</GBD.Comment>
+      <GBD.Comment>
+        {comments.map(comment => (
+          <div key={comment.comment_id}>
+            {!comment.isDeleted ? (
+              <>
+                <div>{comment.text}</div>
+                <div>{comment.createdAt}</div>
+              </>
+            ) : (
+              <div>Deleted Comment</div>
+            )}
+          </div>
+        ))}
+      </GBD.Comment>
       <GBD.CIWrapper>
         <GBD.CIDisplay>
           <GBD.CIInput>
-            <input type="text" placeholder="댓글을 입력하세요." />
+            <input
+              type="text"
+              placeholder="댓글을 입력하세요."
+              value={commentText}
+              onChange={e => setCommentText(e.target.value)}
+            />
           </GBD.CIInput>
           <GBD.CIButton>
-            <button>등록</button>
+            <button onClick={postComment}>등록</button>
           </GBD.CIButton>
         </GBD.CIDisplay>
       </GBD.CIWrapper>
