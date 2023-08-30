@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import * as PA from './PhotoAlbum.styled';
 import SearchInput from '../../../components/common/searchinput/SearchInput';
 import axios from 'axios';
-import PenFooter from '../../../components/layout/footer/PenFooter';
+import PenFooter2 from '../../../components/layout/footer/PenFooter2';
 import { getCookie } from '../../../helper/Cookie';
 import { useParams } from 'react-router-dom';
 import GroupHeader from '../../../components/layout/header/GroupHeader';
@@ -72,7 +72,7 @@ const PhotoAlbum: React.FC<PhotoItemProps> = ({ data }) => {
   return (
     <PA.Wrapper>
       <GroupHeader data={{ group: Number(groupId) }} />
-      <PenFooter />
+      <PenFooter2 />
       <PA.InputDisplay>
         <SearchInput />
       </PA.InputDisplay>
