@@ -9,7 +9,6 @@ export const Container = styled.div`
   margin: 15px auto 0 auto;
 `;
 
-
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
@@ -43,7 +42,7 @@ export const BoardLeft = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  
+
   width: 285px;
   height: auto;
   overflow: hidden;
@@ -59,7 +58,7 @@ export const BoardLeft = styled.div`
 
 export const ProfileData = styled.div`
   display: flex;
-  
+
   align-items: center;
 `;
 
@@ -69,13 +68,10 @@ export const ProfileImg = styled.img`
   border-radius: 50%;
 `;
 export const UpdatedProfile = styled.div`
-display: flex;
-flex-direction: column;
-margin-left: 15px;
-
-
-
-`
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+`;
 export const Writer = styled.div`
   font-size: 14px;
   color: black;
@@ -86,9 +82,8 @@ export const PostedDate = styled.div`
   font-size: 12px;
 `;
 export const Title = styled.div`
-font-weight: 500;
-
-` 
+  font-weight: 500;
+`;
 
 export const Content = styled.div`
   font-size: 14px;
