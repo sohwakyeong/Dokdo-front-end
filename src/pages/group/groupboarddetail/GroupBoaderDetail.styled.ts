@@ -62,11 +62,11 @@ export const Button = styled.div`
 export const Comment = styled.div`
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
   border-top: solid 1px #ddd;
   margin-bottom: 55px;
 `;
-
 export const CommentProfileImg = styled.div`
   width: 50px;
   height: 50px;
