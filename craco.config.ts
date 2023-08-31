@@ -1,12 +1,9 @@
-import path from 'path';
+const path = require('path');
 
-const cracoConfig = {
+module.exports = {
   webpack: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
-      '@assets': path.resolve(__dirname, 'src/assets'),
     },
   },
 };
-
-export default cracoConfig;
