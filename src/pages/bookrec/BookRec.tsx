@@ -1,15 +1,6 @@
 import React from 'react';
-import * as BC from '@/pages/bookrec/BookRec.Styled';
-import bookImg1 from '@/assets/img/bookImg/책추천12.jpeg'
-import bookImg2 from '@/assets/img/bookImg/책추천13.jpeg';
-import bookImg3 from '@/assets/img/bookImg/책추천3.jpeg';
-import bookImg4 from '@/assets/img/bookImg/책추천4.jpeg';
-import bookImg5 from '@/assets/img/bookImg/책추천5.jpeg';
-import bookImg6 from '@/assets/img/bookImg/책추천6.jpeg';
-import bookImg7 from '@/assets/img/bookImg/책추천7.jpeg';
-import bookImg8 from '@/assets/img/bookImg/책추천8.jpeg';
-import bookImg9 from '@/assets/img/bookImg/책추천9.jpeg';
-import bookImg10 from '@/assets/img/bookImg/책추천2.jpeg';
+import * as BC from '@/pages/bookrec/BookRec.Styled'
+
 
 const BookRec = () => {
   return (
@@ -27,7 +18,13 @@ const BookRec = () => {
               <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000201142283">
                 <BC.ImgBox>
                   <BC.Img>
-                    <img src={bookImg1} alt="도서이미지" />
+                    <img
+                      src={
+                        require('@/assets/img/bookImg/책추천12.jpeg')
+                          .default
+                      }
+                      alt="도서이미지"
+                    />
                   </BC.Img>
                   <BC.Info>
                     <div>메리골드 마음 세탁소</div>
@@ -39,7 +36,13 @@ const BookRec = () => {
               <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000000781176">
                 <BC.ImgBox>
                   <BC.Img>
-                    <img src={bookImg2} alt="도서이미지" />
+                    <img
+                      src={
+                        require('@/assets/img/bookImg/책추천13.jpeg')
+                          .default
+                      }
+                      alt="도서이미지"
+                    />
                   </BC.Img>
                   <BC.Info>
                     <div>H마트에서 울다</div>
@@ -53,7 +56,13 @@ const BookRec = () => {
               <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000208590459">
                 <BC.ImgBox>
                   <BC.Img>
-                    <img src={bookImg3} alt="도서이미지" />
+                    <img
+                      src={
+                        require('@/assets/img/bookImg/책추천3.jpeg')
+                          .default
+                      }
+                      alt="도서이미지"
+                    />
                   </BC.Img>
                   <BC.Info>
                     <div>1%를 읽는 힘</div>
@@ -65,7 +74,13 @@ const BookRec = () => {
               <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000202687816">
                 <BC.ImgBox>
                   <BC.Img>
-                    <img src={bookImg4} alt="도서이미지" />
+                    <img
+                      src={
+                        require('@/assets/img/bookImg/책추천4.jpeg')
+                          .default
+                      }
+                      alt="도서이미지"
+                    />
                   </BC.Img>
                   <BC.Info>
                     <div>아메리칸 프로메테우스</div>
@@ -79,7 +94,13 @@ const BookRec = () => {
               <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000208698551">
                 <BC.ImgBox>
                   <BC.Img>
-                    <img src={bookImg5} alt="도서이미지" />
+                    <img
+                      src={
+                        require('@/assets/img/bookImg/책추천5.jpeg')
+                          .default
+                      }
+                      alt="도서이미지"
+                    />
                   </BC.Img>
                   <BC.Info>
                     <div>일론머스크</div>
@@ -91,7 +112,13 @@ const BookRec = () => {
               <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000202340164">
                 <BC.ImgBox>
                   <BC.Img>
-                    <img src={bookImg6} alt="도서이미지" />
+                    <img
+                      src={
+                        require('@/assets/img/bookImg/책추천6.jpeg')
+                          .default
+                      }
+                      alt="도서이미지"
+                    />
                   </BC.Img>
                   <BC.Info>
                     <div>역행자</div>
@@ -105,7 +132,13 @@ const BookRec = () => {
               <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000201621022">
                 <BC.ImgBox>
                   <BC.Img>
-                    <img src={bookImg7} alt="도서이미지" />
+                    <img
+                      src={
+                        require('@/assets/img/bookImg/책추천7.jpeg')
+                          .default
+                      }
+                      alt="도서이미지"
+                    />
                   </BC.Img>
                   <BC.Info>
                     <div>도둑 맞은 집중력</div>
@@ -117,7 +150,13 @@ const BookRec = () => {
               <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000202671445">
                 <BC.ImgBox>
                   <BC.Img>
-                    <img src={bookImg8} alt="도서이미지" />
+                    <img
+                      src={
+                        require('@/assets/img/bookImg/책추천8.jpeg')
+                          .default
+                      }
+                      alt="도서이미지"
+                    />
                   </BC.Img>
                   <BC.Info>
                     <div>문과 남자의 과학 공부</div>
@@ -131,7 +170,13 @@ const BookRec = () => {
               <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000203331812">
                 <BC.ImgBox>
                   <BC.Img>
-                    <img src={bookImg9} alt="도서이미지" />
+                    <img
+                      src={
+                        require('@/assets/img/bookImg/책추천9.jpeg')
+                          .default
+                      }
+                      alt="도서이미지"
+                    />
                   </BC.Img>
                   <BC.Info>
                     <div>아주 희미한 빛만으로도</div>
@@ -143,7 +188,13 @@ const BookRec = () => {
               <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000208603716">
                 <BC.ImgBox>
                   <BC.Img>
-                    <img src={bookImg10} alt="도서이미지" />
+                    <img
+                      src={
+                        require('@/assets/img/bookImg/책추천2.jpeg')
+                          .default
+                      }
+                      alt="도서이미지"
+                    />
                   </BC.Img>
                   <BC.Info>
                     <div>슈퍼노멀</div>
