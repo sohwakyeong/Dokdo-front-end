@@ -1,36 +1,34 @@
 import React from 'react';
 import * as BC from '@/components/bookContest/bookandcontest/BookAndContest.styled';
-
-import bookImg1 from '@/assets/img/bookImg/책추천4.jpeg';
-import bookImg2 from '@/assets/img/bookImg/책추천3.jpeg';
-
+import bookImg1 from '@/assets/img/bookImg/책추천6.png';
+import bookImg2 from '@/assets/img/bookImg/책추천5.png';
 // BookAndContestBox 컴포넌트의 props 타입 정의
 
-function BcBox4() {
+function BcBox3() {
   return (
     <BC.Wrapper>
       <BC.List>
         <BC.ImgBox>
-          <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000202687816">
+          <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000202340164">
             <BC.Img>
               <img src={bookImg1} alt="도서이미지" />
             </BC.Img>
             <BC.Info>
-              <div>아메리칸 프로메테우스</div>
-              <div>카이버드외/사이언스북스</div>
-              <div>2023.06.12</div>
+              <div>역행자</div>
+              <div>자청/웅진지식하우스</div>
+              <div>2023.05.29</div>
             </BC.Info>
           </BC.StyledLink>
         </BC.ImgBox>
         <BC.ImgBox>
-          <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000208590459">
+          <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000208698551">
             <BC.Img>
               <img src={bookImg2} alt="도서이미지" />
             </BC.Img>
             <BC.Info>
-              <div>1%를 읽는 힘</div>
-              <div>메르토네이도</div>
-              <div>2023.08.30</div>
+              <div>일론머스크</div>
+              <div>월터 아이작슨/21세기북스</div>
+              <div>2023.09.19(예정)</div>
             </BC.Info>
           </BC.StyledLink>
         </BC.ImgBox>
@@ -39,4 +37,4 @@ function BcBox4() {
   );
 }
 
-export default BcBox4;
+export default BcBox3;

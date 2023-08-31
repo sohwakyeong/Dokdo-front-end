@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import GroupImg from '@/assets/img/독서모임3.jpg';
+import GroupImg from '@/assets/img/독서모임3.png';
 import axios from 'axios';
 import { getCookie } from '@/helper/Cookie';
 import * as GD from '@/pages/group/groupdetail/GroupDetail.styled';
@@ -8,7 +8,6 @@ import {
   ModalWrapper,
   ModalHeader,
   ModalContent,
-  CloseButton,
 } from '@/pages/group/groupdetail/GroupDetail.styled';
 import { useParams } from 'react-router-dom'; // useParams 임포트
 import GroupHeader from '@/components/layout/header/GroupHeader';
@@ -190,7 +189,6 @@ function GroupDetail() {
           <div>▪︎▪︎▪︎</div>
         </GD.EditButton>
         <GD.GroupName>📚{groupData.name}</GD.GroupName>
-        <GD.GroupInfoTitle>{groupData.introduction}</GD.GroupInfoTitle>
         <GD.GroupInfoTP>
           <div>🏖️ {groupData.place}</div>
           <div>⏰ 매주 {groupData.search.day}</div>
@@ -218,9 +216,15 @@ function GroupDetail() {
           schedules.map((schedule, index) => (
             <GD.ScheduleBox key={index}>
               <GD.SDTitle>{schedule.title}</GD.SDTitle>
-              <GD.SDDate>🍀 일시 {schedule.date}</GD.SDDate>
-              <GD.SDPlace>❣️ 위치 {schedule.location}</GD.SDPlace>
-              <GD.SDDues>🤑 회비 {schedule.amount}</GD.SDDues>
+              <GD.SDDate>
+                🍀 <span>일시</span> {schedule.date}
+              </GD.SDDate>
+              <GD.SDPlace>
+                ❣️ <span>위치</span> {schedule.location}
+              </GD.SDPlace>
+              <GD.SDDues>
+                🤑 <span>회비</span> {schedule.amount}
+              </GD.SDDues>
             </GD.ScheduleBox>
           ))
         )}
@@ -228,8 +232,7 @@ function GroupDetail() {
         {isModalOpen && ( // Modal의 isOpen 대신 조건부 렌더링 사용
           <ModalWrapper>
             <ModalHeader>
-              <h2>일정등록</h2>
-              <CloseButton onClick={closeModal}>×</CloseButton>
+              <div>일정 등록</div>
             </ModalHeader>
             <ModalContent>
               <form
@@ -254,34 +257,37 @@ function GroupDetail() {
                 }}
               >
                 <div>
-                  <label>제목:</label>
+                  <label>제목</label>
                   <input type="text" name="title" required />
                 </div>
                 <div>
-                  <label>일시:</label>
+                  <label>일시</label>
                   <input
                     type="text"
-                    placeholder="xx 월, xx 일, 몇시 몇분"
+                    placeholder="   **월 **일"
                     name="date"
                     required
                   />
                 </div>
                 <div>
-                  <label>위치:</label>
+                  <label>위치</label>
                   <input type="text" name="location" required />
                 </div>
                 <div>
-                  <label>금액:</label>
+                  <label>금액</label>
                   <input type="text" name="amount" required />
                 </div>
-                <button type="submit">일정 추가</button>
+                <div className="button-container">
+                  <button onClick={closeModal}>취소</button>
+                  <button type="submit">일정 추가</button>
+                </div>
               </form>
             </ModalContent>
           </ModalWrapper>
         )}
       </GD.Schedule>
       <GD.MemberBox>
-        <GD.Member>모집멤버 {members.length + 1}</GD.Member>{' '}
+        <GD.Member>모임 멤버 ({members.length + 1})</GD.Member>{' '}
         {/* Displaying count of members here */}
         <ul>
           {members.map((member: MemberType, index: number) => (

@@ -1,21 +1,19 @@
 import React from 'react';
 import * as BC from '@/components/bookContest/bookandcontest/BookAndContest.styled';
+import bookImg2 from '@/assets/img/bookImg/책추천9.png';
+import Contest3 from '@/assets/img/독서공모전2.png';
 
-import bookImg1 from '@/assets/img/bookImg/책추천2.jpeg';
-import bookImg2 from '@/assets/img/bookImg/책추천9.jpeg';
-// BookAndContestBox 컴포넌트의 props 타입 정의
-
-function CTBox2() {
+function CTBox1() {
   return (
     <BC.Wrapper>
       <BC.List>
         <BC.ImgBox>
           <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000208603716">
             <BC.Img>
-              <img src={bookImg1} alt="도서이미지" />
+              <img src={Contest3} alt="공모전이미지" />
             </BC.Img>
             <BC.Info>
-              <div>슈퍼노멀</div>
+              <div>안</div>
               <div>주언규/웅진지식하우스</div>
               <div>2023.08.30</div>
             </BC.Info>
@@ -38,4 +36,4 @@ function CTBox2() {
   );
 }
 
-export default CTBox2;
+export default CTBox1;
