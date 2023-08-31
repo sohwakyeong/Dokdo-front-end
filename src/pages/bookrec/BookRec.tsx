@@ -1,5 +1,5 @@
 import React from 'react';
-import * as BC from '@/pages/bookrec/BookRec.styled';
+import * as BC from '@/pages/bookrec/BookRec.styled'
 import bookImg1 from '@/assets/img/책추천12.png';
 import bookImg2 from '@/assets/img/책추천13.png';
 import bookImg3 from '@/assets/img/책추천3.png';
