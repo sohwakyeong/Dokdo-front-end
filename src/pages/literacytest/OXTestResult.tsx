@@ -16,8 +16,8 @@ import questionsData from '@/assets/data/ox-questions.json';
 // import twitterIcon from '@/assets/img/twitter.png';
 // import kakaoIcon from '@/assets/img/카카오톡아이콘.png';
 
-import pigImage from '@/assets/img/pig-image.jpg';
-import smartImage from '@/assets/img/smart-image.jpg';
+import pigImage from '@/assets/img/pig-image.png';
+import smartImage from '@/assets/img/smart-image.png';
 
 type OXTestResultProps = {
   userAnswers: string[]; // 사용자의 답
