@@ -1,8 +1,8 @@
 import React from 'react';
 import * as BC from '@/components/bookContest/bookandcontest/BookAndContest.styled';
 
-import bookImg1 from '@/assets/img/bookImg/책추천4.jpg';
-import bookImg2 from '@/assets/img/bookImg/책추천3.jpg';
+import bookImg1 from '@/assets/img/bookImg/책추천4.png';
+import bookImg2 from '@/assets/img/bookImg/책추천3.png';
 
 // BookAndContestBox 컴포넌트의 props 타입 정의
 

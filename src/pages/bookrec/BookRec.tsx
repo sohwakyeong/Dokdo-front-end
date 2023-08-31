@@ -1,15 +1,15 @@
 import React from 'react';
 import * as BC from '@/pages/bookrec/BookRec.Styled';
-import bookImg1 from '@/assets/img/bookImg/책추천12.jpg';
-import bookImg2 from '@/assets/img/bookImg/책추천13.jpg';
-import bookImg3 from '@/assets/img/bookImg/책추천3.jpg';
-import bookImg4 from '@/assets/img/bookImg/책추천4.jpg';
-import bookImg5 from '@/assets/img/bookImg/책추천5.jpg';
-import bookImg6 from '@/assets/img/bookImg/책추천6.jpg';
-import bookImg7 from '@/assets/img/bookImg/책추천7.jpg';
-import bookImg8 from '@/assets/img/bookImg/책추천8.jpg';
-import bookImg9 from '@/assets/img/bookImg/책추천9.jpg';
-import bookImg10 from '@/assets/img/bookImg/책추천2.jpg';
+import bookImg1 from '@/assets/img/bookImg/책추천12.png';
+import bookImg2 from '@/assets/img/bookImg/책추천13.png';
+import bookImg3 from '@/assets/img/bookImg/책추천3.png';
+import bookImg4 from '@/assets/img/bookImg/책추천4.png';
+import bookImg5 from '@/assets/img/bookImg/책추천5.png';
+import bookImg6 from '@/assets/img/bookImg/책추천6.png';
+import bookImg7 from '@/assets/img/bookImg/책추천7.png';
+import bookImg8 from '@/assets/img/bookImg/책추천8.png';
+import bookImg9 from '@/assets/img/bookImg/책추천9.png';
+import bookImg10 from '@/assets/img/bookImg/책추천2.png';
 
 const BookRec = () => {
   return (

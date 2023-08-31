@@ -1,7 +1,7 @@
 import React from 'react';
 import * as BC from '@/components/bookContest/bookandcontest/BookAndContest.styled';
-import bookImg2 from '@/assets/img/bookImg/책추천9.jpg';
-import Contest3 from '@/assets/img/독서공모전2.jpg';
+import bookImg2 from '@/assets/img/bookImg/책추천9.png';
+import Contest3 from '@/assets/img/독서공모전2.png';
 
 function CTBox1() {
   return (
