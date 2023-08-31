@@ -18,6 +18,7 @@ export const container = styled.div`
   align-items: center;
   justify-content: center;
   width: 474px;
+  padding-top: 4%;
   background-color: #fff;
 `;
 export const menu = styled.div`

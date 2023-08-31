@@ -86,7 +86,6 @@ const TopLogo = styled.div`
   height: 27px;
 
   & img {
-    width: 100%;
     height: 100%;
   }
 `;
