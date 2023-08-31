@@ -1,5 +1,7 @@
 import React from 'react';
 import * as BC from '@/components/bookContest/bookandcontest/BookAndContest.styled';
+import bookImg7 from '@/assets/img/책추천4.png';
+import bookImg8 from '@/assets/img/책추천3.png';
 
 
 
@@ -12,7 +14,7 @@ function BcBox4() {
         <BC.ImgBox>
           <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000202687816">
             <BC.Img>
-              <img src={require('@/assets/img/bookImg/책추천4.png').default} alt="도서이미지" />
+              <img src={bookImg7} alt="도서이미지" />
             </BC.Img>
             <BC.Info>
               <div>아메리칸 프로메테우스</div>
@@ -24,7 +26,7 @@ function BcBox4() {
         <BC.ImgBox>
           <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000208590459">
             <BC.Img>
-              <img src={require('@/assets/img/bookImg/책추천3.png').default} alt="도서이미지" />
+              <img src={bookImg8} alt="도서이미지" />
             </BC.Img>
             <BC.Info>
               <div>1%를 읽는 힘</div>

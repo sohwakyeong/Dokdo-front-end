@@ -1,5 +1,9 @@
 import React from 'react';
 import * as BC from '@/components/bookContest/bookandcontest/BookAndContest.styled';
+import bookImg1 from '@/assets/img/책추천2.png';
+import bookImg2 from '@/assets/img/책추천9.png';
+
+
 // BookAndContestBox 컴포넌트의 props 타입 정의
 
 function BcBox1() {
@@ -9,7 +13,7 @@ function BcBox1() {
         <BC.ImgBox>
           <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000208603716">
             <BC.Img>
-              <img src={require('@/assets/img/bookImg/책추천2.png').default} alt="도서이미지" />
+              <img src={bookImg1} alt="도서이미지" />
             </BC.Img>
             <BC.Info>
               <div>슈퍼노멀</div>
@@ -21,7 +25,7 @@ function BcBox1() {
         <BC.ImgBox>
           <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000203331812">
             <BC.Img>
-              <img src={require('@/assets/img/bookImg/책추천9.png').default} alt="도서이미지" />
+              <img src={bookImg2} alt="도서이미지" />
             </BC.Img>
             <BC.Info>
               <div>아주 희미한 빛만으로도</div>

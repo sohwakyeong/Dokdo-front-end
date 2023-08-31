@@ -1,9 +1,7 @@
 import React from 'react';
 import * as BC from '@/components/bookContest/bookandcontest/BookAndContest.styled';
-
-import bookImg1 from '@/assets/img/bookImg/책추천13.png';
-import bookImg2 from '@/assets/img/bookImg/책추천12.png';
-// BookAndContestBox 컴포넌트의 props 타입 정의
+import bookImg9 from '@/assets/img/책추천13.png';
+import bookImg10 from '@/assets/img/책추천12.png';
 
 function BookAndContestBox() {
   return (
@@ -12,7 +10,7 @@ function BookAndContestBox() {
         <BC.ImgBox>
           <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000000781176">
             <BC.Img>
-              <img src={bookImg1} alt="도서이미지" />
+              <img src={bookImg9} alt="도서이미지" />
             </BC.Img>
             <BC.Info>
               <div>H마트에서 울다</div>
@@ -24,7 +22,7 @@ function BookAndContestBox() {
         <BC.ImgBox>
           <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000201142283">
             <BC.Img>
-              <img src={bookImg2} alt="도서이미지" />
+              <img src={bookImg10} alt="도서이미지" />
             </BC.Img>
             <BC.Info>
               <div>메리골드 마음 세탁소</div>
