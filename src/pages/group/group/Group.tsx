@@ -11,7 +11,9 @@ import Slider2 from '@/components/common/slider/Slider2';
 // API 요청 함수 추가
 async function fetchAllGroupData() {
   try {
-    const response = await axios.get('http://34.64.149.22:3001/api/v1/group?limit=5&offset=0');
+    const response = await axios.get(
+      'http://34.64.149.22:3001/api/v1/group?limit=5&offset=0',
+    );
     return response.data.data; // 서버 응답에서 실제 그룹 데이터를 반환
   } catch (error) {
     throw error;

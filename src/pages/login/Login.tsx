@@ -43,7 +43,7 @@ function LoginComponent() {
 
       const { data } = response.data;
 
-      if (data.isLogin === true) {
+      if (data.isLogin) {
         alert('로그인 성공하셨습니다.');
         navigate('/');
         return;
