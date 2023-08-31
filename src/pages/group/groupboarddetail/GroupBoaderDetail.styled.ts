@@ -22,7 +22,12 @@ export const DescDisplay = styled.div`
   padding: 0 10px;
 `;
 
-export const ProfileImg = styled.div`
+export const UserName = styled.div`
+font-size: 12px;
+
+`
+
+export const ProfileImg = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 50%;

@@ -53,6 +53,15 @@ const PhotoDetail: React.FC<PhotoDetailDataProps> = ({ data }) => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [commentText, setCommentText] = useState('');
 
+    function formatCreatedAt(createdAt: string | number | Date) {
+      const date = new Date(createdAt);
+   
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+
+      return `${month}월 ${day}일`;
+    }
+
   useEffect(() => {
     if (group_Id && post_Id) {
       fetchPhotoDetail(group_Id, post_Id);
@@ -63,7 +72,7 @@ const PhotoDetail: React.FC<PhotoDetailDataProps> = ({ data }) => {
   const fetchPhotoDetail = async (gId: number, pId: number) => {
     try {
       const response = await axios.get(
-        `http://34.64.149.22:3001/api/v1/group/${gId}/posts/${pId}`,
+        `http://localhost:3001/api/v1/group/${gId}/posts/${pId}`,
         {
           headers: {
             Authorization: `Bearer ${loginToken}`,
@@ -87,7 +96,7 @@ const PhotoDetail: React.FC<PhotoDetailDataProps> = ({ data }) => {
   const postComment = async () => {
     try {
       const response = await axios.post(
-        `http://34.64.149.22:3001/api/v1/group/${group_Id}/posts/${post_Id}/comments`,
+        `http://localhost:3001/api/v1/group/${group_Id}/posts/${post_Id}/comments`,
         { text: commentText },
         {
           headers: {
@@ -110,7 +119,7 @@ const PhotoDetail: React.FC<PhotoDetailDataProps> = ({ data }) => {
   const fetchComments = async (gId: number, pId: number) => {
     try {
       const response = await axios.get(
-        `http://34.64.149.22:3001/api/v1/group/${gId}/posts/${pId}/comments`,
+        `http://localhost:3001/api/v1/group/${gId}/posts/${pId}/comments`,
         {
           headers: {
             Authorization: `Bearer ${loginToken}`,
@@ -139,10 +148,17 @@ const PhotoDetail: React.FC<PhotoDetailDataProps> = ({ data }) => {
         <div>{PhotoDetail?.data.post.title}</div>
       </PAD.GroupBoardTitle>
       <PAD.User>
-        <PAD.ProfileImg></PAD.ProfileImg>
+        <PAD.UserName>{PhotoDetail?.data.user.name}</PAD.UserName>
+        <PAD.ProfileImg
+          src={`http://localhost:3001/api/v1/image/profile/${PhotoDetail?.data.user.profilePic}`}
+        ></PAD.ProfileImg>
         <PAD.Desc>
           <PAD.DescDisplay>
-            <div>{PhotoDetail?.data?.post.createdAt || 'Loading...'}</div>
+            <div>
+              {formatCreatedAt(
+                PhotoDetail?.data?.post.createdAt || 'Loading...',
+              )}
+            </div>
             <PAD.EditButton>●●●</PAD.EditButton>
           </PAD.DescDisplay>
         </PAD.Desc>
@@ -150,7 +166,7 @@ const PhotoDetail: React.FC<PhotoDetailDataProps> = ({ data }) => {
       <PAD.UserWriteBox>
         <div>{PhotoDetail?.data?.post.content || 'Loading...'}</div>
         <img
-          src={`http://34.64.149.22:3001/api/v1/image/post/${PhotoDetail?.data?.post.images[0]}`}
+          src={`http://localhost:3001/api/v1/image/post/${PhotoDetail?.data?.post.images[0]}`}
           alt="게시된 이미지"
         />
       </PAD.UserWriteBox>

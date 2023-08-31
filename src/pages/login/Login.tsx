@@ -33,7 +33,8 @@ function LoginComponent() {
     // 조건을 통과한 경우에만 요청 보내기
     try {
       const response = await AxiosC.post(
-        'http://34.64.149.22:3001/api/v1/auth/login',
+        'http://localhost:3001/api/v1/auth/login',
+
         {
           email,
           password,
@@ -43,10 +44,14 @@ function LoginComponent() {
 
       const { data } = response.data;
 
-      if (data.isLogin === true) {
+      if (data.isLogin) {
         alert('로그인 성공하셨습니다.');
+
+        if (data.isAdmin) {
+          navigate('/admin/user');
+          return;
+        }
         navigate('/');
-        return;
       }
     } catch (e) {
       console.error('로그인 에러:', e);
@@ -81,7 +86,9 @@ function LoginComponent() {
         <LoginStyle.Button type="submit" onClick={onClickLogin}>
           로그인
         </LoginStyle.Button>
-        <LoginStyle.JoinLink to="/signup">회원가입</LoginStyle.JoinLink>
+        <LoginStyle.SignupButton onClick={() => navigate('/signup')}>
+           <p>이메일로 회원가입</p>
+        </LoginStyle.SignupButton>
       </LoginStyle.Form>
     </LoginStyle.Container>
   );

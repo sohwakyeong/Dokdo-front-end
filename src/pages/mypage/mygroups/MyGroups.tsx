@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import * as MyGroupsStyle from '@/pages/mypage/mygroups/MyGroups.styled';
-import { useNavigate } from 'react-router-dom';
 import { getCookie } from '@/helper/Cookie';
 import axios from 'axios';
-// import MoreButton from '@/components/common/morebutton/MoreButton';
+import MoreButton from '@/components/common/morebutton/MoreButton';
 
 interface UserData {
   group: number[];
@@ -18,13 +17,12 @@ interface GroupData {
 export default function MyGroupsComponent() {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [groupData, setGroupData] = useState<GroupData[]>([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const loginToken = getCookie('loginToken');
 
     axios
-      .get('http://34.64.149.22:3001/api/v1/auth/me', {
+      .get('http://localhost:3001/api/v1/auth/me', {
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
@@ -53,11 +51,10 @@ export default function MyGroupsComponent() {
     for (const groupId of groupIds) {
       try {
         const groupResponse = await axios.get(
-          `http://34.64.149.22:3001/api/v1/group/${groupId}`,
+          `http://localhost:3001/api/v1/group/${groupId}`,
         );
 
         if (groupResponse.data.error === null) {
-          // 그룹 데이터 처리
           const groupInfo: GroupData = groupResponse.data.data;
           groupDataArray.push(groupInfo);
         } else {
@@ -70,15 +67,13 @@ export default function MyGroupsComponent() {
         console.error('그룹 슬라이드 가져오기 에러:', error);
       }
     }
-
-    // 모든 그룹 데이터를 한 번에 설정
     setGroupData(groupDataArray);
   };
 
   return (
     <MyGroupsStyle.Container>
       <MyGroupsStyle.Wrapper>
-        {/* 모임 1개짜리 컴포넌트 */}
+        {/* 여기에 그룹의 대표 이미지를 가져와야 함 구현되면!! */}
         <MyGroupsStyle.MyGroupBoardBox>
           <MyGroupsStyle.Title>내가 가입한 모임</MyGroupsStyle.Title>
           {groupData.map((group, index) => (
@@ -103,7 +98,7 @@ export default function MyGroupsComponent() {
             </MyGroupsStyle.GroupBoardBox>
           ))}
         </MyGroupsStyle.MyGroupBoardBox>
-        {/* <MoreButton to="/group/list">더보기</MoreButton> */}
+        <MoreButton to="/group/list">더보기</MoreButton>
       </MyGroupsStyle.Wrapper>
     </MyGroupsStyle.Container>
   );

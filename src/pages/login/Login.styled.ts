@@ -16,14 +16,6 @@ export const LogoImg = styled.img`
   padding-bottom: 65px;
 `;
 
-export const JoinLink = styled(Link)`
-  font-size: 15px;
-  text-decoration: none;
-  color: black;
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-`;
 
 export const Form = styled.form`
   display: flex;
@@ -92,7 +84,7 @@ export const Button = styled.button`
   width: 420px;
   height: 57px;
   text-align: center;
-  border-radius: 8px;
+  border-radius: 15px;
   font-size: 18px;
   margin-bottom: 0.5rem;
   cursor: pointer;
@@ -100,4 +92,14 @@ export const Button = styled.button`
   background-color: #84614b;
   text-decoration: none;
   color: white;
+`;
+
+export const SignupButton = styled(Button)`
+  color: #84614b;
+  background-color: white;
+  border: 1px solid #84614b;
+
+  & p{
+    font-weight: bold;
+  }
 `;
