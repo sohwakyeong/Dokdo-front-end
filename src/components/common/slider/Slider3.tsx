@@ -14,7 +14,7 @@ import { MiddleBoardData } from '@/components/common/boardbox/MiddleBoardBox';
 async function fetchPopularData() {
   try {
     const response = await axios.get(
-      'http://localhost:3001/api/v1/group?orderBy=&limit=10&offset=0',
+      'http://34.64.149.22:3001/api/v1/group?orderBy=&limit=10&offset=0',
     );
     return response.data.data;
   } catch {

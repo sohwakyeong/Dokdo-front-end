@@ -24,7 +24,7 @@ export default function MyGroupsComponent() {
     const loginToken = getCookie('loginToken');
 
     axios
-      .get('http://localhost:3000/api/v1/auth/me', {
+      .get('http://34.64.149.22:3001/api/v1/auth/me', {
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
@@ -53,7 +53,7 @@ export default function MyGroupsComponent() {
     for (const groupId of groupIds) {
       try {
         const groupResponse = await axios.get(
-          `http://localhost:3000/api/v1/group/${groupId}`,
+          `http://34.64.149.22:3001/api/v1/group/${groupId}`,
         );
 
         if (groupResponse.data.error === null) {

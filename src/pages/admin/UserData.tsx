@@ -18,7 +18,7 @@ function UserData({ data }: AdminUserProps) {
   async function handleDeleteUser() {
     try {
       await axios.delete(
-        `http://localhost:3000/api/v1/admin/users/${data?.user_id}`,
+        `http://34.64.149.22:3001/api/v1/admin/users/${data?.user_id}`,
       );
       setDeleted(true);
     } catch (error) {

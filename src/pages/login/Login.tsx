@@ -33,7 +33,7 @@ function LoginComponent() {
     // 조건을 통과한 경우에만 요청 보내기
     try {
       const response = await AxiosC.post(
-        'http://localhost:3000/api/v1/auth/login',
+        'http://34.64.149.22:3001/api/v1/auth/login',
         {
           email,
           password,

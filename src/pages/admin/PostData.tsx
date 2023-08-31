@@ -20,7 +20,7 @@ function PostData({ data }: AdminPostProps) {
   async function handleDeletePost() {
     try {
       await axios.delete(
-        `http://localhost:3000/api/v1/admin/posts/${data?.post_id}`,
+        `http://34.64.149.22:3001/api/v1/admin/posts/${data?.post_id}`,
       );
       setDeleted(true);
     } catch (error) {

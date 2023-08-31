@@ -164,7 +164,7 @@ const SignupComponent = () => {
 
       // 위까지 응답 성공시 밑으로
       const response = await AxiosC.post(
-        'http://localhost:3000/api/v1/auth/register',
+        'http://34.64.149.22:3001/api/v1/auth/register',
         {
           email,
           password,

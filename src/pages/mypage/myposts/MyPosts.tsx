@@ -44,7 +44,7 @@ function MyPostsComponent({ data }: PostBoxProps) {
     const loginToken = getCookie('loginToken');
 
     axios
-      .get('http://localhost:3000/api/v1/auth/me', {
+      .get('http://34.64.149.22:3001/api/v1/auth/me', {
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
@@ -66,7 +66,7 @@ function MyPostsComponent({ data }: PostBoxProps) {
   useEffect(() => {
     const loginToken = getCookie('loginToken');
     axios
-      .get(`http://localhost:3000/api/v1/auth/me/posts`, {
+      .get(`http://34.64.149.22:3001/api/v1/auth/me/posts`, {
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
@@ -83,7 +83,7 @@ function MyPostsComponent({ data }: PostBoxProps) {
             for (const post of userPosts) {
               try {
                 const postResponse = await axios.get(
-                  `http://localhost:3000/api/v1/group/${post.group_id}/posts/${post.post_id}`,
+                  `http://34.64.149.22:3001/api/v1/group/${post.group_id}/posts/${post.post_id}`,
                 );
 
                 if (postResponse.data.error === null) {
@@ -125,7 +125,7 @@ function MyPostsComponent({ data }: PostBoxProps) {
                 <MyPostsStyle.BoardLeft>
                   <MyPostsStyle.ProfileData>
                     <MyPostsStyle.ProfileImg
-                      src={`http://localhost:3000/api/v1/image/profile/${userData.profilePic}`}
+                      src={`http://34.64.149.22:3001/api/v1/image/profile/${userData.profilePic}`}
                       alt={`${userData.name}의 프로필 사진`}
                     />
                     <MyPostsStyle.UpdatedProfile>
@@ -141,7 +141,7 @@ function MyPostsComponent({ data }: PostBoxProps) {
                   </MyPostsStyle.Content>
                 </MyPostsStyle.BoardLeft>
                 <MyPostsStyle.BoardImg
-                  src={`http://localhost:3000/api/v1/image/post/${selectedPost.images[0]}`} // 이미지 URL 설정
+                  src={`http://34.64.149.22:3001/api/v1/image/post/${selectedPost.images[0]}`} // 이미지 URL 설정
                   alt="게시된 이미지"
                 />
               </MyPostsStyle.Boardbox>

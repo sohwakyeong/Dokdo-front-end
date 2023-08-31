@@ -20,7 +20,7 @@ function DeleteAccountComponent() {
 
     try {
       const response = await AxiosC.put(
-        'http://localhost:3000/api/v1/auth/withdrawal',
+        'http://34.64.149.22:3001/api/v1/auth/withdrawal',
         {
           password: Password,
         },
