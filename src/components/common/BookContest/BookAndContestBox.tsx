@@ -1,7 +1,7 @@
 import React from 'react';
 import * as BC from '@/components/bookContest/bookandcontest/BookAndContest.styled';
-import bookImg9 from '@/assets/img/책추천13.png';
-import bookImg10 from '@/assets/img/책추천12.png';
+import bookImg9 from '@/assets/img/chucheon13.png';
+import bookImg10 from '@/assets/img/chucheon12.png';
 
 function BookAndContestBox() {
   return (

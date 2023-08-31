@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import GroupImg from '@/assets/img/독서모임3.png';
+import GroupImg from '@/assets/img/moim3.png';
 import axios from 'axios';
 import { getCookie } from '@/helper/Cookie';
 import * as GD from '@/pages/group/groupdetail/GroupDetail.styled';

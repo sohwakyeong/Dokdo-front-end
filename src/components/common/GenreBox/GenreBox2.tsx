@@ -2,14 +2,14 @@ import React from 'react';
 import * as IB from '@/components/common/GenreBox/GenreBox.styled';
 
 import { useNavigate } from 'react-router-dom';
-import Genre1 from '@/assets/img/소설.png';
-import Genre2 from '@/assets/img/자기계발.png';
-import Genre3 from '@/assets/img/시수필.png';
-import Genre4 from '@/assets/img/인문학.png';
-import Genre5 from '@/assets/img/취미.png';
-import Genre6 from '@/assets/img/철학.png';
-import Genre7 from '@/assets/img/사회과학.png';
-import Genre8 from '@/assets/img/경제.png';
+import Genre1 from '@/assets/icon/newIcon/sosul.png';
+import Genre2 from '@/assets/icon/newIcon/jagigaebal.png';
+import Genre3 from '@/assets/icon/newIcon/sisupil.png';
+import Genre4 from '@/assets/icon/newIcon/inmunhak.png';
+import Genre5 from '@/assets/icon/newIcon/jonggyo.png';
+import Genre6 from '@/assets/icon/newIcon/chulhak.png';
+import Genre7 from '@/assets/icon/newIcon/sahwigwahak.png';
+import Genre8 from '@/assets/icon/newIcon/gyumgjae.png';
 
 interface GenreBoxProps {
   onGenreSelect: (genre: string) => void;
