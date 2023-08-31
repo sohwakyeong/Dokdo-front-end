@@ -5,7 +5,7 @@ import PostData from './PostData';
 
 async function fetchAllPost() {
     try{
-        const response = await axios.get('http://34.64.149.22:3001/api/v1/admin/posts?limit=10?offset=0') 
+        const response = await axios.get('http://34.64.149.22:3001/api/v1/admin/posts?limit=10&offset=0') 
         return response.data.data;
     } catch (error) {
         throw error;

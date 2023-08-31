@@ -109,16 +109,8 @@ export const IconImg = styled.img`
     padding-right: 10px;
 `;
 
-export const LogoutButton = styled.button`
-    width: 125px;
+export const LogoutImage = styled.img`
+    width: 124px;
     height: 40px;
     margin-bottom: 20px;
-    padding: 5px;
-    color: #84614b;
-    background-color: beige; 
-    border: 0.5px solid #f5ddce;
-    border-radius: 30px;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
 `;

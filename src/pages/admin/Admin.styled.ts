@@ -21,7 +21,7 @@ export const Top = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 97%;
-    margin: 64px 0 23px 0;
+    margin: 64px 0 66px 0;
 `;
 
 export const Headline = styled.div`
@@ -33,6 +33,7 @@ export const Headline = styled.div`
 
 export const Total = styled.div`
     margin-left: 5px;
+    margin-top: -43px;
     margin-bottom: 17px;
     font-size : 20px;
     font-weight: 600px;
