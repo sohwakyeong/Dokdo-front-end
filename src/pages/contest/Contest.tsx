@@ -1,8 +1,8 @@
 import React from 'react';
 import * as BC from './Constest.styled';
-import bookImg3 from '@/assets/img/bookImg/책추천3.jpeg';
-import bookImg4 from '@/assets/img/bookImg/책추천4.jpeg';
-import Contest1 from '@/assets/img/독서공모전2.jpeg';
+import bookImg3 from '@/assets/img/bookImg/책추천3.jpg';
+import bookImg4 from '@/assets/img/bookImg/책추천4.jpg';
+import Contest1 from '@/assets/img/독서공모전2.jpg';
 import Contest2 from '@/assets/img/독서공모전1.jpg';
 
 const Contest = () => {
