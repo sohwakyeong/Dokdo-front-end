@@ -11,7 +11,7 @@ function BcBox3() {
           <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000202340164">
             <BC.Img>
               <img
-                src={require('@/assets/img/bookImg/책추천6.jpeg').default}
+                src={require('@/assets/img/bookImg/책추천6.png').default}
                 alt="도서이미지"
               />
             </BC.Img>
@@ -26,7 +26,7 @@ function BcBox3() {
           <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000208698551">
             <BC.Img>
               <img
-                src={require('@/assets/img/bookImg/책추천5.jpeg').default}
+                src={require('@/assets/img/bookImg/책추천5.png').default}
                 alt="도서이미지"
               />
             </BC.Img>
