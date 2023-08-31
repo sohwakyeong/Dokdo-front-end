@@ -74,7 +74,7 @@ function EditProfileComponent() {
   // logintoken 확인하고 유저 정보 가져옴
   useEffect(() => {
     axios
-      .get('http://34.64.149.22:3001/api/v1/auth/me', {
+      .get('http://localhost:3000/api/v1/auth/me', {
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
@@ -105,7 +105,7 @@ function EditProfileComponent() {
     const loginToken = getCookie('loginToken'); // getCookie 함수로 'loginToken' 쿠키 값을 가져옵니다.
 
     axios
-      .put('http://34.64.149.22:3001/api/v1/auth/me/profilePic', formData, {
+      .put('http://localhost:3000/api/v1/auth/me/profilePic', formData, {
         headers: {
           Authorization: `Bearer ${loginToken}`,
           'Content-Type': 'multipart/form-data',
@@ -144,7 +144,7 @@ function EditProfileComponent() {
     };
 
     axios
-      .put('http://34.64.149.22:3001/api/v1/auth/me', updatedUserData, {
+      .put('http://localhost:3000/api/v1/auth/me', updatedUserData, {
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
@@ -174,7 +174,7 @@ function EditProfileComponent() {
     };
 
     axios
-      .put('http://34.64.149.22:3001/api/v1/auth/me', updatedUserData, {
+      .put('http://localhost:3000/api/v1/auth/me', updatedUserData, {
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
@@ -197,7 +197,7 @@ function EditProfileComponent() {
       <EditStyle.Wrapper>
         <EditStyle.UserIconBtn onClick={() => setIsProfileImageModalOpen(true)}>
           <EditStyle.UserIcon
-            src={`http://34.64.149.22:3001/api/v1/image/profile/${
+            src={`http://localhost:3000/api/v1/image/profile/${
               userData.profilePic
             }?${Date.now()}`}
             alt="유저 설정 이미지"

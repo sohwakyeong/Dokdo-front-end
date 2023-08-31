@@ -6,7 +6,7 @@ import PostData from '@/pages/admin/PostData';
 async function fetchAllPost() {
   try {
     const response = await axios.get(
-      'http://34.64.149.22:3001/api/v1/admin/posts',
+      'http://localhost:3000/api/v1/admin/posts',
     );
     return response.data.data; // 서버 응답에서 실제 그룹 데이터를 반환
   } catch (error) {

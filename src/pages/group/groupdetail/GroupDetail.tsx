@@ -21,13 +21,11 @@ interface MemberType {
     title: string;
     content: string;
     images: string[];
-    // ... 나머지 필드들
   };
   user: {
     name: string;
     profilePic: string;
   };
-  // ... 나머지 필드들
 }
 interface GroupData {
   group_id: number;
@@ -41,7 +39,6 @@ interface GroupData {
     group_id: number;
     user_id: number;
     createdAt: string;
-    // 필요한 다른 항목들 추가...
   }>;
   introduction: string;
   place: string;
@@ -94,7 +91,7 @@ function GroupDetail() {
     async function fetchAllGroupBoardData(groupId: number) {
       try {
         const response = await axios.get(
-          `http://34.64.149.22:3001/api/v1/group/${groupId}/posts`,
+          `http://localhost:3000/api/v1/group/${groupId}/posts`,
         );
         if (response.status === 200) {
           setMembers(response.data.data);
@@ -126,7 +123,7 @@ function GroupDetail() {
     async function fetchGroupData(groupId: number) {
       try {
         const response = await axios.get(
-          `http://34.64.149.22:3001/api/v1/group/${groupId}`,
+          `http://localhost:3000/api/v1/group/${groupId}`,
           {
             headers: {
               Authorization: `Bearer ${loginToken}`,
@@ -158,7 +155,7 @@ function GroupDetail() {
 
     try {
       const response = await axios.put(
-        `http://34.64.149.22:3001/api/v1/auth/group/${groupId}`,
+        `http://localhost:3000/api/v1/auth/group/${groupId}`,
         {},
         {
           headers: {

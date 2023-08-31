@@ -62,7 +62,7 @@ const GroupBoardDetail: React.FC<GroupBoardDetailDataProps> = ({ data }) => {
   const fetchGroupDetail = async (gId: number, pId: number) => {
     try {
       const response = await axios.get(
-        `http://34.64.149.22:3001/api/v1/group/${gId}/posts/${pId}`,
+        `http://localhost:3000/api/v1/group/${gId}/posts/${pId}`,
         {
           headers: {
             Authorization: `Bearer ${loginToken}`,
@@ -85,7 +85,7 @@ const GroupBoardDetail: React.FC<GroupBoardDetailDataProps> = ({ data }) => {
   const postComment = async () => {
     try {
       const response = await axios.post(
-        `http://34.64.149.22:3001/api/v1/group/${group_Id}/posts/${post_Id}/comments`,
+        `http://localhost:3000/api/v1/group/${group_Id}/posts/${post_Id}/comments`,
         { text: commentText },
         {
           headers: {
@@ -107,7 +107,7 @@ const GroupBoardDetail: React.FC<GroupBoardDetailDataProps> = ({ data }) => {
   const postReply = async (commentId: number) => {
     try {
       const response = await axios.post(
-        `http://34.64.149.22:3001/api/v1/group/${group_Id}/posts/${post_Id}/comments/${commentId}/reply`,
+        `http://localhost:3000/api/v1/group/${group_Id}/posts/${post_Id}/comments/${commentId}/reply`,
         { text: replyText },
         {
           headers: {
@@ -129,7 +129,7 @@ const GroupBoardDetail: React.FC<GroupBoardDetailDataProps> = ({ data }) => {
   const fetchComments = async (gId: number, pId: number) => {
     try {
       const response = await axios.get(
-        `http://34.64.149.22:3001/api/v1/group/${gId}/posts/${pId}/comments`,
+        `http://localhost:3000/api/v1/group/${gId}/posts/${pId}/comments`,
         {
           headers: {
             Authorization: `Bearer ${loginToken}`,
@@ -169,7 +169,7 @@ const GroupBoardDetail: React.FC<GroupBoardDetailDataProps> = ({ data }) => {
       <GBD.UserWriteBox>
         <div>{groupDetail?.data?.post.content || 'Loading...'}</div>
         <img
-          src={`http://34.64.149.22:3001/api/v1/image/post/${groupDetail?.data.post.images[0]}`}
+          src={`http://localhost:3000/api/v1/image/post/${groupDetail?.data.post.images[0]}`}
           alt="게시된 이미지"
         />
       </GBD.UserWriteBox>

@@ -19,7 +19,7 @@ function MyPageComponent() {
   const loginToken = getCookie('loginToken');
   useEffect(() => {
     axios
-      .get('http://34.64.149.22:3001/api/v1/auth/me', {
+      .get('http://localhost:3000/api/v1/auth/me', {
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
@@ -47,7 +47,7 @@ function MyPageComponent() {
   const handleLogout = async () => {
     try {
       const response = await AxiosC.put(
-        'http://34.64.149.22:3001/api/v1/auth/logout',
+        'http://localhost:3000/api/v1/auth/logout',
       );
       console.log(response);
       // 액세스 토큰 쿠키 삭제
@@ -68,7 +68,7 @@ function MyPageComponent() {
     <MyPageStyle.Container>
       <MyPageStyle.Wrapper>
         <MyPageStyle.UserIcon
-          src={`http://34.64.149.22:3001/api/v1/image/profile/${userData.profilePic}`}
+          src={`http://localhost:3000/api/v1/image/profile/${userData.profilePic}`}
           alt="유저 설정 이미지"
         />
         <MyPageStyle.Introduce>
