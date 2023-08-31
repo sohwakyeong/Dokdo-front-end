@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import * as PA from './PhotoAlbum.styled';
-import SearchInput from '../../../components/common/searchinput/SearchInput';
+import * as PA from '@/pages/group/photoalbum/PhotoAlbum.styled';
+import SearchInput from '@/components/common/searchinput/SearchInput';
 import axios from 'axios';
-import PenFooter2 from '../../../components/layout/footer/PenFooter2';
-import { getCookie } from '../../../helper/Cookie';
+import PenFooter2 from '@/components/layout/footer/PenFooter2';
+import { getCookie } from '@/helper/Cookie';
 import { useParams, useNavigate } from 'react-router-dom';
-import GroupHeader from '../../../components/layout/header/GroupHeader';
+import GroupHeader from '@/components/layout/header/GroupHeader';
 
 interface PhotoItem {
   post: {
@@ -43,7 +43,7 @@ const PhotoAlbum: React.FC<PhotoItemProps> = ({ data }) => {
   async function fetchAllGroupPhotoData(groupId: number) {
     try {
       const response = await axios.get(
-        `http://localhost:3001/api/v1/group/${groupId}/albums`,
+        `http://34.64.149.22:3001/api/v1/group/${groupId}/albums?limit=5&offset=0`,
       );
       return response.data.data;
     } catch (error) {
@@ -55,7 +55,7 @@ const PhotoAlbum: React.FC<PhotoItemProps> = ({ data }) => {
     async function fetchData() {
       try {
         const groupDataResponse = await axios.get(
-          `http://localhost:3001/api/v1/group/${groupId}`,
+          `http://34.64.149.22:3001/api/v1/group/${groupId}`,
           {
             headers: {
               Authorization: `Bearer ${loginToken}`,
@@ -112,7 +112,7 @@ const PhotoAlbum: React.FC<PhotoItemProps> = ({ data }) => {
                   </PA.Profile>
                   <PA.PhotoImg>
                     <img
-                      src={`http://localhost:3001/api/v1/image/post/${photoItem.post.images[0]}`}
+                      src={`http://34.64.149.22:3001/api/v1/image/post/${photoItem.post.images[0]}`}
                       alt="업로드사진"
                     />
                   </PA.PhotoImg>

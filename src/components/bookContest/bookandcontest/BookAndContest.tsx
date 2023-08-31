@@ -1,6 +1,6 @@
 import React from 'react';
-import * as BC from './BookAndContest.styled';
-import BookAndConstBox from '../../common/BookAndContestBox/BookAndContestBox';
+import * as BC from '@/components/bookContest/bookandcontest/BookAndContest.styled';
+import BookAndConstBox from '@/components/common/BookAndContestBox/BookAndContestBox';
 
 const BookAndContest = () => {
   return (

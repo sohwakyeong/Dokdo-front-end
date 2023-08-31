@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
-import Footer from '../footer/Footer';
-import LeftScreen from '../leftscreen/LeftScreen';
-import { LayoutContainer, Children, Left, Right } from './Layout3.styled';
+import Footer from '@/components/layout/footer/Footer';
+import LeftScreen from '@/components/layout/leftscreen/LeftScreen';
+import { LayoutContainer, Children, Left, Right } from '@/components/layout/layout1/Layout3.styled';
 
-import BackSearchHeader from '../header/BackSearchHeader';
+import BackSearchHeader from '@/components/layout/header/BackSearchHeader';
 
 interface Layout3Props {
   children: ReactNode;

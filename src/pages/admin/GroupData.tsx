@@ -1,5 +1,5 @@
 import React from "react";
-import * as A from './Admin.styled';
+import * as A from '@/pages/admin/Admin.styled';
 
 interface AdminGroupData {
     group_id: number;    

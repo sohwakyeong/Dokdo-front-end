@@ -9,9 +9,8 @@ import {
   StepCircle,
   Input,
   SubmitButton,
-} from './GroupCreatePage1.Styled';
+} from '@/pages/group/groupcreate/GroupCreatePage1.Styled';
 import axios from 'axios'; // API 요청을 위해 axios를 가져옴
-
 
 interface GroupCreatePage1Data {
   name: string;
@@ -70,9 +69,9 @@ const GroupCreatePage1: React.FC<GroupCreatePage1Props> = ({
       formData.append('img', image!, 'img');
 
       const uploadResponse = await axios.post(
-        'http://localhost:3001/api/v1/group/images',
+        'http://34.64.149.22:3001/api/v1/group/images',
         formData,
-        { withCredentials: true }
+        { withCredentials: true },
       );
 
       if (uploadResponse.data.error === null) {

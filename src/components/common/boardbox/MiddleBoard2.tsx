@@ -1,8 +1,8 @@
 import React from 'react';
-import * as MB from './MiddleBoard2.styled';
-import BoardImgBox from './BoardImgBox';
+import * as MB from '@/components/common/boardbox/MiddleBoard2.styled';
+import BoardImgBox from '@/components/common/boardbox/BoardImgBox';
 import { useNavigate } from 'react-router-dom';
-import defaultImage from '../../../assets/img/Logo1.png';
+import defaultImage from '@/assets/img/Logo1.png';
 
 export interface MiddleBoardData2 {
   _id: string;

@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
-import searchIcon from '../../../assets/icon/Search.png';
-import notificationIcon from '../../../assets/icon/Bell.png';
-import Logo from '../../../assets/img/Logo2.png';
+import searchIcon from '@/assets/icon/Search.png';
+import notificationIcon from '@/assets/icon/Bell.png';
+import Logo from '@/assets/img/Logo2.png';
 
 function BackSearchHeader() {
   const navigate = useNavigate();

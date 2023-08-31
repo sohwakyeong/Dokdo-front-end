@@ -9,10 +9,10 @@ import {
   Navigation,
   ProgressBarContainer,
   ProgressBarFiller,
-} from './OXTestScreen.Style';
+} from '@/pages/literacytest/OXTestScreen.Style';
 import { useNavigate } from 'react-router-dom';
-import questionsData from '../../assets/data/ox-questions.json';
-import backButtonImage from '../../assets/icon/Vector.png';
+import questionsData from '@/assets/data/ox-questions.json';
+import backButtonImage from '@/assets/icon/Vector.png';
 type OXTestScreenProps = {
   setUserAnswers: (answers: string[]) => void;
 };

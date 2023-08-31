@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import * as MyPageStyle from './MyPage.styled';
-import { getCookie, removeCookie } from '../../../helper/Cookie';
+import * as MyPageStyle from '@/pages/mypage/mainmypage/MyPage.styled';
+
+import { getCookie, removeCookie } from '@/helper/Cookie';
 import { useNavigate } from 'react-router-dom';
-import AxiosC from '../../../helper/AxiosC';
+import AxiosC from '@/helper/AxiosC';
 import axios from 'axios';
-import Slider5 from '../../../components/common/slider/Slider5';
+import Slider5 from '@/components/common/slider/Slider5';
 
 function MyPageComponent() {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ function MyPageComponent() {
   const loginToken = getCookie('loginToken');
   useEffect(() => {
     axios
-      .get('http://localhost:3001/api/v1/auth/me', {
+      .get('http://34.64.149.22:3001/api/v1/auth/me', {
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
@@ -46,7 +47,7 @@ function MyPageComponent() {
   const handleLogout = async () => {
     try {
       const response = await AxiosC.put(
-        'http://localhost:3001/api/v1/auth/logout',
+        'http://34.64.149.22:3001/api/v1/auth/logout',
       );
       console.log(response);
       // 액세스 토큰 쿠키 삭제
@@ -67,7 +68,7 @@ function MyPageComponent() {
     <MyPageStyle.Container>
       <MyPageStyle.Wrapper>
         <MyPageStyle.UserIcon
-          src={`http://localhost:3001/api/v1/image/profile/${userData.profilePic}`}
+          src={`http://34.64.149.22:3001/api/v1/image/profile/${userData.profilePic}`}
           alt="유저 설정 이미지"
         />
         <MyPageStyle.Introduce>

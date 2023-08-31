@@ -1,6 +1,6 @@
 import path from 'path';
 
-const cracoConfig: any = {
+const cracoConfig = {
   webpack: {
     alias: {
       '@': path.resolve(__dirname, 'src'),

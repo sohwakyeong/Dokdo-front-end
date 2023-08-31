@@ -1,13 +1,12 @@
-import React,{ ReactNode, useState } from "react";
-import * as S from './SideBar.styled';
-import Logo2 from '../../assets/img/Logo2.png';
-import User from '../../assets/icon/User.png';
-import Note from '../../assets/icon/Note.png';
-import Group from '../../assets/icon/Group.png';
-import Favorite from '../../assets/icon/Favorite.png';
-import Plus from  '../../assets/icon/Plus.png';
-import Bell from '../../assets/icon/Bell.png';
-
+import React, { ReactNode, useState } from "react";
+import Logo2 from '@/assets/img/Logo2.png';
+import User from '@/assets/icon/User.png';
+import Note from '@/assets/icon/Note.png';
+import Group from '@/assets/icon/Group.png';
+import Favorite from '@/assets/icon/Favorite.png';
+import Plus from '@/assets/icon/Plus.png';
+import Bell from '@/assets/icon/Bell.png';
+import * as S from '@/pages/admin/SideBar.styled'
 interface AdminProps {
    children: ReactNode;
 }

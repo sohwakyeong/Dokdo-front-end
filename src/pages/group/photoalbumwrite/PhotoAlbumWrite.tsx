@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import * as GBW from '../groupboardwrite/GroupBoardWrite.styled';
-import BoardWriteSection2 from '../../../components/common/boardwritesection/BoardWriteSection2';
-import Camera from '../../../assets/icon/Camera.png';
+import * as GBW from '@/pages/group/groupboardwrite/GroupBoardWrite.styled';
+import BoardWriteSection2 from '@/components/common/boardwritesection/BoardWriteSection2';
+import Camera from '@/assets/icon/Camera.png';
 import { useParams } from 'react-router-dom';
-import GroupHeader from '../../../components/layout/header/GroupHeader';
-import { getCookie } from '../../../helper/Cookie';
+import GroupHeader from '@/components/layout/header/GroupHeader';
+import { getCookie } from '@/helper/Cookie';
 
 const PhotoAlbumWrite: React.FC = () => {
   const [responseMessage, setResponseMessage] = useState('');
@@ -20,7 +20,7 @@ const PhotoAlbumWrite: React.FC = () => {
     const loginToken = getCookie('loginToken'); // Assuming getCookie is defined somewhere
 
     axios
-      .get('http://localhost:3001/api/v1/auth/me', {
+      .get('http://34.64.149.22:3001/api/v1/auth/me', {
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
@@ -54,7 +54,7 @@ const PhotoAlbumWrite: React.FC = () => {
       };
 
       const response = await axios.post(
-        `http://localhost:3001/api/v1/group/${groupId}/albums`,
+        `http://34.64.149.22:3001/api/v1/group/${groupId}/albums`,
         payload,
         { withCredentials: true },
       );
@@ -79,7 +79,7 @@ const PhotoAlbumWrite: React.FC = () => {
         formData.append('img', imageFile, 'img'); // 'img'로 키 값을 설정
 
         const uploadResponse = await axios.post(
-          `http://localhost:3001/api/v1/group/images`,
+          `http://34.64.149.22:3001/api/v1/group/images`,
           formData,
           { withCredentials: true },
         );

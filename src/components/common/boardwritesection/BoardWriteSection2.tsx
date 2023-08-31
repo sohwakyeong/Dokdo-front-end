@@ -1,5 +1,6 @@
 import React from 'react';
-import * as BWS from './BoardWriteSection.styled';
+import * as BWS from '@/components/common/boardwritesection/BoardWriteSection.styled';
+
 
 function BoardWriteSection2() {
   return (

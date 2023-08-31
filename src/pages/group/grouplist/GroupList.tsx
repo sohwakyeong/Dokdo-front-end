@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import SearchInput from '../../../components/common/searchinput/SearchInput';
-import * as GL from './GroupList.Styled';
-import BoardBox from '../../../components/common/boardbox/BoardBox';
-import SelectBox from '../../../components/common/selectbox/SelectBox';
+import SearchInput from '@/components/common/searchinput/SearchInput';
+import * as GL from '@/pages/group/grouplist/GroupList.Styled';
+import BoardBox from '@/components/common/boardbox/BoardBox';
+import SelectBox from '@/components/common/selectbox/SelectBox';
 import axios from 'axios';
 
 const regions = [
@@ -65,7 +65,6 @@ const sortOptions = [
   { value: '좋아요', label: '좋아요' },
   { value: '최근순', label: '최근순' },
   { value: '선택', label: '선택' },
-
 ];
 
 const GroupList = () => {
@@ -77,17 +76,13 @@ const GroupList = () => {
   const [clickedInfo, setClickedInfo] = useState<string[]>([]);
   const [groupData, setGroupData] = useState([]);
 
-
-
-
-  
   useEffect(() => {
     async function fetchData() {
       try {
-        let apiUrl = 'http://localhost:3001/api/v1/group?orderBy=popularity'; // 기본적으로 인기순 API 호출
+        let apiUrl = 'http://34.64.149.22:3001/api/v1/group?orderBy=&limit=5&offset=0'; // 기본적으로 인기순 API 호출
 
         if (selectedSort === '최근순') {
-          apiUrl = 'http://localhost:3001/api/v1/group'; // 최신순 API 호출
+          apiUrl = 'http://34.64.149.22:3001/api/v1/group?limit=5&offset=0'; // 최신순 API 호출
         }
 
         const data = await fetchAllGroupData(apiUrl); // API 요청 호출
@@ -124,13 +119,13 @@ const GroupList = () => {
   const handleDeleteClick = (index: number) => {
     const updatedInfo = [...clickedInfo];
     const removedValue = updatedInfo.splice(index, 1)[0]; // 삭제된 값 저장
-  
+
     setClickedInfo(updatedInfo);
-  
+
     // 검색 결과와 선택된 정렬 기준 초기화
     setGroupData([]);
     setSelectedSort('');
-  
+
     // 삭제된 값이 있으면 해당 값을 선택된 값에서도 삭제
     if (removedValue) {
       switch (removedValue) {
@@ -153,7 +148,7 @@ const GroupList = () => {
   };
   const handleSearchButtonClick = async () => {
     try {
-      let apiUrl = 'http://localhost:3001/api/v1/group';
+      let apiUrl = 'http://34.64.149.22:3001/api/v1/group';
 
       if (selectedSort === '최근순') {
         apiUrl += '?orderBy=oldest';

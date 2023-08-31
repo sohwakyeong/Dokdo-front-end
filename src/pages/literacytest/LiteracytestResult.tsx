@@ -1,5 +1,5 @@
 import React from 'react';
-import questions from '../../assets/data/questions.json';
+import questions from '@/assets/data/questions.json';
 import { useNavigate } from 'react-router-dom';
 import {
   Container,
@@ -11,16 +11,16 @@ import {
   ReviewButton,
   TestInstructions,
   RepeatButton,
-} from './LiteracytestResult.Style';
-// import facebookIcon from '../../assets/img/facebook.png';
-// import twitterIcon from '../../assets/img/twitter.png';
-// import kakaoIcon from '../../assets/img/카카오톡아이콘.png';
+} from '@/pages/literacytest/LiteracytestResult.Style';
+// import facebookIcon from '@/assets/img/facebook.png';
+// import twitterIcon from '@/assets/img/twitter.png';
+// import kakaoIcon from '@/assets/img/카카오톡아이콘.png';
 
-import pigImage from '../../assets/img/pig-image.jpeg';
-import smartImage from '../../assets/img/smart-image.jpeg';
-// import geniusImage from '../../assets/img/genius-image.jpeg';
-//import godImage from '../../assets/img/god-image.png';
-//import defaultImage from '../../assets/img/default-image.png';
+import pigImage from '@/assets/img/pig-image.jpeg';
+import smartImage from '@/assets/img/smart-image.jpeg';
+// import geniusImage from '@/assets/img/genius-image.jpeg';
+//import godImage from '@/assets/img/god-image.png';
+//import defaultImage from '@/assets/img/default-image.png';
 
 type LiteracyTestResultProps = {
   userAnswers: number[]; // 사용자가 선택한 답변 인덱스 배열

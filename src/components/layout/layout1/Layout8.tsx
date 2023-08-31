@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
-import LeftScreen from '../leftscreen/LeftScreen';
-import { LayoutContainer, Children, Left, Right } from './Layout1.styled';
-import BackHeader from '../header/BackHeader';
-import Footer from '../footer/Footer';
+import LeftScreen from '@/components/layout/leftscreen/LeftScreen';
+import { LayoutContainer, Children, Left, Right } from '@/components/layout/layout1/Layout1.styled'
 
+import BackHeader from '@/components/layout/header/BackHeader';
+import Footer from '@/components/layout/footer/Footer';
 interface Layout8Props {
   children: ReactNode;
 }

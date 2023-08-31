@@ -12,12 +12,12 @@ import {
   StyledLink,
   MenuText,
   TestInstructions,
-} from './OXTestMain.Style';
+} from '@/pages/literacytest/OXTestMain.Style';
 import { useNavigate } from 'react-router-dom';
-import OXTestImage from '../../assets/img/ox퀴즈.png';
-// import facebookIcon from '../../assets/img/facebook.png';
-// import twitterIcon from '../../assets/img/twitter.png';
-// import kakaoIcon from '../../assets/img/카카오톡아이콘.png';
+import OXTestImage from '@/assets/img/ox퀴즈.png';
+// import facebookIcon from '@/assets/img/facebook.png';
+// import twitterIcon from '@/assets/img/twitter.png';
+// import kakaoIcon from '@/assets/img/카카오톡아이콘.png';
 import { useLocation } from 'react-router-dom';
 
 const OXTestMain: React.FC = () => {

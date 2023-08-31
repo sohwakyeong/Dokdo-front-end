@@ -1,10 +1,10 @@
 import React from 'react';
-import * as MB from './MidleBoardBox.styled';
-import BoardImgBox from './BoardImgBox';
+import * as MB from '@/components/common/boardbox/MiddleBoardBox.styled';
+import BoardImgBox from '@/components/common/boardbox/BoardImgBox';
 import { useNavigate } from 'react-router-dom';
-import defaultImage from '../../../assets/img/Logo1.png';
+import defaultImage from '@/assets/img/Logo1.png';
 
-export interface MidleBoardData {
+export interface MiddleBoardData {
   _id: string;
   group_id: number;
   post_id: number;
@@ -27,11 +27,11 @@ export interface MidleBoardData {
   introduction: string;
 }
 
-interface MidleBoardBoxProps {
-  data?: MidleBoardData;
+interface MiddleBoardBoxProps {
+  data?: MiddleBoardData;
 }
 
-function MidleBoardBox({ data }: MidleBoardBoxProps) {
+function MiddleBoardBox({ data }: MiddleBoardBoxProps) {
   const navigate = useNavigate();
 
   // 모임 상세 페이지 URL을 생성하는 함수
@@ -75,4 +75,4 @@ function MidleBoardBox({ data }: MidleBoardBoxProps) {
   );
 }
 
-export default MidleBoardBox;
+export default MiddleBoardBox;

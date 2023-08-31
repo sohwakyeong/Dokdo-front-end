@@ -10,14 +10,14 @@ import {
   ReviewButton,
   TestInstructions,
   RepeatButton,
-} from './OXTestResult.Style';
-import questionsData from '../../assets/data/ox-questions.json';
-// import facebookIcon from '../../assets/img/facebook.png';
-// import twitterIcon from '../../assets/img/twitter.png';
-// import kakaoIcon from '../../assets/img/카카오톡아이콘.png';
+} from '@/pages/literacytest/OXTestResult.Style';
+import questionsData from '@/assets/data/ox-questions.json';
+// import facebookIcon from '@/assets/img/facebook.png';
+// import twitterIcon from '@/assets/img/twitter.png';
+// import kakaoIcon from '@/assets/img/카카오톡아이콘.png';
 
-import pigImage from '../../assets/img/pig-image.jpeg';
-import smartImage from '../../assets/img/smart-image.jpeg';
+import pigImage from '@/assets/img/pig-image.jpeg';
+import smartImage from '@/assets/img/smart-image.jpeg';
 
 type OXTestResultProps = {
   userAnswers: string[]; // 사용자의 답

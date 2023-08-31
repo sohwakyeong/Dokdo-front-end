@@ -1,6 +1,6 @@
 import React,{useRef} from "react";
-import * as S from './SideBar.styled';
-import * as A from './Admin.styled';
+import * as S from '@/pages/admin/SideBar.styled';
+import * as A from '@/pages/admin/Admin.styled';
 
 function InquiryList(){
     const element = useRef<HTMLDivElement>(null);

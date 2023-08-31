@@ -27,9 +27,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -54,6 +54,7 @@
     "@types/react-modal": "^3.16.0",
     "@types/styled-components": "^5.1.26",
     "@types/swiper": "^6.0.0",
+    "html-webpack-plugin": "^5.5.3",
     "prettier": "3.0.2"
   }
 }

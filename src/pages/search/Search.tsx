@@ -1,7 +1,7 @@
 import React from 'react';
-import * as S from './Search.styled';
-import SearchInput from '../../components/common/searchinput/SearchInput';
-import BookAndContestBox from '../../components/common/BookAndContestBox/BookAndContestBox';
+import * as S from '@/pages/search/Search.styled';
+import SearchInput from '@/components/common/searchinput/SearchInput';
+import BookAndContestBox from '@/components/common/BookAndContestBox/BookAndContestBox';
 
 const Search = () => {
   return (

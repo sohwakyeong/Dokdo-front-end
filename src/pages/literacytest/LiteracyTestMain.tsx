@@ -12,9 +12,9 @@ import {
   StyledLink,
   MenuText,
   TestInstructions,
-} from './LiteracyTestMain.Style';
+} from '@/pages/literacytest/LiteracyTestMain.Style';
 import { useNavigate } from 'react-router-dom';
-import literacyTestImage from '../../assets/img/문해력.png';
+import literacyTestImage from '@/assets/img/문해력.png';
 // import facebookIcon from '../../assets/img/facebook.png';
 // import twitterIcon from '../../assets/img/twitter.png';
 // import kakaoIcon from '../../assets/img/카카오톡아이콘.png';

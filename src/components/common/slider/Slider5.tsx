@@ -4,11 +4,14 @@ import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import './5.styles.css';
-import MiddleBoardBox2 from '../boardbox/MiddleBoard2';
+import '@/components/common/slider/5.styles.css';
+
+import MiddleBoardBox2 from '@/components/common/boardbox/MiddleBoard2';
+
 import axios from 'axios';
-import { MiddleBoardData2 } from '../boardbox/MiddleBoard2';
-import { getCookie } from '../../../helper/Cookie';
+import { MiddleBoardData2 } from '@/components/common/boardbox/MiddleBoard2';
+
+import { getCookie } from '@/helper/Cookie';
 
 interface UserData {
   group: number[]; // group 필드는 숫자 배열로 정의
@@ -22,7 +25,7 @@ export default function Slider3() {
     const loginToken = getCookie('loginToken');
 
     axios
-      .get('http://localhost:3001/api/v1/auth/me', {
+      .get('http://34.64.149.22:3001/api/v1/auth/me', {
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
@@ -50,7 +53,7 @@ export default function Slider3() {
     for (const groupId of groupIds) {
       try {
         const groupResponse = await axios.get(
-          `http://localhost:3001/api/v1/group/${groupId}`,
+          `http://34.64.149.22:3001/api/v1/group/${groupId}`,
         );
 
         if (groupResponse.data.error === null) {
@@ -80,7 +83,7 @@ export default function Slider3() {
       modules={[Navigation, Pagination]}
       className="mySwiper"
     >
-      {popularData.slice(0,3).map((item, index) => (
+      {popularData.slice(0, 3).map((item, index) => (
         <SwiperSlide key={index}>
           {item.name && <MiddleBoardBox2 data={item} />}
         </SwiperSlide>

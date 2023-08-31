@@ -1,7 +1,8 @@
 import React from 'react';
-import * as BC from '../../bookContest/bookandcontest/BookAndContest.styled';
-import bookImg1 from '../../../assets/img/bookImg/책추천2.jpeg';
-import bookImg2 from '../../../assets/img/bookImg/책추천9.jpeg';
+import * as BC from '@/components/bookContest/bookandcontest/BookAndContest.styled';
+
+import bookImg1 from '@/assets/img/bookImg/책추천2.jpeg';
+import bookImg2 from '@/assets/img/bookImg/책추천9.jpeg';
 // BookAndContestBox 컴포넌트의 props 타입 정의
 
 function CTBox2() {

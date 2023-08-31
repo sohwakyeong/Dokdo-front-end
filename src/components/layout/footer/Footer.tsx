@@ -1,10 +1,10 @@
 import React from 'react';
-import * as FT from './Footer.styled';
-import homeIcon from '../../../assets/icon/Home.png';
-import groupIcon from '../../../assets/icon/Person.png';
-import boardIcon from '../../../assets/icon/Plus.png';
-import likeIcon from '../../../assets/icon/Favorite.png';
-import userIcon from '../../../assets/icon/User.png';
+import * as FT from '@/components/layout/footer/Footer.styled';
+import homeIcon from '@/assets/icon/Home.png';
+import groupIcon from '@/assets/icon/Person.png';
+import boardIcon from '@/assets/icon/Plus.png';
+import likeIcon from '@/assets/icon/Favorite.png';
+import userIcon from '@/assets/icon/User.png';
 import { Cookies } from 'react-cookie';
 
 const cookies = new Cookies();

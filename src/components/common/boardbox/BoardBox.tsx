@@ -1,9 +1,11 @@
 // BoardBox.tsx
 import React from 'react';
-import * as BB from './BoardBox.styled';
-import BoardImgBox from './BoardImgBox';
+import * as BB from '@/components/common/boardbox/BoardBox.styled';
+import BoardImgBox from '@/components/common/boardbox/BoardImgBox';
+
+
 import { useNavigate } from 'react-router-dom';
-import defaultImage from '../../../assets/img/Logo1.png';
+import defaultImage from '@/assets/img/Logo1.png';
 
 interface BoardData {
   _id: string;

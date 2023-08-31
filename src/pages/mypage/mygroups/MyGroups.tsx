@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import * as MyGroupsStyle from './MyGroups.styled';
+import * as MyGroupsStyle from '@/pages/mypage/mygroups/MyGroups.styled';
 import { useNavigate } from 'react-router-dom';
-import { getCookie } from '../../../helper/Cookie';
+import { getCookie } from '@/helper/Cookie';
 import axios from 'axios';
-// import MoreButton from '../../../components/common/morebutton/MoreButton';
+// import MoreButton from '@/components/common/morebutton/MoreButton';
 
 interface UserData {
-  
   group: number[];
 }
 
@@ -14,7 +13,6 @@ interface GroupData {
   name: string;
   introduction: string;
   tags: string[];
-
 }
 
 export default function MyGroupsComponent() {
@@ -26,7 +24,7 @@ export default function MyGroupsComponent() {
     const loginToken = getCookie('loginToken');
 
     axios
-      .get('http://localhost:3001/api/v1/auth/me', {
+      .get('http://34.64.149.22:3001/api/v1/auth/me', {
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
@@ -55,7 +53,7 @@ export default function MyGroupsComponent() {
     for (const groupId of groupIds) {
       try {
         const groupResponse = await axios.get(
-          `http://localhost:3001/api/v1/group/${groupId}`,
+          `http://34.64.149.22:3001/api/v1/group/${groupId}`,
         );
 
         if (groupResponse.data.error === null) {
