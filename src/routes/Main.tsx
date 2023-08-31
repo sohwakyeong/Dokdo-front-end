@@ -14,7 +14,7 @@ import PhotoAlbumWrite from '@/pages/group/photoalbumwrite/PhotoAlbumWrite';
 import GroupCreatePage1 from '@/pages/group/groupcreate/GroupCreatePage1';
 import GroupCreatePage2 from '@/pages/group/groupcreate/GroupCreatePage2';
 import GroupCreatePage3 from '@/pages/group/groupcreate/GroupCreatePage3';
-import BookRec from '@/pages/bookRec/BookRec';
+import BookRec from '@/pages/bookrec/BookRec';
 import Contest from '@/pages/contest/Contest';
 import Notifications from '@/pages/notifications/Notifications';
 import Likes from '@/pages/likes/Likes';
