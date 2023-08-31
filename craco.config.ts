@@ -1,7 +1,7 @@
-const CracoAliasPlugin = require('craco-alias');
-const path = require('path');
+import CracoAliasPlugin from 'craco-alias';
+import path from 'path';
 
-module.exports = {
+const cracoConfig = {
   plugins: [
     {
       plugin: CracoAliasPlugin,
@@ -14,3 +14,5 @@ module.exports = {
     },
   ],
 };
+
+export default cracoConfig;
