@@ -20,7 +20,7 @@ export const Container = styled.div`
 `;
 
 export const Image = styled.img`
-  width: 43px;
+  width: 55px;
 `;
 
 export const Genre = styled.div`

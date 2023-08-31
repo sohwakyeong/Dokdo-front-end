@@ -62,7 +62,7 @@ const GroupCreatePage3: React.FC<GroupCreatePage3Props> = ({
 
     try {
       const response = await axios.post(
-        'http://34.64.149.22:3001/api/v1/group/',
+        'http://localhost:3000/api/v1/group/',
         payload,
         { withCredentials: true },
       );
