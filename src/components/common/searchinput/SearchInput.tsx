@@ -1,6 +1,6 @@
 import React from 'react';
 import * as SI from '@/components/common/searchinput/SearchInput.styled';
-import searchIcon from '@/assets/icon/newIcon/페이지별검색.png';
+import searchIcon from '@/assets/icon/newIcon/pagesearch.png';
 
 // props -> { placeholder }
 function SearchInput() {
