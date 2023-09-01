@@ -48,7 +48,7 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
 
     try {
       const response = await axios.get(
-        `http://localhost:3001/api/v1/group/${groupId}/posts?orderBy=oldest&limit=30&offset=${offset}`,
+        `http://localhost:3001/api/v1/group/${groupId}/posts?`,
       );
       return response.data.data;
     } catch (error) {
@@ -85,6 +85,8 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
     fetchData();
   }, [loginToken, groupId]);
 
+
+  
   // 스크롤 이벤트 감지 함수
   const handleScroll = () => {
     const windowHeight = window.innerHeight;
@@ -123,7 +125,7 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
           >
             <GB.BoardLeft>
               <GB.User>
-                <img src={groupBoardItem.user.profilePic} alt="게시자 프로필" />
+                <img src={`http://localhost:3001/api/v1/image/profile/${groupBoardItem.user.profilePic}`} alt="게시자 프로필" />
                 <GB.UserName>
                   <div>{groupBoardItem.user.name}</div>
                   <div>{formatDate(groupBoardItem.post.createdAt)}</div>

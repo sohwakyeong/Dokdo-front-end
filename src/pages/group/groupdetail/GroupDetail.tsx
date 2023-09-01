@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import GroupImg from '@/assets/img/독서모임3.png';
 import axios from 'axios';
 import { getCookie } from '@/helper/Cookie';
 import * as GD from '@/pages/group/groupdetail/GroupDetail.styled';
@@ -32,7 +31,7 @@ interface GroupData {
   group_id: number;
   name: string;
   isRecruit: boolean;
-  profile: string;
+  profile: string[];
   leader: number;
   like: number;
   mem: Array<{

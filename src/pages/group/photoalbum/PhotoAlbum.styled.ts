@@ -58,6 +58,11 @@ export const ProfileImg = styled.div`
   border-radius: 50%;
   background-color: #fff7ec;
   overflow: hidden;
+
+  & img {
+    width: 50px;
+    height: 50px;
+  }
 `;
 
 export const Profile = styled.div`
