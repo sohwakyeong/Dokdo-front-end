@@ -13,7 +13,9 @@ import { MiddleBoardData } from '@/components/common/boardbox/MiddleBoardBox';
 // 서버에서 인기 데이터를 가져오는 함수
 async function fetchPopularData() {
   try {
-    const response = await axios.get('api/v1/group?orderBy=&limit=10&offset=0');
+    const response = await axios.get(
+      '/api/v1/group?orderBy=&limit=10&offset=0',
+    );
     return response.data.data;
   } catch {
     console.log('error');

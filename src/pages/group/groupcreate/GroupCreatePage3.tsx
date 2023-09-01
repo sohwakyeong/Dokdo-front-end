@@ -61,7 +61,7 @@ const GroupCreatePage3: React.FC<GroupCreatePage3Props> = ({
     };
 
     try {
-      const response = await axios.post('api/v1/group/', payload, {
+      const response = await axios.post('/api/v1/group/', payload, {
         withCredentials: true,
       });
       console.log('Response from the server:', response.data);

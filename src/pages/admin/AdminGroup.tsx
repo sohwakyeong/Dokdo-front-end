@@ -21,10 +21,10 @@ function AdminGroup() {
   useEffect(() => {
     async function fetchData() {
       try {
-        let apiUrl = 'api/v1/group?orderBy=popularity'; // 기본적으로 인기순 API 호출
+        let apiUrl = '/api/v1/group?orderBy=popularity'; // 기본적으로 인기순 API 호출
 
         if (selectedSort === '최근순') {
-          apiUrl = 'api/v1/group'; // 최신순 API 호출
+          apiUrl = '/api/v1/group'; // 최신순 API 호출
         }
 
         const data = await fetchAllGroupData(apiUrl); // API 요청 호출
@@ -48,7 +48,7 @@ function AdminGroup() {
 
   async function fetchAllGroup() {
     try {
-      const response = await axios.get('api/v1/group');
+      const response = await axios.get('/api/v1/group');
       return response.data.data;
     } catch (error) {
       throw error;

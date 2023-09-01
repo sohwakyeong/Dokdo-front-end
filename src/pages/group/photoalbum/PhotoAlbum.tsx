@@ -43,7 +43,7 @@ const PhotoAlbum: React.FC<PhotoItemProps> = ({ data }) => {
   async function fetchAllGroupPhotoData(groupId: number) {
     try {
       const response = await axios.get(
-        `api/v1/group/${groupId}/albums?limit=5&offset=0`,
+        `/api/v1/group/${groupId}/albums?limit=5&offset=0`,
       );
       return response.data.data;
     } catch (error) {
@@ -54,7 +54,7 @@ const PhotoAlbum: React.FC<PhotoItemProps> = ({ data }) => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const groupDataResponse = await axios.get(`api/v1/group/${groupId}`, {
+        const groupDataResponse = await axios.get(`/api/v1/group/${groupId}`, {
           headers: {
             Authorization: `Bearer ${loginToken}`,
           },
@@ -109,7 +109,7 @@ const PhotoAlbum: React.FC<PhotoItemProps> = ({ data }) => {
                   </PA.Profile>
                   <PA.PhotoImg>
                     <img
-                      src={`api/v1/image/post/${photoItem.post.images[0]}`}
+                      src={`/api/v1/image/post/${photoItem.post.images[0]}`}
                       alt="업로드사진"
                     />
                   </PA.PhotoImg>

@@ -20,7 +20,7 @@ const PhotoAlbumWrite: React.FC = () => {
     const loginToken = getCookie('loginToken'); // Assuming getCookie is defined somewhere
 
     axios
-      .get('api/v1/auth/me', {
+      .get('/api/v1/auth/me', {
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
@@ -54,7 +54,7 @@ const PhotoAlbumWrite: React.FC = () => {
       };
 
       const response = await axios.post(
-        `api/v1/group/${groupId}/albums`,
+        `/api/v1/group/${groupId}/albums`,
         payload,
         { withCredentials: true },
       );
@@ -79,7 +79,7 @@ const PhotoAlbumWrite: React.FC = () => {
         formData.append('img', imageFile, 'img'); // 'img'로 키 값을 설정
 
         const uploadResponse = await axios.post(
-          `api/v1/group/images`,
+          `/api/v1/group/images`,
           formData,
           { withCredentials: true },
         );

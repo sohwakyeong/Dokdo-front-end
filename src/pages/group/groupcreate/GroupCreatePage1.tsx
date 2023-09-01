@@ -68,9 +68,13 @@ const GroupCreatePage1: React.FC<GroupCreatePage1Props> = ({
       const formData = new FormData();
       formData.append('img', image!, 'img');
 
-      const uploadResponse = await axios.post('api/v1/group/images', formData, {
-        withCredentials: true,
-      });
+      const uploadResponse = await axios.post(
+        '/api/v1/group/images',
+        formData,
+        {
+          withCredentials: true,
+        },
+      );
 
       if (uploadResponse.data.error === null) {
         return uploadResponse.data.data[0];

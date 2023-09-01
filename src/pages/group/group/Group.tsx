@@ -12,7 +12,7 @@ import Slider2 from '@/components/common/slider/Slider2';
 async function fetchAllGroupData() {
   try {
     const response = await axios.get(
-      'api/v1/group?orderBy=popularity&limit=5&offset=0',
+      '/api/v1/group?orderBy=popularity&limit=5&offset=0',
     );
     return response.data.data; // 서버 응답에서 실제 그룹 데이터를 반환
   } catch (error) {

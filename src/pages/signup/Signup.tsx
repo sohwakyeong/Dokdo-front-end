@@ -163,7 +163,7 @@ const SignupComponent = () => {
       }
 
       // 위까지 응답 성공시 밑으로
-      const response = await AxiosC.post('api/v1/auth/register', {
+      const response = await AxiosC.post('/api/v1/auth/register', {
         email,
         password,
       });

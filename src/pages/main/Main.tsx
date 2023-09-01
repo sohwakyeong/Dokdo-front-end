@@ -12,7 +12,7 @@ import { useLocation } from 'react-router-dom';
 async function fetchAllGroupData() {
   try {
     const response = await axios.get(
-      'api/v1/group?orderBy=random=&limit=10&offset=0',
+      '/api/v1/group?orderBy=random=&limit=10&offset=0',
     ); // 최신순 정렬
     return response.data.data; // 서버 응답에서 실제 그룹 데이터를 반환
   } catch (error) {

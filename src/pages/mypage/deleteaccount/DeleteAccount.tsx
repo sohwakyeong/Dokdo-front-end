@@ -20,7 +20,7 @@ function DeleteAccountComponent() {
 
     try {
       const response = await AxiosC.put(
-        'api/v1/auth/withdrawal',
+        '/api/v1/auth/withdrawal',
         {
           password: Password,
         },
