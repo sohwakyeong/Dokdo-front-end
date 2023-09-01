@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -10,14 +9,14 @@ export const Container = styled.div`
   color: black;
   box-sizing: border-box;
   width: 474px;
-  margin: 120px auto;
+  margin: 80px auto 0 auto;
 `;
 
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 0 auto 40px auto;
+  margin: 0 auto 50px auto;
   box-sizing: border-box;
   width: 420px;
   justify-content: space-between;
@@ -45,52 +44,82 @@ export const Form = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 `;
 
 export const FormWrapper = styled.div`
   width: 420px;
   display: flex;
   flex-direction: column;
-  margin-bottom: 40px;
-
- 
-
 `;
 
+export const BtnSelect = styled.div`
+  cursor: pointer;
+  width: 420px;
+  height: 50px;
+  border-radius: 15px;
+  background-color: #ededed;
+  display: flex;
+  align-items: center;
 
+  & p {
+    padding-left: 15px;
+  }
+`;
+export const ListMem = styled.ul`
+  width: 100%;
+  margin-left: 30px;
 
-export const ReasonSelect = styled.select`
-  height: 67px;
-  border-radius: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+`;
+export const ListItem = styled.li`
+  list-style: none;
+  height: 50px;
+  text-align-last: left;
+  width: 100%;
+`;
+
+export const Button = styled.button`
+  padding: 5px 15px;
   border: none;
-  font-size: 18px;
-  background-color: #a8a8a8;
+  text-decoration: none;
+  cursor: pointer;
+  display: block;
+  height: 100%;
+  width: 100%;
+  background-color: #f9f9f9;
+  border: none;
+  border-radius: 15px;
+  &:hover {
+    background-color: #ccc;
+  }
 `;
 
 export const Input = styled.input`
-  height: 67px;
+  height: 50px;
   margin-top: 10px;
-  border-radius: 8px;
-border: none;
-  font-size: 18px;
-  background-color: #a8a8a8;
+  border-radius: 15px;
+  border: none;
+  font-size: 16px;
+  background-color: #ededed;
+  padding-left: 15px;
+  &::placeholder {
+    color: #727272;
+  }
 `;
 
 export const LastDescription = styled.p`
   font-size: 15px;
   margin: 0 auto 5px auto;
-
 `;
 
 export const ButtonWrap = styled.div`
-display: flex;
-width: 100%;
-height: 67px;
-margin-top: 40px;
-justify-content: center;
-
-
+  display: flex;
+  width: 100%;
+  height: 67px;
+  margin-top: 20px;
+  justify-content: center;
 `;
 export const BackButton = styled.button`
   width: 45%;
@@ -102,9 +131,9 @@ export const BackButton = styled.button`
 `;
 
 export const BackLink = styled(Link)`
-    text-decoration: none;
-    color: #595959;
-    
+  text-decoration: none;
+  color: #595959;
+  cursor: pointer;
 `;
 
 export const RemoveButton = styled.button`
@@ -115,36 +144,27 @@ export const RemoveButton = styled.button`
   background-color: #84614b;
   border: none;
   margin-left: 10px;
+  color: #ffffff;
+  cursor: pointer;
 `;
 
 export const RemoveLink = styled(Link)`
   text-decoration: none;
-  color: #FFFFFF;
-  
-
 `;
 
-export const BtnSelect = styled.button`
+export const CheckModalSubmit = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  font-size: 18px;
   border: none;
-width: 250px;
-    height: 50px;
-    padding: 15px;
-    background: darkred;
-    margin-left: 30px;
-    color: #fff;
-    text-align-last: left;
-  line-height: 1;
-&:active+.ListMem {
-    display: block;
-}
-`
+  border-radius: 8px;
+  color: white;
+  background-color: #84614b;
+  cursor: pointer;
+  width: 90%;
+  margin: 30px auto 10px auto;
+`;
 
-export const ListMem = styled.ul`
-
-    margin-left: 30px;
-    width: 250px;
-    height: 30px;
-    
-
-
-`
+export const ModalSubmit = styled(CheckModalSubmit)``;

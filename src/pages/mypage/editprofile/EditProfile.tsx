@@ -67,7 +67,7 @@ function EditProfileComponent() {
   );
   // 파일 선택 시 호출되는 함수
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0]; // Get the first selected file
+    const selectedFile = e.target.files?.[0];
     if (selectedFile) {
       setSelectedFile(selectedFile);
     }
@@ -184,7 +184,7 @@ function EditProfileComponent() {
     };
 
     const loginToken = getCookie('loginToken');
-    console.log('updatedUserData:', updatedUserData); // 변수가 올바르게 설정되었는지 확인
+    console.log('updatedUserData:', updatedUserData);
 
     axios
       .put('http://localhost:3001/api/v1/auth/me', updatedUserData, {
@@ -194,7 +194,7 @@ function EditProfileComponent() {
         withCredentials: true,
       })
       .then(response => {
-        console.log('응답:', response); // 응답을 로그로 기록
+        console.log('응답:', response); 
         if (response.status === 200) {
           alert('프로필 변경완료');
           navigate('/user/mypage');
@@ -203,7 +203,7 @@ function EditProfileComponent() {
         }
       })
       .catch(error => {
-        console.error('닉넴프로필 업데이트 에러:', error); // 어떤 에러가 발생했는지 확인
+        console.error('닉넴프로필 업데이트 에러:', error); 
       });
   };
   return (
@@ -224,7 +224,7 @@ function EditProfileComponent() {
         {isProfileImageModalOpen && (
           <Modal onClose={() => setIsProfileImageModalOpen(false)}>
             <h1>프로필 이미지 업로드</h1>
-            {/* 이미지 선택 부분을 추가하고 필요한 처리를 구현하세요. */}
+     
             <EditStyle.FormTag>
               <EditStyle.Tag>이미지 선택</EditStyle.Tag>
             </EditStyle.FormTag>

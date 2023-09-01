@@ -2,27 +2,26 @@ import React, { useState } from 'react';
 import * as DeleteStyle from '@/pages/mypage/deleteaccount/DeleteAccount.styled';
 import { useNavigate } from 'react-router-dom';
 import AxiosC from '@/helper/AxiosC';
-
+import Modal from '@/components/common/modal/modal';
+import { removeCookie } from '@/helper/Cookie';
+import { GotoHome } from '../inquiredsuccess/InquiredSuccess.styled';
 function DeleteAccountComponent() {
-   const [isListVisible, setListVisible] = useState(false);
-    const [selectedLanguage, setSelectedLanguage] = useState<string | null>(
-      null,
-    );
+  const [isListVisible, setListVisible] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [Password, setPassword] = useState('');
   const navigate = useNavigate();
 
-    const toggleList = (e: { preventDefault: () => void; }) => {
-       e.preventDefault();
-      setListVisible(!isListVisible);
-    };
+  const toggleList = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    setListVisible(!isListVisible);
+  };
 
   const onClickList = (language: string) => {
     setSelectedLanguage(language);
-    setListVisible(false); 
-    // 선택한 언어에 대한 추가 작업 수행
+    setListVisible(false);
   };
-
 
   const onPasswordHanlder = (e: {
     target: { value: React.SetStateAction<string> };
@@ -31,10 +30,13 @@ function DeleteAccountComponent() {
   };
 
   // 탈퇴하기 버튼의 onClick Event
-  // 이 함수에서 AxiosC를 axios로 바꾸면 탈퇴가 안된다
+  // 이 함수에서 AxiosC를 axios로 바꾸면 탈퇴가 안된다!!
   const handleWithDrawal = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-
+    if (!Password) {
+      alert('사용중인 비밀번호를 입력하세요.');
+      return;
+    }
     try {
       const response = await AxiosC.put(
         'http://localhost:3001/api/v1/auth/withdrawal',
@@ -43,12 +45,12 @@ function DeleteAccountComponent() {
         },
         { withCredentials: true },
       );
-      console.log(response);
       if (response.status === 200) {
         // 액세스 토큰 쿠키 삭제 ?? 해야하는가..
-
+        await removeCookie('loginToken');
         alert('회원 탈퇴 되셨습니다.');
-        navigate('/');
+        setIsModalOpen(true);
+        
       } else {
         return alert('response 코드가 200이 아님');
       }
@@ -58,6 +60,11 @@ function DeleteAccountComponent() {
     }
   };
 
+  const GotoHome = () => {
+   setIsModalOpen(false);
+   navigate('/');
+   return;
+  }
 
   return (
     <DeleteStyle.Container>
@@ -75,44 +82,52 @@ function DeleteAccountComponent() {
         <DeleteStyle.Form>
           <div>
             <DeleteStyle.BtnSelect onClick={toggleList}>
-              <p>{selectedLanguage ? `${selectedLanguage} ` : '탈퇴 사유'}</p>
+              <p>
+                {selectedLanguage
+                  ? `${selectedLanguage} `
+                  : '탈퇴 사유를 선택해주세요.'}
+              </p>
             </DeleteStyle.BtnSelect>
             {isListVisible && (
               <DeleteStyle.ListMem>
-                <li>
-                  <button
+                <DeleteStyle.ListItem>
+                  <DeleteStyle.Button
                     type="button"
                     onClick={() => onClickList('흥미가 떨어짐')}
                   >
                     흥미가 떨어짐
-                  </button>
-                </li>
-                <li>
-                  <button
+                  </DeleteStyle.Button>
+                </DeleteStyle.ListItem>
+                <DeleteStyle.ListItem>
+                  <DeleteStyle.Button
                     type="button"
                     onClick={() =>
                       onClickList('내가 원한 문해력의 성장을 이룸')
                     }
                   >
                     내가 원한 문해력의 성장을 이룸
-                  </button>
-                </li>
-                <li>
-                  <button
+                  </DeleteStyle.Button>
+                </DeleteStyle.ListItem>
+                <DeleteStyle.ListItem>
+                  <DeleteStyle.Button
                     type="button"
                     onClick={() => onClickList('다른 회원과의 불화')}
                   >
                     다른 회원과의 불화
-                  </button>
-                </li>
-                <li>
-                  <button type="button" onClick={() => onClickList('기타')}>
+                  </DeleteStyle.Button>
+                </DeleteStyle.ListItem>
+                <DeleteStyle.ListItem>
+                  <DeleteStyle.Button
+                    type="button"
+                    onClick={() => onClickList('기타')}
+                  >
                     기타
-                  </button>
-                </li>
+                  </DeleteStyle.Button>
+                </DeleteStyle.ListItem>
               </DeleteStyle.ListMem>
             )}
           </div>
+
           <DeleteStyle.FormWrapper>
             <DeleteStyle.Input
               type="password"
@@ -121,22 +136,25 @@ function DeleteAccountComponent() {
               value={Password}
             />
           </DeleteStyle.FormWrapper>
-          <DeleteStyle.LastDescription>
-            회원님! 탈퇴 후 3개월 동안은 회원가입이 불가능합니다.
-          </DeleteStyle.LastDescription>
-          <DeleteStyle.LastDescription>
-            탈퇴한 아이디는 본인과 타인 모두 재사용 및
-          </DeleteStyle.LastDescription>
-          <DeleteStyle.LastDescription>
-            복구가 불가하오니 신중하게 선택해 주시길 바랍니다.
-          </DeleteStyle.LastDescription>
+
           <DeleteStyle.ButtonWrap>
             <DeleteStyle.BackButton>
               <DeleteStyle.BackLink to="/">취소하기</DeleteStyle.BackLink>
             </DeleteStyle.BackButton>
+
             <DeleteStyle.RemoveButton onClick={handleWithDrawal}>
               회원 탈퇴하기
             </DeleteStyle.RemoveButton>
+
+            {isModalOpen && (
+              <Modal onClose={() => setIsModalOpen(false)}>
+                <h1>탈퇴가 완료되었습니다.</h1>
+                <p>그동안 독도 서비스를 이용해주셔서 감사합니다.</p>
+                <DeleteStyle.ModalSubmit onClick={GotoHome}>
+                  탈퇴하기
+                </DeleteStyle.ModalSubmit>
+              </Modal>
+            )}
           </DeleteStyle.ButtonWrap>
         </DeleteStyle.Form>
       </DeleteStyle.Wrapper>

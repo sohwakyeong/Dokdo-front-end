@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import LoginComponent from '@/pages/login/Login';
@@ -16,8 +16,32 @@ import Layout1 from '@/components/layout/layout1/Layout1';
 import Layout6 from '@/components/layout/layout1/Layout6';
 import Layout8 from '@/components/layout/layout1/Layout8';
 import Layout3 from '@/components/layout/layout1/Layout3';
+import AxiosC from '@/helper/AxiosC';
 
 const MypageRoutes = () => {
+
+    const [isLogin, setIsLogin] = useState(false);
+
+    const checkUserPermission = async () => {
+      try {
+        const response = await AxiosC.post(
+          'http://localhost:3001/api/v1/auth/login',
+        );
+
+        const userData = response.data;
+
+        // 사용자의 권한에 따라 isAdmin 값을 설정한다.
+        setIsLogin(userData.isLogin);
+      } catch (error) {
+        console.error('권한 확인 중 오류 발생:', error);
+      }
+    };
+
+    useEffect(() => {
+      // 컴포넌트가 마운트될 때 사용자의 권한을 확인한다.
+      checkUserPermission();
+    }, []);
+    
   return (
     <Routes>
       {/* 로그인 */}

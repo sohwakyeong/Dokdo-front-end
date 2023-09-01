@@ -48,15 +48,13 @@ function MyPageComponent() {
       const response = await AxiosC.put(
         'http://localhost:3001/api/v1/auth/logout',
       );
-      console.log(response);
-      // 액세스 토큰 쿠키 삭제
-      console.log('삭제 전');
+
       await removeCookie('loginToken'); // await 추가
-      console.log('삭제 후');
+
       alert('로그아웃에 성공하셨습니다.');
-      console.log('navigate 이전');
+
       navigate('/');
-      console.log('navigate 이후');
+  
     } catch (e) {
       console.error('로그아웃 에러:', e);
       alert('서버 오류: 다시 시도해주세요.');
