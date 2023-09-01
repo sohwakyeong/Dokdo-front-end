@@ -121,13 +121,11 @@ function MyPostsComponent() {
                 <MyPostsStyle.BoardLeft>
                   <MyPostsStyle.ProfileData>
                     <MyPostsStyle.ProfileImg
-                      src={`http://localhost:3001/api/v1/image/profile/${userData.data.getUser.profilePic}`}
-                      alt={`${userData.data.getUser.name}의 프로필 사진`}
+                      src={`http://localhost:3001/api/v1/image/profile/${userData.profilePic}`}
+                      alt={`${userData.name}의 프로필 사진`}
                     />
                     <MyPostsStyle.UpdatedProfile>
-                      <MyPostsStyle.Writer>
-                        {userData.data.getUser.name}
-                      </MyPostsStyle.Writer>
+                      <MyPostsStyle.Writer>{userData.name}</MyPostsStyle.Writer>
                       <MyPostsStyle.PostedDate>
                         {formatCreatedAt(selectedPost.createdAt)}
                       </MyPostsStyle.PostedDate>

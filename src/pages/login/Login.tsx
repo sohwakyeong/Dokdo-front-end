@@ -21,7 +21,7 @@ function LoginComponent() {
     }
   }, []);
 
-  const onEmailHandler = (e: { target: { value: any; }; }) => {
+  const onEmailHandler = (e: { target: { value: any } }) => {
     const newEmail = e.target.value;
     setEmail(newEmail);
     if (newEmail !== cookies.rememberedEmail) {
@@ -31,7 +31,9 @@ function LoginComponent() {
     }
   };
 
-  const onPasswordHandler = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+  const onPasswordHandler = (e: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
     setPassword(e.target.value);
   };
 
@@ -39,7 +41,7 @@ function LoginComponent() {
     setRememberMe(!rememberMe);
   };
 
-  const onClickLogin = async (e: { preventDefault: () => void; }) => {
+  const onClickLogin = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
     if (!(email && password)) {
@@ -59,7 +61,6 @@ function LoginComponent() {
 
       const { data } = response.data;
 
-      if (data.isLogin) {
       if (data.isLogin) {
         alert('로그인 성공하셨습니다.');
         if (rememberMe) {

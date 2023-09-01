@@ -75,7 +75,6 @@ const PhotoDetail: React.FC<PhotoDetailDataProps> = ({ data }) => {
     try {
       const response = await axios.get(
         `http://localhost:3001/api/v1/group/${gId}/posts/${pId}`,
-        `http://localhost:3000/api/v1/group/${gId}/posts/${pId}`,
         {
           headers: {
             Authorization: `Bearer ${loginToken}`,
@@ -128,7 +127,6 @@ const PhotoDetail: React.FC<PhotoDetailDataProps> = ({ data }) => {
     try {
       const response = await axios.post(
         `http://localhost:3001/api/v1/group/${group_Id}/posts/${post_Id}/comments`,
-        `http://localhost:3000/api/v1/group/${group_Id}/posts/${post_Id}/comments`,
         { text: commentText },
         {
           headers: {
@@ -152,7 +150,6 @@ const PhotoDetail: React.FC<PhotoDetailDataProps> = ({ data }) => {
     try {
       const response = await axios.get(
         `http://localhost:3001/api/v1/group/${gId}/posts/${pId}/comments`,
-        `http://localhost:3000/api/v1/group/${gId}/posts/${pId}/comments`,
         {
           headers: {
             Authorization: `Bearer ${loginToken}`,
@@ -201,7 +198,6 @@ const PhotoDetail: React.FC<PhotoDetailDataProps> = ({ data }) => {
         <div>{PhotoDetail?.data?.post.content || 'Loading...'}</div>
         <img
           src={`http://localhost:3001/api/v1/image/post/${PhotoDetail?.data?.post.images[0]}`}
-          src={`http://localhost:3000/api/v1/image/post/${PhotoDetail?.data?.post.images[0]}`}
           alt="게시된 이미지"
         />
       </PAD.UserWriteBox>
