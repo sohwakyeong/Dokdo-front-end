@@ -2,6 +2,7 @@
   "name": "project04e",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://34.64.149.22:3001",
   "dependencies": {
     "@craco/craco": "^7.1.0",
     "@reduxjs/toolkit": "^1.9.5",
@@ -16,7 +17,9 @@
     "axios": "^1.4.0",
     "craco-alias": "^3.0.1",
     "html-webpack-plugin": "^5.5.3",
+    "http-proxy-middleware": "^2.0.6",
     "path": "^0.12.7",
+    "proxy": "^2.1.1",
     "react": "^18.2.0",
     "react-cookie": "^5.0.0",
     "react-modal": "^3.16.1",

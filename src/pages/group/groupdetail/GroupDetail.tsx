@@ -89,9 +89,7 @@ function GroupDetail() {
     // API 요청 함수 정의
     async function fetchAllGroupBoardData(groupId: number) {
       try {
-        const response = await axios.get(
-          `http://34.64.149.22:3001/api/v1/group/${groupId}/posts`,
-        );
+        const response = await axios.get(`api/v1/group/${groupId}/posts`);
         if (response.status === 200) {
           setMembers(response.data.data);
         } else {
@@ -121,15 +119,12 @@ function GroupDetail() {
     // API 요청 함수 정의
     async function fetchGroupData(groupId: number) {
       try {
-        const response = await axios.get(
-          `http://34.64.149.22:3001/api/v1/group/${groupId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${loginToken}`,
-            },
-            withCredentials: true,
+        const response = await axios.get(`api/v1/group/${groupId}`, {
+          headers: {
+            Authorization: `Bearer ${loginToken}`,
           },
-        );
+          withCredentials: true,
+        });
         if (response.status === 200) {
           setGroupData(response.data.data);
         } else {
@@ -154,7 +149,7 @@ function GroupDetail() {
 
     try {
       const response = await axios.put(
-        `http://34.64.149.22:3001/api/v1/auth/group/${groupId}`,
+        `api/v1/auth/group/${groupId}`,
         {},
         {
           headers: {

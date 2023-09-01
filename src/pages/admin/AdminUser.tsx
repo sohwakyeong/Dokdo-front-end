@@ -5,9 +5,7 @@ import UserData from '@/pages/admin/UserData';
 
 async function fetchAllUser() {
   try {
-    const response = await axios.get(
-      'http://34.64.149.22:3001/api/v1/admin/users',
-    );
+    const response = await axios.get('api/v1/admin/users');
     return response.data.data;
   } catch (error) {
     throw error;

@@ -62,15 +62,12 @@ const PhotoDetail: React.FC<PhotoDetailDataProps> = ({ data }) => {
 
   const fetchPhotoDetail = async (gId: number, pId: number) => {
     try {
-      const response = await axios.get(
-        `http://34.64.149.22:3001/api/v1/group/${gId}/posts/${pId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${loginToken}`,
-          },
-          withCredentials: true,
+      const response = await axios.get(`api/v1/group/${gId}/posts/${pId}`, {
+        headers: {
+          Authorization: `Bearer ${loginToken}`,
         },
-      );
+        withCredentials: true,
+      });
 
       if (response.status === 200) {
         setPhotoDetail(response.data);
@@ -87,7 +84,7 @@ const PhotoDetail: React.FC<PhotoDetailDataProps> = ({ data }) => {
   const postComment = async () => {
     try {
       const response = await axios.post(
-        `http://34.64.149.22:3001/api/v1/group/${group_Id}/posts/${post_Id}/comments`,
+        `api/v1/group/${group_Id}/posts/${post_Id}/comments`,
         { text: commentText },
         {
           headers: {
@@ -110,7 +107,7 @@ const PhotoDetail: React.FC<PhotoDetailDataProps> = ({ data }) => {
   const fetchComments = async (gId: number, pId: number) => {
     try {
       const response = await axios.get(
-        `http://34.64.149.22:3001/api/v1/group/${gId}/posts/${pId}/comments`,
+        `api/v1/group/${gId}/posts/${pId}/comments`,
         {
           headers: {
             Authorization: `Bearer ${loginToken}`,
@@ -150,7 +147,7 @@ const PhotoDetail: React.FC<PhotoDetailDataProps> = ({ data }) => {
       <PAD.UserWriteBox>
         <div>{PhotoDetail?.data?.post.content || 'Loading...'}</div>
         <img
-          src={`http://34.64.149.22:3001/api/v1/image/post/${PhotoDetail?.data?.post.images[0]}`}
+          src={`api/v1/image/post/${PhotoDetail?.data?.post.images[0]}`}
           alt="게시된 이미지"
         />
       </PAD.UserWriteBox>

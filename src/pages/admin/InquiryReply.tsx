@@ -10,7 +10,7 @@ function InquiryReply() {
     e.preventDefault();
     try {
       const response = await Axios.post(
-        'http://34.64.149.22:3001/api',
+        'api',
         {
           title,
           content,

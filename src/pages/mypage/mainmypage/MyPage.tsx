@@ -19,7 +19,7 @@ function MyPageComponent() {
   const loginToken = getCookie('loginToken');
   useEffect(() => {
     axios
-      .get('http://34.64.149.22:3001/api/v1/auth/me', {
+      .get('api/v1/auth/me', {
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
@@ -46,9 +46,7 @@ function MyPageComponent() {
   // 이 함수에서 AxiosC를 axios로 바꾸면 로그아웃이 안된다
   const handleLogout = async () => {
     try {
-      const response = await AxiosC.put(
-        'http://34.64.149.22:3001/api/v1/auth/logout',
-      );
+      const response = await AxiosC.put('api/v1/auth/logout');
       console.log(response);
       // 액세스 토큰 쿠키 삭제
       console.log('삭제 전');
@@ -68,7 +66,7 @@ function MyPageComponent() {
     <MyPageStyle.Container>
       <MyPageStyle.Wrapper>
         <MyPageStyle.UserIcon
-          src={`http://34.64.149.22:3001/api/v1/image/profile/${userData.profilePic}`}
+          src={`api/v1/image/profile/${userData.profilePic}`}
           alt="유저 설정 이미지"
         />
         <MyPageStyle.Introduce>
