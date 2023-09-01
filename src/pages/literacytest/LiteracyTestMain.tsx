@@ -14,7 +14,7 @@ import {
   TestInstructions,
 } from '@/pages/literacytest/LiteracyTestMain.Style';
 import { useNavigate } from 'react-router-dom';
-import literacyTestImage from '@/assets/img/문해력.png';
+import literacyTestImage from '@/assets/img/muhaeryuk.png';
 // import facebookIcon from '../../assets/img/facebook.png';
 // import twitterIcon from '../../assets/img/twitter.png';
 // import kakaoIcon from '../../assets/img/카카오톡아이콘.png';
@@ -67,24 +67,7 @@ const LiteracyTestMain: React.FC = () => {
         </MenuItem>
       </Menu>
 
-      <div>
-        <Image src={literacyTestImage} alt="Description" />
-      </div>
-      <TestInstructions>
-        <MenuText>
-          <span>문해력</span> 진단 테스트
-        </MenuText>
-        {'\n'}
-        테스트는 <span className="strongHighlight">10개의 문항</span>으로
-        구성되어 있습니다.
-        {'\n'}
-        문제를 읽고 정답을 체크해주세요.
-        {'\n'}
-        {'\n'}
-        클릭시 다음 문제로 바로 넘어가니,
-        {'\n'}
-        <span className="strong">신중하게 선택</span>해주세요.
-      </TestInstructions>
+      <TestInstructions></TestInstructions>
 
       <StartButton onClick={handleStartTest}>테스트 시작하기</StartButton>
       {/* <SocialIcons>

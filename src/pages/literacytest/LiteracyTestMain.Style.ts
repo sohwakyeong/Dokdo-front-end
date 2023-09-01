@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-
+import literacyTestImage from '@/assets/img/muhaeryuk.png';
 export const StyledLink = styled(Link)`
   text-decoration: none;
   color: #000; // 글자색을 검정색으로 설정
@@ -19,6 +19,9 @@ export const container = styled.div`
   align-items: center;
   justify-content: center;
   width: 474px;
+  background-image: url(${literacyTestImage});
+  background-size: cover; // 배경 이미지 크기를 컨테이너에 맞게 조정
+  background-repeat: no-repeat; // 배경 이미지 반복 제거
   background-color: #fff;
 `;
 export const menu = styled.div`
@@ -60,7 +63,7 @@ export const MenuText = styled.div`
   margin-top: 30px;
 
   span {
-    color: #FEEA63;
+    color: #feea63;
     font-weight: 900;
   }
 `;
@@ -72,6 +75,7 @@ export const TestInstructions = styled.p`
   font-weight: 400;
   line-height: 1.5;
   white-space: pre-line;
+  margin-top: 700px; // 내용 아래 여백 추가
 
   span.strongHighlight {
     font-weight: bold;
@@ -90,16 +94,12 @@ export const image = styled.img`
   margin-top: 20px;
 `;
 
-
-
-
-
 export const startButton = styled.button`
   padding: 20px 66px;
   font-size: 20px;
   cursor: pointer;
-  background-color: #84614b;
-  color: #fff;
+  background-color: #fdf8ef;
+  color: #69391b;
   border: none;
   border-radius: 50px;
   transition: 0.3s;
@@ -110,7 +110,6 @@ export const startButton = styled.button`
   margin-top: 40px;
 
   &:hover {
-    background-color: #84614b;
     transform: scale(1.05);
   }
 

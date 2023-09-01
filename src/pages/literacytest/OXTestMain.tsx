@@ -66,13 +66,10 @@ const OXTestMain: React.FC = () => {
           </StyledLink>
         </MenuItem>
       </Menu>
-      <MenuText>
-        OX 퀴즈
-      </MenuText>
+      <MenuText>OX 퀴즈</MenuText>
       <Image src={OXTestImage} alt="Description" />{' '}
       {/* import한 이미지를 사용합니다. */}
       <TestInstructions>
-   
         {'\n'}
         테스트는 <span className="strongHighlight">10개의 문항</span>으로
         구성되어 있습니다.
@@ -84,7 +81,6 @@ const OXTestMain: React.FC = () => {
         {'\n'}
         <span className="strong">신중하게 선택</span>해주세요.
       </TestInstructions>
-
       <StartButton onClick={handleStartTest}>테스트 시작하기</StartButton>
       {/* <SocialIcons>
         <SocialIcon href="https://facebook.com">
