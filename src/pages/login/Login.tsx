@@ -60,6 +60,7 @@ function LoginComponent() {
       const { data } = response.data;
 
       if (data.isLogin) {
+      if (data.isLogin) {
         alert('로그인 성공하셨습니다.');
         if (rememberMe) {
           setCookie('rememberedEmail', email, {

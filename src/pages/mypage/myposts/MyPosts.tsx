@@ -125,9 +125,7 @@ function MyPostsComponent() {
                       alt={`${userData.data.getUser.name}의 프로필 사진`}
                     />
                     <MyPostsStyle.UpdatedProfile>
-                      <MyPostsStyle.Writer>
-                        {userData.data.getUser.name}
-                      </MyPostsStyle.Writer>
+                      <MyPostsStyle.Writer>{userData.name}</MyPostsStyle.Writer>
                       <MyPostsStyle.PostedDate>
                         {formatCreatedAt(selectedPost.createdAt)}
                       </MyPostsStyle.PostedDate>
@@ -139,7 +137,7 @@ function MyPostsComponent() {
                   </MyPostsStyle.Content>
                 </MyPostsStyle.BoardLeft>
                 <MyPostsStyle.BoardImg
-                  src={`http://localhost:3001/api/v1/image/post/${selectedPost.images[0]}`}
+                  src={`http://34.64.149.22:3001/api/v1/image/post/${selectedPost.images[0]}`} // 이미지 URL 설정
                   alt="게시된 이미지"
                 />
               </MyPostsStyle.Boardbox>
