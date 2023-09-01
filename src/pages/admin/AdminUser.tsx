@@ -5,7 +5,7 @@ import UserData from './UserData';
 
 async function fetchAllUser() {
     try{
-        const response = await axios.get('http://34.64.149.22:3001/api/v1/admin/users?limit=10&offset=0') 
+        const response = await axios.get('http://34.64.149.22:3001/api/v1/admin/users?') 
         return response.data.data;
     } catch (error) {
         throw error;
