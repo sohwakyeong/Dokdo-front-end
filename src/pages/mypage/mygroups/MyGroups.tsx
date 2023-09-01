@@ -3,6 +3,7 @@ import * as MyGroupsStyle from '@/pages/mypage/mygroups/MyGroups.styled';
 import { getCookie } from '@/helper/Cookie';
 import axios from 'axios';
 import MoreButton from '@/components/common/morebutton/MoreButton';
+import GroupData from '@/pages/admin/GroupData';
 
 interface UserData {
   group: number[];
@@ -80,7 +81,7 @@ export default function MyGroupsComponent() {
           {groupData.slice(0, 3).map((group, index) => (
             <MyGroupsStyle.GroupBoardBox key={index}>
               <MyGroupsStyle.BoardImg
-                src={group.profile}
+                src={`http://localhost:3001/api/v1/image/profile/${group.profile}`}
                 alt="그룹의 대표 이미지"
               />
               <MyGroupsStyle.RightSide>
@@ -109,7 +110,7 @@ export default function MyGroupsComponent() {
           {groupData.slice(0, 3).map((group, index) => (
             <MyGroupsStyle.GroupBoardBox key={index}>
               <MyGroupsStyle.BoardImg
-                src={group.profile}
+                src={`http://localhost:3001/api/v1/image/profile/${group.profile}`}
                 alt="그룹의 대표 이미지"
               />
               <MyGroupsStyle.RightSide>
@@ -128,9 +129,8 @@ export default function MyGroupsComponent() {
             </MyGroupsStyle.GroupBoardBox>
           ))}
         </MyGroupsStyle.MyGroupBoardBox>
-       
-          <MoreButton to="/group/list">더보기</MoreButton>
-     
+
+        <MoreButton to="/group/list">더보기</MoreButton>
       </MyGroupsStyle.Wrapper>
     </MyGroupsStyle.Container>
   );

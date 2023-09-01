@@ -52,3 +52,13 @@ body {
   justify-content: space-between;
   margin: 40px 50px 10px;
 }
+.swiper-button-prev,
+.swiper-button-next {
+  color: black; /* 검정색으로 설정 */
+}
+
+/* 슬라이더 화살표 버튼 호버 효과 */
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  color: gray; /* 호버 시 색상 변경 */
+}
