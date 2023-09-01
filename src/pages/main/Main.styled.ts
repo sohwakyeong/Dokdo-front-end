@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Wrapper = styled.div`
+  padding-top: 4%;
   display: flex;
   flex-direction: column;
   align-items: center;

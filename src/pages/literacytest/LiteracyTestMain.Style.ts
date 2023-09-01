@@ -13,6 +13,7 @@ export const StyledLink = styled(Link)`
 
 export const container = styled.div`
   text-align: center;
+  padding-top: 4%;
   display: flex;
   flex-direction: column;
   align-items: center;
