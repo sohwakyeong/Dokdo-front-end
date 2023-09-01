@@ -25,6 +25,7 @@ interface MemberType {
     name: string;
     profilePic: string;
   };
+  user_id: number;
 }
 interface GroupData {
   group_id: number;
@@ -61,8 +62,20 @@ function GroupDetail() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [schedules, setSchedules] = useState<Array<any>>([]);
   const loginToken = getCookie('loginToken');
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const getLocalStorageKey = () => `schedules_${groupId}`;
   const [members, setMembers] = useState<Array<any>>([]);
+  const uniqueMembers: MemberType[] = [];
+  members.forEach(member => {
+    // Check if the member's user_id and name are not already in uniqueMembers
+    if (
+      !uniqueMembers.some(
+        m => m.user_id === member.user_id && m.user.name === member.user.name,
+      )
+    ) {
+      uniqueMembers.push(member);
+    }
+  });
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -84,6 +97,33 @@ function GroupDetail() {
       console.log('Schedule limit reached!');
     }
   };
+  async function uploadProfilePic() {
+    if (!selectedImage || !groupData) {
+      console.log('No image selected or no group data.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('img', selectedImage, 'img');
+
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/api/v1/group/${groupData.group_id}/profilePic`,
+        formData,
+
+        { withCredentials: true },
+      );
+
+      if (response.status === 200) {
+        console.log('Profile picture uploaded successfully.');
+        // You might want to refresh the groupData or display a success message here
+      } else {
+        console.error('Profile picture upload failed:', response.status);
+      }
+    } catch (error) {
+      console.error('Profile picture upload error:', error);
+    }
+  }
 
   useEffect(() => {
     // API 요청 함수 정의
@@ -182,11 +222,25 @@ function GroupDetail() {
       </GD.GroupHeader>
 
       <GD.GroupImage>
-        <img src={GroupImg} alt="모임 설정 이미지" />
+        <GD.GroupImage>
+          <img
+            src={`http://localhost:3001/api/v1/image/profile/${groupData.profile}`}
+            alt="모임 설정 이미지"
+          />
+        </GD.GroupImage>
       </GD.GroupImage>
       <GD.GroupInfo>
         <GD.EditButton>
-          <div>▪︎▪︎▪︎</div>
+          <label htmlFor="profilePicInput">▪︎▪︎▪︎</label>
+          <input
+            id="profilePicInput"
+            type="file"
+            accept="image/*"
+            onChange={e =>
+              setSelectedImage(e.target.files && e.target.files[0])
+            }
+          />
+          <button onClick={uploadProfilePic}>프로필 사진 업로드</button>
         </GD.EditButton>
         <GD.GroupName>📚{groupData.name}</GD.GroupName>
         <GD.GroupInfoTP>
@@ -287,10 +341,10 @@ function GroupDetail() {
         )}
       </GD.Schedule>
       <GD.MemberBox>
-        <GD.Member>모임 멤버 ({members.length + 1})</GD.Member>{' '}
+        <GD.Member>모임 멤버 ({uniqueMembers.length + 1})</GD.Member>{' '}
         {/* Displaying count of members here */}
         <ul>
-          {members.map((member: MemberType, index: number) => (
+          {uniqueMembers.map((member: MemberType, index: number) => (
             <li key={index}>
               <GD.MemberList>
                 <GD.MemberImg>

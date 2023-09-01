@@ -24,7 +24,8 @@ export const GroupName = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 15px;
+  font-size: 24px;
+  font-weight: bold;
 `;
 
 // 이미지 유압프레스로 들어가게 해야 함
