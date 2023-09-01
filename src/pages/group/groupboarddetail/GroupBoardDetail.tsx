@@ -19,7 +19,7 @@ interface GroupDetailData {
     };
     user: {
       name: string;
-      profilePic: string;
+      profilePic: string[];
     };
   };
 }
@@ -35,11 +35,24 @@ interface GroupBoardDetailDataProps {
   data?: GroupDetailData;
 }
 
-const GroupBoardDetail: React.FC<GroupBoardDetailDataProps> = ({ data }) => {
+interface GroupNameData {
+  data: {
+    name: string;
+  };
+}
+
+interface GroupNameProps {
+  data?: GroupNameData;
+}
+
+const GroupBoardDetail: React.FC<
+  GroupBoardDetailDataProps & GroupNameProps
+> = ({ data }) => {
   const loginToken = getCookie('loginToken');
   const { groupId, postsId } = useParams<{
     groupId?: string;
     postsId?: string;
+    gId?:string;
   }>();
   const group_Id = groupId ? parseInt(groupId, 10) : undefined;
   const post_Id = postsId ? parseInt(postsId, 10) : undefined;
@@ -51,18 +64,29 @@ const GroupBoardDetail: React.FC<GroupBoardDetailDataProps> = ({ data }) => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [commentText, setCommentText] = useState('');
   const [replyText, setReplyText] = useState<string>('');
+  const [groupName, setGroupName] = useState<string>('');
+
+  function formatCreatedAt(createdAt: string | number | Date) {
+    const date = new Date(createdAt);
+
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+    return `${month}월 ${day}일`;
+  }
 
   useEffect(() => {
     if (group_Id && post_Id) {
       fetchGroupDetail(group_Id, post_Id);
       fetchComments(group_Id, post_Id);
+      fetchGroupName(group_Id)
     }
   }, [loginToken, group_Id, post_Id]);
 
   const fetchGroupDetail = async (gId: number, pId: number) => {
     try {
       const response = await axios.get(
-        `http://34.64.149.22:3001/api/v1/group/${gId}/posts/${pId}`,
+        `http://localhost:3001/api/v1/group/${gId}/posts/${pId}`,
         {
           headers: {
             Authorization: `Bearer ${loginToken}`,
@@ -82,10 +106,41 @@ const GroupBoardDetail: React.FC<GroupBoardDetailDataProps> = ({ data }) => {
       setIsLoading(false);
     }
   };
+
+  const fetchGroupName = async (gId: number) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/api/v1/group/${gId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${loginToken}`,
+          },
+          withCredentials: true,
+        },
+      );
+  
+      if (response.status === 200) {
+        const groupData = response.data.data;
+        if (groupData) {
+          setGroupName(response.data.data.name);
+        } else {
+          console.error('Group data not found');
+        }
+      } else {
+        console.error('Error fetching Name data:', response.status);
+      }
+    } catch (error) {
+      console.error('Error fetching group name:', error);
+      setGroupName('');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const postComment = async () => {
     try {
       const response = await axios.post(
-        `http://34.64.149.22:3001/api/v1/group/${group_Id}/posts/${post_Id}/comments`,
+        `http://localhost:3001/api/v1/group/${group_Id}/posts/${post_Id}/comments`,
         { text: commentText },
         {
           headers: {
@@ -107,7 +162,7 @@ const GroupBoardDetail: React.FC<GroupBoardDetailDataProps> = ({ data }) => {
   const postReply = async (commentId: number) => {
     try {
       const response = await axios.post(
-        `http://34.64.149.22:3001/api/v1/group/${group_Id}/posts/${post_Id}/comments/${commentId}/reply`,
+        `http://localhost:3001/api/v1/group/${group_Id}/posts/${post_Id}/comments/${commentId}/reply`,
         { text: replyText },
         {
           headers: {
@@ -129,7 +184,7 @@ const GroupBoardDetail: React.FC<GroupBoardDetailDataProps> = ({ data }) => {
   const fetchComments = async (gId: number, pId: number) => {
     try {
       const response = await axios.get(
-        `http://34.64.149.22:3001/api/v1/group/${gId}/posts/${pId}/comments`,
+        `http://localhost:3001/api/v1/group/${gId}/posts/${pId}/comments`,
         {
           headers: {
             Authorization: `Bearer ${loginToken}`,
@@ -155,13 +210,20 @@ const GroupBoardDetail: React.FC<GroupBoardDetailDataProps> = ({ data }) => {
   return (
     <GBD.Wrapper>
       <GBD.GroupBoardTitle>
-        <div>{groupDetail?.data?.post.title || 'Loading...'}</div>
+      <div>{groupName || 'Loading...'}모임의 게시글</div>
       </GBD.GroupBoardTitle>
       <GBD.User>
-        <GBD.ProfileImg></GBD.ProfileImg>
+        <GBD.UserName>{groupDetail?.data.user.name}</GBD.UserName>
+        <GBD.ProfileImg
+          src={`http://localhost:3001/api/v1/image/profile/${groupDetail?.data.user.profilePic}`}
+        ></GBD.ProfileImg>
         <GBD.Desc>
           <GBD.DescDisplay>
-            <div>{groupDetail?.data?.post.createdAt || 'Loading...'}</div>
+            <div>
+              {formatCreatedAt(
+                groupDetail?.data?.post.createdAt || 'Loading...',
+              )}
+            </div>
             <GBD.EditButton>●●●</GBD.EditButton>
           </GBD.DescDisplay>
         </GBD.Desc>
@@ -169,7 +231,7 @@ const GroupBoardDetail: React.FC<GroupBoardDetailDataProps> = ({ data }) => {
       <GBD.UserWriteBox>
         <div>{groupDetail?.data?.post.content || 'Loading...'}</div>
         <img
-          src={`http://34.64.149.22:3001/api/v1/image/post/${groupDetail?.data.post.images[0]}`}
+          src={`http://localhost:3001/api/v1/image/post/${groupDetail?.data.post.images[0]}`}
           alt="게시된 이미지"
         />
       </GBD.UserWriteBox>

@@ -15,24 +15,24 @@ export const Wrapper = styled.div`
   align-items: center;
   margin: 0 auto;
   box-sizing: border-box;
-  width: 420px;
-  justify-content: space-between;
+  width: 400px;
+  
 `;
-
 export const UserIcon = styled.img`
   width: 100px;
   height: 100px;
   border-radius: 50%;
+  border: 1px solid #f2f2f2;
 `;
 
 export const Introduce = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 270px;
   height: auto;
   overflow: hidden;
-  text-align: center;
-  align-items: center;
+  padding-top: 5px;
+ padding-left: 30px;
 `;
 
 export const NickName = styled.div`

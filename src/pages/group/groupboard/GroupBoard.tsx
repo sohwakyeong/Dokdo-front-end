@@ -7,7 +7,6 @@ import GroupHeader from '@/components/layout/header/GroupHeader';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getCookie } from '@/helper/Cookie';
 
-
 interface GroupData {
   group_id: number;
   user: {
@@ -44,7 +43,7 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
   async function fetchAllGroupBoardData(groupId: number) {
     try {
       const response = await axios.get(
-        `http://localhost:3001/v1/group/${groupId}/posts`,
+        `http://localhost:3001/api/v1/group/${groupId}/posts?limit=5&offset=0`,
       );
       return response.data.data;
     } catch (error) {
@@ -56,7 +55,7 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
     async function fetchData() {
       try {
         const groupDataResponse = await axios.get(
-          `http://localhost:3001/v1/group/${groupId}`,
+          `http://localhost:3001/api/v1/group/${groupId}`,
           {
             headers: {
               Authorization: `Bearer ${loginToken}`,
@@ -111,7 +110,7 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
             </GB.BoardLeft>
             <GB.BoardImg>
               <img
-                src={`http://localhost:3001/v1/image/post/${groupBoardItem.post.images[0]}`}
+                src={`http://localhost:3001/api/v1/image/post/${groupBoardItem.post.images[0]}`}
                 alt="게시된 이미지"
               />
             </GB.BoardImg>

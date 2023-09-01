@@ -7,7 +7,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 474px;
-  margin: 0 auto;
+  margin: 15px auto 0 auto;
 `;
 
 export const Wrapper = styled.div`
@@ -29,10 +29,10 @@ export const UserIconBtn = styled.button`
   margin-bottom: 22px;
 `;
 export const UserIcon = styled.img`
-  width: 100%;
-  height: 100%;
-
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
+  border: 1px solid #cbcbcb;
 `;
 
 export const Wrapper2 = styled.div`
@@ -44,6 +44,7 @@ export const Wrapper2 = styled.div`
   width: 420px;
   justify-content: space-between;
 `;
+
 
 export const IconDes = styled.p`
   font-size: 13px;
@@ -122,7 +123,7 @@ export const SubmitButton = styled.button`
 `;
 
 export const ModalSubmitButton = styled(SubmitButton)`
-  width: 100%;
+width: 100%;
   height: 40px;
   margin: 20px auto 0 auto;
 `;
