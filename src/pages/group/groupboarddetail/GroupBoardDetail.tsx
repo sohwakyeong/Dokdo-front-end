@@ -3,7 +3,6 @@ import axios from 'axios';
 import * as GBD from '@/pages/group/groupboarddetail/GroupBoaderDetail.styled';
 import { getCookie } from '@/helper/Cookie';
 import { useParams } from 'react-router-dom';
-
 interface GroupDetailData {
   error: null | string;
   data: {
@@ -60,7 +59,6 @@ const GroupBoardDetail: React.FC<
   }>();
   const group_Id = groupId ? parseInt(groupId, 10) : undefined;
   const post_Id = postsId ? parseInt(postsId, 10) : undefined;
-
   const [groupDetail, setGroupDetail] = useState<GroupDetailData | null>(
     data || null,
   );
@@ -156,7 +154,7 @@ const GroupBoardDetail: React.FC<
           withCredentials: true,
         },
       );
-  
+
       if (response.status === 200) {
         // 댓글 작성 후에 댓글 목록을 업데이트
         //@ts-ignore
@@ -169,7 +167,6 @@ const GroupBoardDetail: React.FC<
       console.error('Error posting comment:', error);
     }
   };
-  
 
   const postReply = async (commentId: number) => {
     try {
@@ -220,12 +217,41 @@ const GroupBoardDetail: React.FC<
     return <div>Loading...</div>;
   }
 
+  const deletePost = async () => {
+    const confirmed = window.confirm('게시글을 삭제하시겠습니까?');
+
+    if (!confirmed) {
+      return; // 삭제를 취소한 경우 함수 종료
+    }
+
+    try {
+      const response = await axios.delete(
+        `http://localhost:3001/api/v1/group/${group_Id}/posts/${post_Id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${loginToken}`,
+          },
+          withCredentials: true,
+        },
+      );
+
+      if (response.status === 204) {
+        // 게시글이 성공적으로 삭제된 경우, 해당 페이지를 새로고침하거나 다른 동작을 수행할 수 있습니다.
+        // 예: history.push()를 사용하여 게시글 목록 페이지로 이동
+      } else {
+        console.error('Error deleting post:', response.status);
+      }
+    } catch (error) {
+      console.error('Error deleting post:', error);
+    }
+  };
+
   return (
     <GBD.Wrapper>
       <GBD.GroupBoardTitle>
         <div>{groupName} 🍀 모임의 게시글</div>
       </GBD.GroupBoardTitle>
-      <GBD.EditButton>●●●</GBD.EditButton>
+      <GBD.EditButton onClick={deletePost}>●●●</GBD.EditButton>
 
       <GBD.User>
         <div>
