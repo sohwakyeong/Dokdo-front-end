@@ -33,28 +33,7 @@ function AdminPost() {
     fetchData();
   }, []);
 
-  return (
-    <A.Wrapper>
-      <A.Menu>
-        <A.Top>
-          <A.Headline> 회원 게시글 관리</A.Headline>
-          <A.Select>
-            <option value="groupboard">토론 모임 공고</option>
-            <option value="freeboard">자유 게시글</option>
-          </A.Select>
-        </A.Top>
-        <A.Layout>
-          <div ref={element}></div>
-          <A.Table>
-            <tr>
-              <th>글 번호</th>
-              <th>제목</th>
-              <th>생성 일자</th>
-              <th>업데이트 일자</th>
-              <th>관리</th>
-            </tr>
-
-    return (
+      return (
         <A.Wrapper>
             <A.Menu>
                 <A.Top>

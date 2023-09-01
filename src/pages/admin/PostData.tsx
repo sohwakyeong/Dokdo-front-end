@@ -28,13 +28,18 @@ function PostData({ data }: AdminPostProps) {
   async function handleDeletePost() {
     try {
       await axios.delete(
-        `http://localhost:3001/api/v1/admin/posts/${data?.post_id}`,
+        `http://localhost:3001/api/v1/admin/posts/${data?.post.post_id}`,
       );
       setDeleted(true);
     } catch (error) {
       throw error;
     }
+    }
     
+    if (!data) {
+        return null;
+      }
+
     const {
         post: { post_id, group_id, createdAt },
         user: { name },

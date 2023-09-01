@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import * as A from './Admin.styled';
+import * as A from '@/pages/admin/Admin.styled';
 
 interface AdminAlbumData {
     album: {
@@ -28,7 +28,7 @@ function AlbumData({data}: AdminAlbumProps) {
 
   async function handleDeleteAlbum() {
     try {
-      await axios.delete(`http://34.64.149.22:3001/api/v1/admin/albums/${data?.album.post_id}`);
+      await axios.delete(`http://localhost:3001/api/v1/admin/albums/${data?.album.post_id}`);
       setDeleted(true);
     } catch (error) {
       throw error;

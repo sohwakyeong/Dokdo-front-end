@@ -5,7 +5,7 @@ import AlbumData from './AlbumData';
 
 async function fetchAllAlbum() {
     try{
-        const response = await axios.get('http://34.64.149.22:3001/api/v1/admin/Albums?') 
+        const response = await axios.get('http:/localhost:3001/api/v1/admin/Albums') 
         return response.data.data;
     } catch (error) {
         throw error;
