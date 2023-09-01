@@ -110,7 +110,7 @@ export const startButton = styled.button`
   margin-top: 40px;
 
   &:hover {
-    transform: scale(1.05);
+    transform: scale(1.01);
   }
 
   &:active {
