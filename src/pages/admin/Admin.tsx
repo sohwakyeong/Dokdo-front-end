@@ -37,17 +37,13 @@ function Admin({children}: AdminProps) {
                 </S.SideMenu>
                 <S.SideMenu>
                     <S.AdminLink to="/admin/album">
-                    <S.IconImg src={Create} alt="사진첩 이미지" />사진첩 관리
+                    <S.IconImg src={Edit} alt="사진첩 이미지" />사진첩 관리
                     </S.AdminLink>
                 </S.SideMenu>
                 <S.SideMenu>                
                     <S.AdminLink to="/admin/group">
                         <S.IconImg src={Supervised} alt="모임 이미지" />모임 관리
                     </S.AdminLink>
-                </S.SideMenu>
-                <S.SideMenu>
-                    <S.AdminLink to="/admin/inquirylist">
-                    <S.IconImg src={Edit} alt="질문 이미지" />문의사항</S.AdminLink>
                 </S.SideMenu>
             </S.SideNav> 
             <S.LogoutImage src={Logout} alt="로그아웃 이미지" />
