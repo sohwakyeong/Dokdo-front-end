@@ -68,6 +68,8 @@ function GroupDetail() {
   const getLocalStorageKey = () => `schedules_${groupId}`;
   const [members, setMembers] = useState<Array<any>>([]);
   const uniqueMembers: MemberType[] = [];
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
   members.forEach(member => {
     // Check if the member's user_id and name are not already in uniqueMembers
     if (
@@ -78,7 +80,9 @@ function GroupDetail() {
       uniqueMembers.push(member);
     }
   });
-
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -256,19 +260,32 @@ function GroupDetail() {
           />
         </GD.GroupImage>
       </GD.GroupImage>
+      <button onClick={toggleDropdown}>▪︎▪︎▪︎</button>
+      {showDropdown && (
+        <div
+          style={{
+            position: 'absolute',
+            background: 'white',
+            boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
+            zIndex: 9999,
+          }}
+        >
+          <button onClick={handleDeleteGroup}>모임 삭제하기</button>
+          <GD.EditButton>
+            <label htmlFor="profilePicInput">프로필 사진 변경</label>
+            <input
+              id="profilePicInput"
+              type="file"
+              accept="image/*"
+              onChange={e =>
+                setSelectedImage(e.target.files && e.target.files[0])
+              }
+            />
+            <button onClick={uploadProfilePic}>프로필 사진 업로드</button>
+          </GD.EditButton>
+        </div>
+      )}
       <GD.GroupInfo>
-        <GD.EditButton>
-          <label htmlFor="profilePicInput">▪︎▪︎▪︎</label>
-          <input
-            id="profilePicInput"
-            type="file"
-            accept="image/*"
-            onChange={e =>
-              setSelectedImage(e.target.files && e.target.files[0])
-            }
-          />
-          <button onClick={uploadProfilePic}>프로필 사진 업로드</button>
-        </GD.EditButton>
         <GD.GroupName>📚{groupData.name}</GD.GroupName>
         <GD.GroupInfoTP>
           <div>🏖️ {groupData.place}</div>
@@ -389,7 +406,6 @@ function GroupDetail() {
             <GD.NFDisplay>
               <GD.NFNextBtn>
                 <button onClick={handleJoinGroup}>모임 가입하기</button>
-                <button onClick={handleDeleteGroup}>모임 삭제하기</button>
               </GD.NFNextBtn>
             </GD.NFDisplay>
           </GD.NFWrapper>
