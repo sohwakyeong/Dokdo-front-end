@@ -25,6 +25,7 @@ interface MemberType {
     name: string;
     profilePic: string;
   };
+  user_id: number;
 }
 interface GroupData {
   group_id: number;
@@ -63,6 +64,13 @@ function GroupDetail() {
   const loginToken = getCookie('loginToken');
   const getLocalStorageKey = () => `schedules_${groupId}`;
   const [members, setMembers] = useState<Array<any>>([]);
+  const uniqueMembers: MemberType[] = [];
+  members.forEach(member => {
+    // Check if the member's user_id is already in uniqueMembers
+    if (!uniqueMembers.some(m => m.user_id === member.user_id)) {
+      uniqueMembers.push(member);
+    }
+  });
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -287,10 +295,10 @@ function GroupDetail() {
         )}
       </GD.Schedule>
       <GD.MemberBox>
-        <GD.Member>모임 멤버 ({members.length + 1})</GD.Member>{' '}
+        <GD.Member>모임 멤버 ({uniqueMembers.length + 1})</GD.Member>{' '}
         {/* Displaying count of members here */}
         <ul>
-          {members.map((member: MemberType, index: number) => (
+          {uniqueMembers.map((member: MemberType, index: number) => (
             <li key={index}>
               <GD.MemberList>
                 <GD.MemberImg>
