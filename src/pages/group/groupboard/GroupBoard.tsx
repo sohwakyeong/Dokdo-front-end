@@ -114,7 +114,7 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
         <PenFooter />
         <SearchInput />
         <GB.GroupBoardTitle>
-          <div>모임 이름</div>
+          <div>게시글 목록</div>
         </GB.GroupBoardTitle>
         {groupBoardData.map((groupBoardItem, index) => (
           <GB.Boardbox
@@ -128,7 +128,7 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
                 <img src={`http://localhost:3001/api/v1/image/profile/${groupBoardItem.user.profilePic}`} alt="게시자 프로필" />
                 <GB.UserName>
                   <div>{groupBoardItem.user.name}</div>
-                  <div>{formatDate(groupBoardItem.post.createdAt)}</div>
+                  <GB.UserDate>{formatDate(groupBoardItem.post.createdAt)}</GB.UserDate>
                 </GB.UserName>
               </GB.User>
               <div>

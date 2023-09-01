@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
 `;
 
 export const GroupPhotoTitle = styled.div`
-  height: 40px;
+  height: 55px;
   width: 100%;
   background-color: #fdf8ef;
   color: black;

@@ -223,7 +223,7 @@ const GroupBoardDetail: React.FC<
   return (
     <GBD.Wrapper>
       <GBD.GroupBoardTitle>
-        <div>{groupName} 모임의 게시글</div>
+        <div>{groupName} 🍀 모임의 게시글</div>
       </GBD.GroupBoardTitle>
       <GBD.EditButton>●●●</GBD.EditButton>
 

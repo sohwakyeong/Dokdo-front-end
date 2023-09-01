@@ -223,7 +223,7 @@ const PhotoDetail: React.FC<PhotoDetailDataProps & GroupNameProps> = ({
   return (
     <PAD.Wrapper>
       <PAD.GroupBoardTitle>
-        <div>{groupName} 모임의 사진첩</div>
+        <div>{groupName} 🍀 모임의 사진첩</div>
       </PAD.GroupBoardTitle>
       <PAD.EditButton>●●●</PAD.EditButton>
 
