@@ -13,11 +13,7 @@ interface PostData {
   updatedAt: string;
   __v: number;
   content: string;
-  images: string[]; // 이미지 파일명 배열
-}
-
-interface PostBoxProps {
-  data?: PostData;
+  images: string[];
 }
 
 interface UserData {
@@ -25,11 +21,11 @@ interface UserData {
   profilePic: string;
 }
 
-function MyPostsComponent({ data }: PostBoxProps) {
+function MyPostsComponent() {
   const navigate = useNavigate();
   const [myPosts, setMyPosts] = useState<PostData[]>([]);
-  const [selectedPosts, setSelectedPosts] = useState<any[]>([]); // 추가: 선택된 포스트 정보를 저장할 상태
-  const [userData, setUserData] = useState<UserData | null>(null); // 추가: 유저 정보 상태
+  const [selectedPosts, setSelectedPosts] = useState<PostData[]>([]);
+  const [userData, setUserData] = useState<UserData | null>(null);
 
   function formatCreatedAt(createdAt: string | number | Date) {
     const date = new Date(createdAt);
@@ -63,57 +59,70 @@ function MyPostsComponent({ data }: PostBoxProps) {
       });
   }, [navigate]);
 
+useEffect(() => {
+  const loginToken = getCookie('loginToken');
+  axios
+    .get(`http://localhost:3001/api/v1/auth/me/posts?&limit=5&offset=0`, {
+      headers: {
+        Authorization: `Bearer ${loginToken}`,
+      },
+      withCredentials: true,
+    })
+    .then(postsResponse => {
+      if (postsResponse.data && Array.isArray(postsResponse.data)) {
+        // 이 부분에서 데이터를 배열로 추출하고 setMyPosts에 할당합니다.
+        const userPosts = postsResponse.data;
+        setMyPosts(userPosts);
+  
+      } else {
+        console.error('게시글 가져오기 오류:', postsResponse.data.error);
+      }
+    })
+    .catch(error => {
+      console.error('게시글 가져오기 에러:', error);
+    });
+}, []);
+
   useEffect(() => {
+    const fetchAllPosts = async () => {
     const loginToken = getCookie('loginToken');
-    axios
-      .get(`http://localhost:3001/api/v1/auth/me/posts`, {
-        headers: {
-          Authorization: `Bearer ${loginToken}`,
-        },
-        withCredentials: true,
-      })
-      .then(postsResponse => {
-        if (postsResponse.data.error === null) {
-          const userPosts: PostData[] = postsResponse.data.data;
-          setMyPosts(userPosts);
 
-          const fetchAllPosts = async () => {
-            const selectedPostsWithImages: PostData[] = [];
+      const selectedPostsWithImages: PostData[] = [];
+      console.log(myPosts);
+if (myPosts.length === 0) {
+ alert('작성한 글이 없습니다.');
+   return;
+}
+      for (const post of myPosts) {
+        try {
+          const postResponse = await axios.get(
+            `http://localhost:3001/api/v1/group/${post.group_id}/posts/${post.post_id}`,
+            {
+              headers: {
+                Authorization: `Bearer ${loginToken}`,
+              },
+              withCredentials: true,
+            },
+          );
 
-            for (const post of userPosts) {
-              try {
-                const postResponse = await axios.get(
-                  `http://localhost:3001/api/v1/group/${post.group_id}/posts/${post.post_id}`,
-                );
-
-                if (postResponse.data.error === null) {
-                  const postData: PostData = {
-                    ...postResponse.data.data,
-                  };
-                  selectedPostsWithImages.push(postData);
-                } else {
-                  console.error(
-                    '포스트 가져오기 오류:',
-                    postResponse.data.error,
-                  );
-                }
-              } catch (error) {
-                console.error('포스트 가져오기 에러:', error);
-              }
-            }
-
-            setSelectedPosts(selectedPostsWithImages);
-          };
-
-          fetchAllPosts();
-        } else {
-          console.error('게시글 가져오기 오류:', postsResponse.data.error);
+          if (postResponse.data.error === null) {
+            const postData: PostData = {
+              ...postResponse.data.data,
+            };
+            selectedPostsWithImages.push(postData);
+          } else {
+            console.error('포스트 가져오기 오류:', postResponse.data.error);
+          }
+        } catch (error) {
+          console.error('포스트 가져오기 에러:', error);
         }
-      })
-      .catch(error => {
-        console.error('게시글 가져오기 에러:', error);
-      });
-  }, []);
+      }
+
+      setSelectedPosts(selectedPostsWithImages);
+    };
+
+    fetchAllPosts();
+  }, [myPosts]);
 
   return (
     <MyPostsStyle.Container>
@@ -131,17 +140,17 @@ function MyPostsComponent({ data }: PostBoxProps) {
                     <MyPostsStyle.UpdatedProfile>
                       <MyPostsStyle.Writer>{userData.name}</MyPostsStyle.Writer>
                       <MyPostsStyle.PostedDate>
-                        {selectedPost.createdAt}
+                        {formatCreatedAt(selectedPost.createdAt)}
                       </MyPostsStyle.PostedDate>
                     </MyPostsStyle.UpdatedProfile>
                   </MyPostsStyle.ProfileData>
 
                   <MyPostsStyle.Content>
-                    {formatCreatedAt(selectedPost.content)}
+                    {selectedPost.content}
                   </MyPostsStyle.Content>
                 </MyPostsStyle.BoardLeft>
                 <MyPostsStyle.BoardImg
-                  src={`http://localhost:3001/api/v1/image/post/${selectedPost.images[0]}`} // 이미지 URL 설정
+                  src={`http://localhost:3001/api/v1/image/post/${selectedPost.images[0]}`}
                   alt="게시된 이미지"
                 />
               </MyPostsStyle.Boardbox>
