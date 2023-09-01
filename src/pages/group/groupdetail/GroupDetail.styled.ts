@@ -17,7 +17,11 @@ export const GroupHeader = styled.div`
     font-weight: bold;
   }
 `;
-
+export const ModalDisplay = styled.div`
+  display: flex;
+  justify-content: right;
+  width: 90%;
+`;
 export const GroupName = styled.div`
   width: 90%;
   padding: 10px;
@@ -30,11 +34,11 @@ export const GroupName = styled.div`
 
 // 이미지 유압프레스로 들어가게 해야 함
 export const GroupImage = styled.div`
-  text-align: right;
   height: 200px;
   width: 100%;
   overflow: hidden;
-
+  display: flex;
+  text-align: center;
   & img {
     width: 100%;
     height: 100%;
@@ -376,21 +380,19 @@ export const NFNextBtn = styled.div`
     cursor: pointer;
   }
 `;
+
 export const DropdownButton = styled.button`
-  position: fixed;
+  display: flex;
+  justify-content: right;
   border: none;
   background-color: transparent;
-  padding: 0;
   cursor: pointer;
-  position: absolute;
-  right: 21%;
-  bottom: 75%;
   font-size: 25px;
-  top: 0;
+  right: 0;
+  width: 90%;
 `;
 
 export const DropdownContent = styled.div`
-  position: absolute;
   background: white;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   z-index: 9999;
@@ -429,11 +431,15 @@ export const CustomFileInput = styled.label`
   cursor: pointer;
 
   &:hover {
-    background-color: #634b36;
+    font-weight: 700;
   }
 `;
 
 // 파일 선택 버튼의 라벨 디자인
 export const CustomFileInputLabel = styled.span`
   font-size: 15px;
+
+  &:hover {
+    font-weight: 700;
+  }
 `;

@@ -130,6 +130,33 @@ function GroupDetail() {
     }
   }
 
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files && e.target.files[0];
+
+    if (selectedFile && groupData) {
+      const formData = new FormData();
+      formData.append('img', selectedFile, 'img');
+
+      try {
+        const response = await axios.put(
+          `http://localhost:3001/api/v1/group/${groupData.group_id}/profilePic`,
+          formData,
+          { withCredentials: true },
+        );
+
+        if (response.status === 200) {
+          window.location.reload();
+          console.log('Profile picture uploaded successfully.');
+          // You might want to refresh the groupData or display a success message here
+        } else {
+          console.error('Profile picture upload failed:', response.status);
+        }
+      } catch (error) {
+        console.error('Profile picture upload error:', error);
+      }
+    }
+  };
+
   useEffect(() => {
     // API 요청 함수 정의
     async function fetchAllGroupBoardData(groupId: number) {
@@ -250,41 +277,39 @@ function GroupDetail() {
       <GD.GroupHeader>
         <GroupHeader data={{ group: Number(groupId) }} />
       </GD.GroupHeader>
-
-      <GD.GroupImage>
-        <GD.GroupImage>
-          <img
-            src={`http://localhost:3001/api/v1/image/profile/${groupData.profile}`}
-            alt="모임 설정 이미지"
-          />
-        </GD.GroupImage>
-      </GD.GroupImage>
-      <GD.DropdownButton onClick={toggleDropdown}>▪︎▪︎▪︎</GD.DropdownButton>
-
-      {showDropdown && (
-        <GD.DropdownContent>
-          <GD.ProfileSection>
-            <GD.CustomFileInput htmlFor="profilePicInput">
-              <GD.StyledFileInput
-                id="profilePicInput"
-                type="file"
-                accept="image/*"
-                onChange={e =>
-                  setSelectedImage(e.target.files && e.target.files[0])
-                }
-              />
-              <GD.CustomFileInputLabel onClick={uploadProfilePic}>
-                그룹 사진 업로드
+      <GD.ModalDisplay>
+        {showDropdown && (
+          <GD.DropdownContent>
+            <GD.ProfileSection>
+              <GD.CustomFileInput htmlFor="profilePicInput">
+                <GD.StyledFileInput
+                  id="profilePicInput"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                />
+                <GD.CustomFileInputLabel onClick={uploadProfilePic}>
+                  그룹 사진 업로드
+                </GD.CustomFileInputLabel>
+              </GD.CustomFileInput>
+            </GD.ProfileSection>
+            <GD.DeleteSection>
+              <GD.CustomFileInputLabel onClick={handleDeleteGroup}>
+                그룹 삭제하기
               </GD.CustomFileInputLabel>
-            </GD.CustomFileInput>
-          </GD.ProfileSection>
-          <GD.DeleteSection>
-            <GD.CustomFileInputLabel onClick={handleDeleteGroup}>
-              그룹 삭제하기
-            </GD.CustomFileInputLabel>
-          </GD.DeleteSection>
-        </GD.DropdownContent>
-      )}
+            </GD.DeleteSection>
+          </GD.DropdownContent>
+        )}
+      </GD.ModalDisplay>
+
+      <GD.DropdownButton onClick={toggleDropdown}>▪︎▪︎▪︎</GD.DropdownButton>
+      <GD.GroupImage>
+        <img
+          src={`http://localhost:3001/api/v1/image/profile/${groupData.profile}`}
+          alt="모임이미지"
+        />
+      </GD.GroupImage>
+
       <GD.GroupInfo>
         <GD.GroupName>📚{groupData.name}</GD.GroupName>
         <GD.GroupInfoTP>
