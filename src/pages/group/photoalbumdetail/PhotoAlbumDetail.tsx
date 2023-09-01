@@ -219,13 +219,41 @@ const PhotoDetail: React.FC<PhotoDetailDataProps & GroupNameProps> = ({
   if (isLoading) {
     return <div>Loading...</div>;
   }
+  const deletePost = async () => {
+    const confirmed = window.confirm('게시글을 삭제하시겠습니까?');
+
+    if (!confirmed) {
+      return; // 삭제를 취소한 경우 함수 종료
+    }
+
+    try {
+      const response = await axios.delete(
+        `http://localhost:3001/api/v1/group/${group_Id}/albums/${post_Id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${loginToken}`,
+          },
+          withCredentials: true,
+        },
+      );
+
+      if (response.status === 204) {
+        // 게시글이 성공적으로 삭제된 경우, 해당 페이지를 새로고침하거나 다른 동작을 수행할 수 있습니다.
+        // 예: history.push()를 사용하여 게시글 목록 페이지로 이동
+      } else {
+        console.error('Error deleting post:', response.status);
+      }
+    } catch (error) {
+      console.error('Error deleting post:', error);
+    }
+  };
 
   return (
     <PAD.Wrapper>
       <PAD.GroupBoardTitle>
         <div>{groupName} 모임의 사진첩</div>
       </PAD.GroupBoardTitle>
-      <PAD.EditButton>●●●</PAD.EditButton>
+      <PAD.EditButton onClick={deletePost}>●●●</PAD.EditButton>
 
       <PAD.User>
         <div>

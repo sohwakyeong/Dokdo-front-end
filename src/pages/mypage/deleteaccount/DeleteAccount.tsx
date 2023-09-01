@@ -4,25 +4,22 @@ import { useNavigate } from 'react-router-dom';
 import AxiosC from '@/helper/AxiosC';
 
 function DeleteAccountComponent() {
-   const [isListVisible, setListVisible] = useState(false);
-    const [selectedLanguage, setSelectedLanguage] = useState<string | null>(
-      null,
-    );
+  const [isListVisible, setListVisible] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
 
   const [Password, setPassword] = useState('');
   const navigate = useNavigate();
 
-    const toggleList = (e: { preventDefault: () => void; }) => {
-       e.preventDefault();
-      setListVisible(!isListVisible);
-    };
+  const toggleList = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    setListVisible(!isListVisible);
+  };
 
   const onClickList = (language: string) => {
     setSelectedLanguage(language);
-    setListVisible(false); 
+    setListVisible(false);
     // 선택한 언어에 대한 추가 작업 수행
   };
-
 
   const onPasswordHanlder = (e: {
     target: { value: React.SetStateAction<string> };
@@ -57,7 +54,6 @@ function DeleteAccountComponent() {
       alert('서버 오류: 다시 시도해주세요.');
     }
   };
-
 
   return (
     <DeleteStyle.Container>
