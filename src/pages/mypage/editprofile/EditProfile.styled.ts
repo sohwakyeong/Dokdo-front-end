@@ -7,7 +7,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 474px;
-  margin: 0 auto;
+  margin: 15px auto 0 auto;
 `;
 
 export const Wrapper = styled.div`
@@ -20,19 +20,21 @@ export const Wrapper = styled.div`
   justify-content: space-between;
 `;
 
+
 export const UserIconBtn = styled.button`
-  width: 150px;
-  height: 150px;
   background-color: transparent;
   border: none;
+  width: 150px;
+  height: 150px;
   cursor: pointer;
   margin-bottom: 22px;
 `;
+
 export const UserIcon = styled.img`
   width: 100%;
   height: 100%;
-
   border-radius: 50%;
+  border: 1px solid #cbcbcb;
 `;
 
 export const Wrapper2 = styled.div`

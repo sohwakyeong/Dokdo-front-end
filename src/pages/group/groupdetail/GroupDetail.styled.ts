@@ -17,23 +17,28 @@ export const GroupHeader = styled.div`
     font-weight: bold;
   }
 `;
-
+export const ModalDisplay = styled.div`
+  display: flex;
+  justify-content: right;
+  width: 90%;
+`;
 export const GroupName = styled.div`
   width: 90%;
   padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 15px;
+  font-size: 24px;
+  font-weight: bold;
 `;
 
 // 이미지 유압프레스로 들어가게 해야 함
 export const GroupImage = styled.div`
-  text-align: right;
   height: 200px;
   width: 100%;
   overflow: hidden;
-
+  display: flex;
+  text-align: center;
   & img {
     width: 100%;
     height: 100%;
@@ -373,5 +378,68 @@ export const NFNextBtn = styled.div`
     width: 100%;
     height: 100%;
     cursor: pointer;
+  }
+`;
+
+export const DropdownButton = styled.button`
+  display: flex;
+  justify-content: right;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 25px;
+  right: 0;
+  width: 90%;
+`;
+
+export const DropdownContent = styled.div`
+  background: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #000;
+  border-radius: 15px;
+  width: 180px;
+  height: 80px;
+`;
+
+export const ProfileSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #000;
+`;
+
+export const DeleteSection = styled.div`
+  display: flex;
+  align-items: center;
+`;
+// 스타일링된 파일 선택 버튼
+export const StyledFileInput = styled.input`
+  display: none;
+`;
+
+export const CustomFileInput = styled.label`
+  display: inline-block;
+  background-color: #ffffff;
+  color: 000;
+  padding: 10px 37px;
+  border-radius: 15px;
+  cursor: pointer;
+
+  &:hover {
+    font-weight: 700;
+  }
+`;
+
+// 파일 선택 버튼의 라벨 디자인
+export const CustomFileInputLabel = styled.span`
+  font-size: 15px;
+
+  &:hover {
+    font-weight: 700;
   }
 `;

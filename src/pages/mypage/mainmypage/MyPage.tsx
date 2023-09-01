@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import * as MyPageStyle from '@/pages/mypage/mainmypage/MyPage.styled';
-
 import { getCookie, removeCookie } from '@/helper/Cookie';
 import { useNavigate } from 'react-router-dom';
 import AxiosC from '@/helper/AxiosC';
@@ -19,7 +18,11 @@ function MyPageComponent() {
   const loginToken = getCookie('loginToken');
   useEffect(() => {
     axios
+<<<<<<< HEAD
       .get('/api/v1/auth/me', {
+=======
+      .get('http://localhost:3001/api/v1/auth/me', {
+>>>>>>> feature-main
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
@@ -46,16 +49,23 @@ function MyPageComponent() {
   // 이 함수에서 AxiosC를 axios로 바꾸면 로그아웃이 안된다
   const handleLogout = async () => {
     try {
+<<<<<<< HEAD
       const response = await AxiosC.put('/api/v1/auth/logout');
       console.log(response);
       // 액세스 토큰 쿠키 삭제
       console.log('삭제 전');
+=======
+      const response = await AxiosC.put(
+        'http://localhost:3001/api/v1/auth/logout',
+      );
+
+>>>>>>> feature-main
       await removeCookie('loginToken'); // await 추가
-      console.log('삭제 후');
+
       alert('로그아웃에 성공하셨습니다.');
-      console.log('navigate 이전');
+
       navigate('/');
-      console.log('navigate 이후');
+  
     } catch (e) {
       console.error('로그아웃 에러:', e);
       alert('서버 오류: 다시 시도해주세요.');
@@ -66,13 +76,17 @@ function MyPageComponent() {
     <MyPageStyle.Container>
       <MyPageStyle.Wrapper>
         <MyPageStyle.UserIcon
+<<<<<<< HEAD
           src={`/api/v1/image/profile/${userData.profilePic}`}
+=======
+          src={`http://localhost:3001/api/v1/image/profile/${userData.profilePic}`}
+>>>>>>> feature-main
           alt="유저 설정 이미지"
         />
         <MyPageStyle.Introduce>
           <MyPageStyle.NickName>{userData.name}</MyPageStyle.NickName>
           <MyPageStyle.SimpleIntro>
-            {userData.introduction}
+            {userData.introduction ? userData.introduction : '안녕하세요.'}
           </MyPageStyle.SimpleIntro>
         </MyPageStyle.Introduce>
       </MyPageStyle.Wrapper>

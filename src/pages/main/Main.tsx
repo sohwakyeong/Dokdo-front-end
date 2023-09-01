@@ -8,11 +8,12 @@ import BoardBox from '@/components/common/boardbox/BoardBox';
 import axios from 'axios';
 import GenreBox from '@/components/common/GenreBox/GenreBox';
 import { useLocation } from 'react-router-dom';
+
 // API 요청 함수 추가
 async function fetchAllGroupData() {
   try {
     const response = await axios.get(
-      '/api/v1/group?orderBy=random=&limit=10&offset=0',
+      'http://localhost:3001/api/v1/group?&limit=5&offset=0',
     ); // 최신순 정렬
     return response.data.data; // 서버 응답에서 실제 그룹 데이터를 반환
   } catch (error) {

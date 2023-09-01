@@ -9,12 +9,13 @@ export const Container = styled.div`
   justify-content: center; // 수직 중앙 정렬
   width: 474px;
   height: 100%; // 화면의 높이만큼 설정
+  margin-top: 50px;
 `;
 
 export const ImgResult = styled.div`
-width: 100%;
-height: 100%;
-`
+  width: 100%;
+  height: 100%;
+`;
 
 export const ResultText = styled.div`
   font-size: 24px;
@@ -132,5 +133,3 @@ export const StyledLink = styled(Link)`
     transform: scale(1);
   }
 `;
-
-  

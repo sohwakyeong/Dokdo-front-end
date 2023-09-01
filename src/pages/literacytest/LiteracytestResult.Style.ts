@@ -9,6 +9,7 @@ export const Container = styled.div`
   justify-content: center; // 수직 중앙 정렬
   width: 474px;
   height: 100%; // 화면의 높이만큼 설정
+  margin-top: 50px;
 `;
 
 export const ImgResult = styled.div`

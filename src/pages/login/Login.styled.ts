@@ -7,28 +7,21 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 474px;
-  margin: 65px auto 0 auto;
+  margin: 45px auto 0 auto;
 `;
 
 export const LogoImg = styled.img`
   width: 30%;
   height: 30%;
-  padding-bottom: 65px;
+  padding-bottom: 25px;
 `;
 
-export const JoinLink = styled(Link)`
-  font-size: 15px;
-  text-decoration: none;
-  color: black;
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-`;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-top: 20px;
 `;
 
 export const Title = styled.p`
@@ -51,7 +44,7 @@ export const Input = styled.input`
   outline: none;
   cursor: pointer;
 
-  margin-bottom: 0.5rem;
+ 
 
   &::placeholder {
     color: #c4c4c4;
@@ -61,17 +54,23 @@ export const Input = styled.input`
   }
 `;
 
-export const Save = styled.label`
+export const Save = styled.div`
+display: flex;
+align-items: center;
+
+`
+
+export const SaveLabel = styled.label`
   display: flex;
   color: black;
   cursor: pointer;
   font-size: 18px;
   align-items: center;
 
-  margin: 5px 10px 10px 10px;
+  margin: 15px 10px;
 `;
 export const SaveId = styled.input`
-  margin: 0 8px 2px 0;
+  zoom: 1.3;
 `;
 
 export const OtherLogin = styled.div`
@@ -92,12 +91,23 @@ export const Button = styled.button`
   width: 420px;
   height: 57px;
   text-align: center;
-  border-radius: 8px;
+  border-radius: 15px;
   font-size: 18px;
+  
   margin-bottom: 0.5rem;
   cursor: pointer;
   border: none;
   background-color: #84614b;
   text-decoration: none;
   color: white;
+`;
+
+export const SignupButton = styled(Button)`
+  color: #84614b;
+  background-color: white;
+  border: 2px solid #84614b;
+
+  & p{
+    font-weight: bold;
+  }
 `;

@@ -7,6 +7,8 @@ function LeftScreen() {
   return (
     <LS.StyledLeftScreen>
       <LS.Wrapper>
+      <img src='' alt="" />
+
         <LS.Logo>
           <img src={Logo} alt="독도 로고" />
         </LS.Logo>

@@ -29,7 +29,17 @@ export const ImgBox = styled.div`
   width: 104px;
   height: 104px;
   background-color: #fff7ec;
-  object-fit: cover;
+  border-radius: 20px;
+  overflow: hidden; // 추가
+  display: flex; // 추가
+  align-items: center; // 추가
+  justify-content: center; // 추가
+`;
+
+export const Img = styled.img`
+  width: 100%; // 이미지의 크기를 컨테이너에 맞게 설정
+  height: 100%;
+  object-fit: cover; // 이미지 비율 유지하면서 컨테이너에 꽉 차도록 설정
   border-radius: 20px;
 `;
 export const HashTagDisplay = styled.div`
@@ -40,7 +50,7 @@ export const HashTagDisplay = styled.div`
 `;
 
 export const HashTags = styled.div`
- border: none;
+  border: none;
   height: 20px;
   border-radius: 20px;
   background-color: #fff7ec;
@@ -54,7 +64,7 @@ export const HashTags = styled.div`
   justify-content: center;
   align-items: center;
   font-weight: 600;
-  white-space: nowrap; 
+  white-space: nowrap;
 `;
 
 export const GroupName = styled.div`

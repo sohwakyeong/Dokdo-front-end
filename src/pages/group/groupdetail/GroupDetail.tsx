@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import GroupImg from '@/assets/img/moim3.png';
+=======
+>>>>>>> feature-main
 import axios from 'axios';
 import { getCookie } from '@/helper/Cookie';
 import * as GD from '@/pages/group/groupdetail/GroupDetail.styled';
+import { useNavigate } from 'react-router-dom';
 
 import {
   ModalWrapper,
@@ -25,12 +29,13 @@ interface MemberType {
     name: string;
     profilePic: string;
   };
+  user_id: number;
 }
 interface GroupData {
   group_id: number;
   name: string;
   isRecruit: boolean;
-  profile: string;
+  profile: string[];
   leader: number;
   like: number;
   mem: Array<{
@@ -56,14 +61,33 @@ interface GroupData {
 }
 
 function GroupDetail() {
+  const navigate = useNavigate();
   const [groupData, setGroupData] = useState<GroupData | null>(null);
   const { groupId } = useParams<{ groupId: string }>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [schedules, setSchedules] = useState<Array<any>>([]);
   const loginToken = getCookie('loginToken');
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const getLocalStorageKey = () => `schedules_${groupId}`;
   const [members, setMembers] = useState<Array<any>>([]);
+  const uniqueMembers: MemberType[] = [];
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [joinError, setJoinError] = useState<string | null>(null);
 
+  members.forEach(member => {
+    // Check if the member's user_id and name are not already in uniqueMembers
+    if (
+      !uniqueMembers.some(
+        m => m.user_id === member.user_id && m.user.name === member.user.name,
+      )
+    ) {
+      uniqueMembers.push(member);
+    }
+  });
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -84,12 +108,72 @@ function GroupDetail() {
       console.log('Schedule limit reached!');
     }
   };
+  async function uploadProfilePic() {
+    if (!selectedImage || !groupData) {
+      console.log('No image selected or no group data.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('img', selectedImage, 'img');
+
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/api/v1/group/${groupData.group_id}/profilePic`,
+        formData,
+
+        { withCredentials: true },
+      );
+
+      if (response.status === 200) {
+        console.log('Profile picture uploaded successfully.');
+        // You might want to refresh the groupData or display a success message here
+      } else {
+        console.error('Profile picture upload failed:', response.status);
+      }
+    } catch (error) {
+      console.error('Profile picture upload error:', error);
+    }
+  }
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files && e.target.files[0];
+
+    if (selectedFile && groupData) {
+      const formData = new FormData();
+      formData.append('img', selectedFile, 'img');
+
+      try {
+        const response = await axios.put(
+          `http://localhost:3001/api/v1/group/${groupData.group_id}/profilePic`,
+          formData,
+          { withCredentials: true },
+        );
+
+        if (response.status === 200) {
+          window.location.reload();
+          console.log('Profile picture uploaded successfully.');
+          // You might want to refresh the groupData or display a success message here
+        } else {
+          console.error('Profile picture upload failed:', response.status);
+        }
+      } catch (error) {
+        console.error('Profile picture upload error:', error);
+      }
+    }
+  };
 
   useEffect(() => {
     // API 요청 함수 정의
     async function fetchAllGroupBoardData(groupId: number) {
       try {
+<<<<<<< HEAD
         const response = await axios.get(`/api/v1/group/${groupId}/posts`);
+=======
+        const response = await axios.get(
+          `http://localhost:3001/api/v1/group/${groupId}/posts`,
+        );
+>>>>>>> feature-main
         if (response.status === 200) {
           setMembers(response.data.data);
         } else {
@@ -119,9 +203,19 @@ function GroupDetail() {
     // API 요청 함수 정의
     async function fetchGroupData(groupId: number) {
       try {
+<<<<<<< HEAD
         const response = await axios.get(`/api/v1/group/${groupId}`, {
           headers: {
             Authorization: `Bearer ${loginToken}`,
+=======
+        const response = await axios.get(
+          `http://localhost:3001/api/v1/group/${groupId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${loginToken}`,
+            },
+            withCredentials: true,
+>>>>>>> feature-main
           },
           withCredentials: true,
         });
@@ -149,7 +243,11 @@ function GroupDetail() {
 
     try {
       const response = await axios.put(
+<<<<<<< HEAD
         `/api/v1/auth/group/${groupId}`,
+=======
+        `http://localhost:3001/api/v1/auth/group/${groupId}`,
+>>>>>>> feature-main
         {},
         {
           headers: {
@@ -169,20 +267,78 @@ function GroupDetail() {
       console.error('그룹 가입 에러:', error);
     }
   }
+  async function handleDeleteGroup() {
+    if (window.confirm('정말로 그룹을 삭제하시겠습니까?')) {
+      try {
+        const response = await axios.delete(
+          `http://localhost:3001/api/v1/group/${groupId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${loginToken}`,
+            },
+            withCredentials: true,
+          },
+        );
+
+        if (response.status === 200) {
+          console.log('그룹 삭제 성공:', response.data);
+          // 그룹 삭제 후 리다이렉트 등 처리 가능
+          navigate('/group/list');
+        } else {
+          console.error('그룹 삭제 실패:', response.status);
+        }
+      } catch (error) {
+        console.error('그룹 삭제 에러:', error);
+      }
+    }
+  }
+
+  const isUserAlreadyJoined = uniqueMembers.some(
+    member =>
+      member.user_id === groupData?.leader ||
+      (groupData?.mem.length > 0 &&
+        member.user_id === groupData?.mem[0]?.user_id),
+  );
 
   return (
     <GD.Wrapper>
       <GD.GroupHeader>
         <GroupHeader data={{ group: Number(groupId) }} />
       </GD.GroupHeader>
+      <GD.ModalDisplay>
+        {showDropdown && (
+          <GD.DropdownContent>
+            <GD.ProfileSection>
+              <GD.CustomFileInput htmlFor="profilePicInput">
+                <GD.StyledFileInput
+                  id="profilePicInput"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                />
+                <GD.CustomFileInputLabel onClick={uploadProfilePic}>
+                  그룹 사진 업로드
+                </GD.CustomFileInputLabel>
+              </GD.CustomFileInput>
+            </GD.ProfileSection>
+            <GD.DeleteSection>
+              <GD.CustomFileInputLabel onClick={handleDeleteGroup}>
+                그룹 삭제하기
+              </GD.CustomFileInputLabel>
+            </GD.DeleteSection>
+          </GD.DropdownContent>
+        )}
+      </GD.ModalDisplay>
 
+      <GD.DropdownButton onClick={toggleDropdown}>▪︎▪︎▪︎</GD.DropdownButton>
       <GD.GroupImage>
-        <img src={GroupImg} alt="모임 설정 이미지" />
+        <img
+          src={`http://localhost:3001/api/v1/image/profile/${groupData.profile}`}
+          alt="모임이미지"
+        />
       </GD.GroupImage>
+
       <GD.GroupInfo>
-        <GD.EditButton>
-          <div>▪︎▪︎▪︎</div>
-        </GD.EditButton>
         <GD.GroupName>📚{groupData.name}</GD.GroupName>
         <GD.GroupInfoTP>
           <div>🏖️ {groupData.place}</div>
@@ -282,10 +438,10 @@ function GroupDetail() {
         )}
       </GD.Schedule>
       <GD.MemberBox>
-        <GD.Member>모임 멤버 ({members.length + 1})</GD.Member>{' '}
+        <GD.Member>모임 멤버 ({uniqueMembers.length + 1})</GD.Member>{' '}
         {/* Displaying count of members here */}
         <ul>
-          {members.map((member: MemberType, index: number) => (
+          {uniqueMembers.map((member: MemberType, index: number) => (
             <li key={index}>
               <GD.MemberList>
                 <GD.MemberImg>
@@ -301,9 +457,16 @@ function GroupDetail() {
         <GD.ButtonDisplay>
           <GD.NFWrapper>
             <GD.NFDisplay>
-              <GD.NFNextBtn>
-                <button onClick={handleJoinGroup}>모임 가입하기</button>
-              </GD.NFNextBtn>
+              {/* Conditionally render the button based on join error */}
+              {joinError ? (
+                <div>{joinError}</div>
+              ) : isUserAlreadyJoined ? (
+                <div>이미 가입한 멤버입니다.</div>
+              ) : (
+                <GD.NFNextBtn>
+                  <button onClick={handleJoinGroup}>모임 가입하기</button>
+                </GD.NFNextBtn>
+              )}
             </GD.NFDisplay>
           </GD.NFWrapper>
         </GD.ButtonDisplay>

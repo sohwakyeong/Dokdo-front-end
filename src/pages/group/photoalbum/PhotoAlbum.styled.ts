@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
 `;
 
 export const GroupPhotoTitle = styled.div`
-  height: 40px;
+  height: 55px;
   width: 100%;
   background-color: #fdf8ef;
   color: black;
@@ -46,6 +46,10 @@ export const PhotoImg = styled.div`
   background-color: #fff7ec;
   overflow: hidden;
   border-radius: 15px;
+
+  & img {
+    width: 100%;
+  }
 `;
 
 export const ProfileImg = styled.div`
@@ -54,6 +58,11 @@ export const ProfileImg = styled.div`
   border-radius: 50%;
   background-color: #fff7ec;
   overflow: hidden;
+
+  & img {
+    width: 50px;
+    height: 50px;
+  }
 `;
 
 export const Profile = styled.div`

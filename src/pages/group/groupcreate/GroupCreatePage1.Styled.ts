@@ -6,6 +6,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 474px;
+  padding-top: 30px;
 `;
 
 export const StepsContainer = styled.div`
@@ -43,8 +44,11 @@ export const Step = styled.div`
   color: #000000;
 `;
 
+
+
+
 export const Title = styled.h1`
-  margin-bottom: 15px;
+  margin: 15px;
   font-size: 27px;
   text-align: center;
   color: #000000;
@@ -61,23 +65,22 @@ export const FormGroup = styled.div`
   margin-bottom: 10px;
   width: 100%;
   max-width: 400px;
-  position: relative;
   top: -15px;
   color: #000000;
   label {
-    margin-right: 40px;
+    margin-right: 10px;
     flex-shrink: 0;
   }
   input,
   textarea {
-    padding: 5px;
+    padding: 10px;
     box-sizing: border-box;
     background-color: #ededed;
     border: 1px solid #ccc;
     width: 100%;
   }
   textarea {
-    width: 314px;
+    width: 100%;
     height: 296px;
     border-radius: 15px;
   }
@@ -85,7 +88,7 @@ export const FormGroup = styled.div`
 
 export const FileInputContainer = styled(FormGroup)`
   input[type='file'] {
-    font-size: 16px;
+    font-size: 12px;
   }
 `;
 
@@ -98,7 +101,7 @@ export const Input = styled.input`
   margin-left: 16px;
 `;
 export const SubmitButton = styled.button`
-  width: 442px;
+  width: 440px;
   height: 66px;
   border-radius: 20px;
   background: #84614b;
@@ -109,11 +112,21 @@ export const SubmitButton = styled.button`
   cursor: pointer;
   transition: background 0.3s;
   bottom: 65px;
-  left: 51%;
-  //transform: translateX(-50%);
   position: fixed;
 
   &:hover {
     background: #71503c;
   }
+`;
+
+export const SubmitButtonDisplay = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 474px;
+`;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;

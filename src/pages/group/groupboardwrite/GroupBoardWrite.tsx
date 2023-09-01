@@ -20,7 +20,11 @@ const GroupBoardWrite: React.FC = () => {
     const loginToken = getCookie('loginToken'); // Assuming getCookie is defined somewhere
 
     axios
+<<<<<<< HEAD
       .get('/api/v1/auth/me', {
+=======
+      .get('http://localhost:3001/api/v1/auth/me', {
+>>>>>>> feature-main
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
@@ -54,7 +58,11 @@ const GroupBoardWrite: React.FC = () => {
       };
 
       const response = await axios.post(
+<<<<<<< HEAD
         `/api/v1/group/${groupId}/posts`,
+=======
+        `http://localhost:3001/api/v1/group/${groupId}/posts`,
+>>>>>>> feature-main
         payload,
         { withCredentials: true },
       );
@@ -79,7 +87,11 @@ const GroupBoardWrite: React.FC = () => {
         formData.append('img', imageFile, 'img'); // 'img'로 키 값을 설정
 
         const uploadResponse = await axios.post(
+<<<<<<< HEAD
           `/api/v1/group/images`,
+=======
+          `http://localhost:3001/api/v1/group/images`,
+>>>>>>> feature-main
           formData,
           { withCredentials: true },
         );
@@ -129,13 +141,6 @@ const GroupBoardWrite: React.FC = () => {
           rows={15}
           maxLength={1000}
         />
-        {images.map((image, index) => (
-          <GBW.UploadImage
-            key={index}
-            src={URL.createObjectURL(image)}
-            alt="업로드된 이미지"
-          />
-        ))}
       </GBW.WriteBox>
 
       <GBW.ImgFileTitle>
@@ -145,16 +150,24 @@ const GroupBoardWrite: React.FC = () => {
       <GBW.ImgUpload>
         <div>
           <GBW.CameraBox>
-            <img src={Camera} alt="" />
+            {images.map((image, index) => (
+              <GBW.UploadImage
+                key={index}
+                src={URL.createObjectURL(image)}
+                alt="업로드된 이미지"
+              />
+            ))}
           </GBW.CameraBox>
-          <input
-            type="file"
-            id="image-upload"
-            accept="image/*"
-            onChange={handleImageUpload}
-          />
+          <GBW.ImgChoice>
+            <input
+              type="file"
+              id="image-upload"
+              accept="image/*"
+              onChange={handleImageUpload}
+            />
+            <div>{content.length}/1000자</div>
+          </GBW.ImgChoice>
         </div>
-        <div>{content.length}/1000자</div>
       </GBW.ImgUpload>
       <button onClick={handleCreatePost}>포스트 작성</button>
       <p>{responseMessage}</p>

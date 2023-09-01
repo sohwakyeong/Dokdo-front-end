@@ -14,8 +14,6 @@ export const GroupHeader = styled.div`
   height: 100%;
 `;
 
-
-
 export const TitleWrite = styled.div`
   display: flex;
   justify-content: start;
@@ -38,7 +36,7 @@ export const TitleWrite = styled.div`
 
 export const WriteBox = styled.div`
   display: flex;
-  justify-content: start;
+  flex-direction: column;
   align-items: center;
   width: 95%;
   border-bottom: 1px solid #ddd;
@@ -49,6 +47,7 @@ export const WriteBox = styled.div`
   textarea {
     border: none;
     width: 95%;
+    height: 100%;
     resize: none;
     padding: 20px;
     outline: none;
@@ -57,8 +56,7 @@ export const WriteBox = styled.div`
 `;
 
 export const UploadImage = styled.img`
-  max-width: 100%; /* 이미지의 최대 너비를 100%로 설정 */
-  height: auto; /* 높이 자동 조정 */
+  height: 100px; /* 높이 자동 조정 */
   margin: 10px 0; /* 이미지 간격을 조절할 수 있습니다. */
 `;
 
@@ -67,9 +65,7 @@ export const ImgUpload = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 20px 0;
-  width: 95%;
-
-
+  width: 100%;
 `;
 
 export const ImgFileTitle = styled.div`
@@ -98,10 +94,8 @@ export const CameraImg = styled.div`
 export const CameraBox = styled.div`
   display: flex;
   justify-content: space-around;
-  width: 250px;
+  width: 90%;
 `;
-
-
 
 export const Label = styled.label`
   background-color: white;
@@ -113,4 +107,11 @@ export const Label = styled.label`
 `;
 export const TypeSelect = styled.select`
   // 필요한 스타일 속성을 여기에 추가
+`;
+
+export const ImgChoice = styled.div`
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;

@@ -35,7 +35,7 @@ export const Right = styled.div`
 
 export const Children = styled.div`
   max-width: 474px;
-  padding: 100px 0 70px 0;
+  padding: 70px 0 70px 0;
   background-color: white;
   min-height: calc(100vh - 2px);
   box-sizing: border-box;

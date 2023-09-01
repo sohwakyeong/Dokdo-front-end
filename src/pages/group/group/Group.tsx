@@ -5,14 +5,13 @@ import GroupTitleImg from '@/assets/img/jangryeoimg.png';
 import MoreButton from '@/components/common/morebutton/MoreButton';
 import BoardBox from '@/components/common/boardbox/BoardBox';
 import axios from 'axios';
-
-import Slider2 from '@/components/common/slider/Slider2';
+import Slider7 from '../../../components/common/slider/Slider7';
 
 // API 요청 함수 추가
 async function fetchAllGroupData() {
   try {
     const response = await axios.get(
-      '/api/v1/group?orderBy=popularity&limit=5&offset=0',
+      'http://localhost:3001/api/v1/group?limit=5&offset=0',
     );
     return response.data.data; // 서버 응답에서 실제 그룹 데이터를 반환
   } catch (error) {
@@ -61,7 +60,7 @@ const Group = () => {
         <GR.ContestTitle>
           주기적인 독서 토론 모임으로 공모전도 도전 해 봐🔥
         </GR.ContestTitle>
-        <Slider2 />
+        <Slider7 />
       </GR.ContestBox>
       <MoreButton to="/contest">더보기</MoreButton>
     </GR.Wrapper>

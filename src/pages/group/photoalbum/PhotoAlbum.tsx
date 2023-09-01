@@ -43,7 +43,7 @@ const PhotoAlbum: React.FC<PhotoItemProps> = ({ data }) => {
   async function fetchAllGroupPhotoData(groupId: number) {
     try {
       const response = await axios.get(
-        `/api/v1/group/${groupId}/albums?limit=5&offset=0`,
+        `http://localhost:3001/api/v1/group/${groupId}/albums?limit=5&offset=0`,
       );
       return response.data.data;
     } catch (error) {
@@ -54,12 +54,15 @@ const PhotoAlbum: React.FC<PhotoItemProps> = ({ data }) => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const groupDataResponse = await axios.get(`/api/v1/group/${groupId}`, {
-          headers: {
-            Authorization: `Bearer ${loginToken}`,
+        const groupDataResponse = await axios.get(
+          `http://localhost:3001/api/v1/group/${groupId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${loginToken}`,
+            },
+            withCredentials: true,
           },
-          withCredentials: true,
-        });
+        );
         if (groupDataResponse.status === 200) {
           const fetchedGroupData = groupDataResponse.data.data;
           setPhotoItems(
@@ -83,7 +86,7 @@ const PhotoAlbum: React.FC<PhotoItemProps> = ({ data }) => {
       <PA.InputDisplay>
         <SearchInput />
       </PA.InputDisplay>
-      <PA.GroupPhotoTitle>모임 사진첩</PA.GroupPhotoTitle>
+      <PA.GroupPhotoTitle>사진첩 목록</PA.GroupPhotoTitle>
 
       <PA.PhotoList>
         <ul>
@@ -100,7 +103,10 @@ const PhotoAlbum: React.FC<PhotoItemProps> = ({ data }) => {
                 <PA.PhotoBoardBox>
                   <PA.Profile>
                     <PA.ProfileImg>
-                      <img src={photoItem.user.profilePic} alt="프로필" />
+                      <img
+                        src={`http://localhost:3001/api/v1/image/profile/${photoItem.user.profilePic}`}
+                        alt="게시자 프로필"
+                      />
                     </PA.ProfileImg>
                     <PA.User>
                       <div>{photoItem.user.name}</div>
@@ -109,7 +115,7 @@ const PhotoAlbum: React.FC<PhotoItemProps> = ({ data }) => {
                   </PA.Profile>
                   <PA.PhotoImg>
                     <img
-                      src={`/api/v1/image/post/${photoItem.post.images[0]}`}
+                      src={`http://localhost:3001/api/v1/image/post/${photoItem.post.images[0]}`}
                       alt="업로드사진"
                     />
                   </PA.PhotoImg>

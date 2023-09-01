@@ -6,13 +6,16 @@ export const StyleHeader = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100px;
+  height: 90px;
   width: 472px;
   margin-bottom: 10px;
   position: fixed;
   z-index: 9999;
+  font-family: Pretendard;
+  font-weight: 500;
 border-left: 1px solid #ddd;
 border-right: 1px solid #ddd;
+font-size: 15px;
 
 `;
 
@@ -25,8 +28,12 @@ export const Logo = styled.h1`
 `;
 
 export const StyleLogo = styled.img`
+<<<<<<< HEAD
   width: 65px;
   height: 27px;
+=======
+  height: 32px;
+>>>>>>> style
 `;
 
 export const Nav = styled.nav`
@@ -47,11 +54,12 @@ export const Up = styled.div`
 `;
 
 export const Down = styled.div`
+padding-top: 10px;
   display: flex;
   justify-content: space-between;
   width: 90%;
-  height: 60px;
-  padding: 10px;
+  height: 50px;
+  padding: 5px;
   background-color: white;
   color: black;
 `;
@@ -62,6 +70,7 @@ export const StyledLink = styled(NavLink)`
   text-decoration: none;
   color: #333;
   list-style: none;
+  justify-content: center;
   color: black;
   border-bottom: 2px solid transparent;
   height: 100%;

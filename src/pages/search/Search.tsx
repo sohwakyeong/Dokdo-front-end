@@ -2,12 +2,12 @@ import React from 'react';
 import * as S from '@/pages/search/Search.styled';
 import SearchInput from '@/components/common/searchinput/SearchInput';
 import BookAndContestBox from '@/components/common/BookContest/BookAndContestBox';
-
+import Logo from '@/assets/img/Logo1.png';
 const Search = () => {
   return (
     <S.Wrapper>
       <S.Logo>
-        <h1>Logo</h1>
+        <img src={Logo} alt="" />
       </S.Logo>
       <SearchInput />
       <S.TagBox>

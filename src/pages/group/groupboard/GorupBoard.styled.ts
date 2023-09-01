@@ -23,7 +23,6 @@ export const GroupBoardTitle = styled.div`
   & div {
     height: 100%;
     width: 100%;
-    padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -75,8 +74,8 @@ export const User = styled.div`
   align-items: center;
 
   & img {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     background-color: #ddd;
     border-radius: 50%;
   }
@@ -92,12 +91,22 @@ export const UserName = styled.div`
   flex-direction: column;
 `;
 
+export const UserDate = styled.div`
+  color: #727272;
+  font-size: 13px;
+`;
+
 export const BoardImg = styled.div`
   width: 100px;
   height: 100px;
   background-color: #ddd;
   border-radius: 15px;
   overflow: hidden;
+
+  & img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 export const BoardTitle = styled.div`
   font-size: 18px;

@@ -53,15 +53,11 @@ const OXTestResult: React.FC<OXTestResultProps> = ({ userAnswers }) => {
 
   return (
     <Container>
-      <ResultText>{getResultMessage()}</ResultText>
       <ResultText>{`${correctAnswers} / ${questionsData.questions.length}`}</ResultText>
       <ResultImage src={imageSource} alt="Result" /> {/* 이미지 출력 */}
-        
-      <TestInstructions>
-        문해력 향상에 도움을 받고 싶다면?
-      </TestInstructions>
+      <ResultText>{getResultMessage()}</ResultText>
+      <TestInstructions>문해력 향상에 도움을 받고 싶다면?</TestInstructions>
       <StyledLink to="group/list">독서토론 시작하기</StyledLink>
-
       {/* <SocialIcons>
         <SocialIcon href="https://facebook.com">
           <SocialIconImage src={facebookIcon} alt="Facebook" />
@@ -76,12 +72,10 @@ const OXTestResult: React.FC<OXTestResultProps> = ({ userAnswers }) => {
       <TestInstructions>
         문해력이 궁금한 친구에게 공유해 보세요!
       </TestInstructions>
-      <ReviewButton>틀린 문제 확인하기</ReviewButton>
       <RepeatButton onClick={handleRepeatTest}>
         ✔ 테스트 다시하기 ✔
       </RepeatButton>
     </Container>
-     
   );
 };
 
