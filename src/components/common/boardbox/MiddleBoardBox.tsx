@@ -59,14 +59,17 @@ function MiddleBoardBox({ data }: MiddleBoardBoxProps) {
       <MB.Border>
         <MB.TextImgBox>
           <MB.ImgBox>
-            <BoardImgBox data={{ profile: imageSource }} />
+            <img
+              src={`http://localhost:3001/api/v1/image/profile/${data.profile}`}
+              alt="업로드사진"
+            />
           </MB.ImgBox>
           <MB.TextBox>
             <div>
-            <MB.GroupName>{name}</MB.GroupName>
+              <MB.GroupName>{name}</MB.GroupName>
             </div>
             <div>
-            <MB.GroupIntro>"{introduction}"</MB.GroupIntro>
+              <MB.GroupIntro>"{introduction}"</MB.GroupIntro>
             </div>
           </MB.TextBox>
         </MB.TextImgBox>
