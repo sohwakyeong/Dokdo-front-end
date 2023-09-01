@@ -49,23 +49,25 @@ const PhotoDetail: React.FC<PhotoDetailDataProps> = ({ data }) => {
   const [PhotoDetail, setPhotoDetail] = useState<PhotoDetailData | null>(
     data || null,
   );
+  const [groupName, setGroupName] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
   const [comments, setComments] = useState<Comment[]>([]);
   const [commentText, setCommentText] = useState('');
 
-    function formatCreatedAt(createdAt: string | number | Date) {
-      const date = new Date(createdAt);
-   
-      const month = date.getMonth() + 1;
-      const day = date.getDate();
+  function formatCreatedAt(createdAt: string | number | Date) {
+    const date = new Date(createdAt);
 
-      return `${month}월 ${day}일`;
-    }
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+    return `${month}월 ${day}일`;
+  }
 
   useEffect(() => {
     if (group_Id && post_Id) {
       fetchPhotoDetail(group_Id, post_Id);
       fetchComments(group_Id, post_Id);
+      fetchGroupName(group_Id); // 모임 이름 가져오기
     }
   }, [loginToken, group_Id, post_Id]);
 
@@ -90,6 +92,34 @@ const PhotoDetail: React.FC<PhotoDetailDataProps> = ({ data }) => {
       console.error('Error fetching detail data:', error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const fetchGroupName = async (gId: number) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/api/v1/group/${gId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${loginToken}`,
+          },
+          withCredentials: true,
+        },
+      );
+
+      if (response.status === 200) {
+        const groupData = response.data.data;
+        if (groupData) {
+          setGroupName(response.data.data.name);
+        } else {
+          console.error('Group data not found');
+        }
+      } else {
+        console.error('Error fetching Name data:', response.status);
+      }
+    } catch (error) {
+      console.error('Error fetching group name:', error);
+      setGroupName('');
     }
   };
 
@@ -145,13 +175,14 @@ const PhotoDetail: React.FC<PhotoDetailDataProps> = ({ data }) => {
   return (
     <PAD.Wrapper>
       <PAD.GroupBoardTitle>
-        <div>{PhotoDetail?.data.post.title}</div>
+        <div>{groupName || 'Loading...'} 모임의 사진첩</div>
       </PAD.GroupBoardTitle>
       <PAD.User>
-        <PAD.UserName>{PhotoDetail?.data.user.name}</PAD.UserName>
         <PAD.ProfileImg
           src={`http://localhost:3001/api/v1/image/profile/${PhotoDetail?.data.user.profilePic}`}
         ></PAD.ProfileImg>
+        <div></div>
+        <PAD.UserName>{PhotoDetail?.data.user.name}</PAD.UserName>
         <PAD.Desc>
           <PAD.DescDisplay>
             <div>
@@ -159,8 +190,8 @@ const PhotoDetail: React.FC<PhotoDetailDataProps> = ({ data }) => {
                 PhotoDetail?.data?.post.createdAt || 'Loading...',
               )}
             </div>
-            <PAD.EditButton>●●●</PAD.EditButton>
           </PAD.DescDisplay>
+          <PAD.EditButton>●●●</PAD.EditButton>
         </PAD.Desc>
       </PAD.User>
       <PAD.UserWriteBox>

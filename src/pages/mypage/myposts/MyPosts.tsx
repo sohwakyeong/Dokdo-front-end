@@ -13,23 +13,27 @@ interface PostData {
   updatedAt: string;
   __v: number;
   content: string;
-  images: string[]; // 이미지 파일명 배열
+  images: string[];
+}
+
+interface UserData {
+  data: {
+    getUser: {
+      name: string;
+      profilePic: string;
+    };
+  };
 }
 
 interface PostBoxProps {
   data?: PostData;
 }
 
-interface UserData {
-  name: string;
-  profilePic: string;
-}
-
 function MyPostsComponent({ data }: PostBoxProps) {
   const navigate = useNavigate();
-  const [myPosts, setMyPosts] = useState<PostData[]>([]);
-  const [selectedPosts, setSelectedPosts] = useState<any[]>([]); // 추가: 선택된 포스트 정보를 저장할 상태
+  const [selectedPosts, setSelectedPosts] = useState<PostData[]>([]); // 추가: 선택된 포스트 정보를 저장할 상태
   const [userData, setUserData] = useState<UserData | null>(null); // 추가: 유저 정보 상태
+  const [myPosts, setMyPosts] = useState<PostData[]>([]);
 
   function formatCreatedAt(createdAt: string | number | Date) {
     const date = new Date(createdAt);
@@ -63,8 +67,10 @@ function MyPostsComponent({ data }: PostBoxProps) {
       });
   }, [navigate]);
 
+  // fetch posts data
   useEffect(() => {
     const loginToken = getCookie('loginToken');
+
     axios
       .get(`http://localhost:3001/api/v1/auth/me/posts`, {
         headers: {
@@ -72,40 +78,13 @@ function MyPostsComponent({ data }: PostBoxProps) {
         },
         withCredentials: true,
       })
-      .then(postsResponse => {
+      .then(async postsResponse => {
         if (postsResponse.data.error === null) {
-          const userPosts: PostData[] = postsResponse.data.data;
+          const userPosts: PostData[] = Array.isArray(postsResponse.data.data)
+            ? postsResponse.data.data
+            : [];
           setMyPosts(userPosts);
-
-          const fetchAllPosts = async () => {
-            const selectedPostsWithImages: PostData[] = [];
-
-            for (const post of userPosts) {
-              try {
-                const postResponse = await axios.get(
-                  `http://localhost:3001/api/v1/group/${post.group_id}/posts/${post.post_id}`,
-                );
-
-                if (postResponse.data.error === null) {
-                  const postData: PostData = {
-                    ...postResponse.data.data,
-                  };
-                  selectedPostsWithImages.push(postData);
-                } else {
-                  console.error(
-                    '포스트 가져오기 오류:',
-                    postResponse.data.error,
-                  );
-                }
-              } catch (error) {
-                console.error('포스트 가져오기 에러:', error);
-              }
-            }
-
-            setSelectedPosts(selectedPostsWithImages);
-          };
-
-          fetchAllPosts();
+          await fetchAllPosts(userPosts);
         } else {
           console.error('게시글 가져오기 오류:', postsResponse.data.error);
         }
@@ -114,6 +93,36 @@ function MyPostsComponent({ data }: PostBoxProps) {
         console.error('게시글 가져오기 에러:', error);
       });
   }, []);
+
+  const fetchAllPosts = async (userPosts: PostData[]) => {
+    const selectedPostsWithImages: PostData[] = [];
+
+    // 모든 비동기 요청을 처리하는 Promise 배열
+    const promises = userPosts.map(async post => {
+      try {
+        const postResponse = await axios.get(
+          `http://localhost:3001/api/v1/group/${post.group_id}/posts/${post.post_id}`,
+        );
+
+        if (postResponse.data.error === null) {
+          const postData: PostData = {
+            ...postResponse.data.data,
+          };
+          selectedPostsWithImages.push(postData);
+        } else {
+          console.error('포스트 가져오기 오류:', postResponse.data.error);
+        }
+      } catch (error) {
+        console.error('포스트 가져오기 에러:', error);
+      }
+    });
+
+    // 모든 비동기 요청이 완료될 때까지 대기
+    await Promise.all(promises);
+
+    // 모든 비동기 요청이 완료된 후에 상태 업데이트
+    setSelectedPosts(selectedPostsWithImages);
+  };
 
   return (
     <MyPostsStyle.Container>
@@ -125,11 +134,13 @@ function MyPostsComponent({ data }: PostBoxProps) {
                 <MyPostsStyle.BoardLeft>
                   <MyPostsStyle.ProfileData>
                     <MyPostsStyle.ProfileImg
-                      src={`http://localhost:3001/api/v1/image/profile/${userData.profilePic}`}
-                      alt={`${userData.name}의 프로필 사진`}
+                      src={`http://localhost:3001/api/v1/image/profile/${userData.data.getUser.profilePic}`}
+                      alt={`${userData.data.getUser.name}의 프로필 사진`}
                     />
                     <MyPostsStyle.UpdatedProfile>
-                      <MyPostsStyle.Writer>{userData.name}</MyPostsStyle.Writer>
+                      <MyPostsStyle.Writer>
+                        {userData.data.getUser.name}
+                      </MyPostsStyle.Writer>
                       <MyPostsStyle.PostedDate>
                         {selectedPost.createdAt}
                       </MyPostsStyle.PostedDate>
@@ -137,11 +148,11 @@ function MyPostsComponent({ data }: PostBoxProps) {
                   </MyPostsStyle.ProfileData>
 
                   <MyPostsStyle.Content>
-                    {formatCreatedAt(selectedPost.content)}
+                    {formatCreatedAt(selectedPost.createdAt)}
                   </MyPostsStyle.Content>
                 </MyPostsStyle.BoardLeft>
                 <MyPostsStyle.BoardImg
-                  src={`http://localhost:3001/api/v1/image/post/${selectedPost.images[0]}`} // 이미지 URL 설정
+                  src={`http://localhost:3001/api/v1/image/post/${selectedPost.images[0]}`}
                   alt="게시된 이미지"
                 />
               </MyPostsStyle.Boardbox>

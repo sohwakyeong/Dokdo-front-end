@@ -21,13 +21,11 @@ interface MemberType {
     title: string;
     content: string;
     images: string[];
-    // ... 나머지 필드들
   };
   user: {
     name: string;
     profilePic: string;
   };
-  // ... 나머지 필드들
 }
 interface GroupData {
   group_id: number;
