@@ -52,7 +52,7 @@ const GroupBoardDetail: React.FC<
   const { groupId, postsId } = useParams<{
     groupId?: string;
     postsId?: string;
-    gId?:string;
+    gId?: string;
   }>();
   const group_Id = groupId ? parseInt(groupId, 10) : undefined;
   const post_Id = postsId ? parseInt(postsId, 10) : undefined;
@@ -79,8 +79,9 @@ const GroupBoardDetail: React.FC<
     if (group_Id && post_Id) {
       fetchGroupDetail(group_Id, post_Id);
       fetchComments(group_Id, post_Id);
-      fetchGroupName(group_Id)
+      fetchGroupName(group_Id);
     }
+    // useEffect의 의존성 배열에 사용된 함수들 추가
   }, [loginToken, group_Id, post_Id]);
 
   const fetchGroupDetail = async (gId: number, pId: number) => {
@@ -118,7 +119,7 @@ const GroupBoardDetail: React.FC<
           withCredentials: true,
         },
       );
-  
+
       if (response.status === 200) {
         const groupData = response.data.data;
         if (groupData) {
@@ -151,7 +152,7 @@ const GroupBoardDetail: React.FC<
       );
 
       if (response.status === 200) {
-        window.location.reload(); // 페이지를 새로고침
+        // window.location.reload(); // 페이지를 새로고침
       } else {
         console.error('Error posting comment:', response.status);
       }
@@ -159,6 +160,7 @@ const GroupBoardDetail: React.FC<
       console.error('Error posting comment:', error);
     }
   };
+
   const postReply = async (commentId: number) => {
     try {
       const response = await axios.post(
@@ -172,7 +174,7 @@ const GroupBoardDetail: React.FC<
         },
       );
       if (response.status === 200) {
-        window.location.reload();
+        // window.location.reload();
       } else {
         console.error('Error posting reply:', response.status);
       }
@@ -210,43 +212,67 @@ const GroupBoardDetail: React.FC<
   return (
     <GBD.Wrapper>
       <GBD.GroupBoardTitle>
-      <div>{groupName || 'Loading...'}모임의 게시글</div>
+        <div>{groupName} 모임의 게시글</div>
       </GBD.GroupBoardTitle>
+      <GBD.EditButton>●●●</GBD.EditButton>
+
       <GBD.User>
-        <GBD.UserName>{groupDetail?.data.user.name}</GBD.UserName>
-        <GBD.ProfileImg
-          src={`http://localhost:3001/api/v1/image/profile/${groupDetail?.data.user.profilePic}`}
-        ></GBD.ProfileImg>
+        <div>
+          <GBD.ProfileImg
+            src={`http://localhost:3001/api/v1/image/profile/${groupDetail?.data.user.profilePic}`}
+          ></GBD.ProfileImg>
+        </div>
         <GBD.Desc>
           <GBD.DescDisplay>
-            <div>
+            <GBD.UserName>{groupDetail?.data.user.name}</GBD.UserName>
+            <GBD.MMDD>
               {formatCreatedAt(
                 groupDetail?.data?.post.createdAt || 'Loading...',
               )}
-            </div>
-            <GBD.EditButton>●●●</GBD.EditButton>
+            </GBD.MMDD>
           </GBD.DescDisplay>
         </GBD.Desc>
       </GBD.User>
+
       <GBD.UserWriteBox>
-        <div>{groupDetail?.data?.post.content || 'Loading...'}</div>
-        <img
-          src={`http://localhost:3001/api/v1/image/post/${groupDetail?.data.post.images[0]}`}
-          alt="게시된 이미지"
-        />
+        <GBD.UserContent>
+          {groupDetail?.data?.post.content || '게시글이 없습니다.'}
+        </GBD.UserContent>
+        {/* 이미지 배열이 정의되어 있고 비어있지 않은 경우에만 이미지 출력 */}
+        {groupDetail?.data?.post.images &&
+          groupDetail.data.post.images.length > 0 && (
+            <img
+              src={`http://localhost:3001/api/v1/image/post/${groupDetail.data.post.images[0]}`}
+              alt="게시된 이미지"
+            />
+          )}
       </GBD.UserWriteBox>
       <GBD.Button>
-        <button>❤️ 좋아요 숫자</button>
+        <button>❤️ 555</button>
         <button>공유하기</button>
       </GBD.Button>
       <GBD.Comment>
+        <GBD.CommentsTitle>
+          댓글 <span> {comments.length}</span>
+        </GBD.CommentsTitle>
         {comments.map(comment => (
           <div key={comment.comment_id}>
             {!comment.isDeleted ? (
-              <>
-                <div>{comment.text}</div>
-                <div>{comment.createdAt}</div>
-              </>
+                <GBD.CommentsList>
+                    <GBD.ComentsBox>
+                      <GBD.PFImg>
+                        <img src="/" alt="프사" />
+                      </GBD.PFImg>
+
+                      <GBD.PFText>
+                        <GBD.CommentUser>작성자 이름</GBD.CommentUser>
+                        <GBD.CommentText>{comment.text}</GBD.CommentText>
+                        <GBD.CommnetCreatedAt>
+                          {formatCreatedAt(comment.createdAt)}
+                        </GBD.CommnetCreatedAt>
+                      </GBD.PFText>
+                    </GBD.ComentsBox>
+                </GBD.CommentsList>
             ) : (
               <div>Deleted Comment</div>
             )}

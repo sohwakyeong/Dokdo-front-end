@@ -129,13 +129,6 @@ const GroupBoardWrite: React.FC = () => {
           rows={15}
           maxLength={1000}
         />
-        {images.map((image, index) => (
-          <GBW.UploadImage
-            key={index}
-            src={URL.createObjectURL(image)}
-            alt="업로드된 이미지"
-          />
-        ))}
       </GBW.WriteBox>
 
       <GBW.ImgFileTitle>
@@ -145,16 +138,24 @@ const GroupBoardWrite: React.FC = () => {
       <GBW.ImgUpload>
         <div>
           <GBW.CameraBox>
-            <img src={Camera} alt="" />
+            {images.map((image, index) => (
+              <GBW.UploadImage
+                key={index}
+                src={URL.createObjectURL(image)}
+                alt="업로드된 이미지"
+              />
+            ))}
           </GBW.CameraBox>
-          <input
-            type="file"
-            id="image-upload"
-            accept="image/*"
-            onChange={handleImageUpload}
-          />
+          <GBW.ImgChoice>
+            <input
+              type="file"
+              id="image-upload"
+              accept="image/*"
+              onChange={handleImageUpload}
+            />
+            <div>{content.length}/1000자</div>
+          </GBW.ImgChoice>
         </div>
-        <div>{content.length}/1000자</div>
       </GBW.ImgUpload>
       <button onClick={handleCreatePost}>포스트 작성</button>
       <p>{responseMessage}</p>

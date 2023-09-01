@@ -46,6 +46,10 @@ export const PhotoImg = styled.div`
   background-color: #fff7ec;
   overflow: hidden;
   border-radius: 15px;
+
+  & img {
+    width: 100%;
+  }
 `;
 
 export const ProfileImg = styled.div`

@@ -77,6 +77,11 @@ const GroupList = () => {
   const [groupData, setGroupData] = useState([]);
   const [offset, setOffset] = useState(0);
 
+
+
+
+
+  
   useEffect(() => {
     async function fetchData() {
       try {
