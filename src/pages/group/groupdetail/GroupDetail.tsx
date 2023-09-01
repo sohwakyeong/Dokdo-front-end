@@ -260,30 +260,31 @@ function GroupDetail() {
           />
         </GD.GroupImage>
       </GD.GroupImage>
-      <button onClick={toggleDropdown}>▪︎▪︎▪︎</button>
+      <GD.DropdownButton onClick={toggleDropdown}>▪︎▪︎▪︎</GD.DropdownButton>
+
       {showDropdown && (
-        <div
-          style={{
-            position: 'absolute',
-            background: 'white',
-            boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
-            zIndex: 9999,
-          }}
-        >
-          <button onClick={handleDeleteGroup}>모임 삭제하기</button>
-          <GD.EditButton>
-            <label htmlFor="profilePicInput">프로필 사진 변경</label>
-            <input
-              id="profilePicInput"
-              type="file"
-              accept="image/*"
-              onChange={e =>
-                setSelectedImage(e.target.files && e.target.files[0])
-              }
-            />
-            <button onClick={uploadProfilePic}>프로필 사진 업로드</button>
-          </GD.EditButton>
-        </div>
+        <GD.DropdownContent>
+          <GD.ProfileSection>
+            <GD.CustomFileInput htmlFor="profilePicInput">
+              <GD.StyledFileInput
+                id="profilePicInput"
+                type="file"
+                accept="image/*"
+                onChange={e =>
+                  setSelectedImage(e.target.files && e.target.files[0])
+                }
+              />
+              <GD.CustomFileInputLabel onClick={uploadProfilePic}>
+                그룹 사진 업로드
+              </GD.CustomFileInputLabel>
+            </GD.CustomFileInput>
+          </GD.ProfileSection>
+          <GD.DeleteSection>
+            <GD.CustomFileInputLabel onClick={handleDeleteGroup}>
+              그룹 삭제하기
+            </GD.CustomFileInputLabel>
+          </GD.DeleteSection>
+        </GD.DropdownContent>
       )}
       <GD.GroupInfo>
         <GD.GroupName>📚{groupData.name}</GD.GroupName>
