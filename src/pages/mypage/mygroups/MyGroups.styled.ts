@@ -14,12 +14,14 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 0 auto 40px auto;
+  margin: 10px auto 40px auto;
   box-sizing: border-box;
   width: 420px;
   justify-content: center;
 `;
-
+export const EmptyPage = styled.div`
+  font-size: 30px;
+`;
 export const MyGroupBoardBox = styled.div`
   display: flex;
   justify-content: center;
@@ -29,14 +31,14 @@ export const MyGroupBoardBox = styled.div`
   flex-direction: column;
 `;
 export const Title = styled.div`
-  font-size: 20px;
+  font-size: 30px;
   font-weight: bold;
   padding-bottom: 20px;
 `;
 
 export const GroupBoardBox = styled.div`
   display: flex;
-  border: 1px solid #8e8e8e;
+  border: 1px solid #d7d7d7;
   width: 100%;
   height: 100px;
   border-radius: 20px;
@@ -57,16 +59,17 @@ export const RightSide = styled.div`
   flex-direction: column;
   justify-content: space-around;
 
-  width: 285px;
+  width: 300px;
   height: auto;
   overflow: hidden;
   margin-top: 3px;
-  padding: 10px;
+  padding: 15px;
+
   & div {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 6px;
+    padding: 4px;
   }
 `;
 
@@ -80,6 +83,8 @@ export const GroupIntro = styled.div`
 
 export const GroupTags = styled.div`
   display: flex;
+  margin-top: 1px;
+  
   
 `;
 export const GroupTag = styled.div`
@@ -96,3 +101,10 @@ export const GroupTag = styled.div`
     margin-left: 5px;
   }
 `;
+
+export const SectionLine = styled.div`
+width: 474px;
+border: 1px solid #d7d7d7;
+margin: 10px 0;
+
+`

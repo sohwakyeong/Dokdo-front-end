@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import * as EditStyle from '@/pages/mypage/editprofile/EditProfile.styled';
+import UserIcon from '@/assets/img/userprofile.png';
 import { getCookie } from '@/helper/Cookie';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -7,13 +8,13 @@ import Modal from '@/components/common/modal/modal';
 
 function EditProfileComponent() {
   const navigate = useNavigate();
+  const [profilePic, setProfilePic] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [pwdMsg, setPwdMsg] = useState('');
   const [confirmPwdMsg, setConfirmPwdMsg] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isProfileImageModalOpen, setIsProfileImageModalOpen] = useState(false);
-  const [profilePic, setProfilePic] = useState('');
   const [selectedFile, setSelectedFile] = useState<File | null>(null); // 선택한 파일을 상태로 관리
 
   // 데이터 API. fetchData할 때는 axios를 써야함
@@ -26,7 +27,7 @@ function EditProfileComponent() {
     user_id: number;
   } | null>(null);
 
-  const loginToken = getCookie('loginToken'); // getCookie 함수로 'loginToken' 쿠키 값을 가져옵니다.
+  const loginToken = getCookie('loginToken');
 
   // 유효성 검사 비밀번호
   const validatePwd = (password: string) => {
@@ -71,10 +72,11 @@ function EditProfileComponent() {
       setSelectedFile(selectedFile);
     }
   };
-  // logintoken 확인하고 유저 정보 가져옴
+
   useEffect(() => {
+    const loginToken = getCookie('loginToken');
     axios
-      .get('http://localhost:3000/api/v1/auth/me', {
+      .get('http://localhost:3001/api/v1/auth/me', {
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
@@ -93,37 +95,38 @@ function EditProfileComponent() {
       });
   }, [navigate, loginToken]);
 
-  // 모달에서 파일 업로드 함수
-  const uploadFile = () => {
+  // 모달에서 파일 업로드 버튼 함수
+  const uploadProfilePic = async () => {
     if (!selectedFile) {
       alert('파일을 선택하세요.');
       return;
     }
+    try {
+      const formData = new FormData();
+      formData.append('img', selectedFile);
+      const loginToken = getCookie('loginToken');
 
-    const formData = new FormData();
-    formData.append('img', selectedFile);
-    const loginToken = getCookie('loginToken'); // getCookie 함수로 'loginToken' 쿠키 값을 가져옵니다.
-
-    axios
-      .put('http://localhost:3000/api/v1/auth/me/profilePic', formData, {
-        headers: {
-          Authorization: `Bearer ${loginToken}`,
-          'Content-Type': 'multipart/form-data',
+      const response = await axios.put(
+        'http://localhost:3001/api/v1/auth/me/profilePic',
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${loginToken}`,
+            'Content-Type': 'multipart/form-data',
+          },
+          withCredentials: true,
         },
-        withCredentials: true,
-      })
-      .then(response => {
-        if (response.status === 200) {
-          // 업로드 성공 시, 프로필 이미지를 업데이트합니다.
-          setProfilePic(response.data.data);
-          setIsProfileImageModalOpen(false);
-        } else {
-          console.error('프로필 이미지 업로드 실패:', response.data.error);
-        }
-      })
-      .catch(error => {
-        console.error('프로필 이미지 업로드 에러:', error);
-      });
+      );
+
+      if (response.status === 200) {
+        setProfilePic(response.data.data);
+        setIsProfileImageModalOpen(false);
+      } else {
+        console.error('프로필 이미지 업로드 실패:', response.data.error);
+      }
+    } catch (error) {
+      console.error('프로필 이미지 업로드 에러:', error);
+    }
   };
 
   if (!userData) {
@@ -140,11 +143,13 @@ function EditProfileComponent() {
     }
 
     const updatedUserData = {
-      password: newPassword, // 변경할 패스워드
+      password: newPassword,
     };
 
+    const loginToken = getCookie('loginToken');
+
     axios
-      .put('http://localhost:3000/api/v1/auth/me', updatedUserData, {
+      .put('http://localhost:3001/api/v1/auth/me/password', updatedUserData, {
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
@@ -152,52 +157,61 @@ function EditProfileComponent() {
       })
       .then(response => {
         if (response.status === 200) {
-          navigate(-1);
+          alert('비밀번호 변경 성공');
+          setIsModalOpen(false);
         } else {
-          console.error('프로필 업데이트 실패:', response.data.error);
+          alert('비밀번호 변경 실패');
+          console.error('비밀번호 업데이트 실패:', response.data.error);
         }
       })
       .catch(error => {
-        console.error('프로필 업데이트 에러:', error);
+        alert('비밀번호 변경 에러');
+        console.error('비밀번호 업데이트 에러:', error);
       });
   };
 
   // 저장하기 함수
   const onClickSubmit = () => {
-    if (!(userData.name && userData.introduction)) {
-      return alert('빈칸 없이 입력해주세요.');
+    console.log('onClickSubmit 함수 호출됨'); // 이 줄을 추가합니다.
+
+    if (!userData.name) {
+      return alert('닉네임을 입력해주세요.');
     }
 
     const updatedUserData = {
-      name: userData.name, // 변경할 닉네임
-      introduction: userData.introduction, // 변경할 한 줄 소개
+      name: userData.name,
+      introduction: userData.introduction,
     };
 
+    const loginToken = getCookie('loginToken');
+    console.log('updatedUserData:', updatedUserData); // 변수가 올바르게 설정되었는지 확인
+
     axios
-      .put('http://localhost:3000/api/v1/auth/me', updatedUserData, {
+      .put('http://localhost:3001/api/v1/auth/me', updatedUserData, {
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
         withCredentials: true,
       })
       .then(response => {
+        console.log('응답:', response); // 응답을 로그로 기록
         if (response.status === 200) {
+          alert('프로필 변경완료');
           navigate('/user/mypage');
         } else {
-          console.error('프로필 업데이트 실패:', response.data.error);
+          console.error('닉넴프로필 업데이트 실패:', response.data.error);
         }
       })
       .catch(error => {
-        console.error('프로필 업데이트 에러:', error);
+        console.error('닉넴프로필 업데이트 에러:', error); // 어떤 에러가 발생했는지 확인
       });
   };
-
   return (
     <EditStyle.Container>
       <EditStyle.Wrapper>
         <EditStyle.UserIconBtn onClick={() => setIsProfileImageModalOpen(true)}>
           <EditStyle.UserIcon
-            src={`http://localhost:3000/api/v1/image/profile/${
+            src={`http://localhost:3001/api/v1/image/profile/${
               userData.profilePic
             }?${Date.now()}`}
             alt="유저 설정 이미지"
@@ -221,7 +235,7 @@ function EditProfileComponent() {
                 />
               </form>
             </EditStyle.FormInput>
-            <EditStyle.ModalSubmitButton onClick={uploadFile}>
+            <EditStyle.ModalSubmitButton onClick={uploadProfilePic}>
               업로드
             </EditStyle.ModalSubmitButton>
           </Modal>
@@ -252,10 +266,9 @@ function EditProfileComponent() {
         <EditStyle.FormInput>
           <EditStyle.FixInput
             readOnly
-            id="pwd_val"
-            type="password"
+            type="text"
             name="is_Password"
-            value={newPassword}
+            placeholder="비밀번호 변경은 변경을 눌러주세요."
           />
           <EditStyle.PwdInputBtn onClick={() => setIsModalOpen(true)}>
             변경
@@ -307,7 +320,6 @@ function EditProfileComponent() {
           </Modal>
         )}
 
-        {/* 닉네임 수정하고싶으면 일단 관리자한테 연락하라고 햇음 회의때 물어보기 */}
         <EditStyle.FormTag>
           <EditStyle.Tag>닉네임</EditStyle.Tag>
         </EditStyle.FormTag>
@@ -328,7 +340,6 @@ function EditProfileComponent() {
           />
         </EditStyle.FormInput>
 
-        {/* 한줄 소개 띄우는 곳이 없는데 이거 어디에 띄워지는 건지?? 만약 띄운다면 마이페이지의 닉네임 하단과 모임가입 신청할 때 개인의 프로필도 같이 보내지는 건지?? 회의때 물어보기 */}
         <EditStyle.FormTag>
           <EditStyle.Tag>한 줄 소개</EditStyle.Tag>
         </EditStyle.FormTag>
@@ -353,6 +364,7 @@ function EditProfileComponent() {
       <EditStyle.SubmitButton onClick={onClickSubmit}>
         저장하기
       </EditStyle.SubmitButton>
+
       <EditStyle.DeleteWrap>
         <EditStyle.DeleteAccount to="/user/deleteaccount">
           탈퇴하기

@@ -90,7 +90,7 @@ function GroupDetail() {
     async function fetchAllGroupBoardData(groupId: number) {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/v1/group/${groupId}/posts`,
+          `http://localhost:3001/api/v1/group/${groupId}/posts`,
         );
         if (response.status === 200) {
           setMembers(response.data.data);
@@ -122,7 +122,7 @@ function GroupDetail() {
     async function fetchGroupData(groupId: number) {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/v1/group/${groupId}`,
+          `http://localhost:3001/api/v1/group/${groupId}`,
           {
             headers: {
               Authorization: `Bearer ${loginToken}`,
@@ -154,7 +154,7 @@ function GroupDetail() {
 
     try {
       const response = await axios.put(
-        `http://localhost:3000/api/v1/auth/group/${groupId}`,
+        `http://localhost:3001/api/v1/auth/group/${groupId}`,
         {},
         {
           headers: {

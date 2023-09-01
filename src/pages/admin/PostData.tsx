@@ -22,23 +22,17 @@ interface AdminPostProps {
   data?: AdminPostData;
 }
 
+function PostData({ data }: AdminPostProps) {
+  const [deleted, setDeleted] = useState(false);
 
-
-function PostData({data}: AdminPostProps) {
-
-    const [deleted, setDeleted] = useState(false);
-
-    async function handleDeletePost() {
-        try{
-            await axios.delete(`http://34.64.149.22:3001/api/v1/admin/posts/${data?.post.post_id}`);
-            setDeleted(true);
-        } catch (error) {
-            throw error;
-        }
-    }
-
-    if (!data ){
-        return null;
+  async function handleDeletePost() {
+    try {
+      await axios.delete(
+        `http://localhost:3001/api/v1/admin/posts/${data?.post_id}`,
+      );
+      setDeleted(true);
+    } catch (error) {
+      throw error;
     }
     
     const {

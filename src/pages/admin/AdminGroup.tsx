@@ -9,20 +9,22 @@ const sortOptions = [
   { value: '최근순', label: '최근순' },
 ];
 
-    useEffect(() => {
-        async function fetchData() {
-        try {
-            let apiUrl = 'http://34.64.149.22:3001/api/v1/group?orderBy=popularity?'; // 기본적으로 인기순 API 호출
-        
-            if (selectedSort === '최근순') {
-              apiUrl = 'http://34.64.149.22:3001/api/v1/group?'; // 최신순 API 호출
-            }
-        
-            const data = await fetchAllGroupData(apiUrl); // API 요청 호출
-                setGroupData(data);
-          } catch (error) {
-            console.error('데이터를 가져오는 중 에러 발생:', error);
-          }
+function AdminGroup() {
+  const [groupData, setGroupData] = useState([]);
+  const element = useRef<HTMLDivElement>(null);
+  const onMoveBox = () => {
+    element.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const [selectedSort, setSelectedSort] = useState('');
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        let apiUrl = 'http://localhost:3001/api/v1/group?orderBy=popularity'; // 기본적으로 인기순 API 호출
+
+        if (selectedSort === '최근순') {
+          apiUrl = 'http://localhost:3001/api/v1/group'; // 최신순 API 호출
         }
         
         fetchData();
@@ -46,17 +48,39 @@ const sortOptions = [
         }  
     }
 
-    useEffect(()=>{
-        async function fetchData() {
-            try {
-                const data = await fetchAllGroup(); 
-                    setGroupData(data);
-            } catch(error) {
-                console.error('데이터를 가져오는 중 에러 발생:', error);
-            }
-        }
-        fetchData();
-    },[]);
+    fetchData();
+  }, [selectedSort]);
+
+  async function fetchAllGroupData(apiUrl: string) {
+    try {
+      const response = await axios.get(apiUrl);
+      return response.data.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async function fetchAllGroup() {
+    try {
+      const response = await axios.get('http://localhost:3001/api/v1/group');
+      return response.data.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await fetchAllGroup(); // API 요청 호출
+        // 데이터 가공 및 저장
+        setGroupData(data);
+      } catch (error) {
+        console.error('데이터를 가져오는 중 에러 발생:', error);
+      }
+    }
+    fetchData();
+  }, []);
 
     return (
         <A.Wrapper>
