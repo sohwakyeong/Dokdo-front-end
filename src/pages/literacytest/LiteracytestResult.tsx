@@ -12,8 +12,7 @@ import {
   TestInstructions,
   RepeatButton,
   StyledLink,
-  ImgResult
-,
+  ImgResult,
 } from '@/pages/literacytest/LiteracytestResult.Style';
 // import facebookIcon from '@/assets/img/facebook.png';
 // import twitterIcon from '@/assets/img/twitter.png';
@@ -65,13 +64,11 @@ const LiteracyTestResult: React.FC<LiteracyTestResultProps> = ({
     <Container>
       <ImgResult>
         {/* <ResultText>{getResultMessage()}</ResultText> */}
-      <ResultText>{`${correctAnswers} / ${questions.questions.length}`}</ResultText>
-      <ResultImage src={imageSource} alt="Result" />
+        <ResultText>{`${correctAnswers} / ${questions.questions.length}`}</ResultText>
+        <ResultImage src={imageSource} alt="Result" />
       </ImgResult>
-      
-      <TestInstructions>
-        문해력 향상에 도움을 받고 싶다면?
-      </TestInstructions>
+
+      <TestInstructions>문해력 향상에 도움을 받고 싶다면?</TestInstructions>
       <StyledLink to="group/list">독서토론 시작하기</StyledLink>
 
       {/* <SocialIcons>

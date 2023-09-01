@@ -4,12 +4,18 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 60px;
   width: 474px;
 `;
 
 export const Logo = styled.div`
   font-size: 30px;
   margin-bottom: 30px;
+
+  & img {
+    width: 80px;
+    height: 40px;
+  }
 `;
 
 export const TagBox = styled.div`

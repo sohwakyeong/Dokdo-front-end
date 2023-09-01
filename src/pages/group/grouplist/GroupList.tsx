@@ -75,7 +75,6 @@ const GroupList = () => {
   const [selectedSort, setSelectedSort] = useState('');
   const [clickedInfo, setClickedInfo] = useState<string[]>([]);
   const [groupData, setGroupData] = useState([]);
-  const [offset, setOffset] = useState(0);
 
 
 

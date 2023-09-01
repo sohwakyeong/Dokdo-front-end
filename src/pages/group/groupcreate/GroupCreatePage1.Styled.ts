@@ -13,7 +13,7 @@ export const StepsContainer = styled.div`
   display: flex;
   gap: 10px;
   position: relative;
-  & > div:nth-child(3) {
+  & > div:nth-child(1) {
     background-color: #84614b;
     color: #fdf8ef;
   }

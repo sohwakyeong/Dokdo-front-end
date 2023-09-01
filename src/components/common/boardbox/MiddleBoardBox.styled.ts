@@ -35,8 +35,8 @@ export const TextImgBox = styled.div`
 
 export const ImgBox = styled.div`
   width: 210px;
-  height: 45%;
-  background-color: #fff7ec;
+  height: 75%;
+  background-color: white;
   object-fit: cover;
   margin-bottom: 7px;
   box-sizing: border-box;
@@ -47,6 +47,7 @@ export const ImgBox = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 15px;
   }
 `;
 

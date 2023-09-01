@@ -3,6 +3,7 @@ import axios from 'axios';
 import * as PAD from '@/pages/group/photoalbumdetail/PhotoAlbumDetail.styled';
 import { getCookie } from '@/helper/Cookie';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface PhotoDetailData {
   error: null | string;
@@ -57,7 +58,7 @@ const PhotoDetail: React.FC<PhotoDetailDataProps & GroupNameProps> = ({
   data,
 }) => {
   const loginToken = getCookie('loginToken');
-
+  const navigate = useNavigate();
   const { groupId, postsId } = useParams<{
     groupId?: string;
     postsId?: string;
@@ -238,6 +239,7 @@ const PhotoDetail: React.FC<PhotoDetailDataProps & GroupNameProps> = ({
       );
 
       if (response.status === 204) {
+        navigate(-1); // -1을 넘겨주면 이전 페이지로 이동합니다.
         // 게시글이 성공적으로 삭제된 경우, 해당 페이지를 새로고침하거나 다른 동작을 수행할 수 있습니다.
         // 예: history.push()를 사용하여 게시글 목록 페이지로 이동
       } else {

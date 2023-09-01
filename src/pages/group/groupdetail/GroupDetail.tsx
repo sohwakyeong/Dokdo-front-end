@@ -69,6 +69,8 @@ function GroupDetail() {
   const uniqueMembers: MemberType[] = [];
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [joinError, setJoinError] = useState<string | null>(null);
+
   members.forEach(member => {
     // Check if the member's user_id and name are not already in uniqueMembers
     if (
@@ -272,6 +274,13 @@ function GroupDetail() {
     }
   }
 
+  const isUserAlreadyJoined = uniqueMembers.some(
+    member =>
+      member.user_id === groupData?.leader ||
+      (groupData?.mem.length > 0 &&
+        member.user_id === groupData?.mem[0]?.user_id),
+  );
+
   return (
     <GD.Wrapper>
       <GD.GroupHeader>
@@ -429,9 +438,16 @@ function GroupDetail() {
         <GD.ButtonDisplay>
           <GD.NFWrapper>
             <GD.NFDisplay>
-              <GD.NFNextBtn>
-                <button onClick={handleJoinGroup}>모임 가입하기</button>
-              </GD.NFNextBtn>
+              {/* Conditionally render the button based on join error */}
+              {joinError ? (
+                <div>{joinError}</div>
+              ) : isUserAlreadyJoined ? (
+                <div>이미 가입한 멤버입니다.</div>
+              ) : (
+                <GD.NFNextBtn>
+                  <button onClick={handleJoinGroup}>모임 가입하기</button>
+                </GD.NFNextBtn>
+              )}
             </GD.NFDisplay>
           </GD.NFWrapper>
         </GD.ButtonDisplay>
