@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import LiteracyTestMain from '../pages/literacytest/LiteracyTestMain';
-import OXTestMain from '../pages/literacytest/OXTestMain';
-import LiteracyTestScreen from '../pages/literacytest/LiteracyTestScreen';
-import OXTestScreen from '../pages/literacytest/OXTestScreen';
-import OXTestResult from '../pages/literacytest/OXTestResult';
-import LiteracyTestResult from '../pages/literacytest/LiteracytestResult';
-import Layout1 from '../components/layout/layout1/Layout1';
-import Layout8 from '../components/layout/layout1/Layout8';
+import LiteracyTestMain from '@/pages/literacytest/LiteracyTestMain';
+import OXTestMain from '@/pages/literacytest/OXTestMain';
+import LiteracyTestScreen from '@/pages/literacytest/LiteracyTestScreen';
+import OXTestScreen from '@/pages/literacytest/OXTestScreen';
+import OXTestResult from '@/pages/literacytest/OXTestResult';
+import LiteracyTestResult from '@/pages/literacytest/LiteracytestResult';
+import Layout1 from '@/components/layout/layout1/Layout1';
+import Layout8 from '@/components/layout/layout1/Layout8';
 
 const LiteracytestRoute = () => {
   // Literacy Test 사용자 답변을 관리할 상태

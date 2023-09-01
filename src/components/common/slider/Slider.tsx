@@ -3,8 +3,8 @@ import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import './styles.css';
-import SlideImg3 from '../../../assets/img/독서모임3.jpg';
+import '@/components/common/slider/styles.css';
+import SlideImg3 from '@/assets/img/독서모임3.png';
 import { Link } from 'react-router-dom';
 
 export default function Slider() {

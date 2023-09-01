@@ -1,31 +1,26 @@
 import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Main from '../pages/main/Main';
-import Search from '../pages/search/Search';
-import Group from '../pages/group/group/Group';
-import GroupList from '../pages/group/grouplist/GroupList';
-import GroupDetail from '../pages/group/groupdetail/GroupDetail';
-import GroupBoard from '../pages/group/groupboard/GroupBoard';
-import GroupBoardDetail from '../pages/group/groupboarddetail/GroupBoardDetail';
-import GroupBoardWrite from '../pages/group/groupboardwrite/GroupBoardWrite';
-import PhotoAlbum from '../pages/group/photoalbum/PhotoAlbum';
-import PhotoAlbumDetail from '../pages/group/photoalbumdetail/PhotoAlbumDetail';
-import PhotoAlbumWrite from '../pages/group/photoalbumwrite/PhotoAlbumWrite';
-import FreeBoardList from '../pages/freeboard/freeboardlist/FreeBoardList';
-import FreeBoardDetail from '../pages/freeboard/freeboardDetail/FreeBoardDetail';
-import FreeBoardWrite from '../pages/freeboard/freeboardwrite/FreeBoardWrite';
-import GroupCreatePage1 from '../pages/group/groupcreate/GroupCreatePage1';
-import GroupCreatePage2 from '../pages/group/groupcreate/GroupCreatePage2';
-import GroupCreatePage3 from '../pages/group/groupcreate/GroupCreatePage3';
-import BookRec from '../pages/bookrec/BookRec';
-import Contest from '../pages/contest/Contest';
-import Notifications from '../pages/notifications/Notifications';
-import Likes from '../pages/likes/Likes';
-import Layout1 from '../components/layout/layout1/Layout1';
-import ContestDetail from '../pages/contestdetail/ContestDetail';
-import BookRecDetail from '../pages/bookrecdetail/BookRecDetail';
-import Layout3 from '../components/layout/layout1/Layout3';
-import Layout8 from '../components/layout/layout1/Layout8';
+import Main from '@/pages/main/Main';
+import Search from '@/pages/search/Search';
+import Group from '@/pages/group/group/Group';
+import GroupList from '@/pages/group/grouplist/GroupList';
+import GroupDetail from '@/pages/group/groupdetail/GroupDetail';
+import GroupBoard from '@/pages/group/groupboard/GroupBoard';
+import GroupBoardDetail from '@/pages/group/groupboarddetail/GroupBoardDetail';
+import GroupBoardWrite from '@/pages/group/groupboardwrite/GroupBoardWrite';
+import PhotoAlbum from '@/pages/group/photoalbum/PhotoAlbum';
+import PhotoAlbumDetail from '@/pages/group/photoalbumdetail/PhotoAlbumDetail';
+import PhotoAlbumWrite from '@/pages/group/photoalbumwrite/PhotoAlbumWrite';
+import GroupCreatePage1 from '@/pages/group/groupcreate/GroupCreatePage1';
+import GroupCreatePage2 from '@/pages/group/groupcreate/GroupCreatePage2';
+import GroupCreatePage3 from '@/pages/group/groupcreate/GroupCreatePage3';
+import BookRec from '@/pages/bookrec/BookRec';
+import Contest from '@/pages/contest/Contest';
+import Notifications from '@/pages/notifications/Notifications';
+import Likes from '@/pages/likes/Likes';
+import Layout1 from '@/components/layout/layout1/Layout1';
+import Layout3 from '@/components/layout/layout1/Layout3';
+import Layout8 from '@/components/layout/layout1/Layout8';
 
 const MainRoutes = () => {
   // Group creation data
@@ -101,7 +96,7 @@ const MainRoutes = () => {
       />
 
       <Route
-        path="/group/:id/boarddetail"
+        path="/group/:groupId/board/:postsId"
         element={
           <Layout3>
             <GroupBoardDetail />
@@ -125,7 +120,7 @@ const MainRoutes = () => {
         }
       />
       <Route
-        path="/group/:id/photo/:id"
+        path="/group/:groupId/photo/:postsId"
         element={
           <Layout3>
             <PhotoAlbumDetail />
@@ -156,30 +151,9 @@ const MainRoutes = () => {
           </Layout1>
         }
       />
-      <Route
-        path="/freeboard/list"
-        element={
-          <Layout1>
-            <FreeBoardList />
-          </Layout1>
-        }
-      />
-      <Route
-        path="/freeboard/detail"
-        element={
-          <Layout1>
-            <FreeBoardDetail />
-          </Layout1>
-        }
-      />
-      <Route
-        path="/freeboard/write/:id"
-        element={
-          <Layout1>
-            <FreeBoardWrite />
-          </Layout1>
-        }
-      />
+
+
+
       <Route
         path="/bookrec"
         element={
@@ -188,14 +162,7 @@ const MainRoutes = () => {
           </Layout1>
         }
       />
-      <Route
-        path="/bookrec/detail"
-        element={
-          <Layout1>
-            <BookRecDetail />
-          </Layout1>
-        }
-      />
+
       <Route
         path="/notifications"
         element={
@@ -204,14 +171,7 @@ const MainRoutes = () => {
           </Layout1>
         }
       />
-      <Route
-        path="/contest/detail"
-        element={
-          <Layout1>
-            <ContestDetail />
-          </Layout1>
-        }
-      />
+
       <Route
         path="/contest"
         element={

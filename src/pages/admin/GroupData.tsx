@@ -1,6 +1,5 @@
-import React, {useState} from "react";
-import axios from 'axios';
-import * as A from './Admin.styled';
+import React from "react";
+import * as A from '@/pages/admin/Admin.styled';
 
 interface AdminGroupData {
     group_id: number;    

@@ -1,5 +1,6 @@
 import React from 'react';
-import * as SBox from './SelectBox2.styled';
+import * as SBox from '@/components/common/selectbox/SelectBox2.styled';
+
 
 interface Option {
   value: string;

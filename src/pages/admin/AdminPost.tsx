@@ -1,7 +1,7 @@
-import React,{useState, useEffect, useRef} from "react";
-import * as A from "./Admin.styled";
-import axios from "axios";
-import PostData from './PostData';
+import React, { useState, useEffect, useRef } from 'react';
+import * as A from '@/pages/admin/Admin.styled';
+import axios from 'axios';
+import PostData from '@/pages/admin/PostData';
 
 async function fetchAllPost() {
     try{
@@ -12,26 +12,45 @@ async function fetchAllPost() {
     }
 }
 
+function AdminPost() {
+  const [postData, setPostData] = useState([]);
+  const element = useRef<HTMLDivElement>(null);
+  const onMoveBox = () => {
+    element.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
-function AdminPost (){
-    const [postData, setPostData] = useState([]);
-    const element = useRef<HTMLDivElement>(null);
-    
-    const onMoveBox = () => {
-        element.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-      };
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await fetchAllPost();
+        setPostData(data);
+      } catch (error) {
+        console.error('데이터를 가져오는 중 에러 발생:', error);
+      }
+    }
+    fetchData();
+  }, []);
 
-    useEffect(()=>{
-        async function fetchData() {
-            try {
-                const data = await fetchAllPost(); 
-                setPostData(data);
-            } catch(error) {
-                console.error('데이터를 가져오는 중 에러 발생:', error);
-            }
-        }
-        fetchData();
-    },[]);
+  return (
+    <A.Wrapper>
+      <A.Menu>
+        <A.Top>
+          <A.Headline> 회원 게시글 관리</A.Headline>
+          <A.Select>
+            <option value="groupboard">토론 모임 공고</option>
+            <option value="freeboard">자유 게시글</option>
+          </A.Select>
+        </A.Top>
+        <A.Layout>
+          <div ref={element}></div>
+          <A.Table>
+            <tr>
+              <th>글 번호</th>
+              <th>제목</th>
+              <th>생성 일자</th>
+              <th>업데이트 일자</th>
+              <th>관리</th>
+            </tr>
 
     return (
         <A.Wrapper>

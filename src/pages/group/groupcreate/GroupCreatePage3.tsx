@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios, { AxiosError } from 'axios';
-import SelectBox from '../../../components/common/selectbox/SelectBox';
+import SelectBox from '@/components/common/selectbox/SelectBox';
 import { useNavigate } from 'react-router-dom';
 import {
   Container,
@@ -10,9 +10,9 @@ import {
   StepCircle,
   Input,
   SubmitButton,
-} from './GroupCreatePage3.Styled';
+} from '@/pages/group/groupcreate/GroupCreatePage1.Styled';
 
-import GenreBox2 from '../../../components/common/GenreBox/GenreBox2'; // GenreBox 컴포넌트의 경로를 지정해주세요.
+import GenreBox2 from '@/components/common/GenreBox/GenreBox2'; // GenreBox 컴포넌트의 경로를 지정해주세요.
 
 interface GroupCreatePage3Data {
   name: string;
@@ -62,7 +62,7 @@ const GroupCreatePage3: React.FC<GroupCreatePage3Props> = ({
 
     try {
       const response = await axios.post(
-        'http://localhost:3001/api/v1/group/',
+        'http://localhost:3000/api/v1/group/',
         payload,
         { withCredentials: true },
       );

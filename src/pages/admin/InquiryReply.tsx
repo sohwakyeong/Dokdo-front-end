@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, { useState } from 'react';
 // import Axios from 'axios';
-import * as Reply from "./InquiryReply.styled";
+import * as Reply from '@/pages/admin/InquiryReply.styled';
 
 function InquiryReply (){
     const [title, setTitle] = useState('');

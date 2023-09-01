@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import SearchInput from '../../../components/common/searchinput/SearchInput';
-import * as GL from './GroupList.Styled';
-import BoardBox from '../../../components/common/boardbox/BoardBox';
-import SelectBox from '../../../components/common/selectbox/SelectBox';
+import SearchInput from '@/components/common/searchinput/SearchInput';
+import * as GL from '@/pages/group/grouplist/GroupList.Styled';
+import BoardBox from '@/components/common/boardbox/BoardBox';
+import SelectBox from '@/components/common/selectbox/SelectBox';
 import axios from 'axios';
 
 const regions = [
@@ -13,7 +13,8 @@ const regions = [
   { value: '대구', label: '대구' },
   { value: '울산', label: '울산' },
   { value: '세종', label: '세종' },
-  { value: '전남', label: '대전' },
+  { value: '전남', label: '전남' },
+  { value: '대전', label: '대전' },
   { value: '전북', label: '전북' },
   { value: '경남', label: '경남' },
   { value: '경북', label: '경북' },
@@ -57,13 +58,13 @@ const Genre = [
   { value: '시/수필', label: '시/수필' },
   { value: '경제', label: '경제' },
   { value: '사회과학', label: '사회과학' },
-  { value: '취미', label: '취미' },
-
+  { value: '종교', label: '종교' },
 ];
 
 const sortOptions = [
   { value: '좋아요', label: '좋아요' },
   { value: '최근순', label: '최근순' },
+  { value: '선택', label: '선택' },
 ];
 
 const GroupList = () => {
@@ -78,10 +79,11 @@ const GroupList = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        let apiUrl = 'http://localhost:3001/api/v1/group?orderBy=popularity'; // 기본적으로 인기순 API 호출
+        let apiUrl =
+          'http://localhost:3000/api/v1/group?limit=5&offset=0'; // 기본적으로 인기순 API 호출
 
         if (selectedSort === '최근순') {
-          apiUrl = 'http://localhost:3001/api/v1/group'; // 최신순 API 호출
+          apiUrl = 'http://localhost:3000/api/v1/group?limit=5&offset=0'; // 최신순 API 호출
         }
 
         const data = await fetchAllGroupData(apiUrl); // API 요청 호출
@@ -102,31 +104,52 @@ const GroupList = () => {
       throw error;
     }
   }
-
   const handleOptionClick = (optionLabel: string) => {
     const updatedInfo = [...clickedInfo];
 
-    if (updatedInfo.length < 5) {
-      updatedInfo.push(optionLabel);
-    } else {
-      alert('태그는 5개까지만 선택 가능합니다');
+    if (!updatedInfo.includes(optionLabel)) {
+      if (updatedInfo.length < 5) {
+        updatedInfo.push(optionLabel);
+      } else {
+        alert('태그는 5개까지만 선택 가능합니다');
+      }
     }
+
     setClickedInfo(updatedInfo);
   };
-
   const handleDeleteClick = (index: number) => {
     const updatedInfo = [...clickedInfo];
-    updatedInfo.splice(index, 1);
+    const removedValue = updatedInfo.splice(index, 1)[0]; // 삭제된 값 저장
+
     setClickedInfo(updatedInfo);
 
     // 검색 결과와 선택된 정렬 기준 초기화
     setGroupData([]);
     setSelectedSort('');
-  };
 
+    // 삭제된 값이 있으면 해당 값을 선택된 값에서도 삭제
+    if (removedValue) {
+      switch (removedValue) {
+        case selectedRegion:
+          setSelectedRegion('');
+          break;
+        case selectedDuration:
+          setSelectedDuration('');
+          break;
+        case selectedGenre:
+          setSelectedGenre('');
+          break;
+        case selectedAge:
+          setSelectedAge('');
+          break;
+        default:
+          break;
+      }
+    }
+  };
   const handleSearchButtonClick = async () => {
     try {
-      let apiUrl = 'http://localhost:3001/api/v1/group';
+      let apiUrl = 'http://localhost:3000/api/v1/group?limit=5&offset=0';
 
       if (selectedSort === '최근순') {
         apiUrl += '?orderBy=oldest';
@@ -140,7 +163,6 @@ const GroupList = () => {
         genre: selectedGenre,
         age: selectedAge,
       };
-
       // 선택된 값이 있는 경우에만 추가적인 쿼리 파라미터를 포함한 URL을 사용하여 API 요청 호출
       if (Object.values(params).some(Boolean)) {
         Object.entries(params).forEach(([key, value]) => {
@@ -153,28 +175,37 @@ const GroupList = () => {
 
         if (data.length === 0) {
           alert('검색 결과가 없습니다.');
-          setGroupData([]); // 검색 결과 초기화
-          return;
+
+          setGroupData([]);
+          setSelectedRegion('');
+          setSelectedDuration('');
+          setSelectedAge('');
+          setSelectedGenre('');
+
+          // 선택한 정렬 기준 초기화 및 디폴트 정렬값 설정
+          setSelectedSort('좋아요'); // 디폴트 정렬값 설정
+          setClickedInfo([]);
+        } else {
+          setGroupData(data);
+          // 선택된 조건 업데이트 - 삭제된 조건은 제외하고 유지됩니다.
+          const updatedClickedInfo = Object.values(params)
+            .filter(Boolean)
+            .filter(condition => clickedInfo.includes(condition));
+
+          setClickedInfo(updatedClickedInfo);
         }
-
-        setGroupData(data);
-      } else {
-        alert('검색 조건을 선택해주세요.');
-        setGroupData([]); // 검색 결과 초기화
-        return;
       }
-
-      setSelectedSort(''); // 선택된 정렬 기준 초기화
     } catch (error) {
       console.error('데이터를 가져오는 중 에러 발생:', error);
     }
   };
+
   return (
     <GL.Wrapper>
       <SearchInput />
       <GL.ChoiceBox>
         <GL.ChoiceBoxTitle>
-          내게 맞는 독서 <br /> 토론 모임을 찾아보세요📚
+          내게 맞는 독서 <br /> 토론 모임을 찾아보세요👀
         </GL.ChoiceBoxTitle>
         <GL.HashTagBox>
           <GL.HashTag>
@@ -246,9 +277,22 @@ const GroupList = () => {
           />
         </GL.ChoiceSelect>
         <GL.ChoiceGroupBoard>
-          {groupData.map((groupItem, index) => (
-            <BoardBox key={index} data={groupItem} isMainPage={true} />
-          ))}
+          {groupData.length === 0 && (
+            <GL.NoResultBox>
+              <div>검색된 게시글이 없습니다.</div>
+              {selectedRegion !== '' &&
+                selectedDuration !== '' &&
+                selectedGenre !== '' &&
+                selectedAge !== '' && (
+                  <div>선택한 조건에 해당하는 게시글이 없습니다.</div>
+                )}
+              <div>조건을 다시 선택해주세요! 🔎</div>
+            </GL.NoResultBox>
+          )}
+          {groupData.length > 0 &&
+            groupData.map((groupItem, index) => (
+              <BoardBox key={index} data={groupItem} isMainPage={true} />
+            ))}
         </GL.ChoiceGroupBoard>
       </GL.ChoiceImageGroup>
     </GL.Wrapper>

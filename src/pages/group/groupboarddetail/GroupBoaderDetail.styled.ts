@@ -62,11 +62,11 @@ export const Button = styled.div`
 export const Comment = styled.div`
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
   border-top: solid 1px #ddd;
   margin-bottom: 55px;
 `;
-
 export const CommentProfileImg = styled.div`
   width: 50px;
   height: 50px;
@@ -124,7 +124,7 @@ export const CIWrapper = styled.div`
   font-size: 13px;
   background-color: white;
   width: 472px;
-  z-index: 9999;
+  z-index: 9998;
   border-top: 0.5px solid #d7d7d7;
   margin-bottom: 58px;
 `;

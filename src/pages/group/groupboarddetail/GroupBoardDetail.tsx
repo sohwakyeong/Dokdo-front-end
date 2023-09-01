@@ -1,123 +1,208 @@
-import React, { useState } from 'react';
-import { getCookie } from '../../../helper/Cookie';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import * as GBD from './GroupBoaderDetail.styled';
-import Slider from '../../../components/common/slider/Slider';
+import * as GBD from '@/pages/group/groupboarddetail/GroupBoaderDetail.styled';
+import { getCookie } from '@/helper/Cookie';
+import { useParams } from 'react-router-dom';
 
-const loginToken = getCookie('loginToken'); // getCookie 함수는 쿠키를 읽어오는 함수로 적절한 코드로 대체해야 합니다.
-
-if (loginToken) {
-  // 로그인 토큰이 존재하면 API 요청 시 헤더에 추가
-  axios.defaults.headers.common['Authorization'] = `Bearer ${loginToken}`;
+interface GroupDetailData {
+  error: null | string;
+  data: {
+    post: {
+      _id: string;
+      title: string;
+      content: string;
+      images: string[];
+      createdAt: string;
+      updatedAt: string;
+      post_id: number;
+      __v: number;
+    };
+    user: {
+      name: string;
+      profilePic: string;
+    };
+  };
 }
 
-interface GroupBoardDetailData {
+interface Comment {
+  text: string;
+  isDeleted: boolean;
   comment_id: number;
-  postCommentToPost: {
-    comment_id: number;
-    post_id: number;
-    user_id: number;
-    _id: string;
-    group_id: number;
-  };
-  text: string; // 추가: 댓글 텍스트를 저장하는 속성
+  createdAt: string;
 }
 
 interface GroupBoardDetailDataProps {
-  data?: GroupBoardDetailData;
+  data?: GroupDetailData;
 }
 
-const GroupBoardDetail = ({ data }: GroupBoardDetailDataProps) => {
+const GroupBoardDetail: React.FC<GroupBoardDetailDataProps> = ({ data }) => {
+  const loginToken = getCookie('loginToken');
+  const { groupId, postsId } = useParams<{
+    groupId?: string;
+    postsId?: string;
+  }>();
+  const group_Id = groupId ? parseInt(groupId, 10) : undefined;
+  const post_Id = postsId ? parseInt(postsId, 10) : undefined;
+
+  const [groupDetail, setGroupDetail] = useState<GroupDetailData | null>(
+    data || null,
+  );
+  const [isLoading, setIsLoading] = useState(false);
+  const [comments, setComments] = useState<Comment[]>([]);
   const [commentText, setCommentText] = useState('');
-  const [comments, setComments] = useState<Array<GroupBoardDetailData>>([]);
+  const [replyText, setReplyText] = useState<string>('');
 
-  // group_id와 post_id를 가져옴
-  const group_id = data?.postCommentToPost?.post_id ?? '';
-  const post_id = data?.postCommentToPost?.comment_id ?? '';
+  useEffect(() => {
+    if (group_Id && post_Id) {
+      fetchGroupDetail(group_Id, post_Id);
+      fetchComments(group_Id, post_Id);
+    }
+  }, [loginToken, group_Id, post_Id]);
 
-  const handleCommentSubmit = async () => {
+  const fetchGroupDetail = async (gId: number, pId: number) => {
     try {
-      const response = await fetch(
-        `http://localhost:3001/api/v1/group/${group_id}/posts/${post_id}/comments`,
+      const response = await axios.get(
+        `http://localhost:3000/api/v1/group/${gId}/posts/${pId}`,
         {
-          method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
+            Authorization: `Bearer ${loginToken}`,
           },
-          body: JSON.stringify({
-            text: commentText, // 댓글 텍스트를 API 요청에 추가
-          }),
+          withCredentials: true,
         },
       );
 
-      if (response.ok) {
-        const responseData = await response.json();
-        setComments([...comments, responseData.data]);
-        setCommentText('');
+      if (response.status === 200) {
+        setGroupDetail(response.data);
       } else {
-        console.error('댓글 작성 실패');
+        console.error('Error fetching detail data:', response.status);
       }
     } catch (error) {
-      console.error('댓글 작성 오류:', error);
+      console.error('Error fetching detail data:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
+  const postComment = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:3000/api/v1/group/${group_Id}/posts/${post_Id}/comments`,
+        { text: commentText },
+        {
+          headers: {
+            Authorization: `Bearer ${loginToken}`,
+          },
+          withCredentials: true,
+        },
+      );
+
+      if (response.status === 200) {
+        window.location.reload(); // 페이지를 새로고침
+      } else {
+        console.error('Error posting comment:', response.status);
+      }
+    } catch (error) {
+      console.error('Error posting comment:', error);
+    }
+  };
+  const postReply = async (commentId: number) => {
+    try {
+      const response = await axios.post(
+        `http://localhost:3000/api/v1/group/${group_Id}/posts/${post_Id}/comments/${commentId}/reply`,
+        { text: replyText },
+        {
+          headers: {
+            Authorization: `Bearer ${loginToken}`,
+          },
+          withCredentials: true,
+        },
+      );
+      if (response.status === 200) {
+        window.location.reload();
+      } else {
+        console.error('Error posting reply:', response.status);
+      }
+    } catch (error) {
+      console.error('Error posting reply:', error);
+    }
+  };
+
+  const fetchComments = async (gId: number, pId: number) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/api/v1/group/${gId}/posts/${pId}/comments`,
+        {
+          headers: {
+            Authorization: `Bearer ${loginToken}`,
+          },
+          withCredentials: true,
+        },
+      );
+
+      if (response.status === 200) {
+        setComments(response.data.data);
+      } else {
+        console.error('Error fetching comments:', response.status);
+      }
+    } catch (error) {
+      console.error('Error fetching comments:', error);
+    }
+  };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <GBD.Wrapper>
-
       <GBD.GroupBoardTitle>
-        <div>모임 이름</div>
+        <div>{groupDetail?.data?.post.title || 'Loading...'}</div>
       </GBD.GroupBoardTitle>
       <GBD.User>
-        <GBD.ProfileImg>
-          <img src="" alt="이미지" />
-        </GBD.ProfileImg>
+        <GBD.ProfileImg></GBD.ProfileImg>
         <GBD.Desc>
           <GBD.DescDisplay>
-            <div>
-              <div>최형욱</div>
-              <div>글쓴 시간</div>
-            </div>
+            <div>{groupDetail?.data?.post.createdAt || 'Loading...'}</div>
             <GBD.EditButton>●●●</GBD.EditButton>
           </GBD.DescDisplay>
         </GBD.Desc>
       </GBD.User>
       <GBD.UserWriteBox>
-        <div>
-          <Slider />
-        </div>
+        <div>{groupDetail?.data?.post.content || 'Loading...'}</div>
+        <img
+          src={`http://localhost:3000/api/v1/image/post/${groupDetail?.data.post.images[0]}`}
+          alt="게시된 이미지"
+        />
       </GBD.UserWriteBox>
       <GBD.Button>
         <button>❤️ 좋아요 숫자</button>
-        <button> 공유하기</button>
+        <button>공유하기</button>
       </GBD.Button>
       <GBD.Comment>
-        <li>
-          <GBD.CommentTitle> 댓글 5(개수)</GBD.CommentTitle>
-          {Array(2)
-            .fill('')
-            .map((v, i) => (
-              <GBD.UserCommentBox key={i}>
-                <GBD.CommentProfileImg>
-                  <img src="" alt="프로필" />
-                </GBD.CommentProfileImg>
-                <GBD.UserReply>
-                  <div>최형욱</div>
-                  <div>
-                    대댓글 기능 대댓글 기능 대댓글 기능 대댓글 기능 대댓글 기능
-                  </div>
-                  <div>시간 답글달기 삭제하기 등</div>
-                </GBD.UserReply>
-              </GBD.UserCommentBox>
-            ))}
-        </li>
+        {comments.map(comment => (
+          <div key={comment.comment_id}>
+            {!comment.isDeleted ? (
+              <>
+                <div>{comment.text}</div>
+                <div>{comment.createdAt}</div>
+              </>
+            ) : (
+              <div>Deleted Comment</div>
+            )}
+          </div>
+        ))}
       </GBD.Comment>
       <GBD.CIWrapper>
         <GBD.CIDisplay>
           <GBD.CIInput>
-            <input type="text" placeholder="댓글을 입력하세요." />
+            <input
+              type="text"
+              placeholder="댓글을 입력하세요."
+              value={commentText}
+              onChange={e => setCommentText(e.target.value)}
+            />
           </GBD.CIInput>
           <GBD.CIButton>
-            <button onClick={handleCommentSubmit}>등록</button>
+            <button onClick={postComment}>등록</button>
           </GBD.CIButton>
         </GBD.CIDisplay>
       </GBD.CIWrapper>

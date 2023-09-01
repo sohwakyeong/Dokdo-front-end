@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import * as MyPageStyle from './MyPage.styled';
-import UserIcon from '../../../assets/img/userprofile.png';
-import { getCookie, removeCookie } from '../../../helper/Cookie';
-import { useNavigate } from 'react-router-dom';
-import AxiosC from '../../../helper/AxiosC';
-import axios from 'axios';
+import * as MyPageStyle from '@/pages/mypage/mainmypage/MyPage.styled';
 
+import { getCookie, removeCookie } from '@/helper/Cookie';
+import { useNavigate } from 'react-router-dom';
+import AxiosC from '@/helper/AxiosC';
+import axios from 'axios';
+import Slider5 from '@/components/common/slider/Slider5';
 
 function MyPageComponent() {
   const navigate = useNavigate();
@@ -16,11 +16,10 @@ function MyPageComponent() {
     introduction: string;
   } | null>(null);
 
-  const loginToken = getCookie('loginToken'); // getCookie 함수로 'loginToken' 쿠키 값을 가져옵니다.
-
+  const loginToken = getCookie('loginToken');
   useEffect(() => {
     axios
-      .get('http://localhost:3001/api/v1/auth/me', {
+      .get('http://localhost:3000/api/v1/auth/me', {
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
@@ -40,7 +39,6 @@ function MyPageComponent() {
   }, [navigate, loginToken]);
 
   if (!userData) {
-    // userData가 없으면 로딩 또는 에러 메시지 표시
     return <div>로딩 중...</div>;
   }
 
@@ -49,13 +47,17 @@ function MyPageComponent() {
   const handleLogout = async () => {
     try {
       const response = await AxiosC.put(
-        'http://localhost:3001/api/v1/auth/logout',
+        'http://localhost:3000/api/v1/auth/logout',
       );
       console.log(response);
       // 액세스 토큰 쿠키 삭제
-      removeCookie('loginToken');
+      console.log('삭제 전');
+      await removeCookie('loginToken'); // await 추가
+      console.log('삭제 후');
       alert('로그아웃에 성공하셨습니다.');
+      console.log('navigate 이전');
       navigate('/');
+      console.log('navigate 이후');
     } catch (e) {
       console.error('로그아웃 에러:', e);
       alert('서버 오류: 다시 시도해주세요.');
@@ -65,10 +67,15 @@ function MyPageComponent() {
   return (
     <MyPageStyle.Container>
       <MyPageStyle.Wrapper>
-        <MyPageStyle.UserIcon src={UserIcon} alt="유저 설정 이미지" />
+        <MyPageStyle.UserIcon
+          src={`http://localhost:3000/api/v1/image/profile/${userData.profilePic}`}
+          alt="유저 설정 이미지"
+        />
         <MyPageStyle.Introduce>
           <MyPageStyle.NickName>{userData.name}</MyPageStyle.NickName>
-          <MyPageStyle.SimpleIntro>{userData.introduction}</MyPageStyle.SimpleIntro>
+          <MyPageStyle.SimpleIntro>
+            {userData.introduction}
+          </MyPageStyle.SimpleIntro>
         </MyPageStyle.Introduce>
       </MyPageStyle.Wrapper>
 
@@ -79,8 +86,8 @@ function MyPageComponent() {
         </MyPageStyle.ManageLink>
       </MyPageStyle.Group>
 
-
-
+      <Slider5 />
+      <MyPageStyle.Section />
       <MyPageStyle.ManageList>
         <MyPageStyle.ManageTitle>나의 관리 목록</MyPageStyle.ManageTitle>
         <MyPageStyle.ManageLink2 to="/user/mypage/myposts">

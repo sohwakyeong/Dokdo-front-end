@@ -14,8 +14,9 @@ import {
   TagList,
   Tag,
   RemoveTagButton,
-} from './GroupCreatePage2.Styled';
-import SelectBox from '../../../components/common/selectbox/SelectBox2';
+} from '@/pages/group/groupcreate/GroupCreatePage2.Styled';
+
+import SelectBox from '@/components/common/selectbox/SelectBox2';
 
 interface GroupCreatePage2Data {
   location: string;

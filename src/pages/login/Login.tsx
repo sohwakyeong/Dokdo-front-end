@@ -1,21 +1,20 @@
-import AxiosC from '../../helper/AxiosC';
+import AxiosC from '@/helper/AxiosC';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LogoIcon from '../../assets/img/Logo1.png';
-import * as LoginStyle from './Login.styled';
+import LogoIcon from '@/assets/img/Logo1.png';
+import * as LoginStyle from '@/pages/login/Login.styled';
 
 function LoginComponent() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const navigate = useNavigate();
 
-const navigate = useNavigate();
-
-const onEmailHandler = (e: {
-target: { value: React.SetStateAction<string> };
-}) => {
-setEmail(e.target.value);
-};
+  const onEmailHandler = (e: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setEmail(e.target.value);
+  };
 
   const onPasswordHandler = (e: {
     target: { value: React.SetStateAction<string> };
@@ -34,17 +33,17 @@ setEmail(e.target.value);
     // 조건을 통과한 경우에만 요청 보내기
     try {
       const response = await AxiosC.post(
-        'http://localhost:3001/api/v1/auth/login',
+        'http://localhost:3000/api/v1/auth/login',
         {
           email,
           password,
         },
         { withCredentials: true },
       );
-      
+
       const { data } = response.data;
-      
-      if (data.isLogin === true) {
+
+      if (data.isLogin) {
         alert('로그인 성공하셨습니다.');
         navigate('/');
         return;
@@ -77,9 +76,7 @@ setEmail(e.target.value);
           onChange={onPasswordHandler}
         />
         <LoginStyle.Save htmlFor="check1">
-          <LoginStyle.SaveId
-            type="checkbox"
-          />
+          <LoginStyle.SaveId type="checkbox" />
         </LoginStyle.Save>
         <LoginStyle.Button type="submit" onClick={onClickLogin}>
           로그인

@@ -62,10 +62,11 @@ export const Button = styled.div`
 export const Comment = styled.div`
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
   border-top: solid 1px #ddd;
+  margin-bottom: 55px;
 `;
-
 export const CommentProfileImg = styled.div`
   width: 50px;
   height: 50px;
@@ -114,4 +115,60 @@ export const GroupBoardTitle = styled.div`
 export const CommentTitle = styled.div`
   font-size: 20px;
   padding: 30px 30px 20px 30px;
+`;
+
+export const CIWrapper = styled.div`
+  position: fixed;
+  bottom: 0;
+  height: 70px;
+  font-size: 13px;
+  background-color: white;
+  width: 472px;
+  z-index: 9998;
+  border-top: 0.5px solid #d7d7d7;
+  margin-bottom: 58px;
+`;
+
+export const CIDisplay = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+`;
+
+export const CIButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  background-color: #84614b;
+  height: 50px;
+  border-radius: 20px;
+
+  & button {
+    border: none;
+    color: white;
+    background-color: transparent;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+`;
+
+export const CIInput = styled.div`
+  width: 74%;
+
+  & input {
+    width: 100%;
+    height: 45px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+
+    &::placeholder {
+      padding-left: 10px;
+      font-size: 15px;
+      color: #a8a8a8;
+    }
+  }
 `;

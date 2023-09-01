@@ -1,7 +1,7 @@
 import React from 'react';
 
-import * as SignupSuccessStyle from './Signupsuccess.styled';
-import ClapImg from '../../assets/img/claphand.png';
+import * as SignupSuccessStyle from '@/pages/signupsuccess/Signupsuccess.styled';
+import ClapImg from '@/assets/img/claphand.png';
 
 
 function SignupSuccessComponent() {

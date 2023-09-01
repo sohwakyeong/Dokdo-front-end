@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import PenIcon from '../../../assets/icon/PenIcon.png';
+import PenIcon from '@/assets/icon/newIcon/pen.png';
 import { Link, useParams } from 'react-router-dom';
 
 function PenFooter() {
@@ -28,7 +28,7 @@ const Wrapper = styled.div`
   font-size: 13px;
   background-color: transparent;
   width: 472px;
-  z-index: 9999;
+  z-index: 9998;
 `;
 
 const Display = styled.div`

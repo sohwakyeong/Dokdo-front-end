@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import * as MyPostsStyle from './MyPosts.styled';
+import * as MyPostsStyle from '@/pages/mypage/myposts/MyPosts.styled';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { getCookie } from '../../../helper/Cookie';
-// import UserIcon from '../../../assets/img/userprofile.png';
+import { getCookie } from '@/helper/Cookie';
 
 interface PostData {
   _id: string;
@@ -13,6 +12,8 @@ interface PostData {
   createdAt: string;
   updatedAt: string;
   __v: number;
+  content: string;
+  images: string[]; // 이미지 파일명 배열
 }
 
 interface PostBoxProps {
@@ -20,7 +21,7 @@ interface PostBoxProps {
 }
 
 interface UserData {
-  name: any;
+  name: string;
   profilePic: string;
 }
 
@@ -29,36 +30,43 @@ function MyPostsComponent({ data }: PostBoxProps) {
   const [myPosts, setMyPosts] = useState<PostData[]>([]);
   const [selectedPosts, setSelectedPosts] = useState<any[]>([]); // 추가: 선택된 포스트 정보를 저장할 상태
   const [userData, setUserData] = useState<UserData | null>(null); // 추가: 유저 정보 상태
-  
-   useEffect(() => {
-     // 먼저 유저 정보를 가져옵니다.
-     const loginToken = getCookie('loginToken');
 
-     axios
-       .get('http://localhost:3001/api/v1/auth/me', {
-         headers: {
-           Authorization: `Bearer ${loginToken}`,
-         },
-         withCredentials: true,
-       })
-       .then(response => {
-         if (response.status === 200) {
-           setUserData(response.data.data.getUser);
-         } else {
-           navigate('/signup');
-         }
-       })
-       .catch(error => {
-         console.error('유저 정보 가져오기 에러:', error);
-         navigate('/');
-       });
-   }, []);
+  function formatCreatedAt(createdAt: string | number | Date) {
+    const date = new Date(createdAt);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+    return `${year}년 ${month}월 ${day}일`;
+  }
 
   useEffect(() => {
-    // 먼저 유저 정보를 가져옵니다.
-    const loginToken = getCookie('loginToken'); // getCookie 함수로 'loginToken' 쿠키 값을 가져옵니다.
+    const loginToken = getCookie('loginToken');
+
     axios
-      .get(`http://localhost:3001/api/v1/auth/me/posts`, {
+      .get('http://localhost:3000/api/v1/auth/me', {
+        headers: {
+          Authorization: `Bearer ${loginToken}`,
+        },
+        withCredentials: true,
+      })
+      .then(response => {
+        if (response.status === 200) {
+          setUserData(response.data.data.getUser);
+        } else {
+          navigate('/signup');
+        }
+      })
+      .catch(error => {
+        console.error('myposts유저 정보 가져오기 에러:', error);
+        navigate('/');
+      });
+  }, [navigate]);
+
+  useEffect(() => {
+    const loginToken = getCookie('loginToken');
+    axios
+      .get(`http://localhost:3000/api/v1/auth/me/posts`, {
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
@@ -66,28 +74,23 @@ function MyPostsComponent({ data }: PostBoxProps) {
       })
       .then(postsResponse => {
         if (postsResponse.data.error === null) {
-          // 수정: 오류 확인
           const userPosts: PostData[] = postsResponse.data.data;
           setMyPosts(userPosts);
-          
-          // 모든 포스트를 가져오기 위한 함수
+
           const fetchAllPosts = async () => {
+            const selectedPostsWithImages: PostData[] = [];
+
             for (const post of userPosts) {
               try {
                 const postResponse = await axios.get(
-                  `http://localhost:3001/api/v1/group/${post.group_id}/posts/${post.post_id}`,
+                  `http://localhost:3000/api/v1/group/${post.group_id}/posts/${post.post_id}`,
                 );
 
                 if (postResponse.data.error === null) {
-                  // 포스트 정보 처리
-                  const postData = {
+                  const postData: PostData = {
                     ...postResponse.data.data,
-                    // 여기에 원하는 추가 데이터를 저장할 수 있습니다.
                   };
-                  setSelectedPosts(prevSelectedPosts => [
-                    ...prevSelectedPosts,
-                    postData,
-                  ]);
+                  selectedPostsWithImages.push(postData);
                 } else {
                   console.error(
                     '포스트 가져오기 오류:',
@@ -98,9 +101,10 @@ function MyPostsComponent({ data }: PostBoxProps) {
                 console.error('포스트 가져오기 에러:', error);
               }
             }
+
+            setSelectedPosts(selectedPostsWithImages);
           };
 
-          // fetchAllPosts 함수 실행
           fetchAllPosts();
         } else {
           console.error('게시글 가져오기 오류:', postsResponse.data.error);
@@ -115,37 +119,33 @@ function MyPostsComponent({ data }: PostBoxProps) {
     <MyPostsStyle.Container>
       <MyPostsStyle.Wrapper>
         <MyPostsStyle.GroupBoardList>
-          {userData && selectedPosts.map(selectedPost => (
-            <MyPostsStyle.Boardbox key={selectedPost._id}>
-              <MyPostsStyle.BoardLeft>
-                <MyPostsStyle.ProfileData>
-                  <MyPostsStyle.ProfileImg
-                    src={userData.profilePic}
-                    alt={`${userData.name}의 프로필 사진`}
-                  />
-                  <MyPostsStyle.UpdatedProfile>
-                    <MyPostsStyle.Writer>{userData.name}</MyPostsStyle.Writer>
-                    <MyPostsStyle.PostedDate>
-                      {selectedPost.createdAt}
-                    </MyPostsStyle.PostedDate>
-                  </MyPostsStyle.UpdatedProfile>
-                </MyPostsStyle.ProfileData>
+          {userData &&
+            selectedPosts.map(selectedPost => (
+              <MyPostsStyle.Boardbox key={selectedPost._id}>
+                <MyPostsStyle.BoardLeft>
+                  <MyPostsStyle.ProfileData>
+                    <MyPostsStyle.ProfileImg
+                      src={`http://localhost:3000/api/v1/image/profile/${userData.profilePic}`}
+                      alt={`${userData.name}의 프로필 사진`}
+                    />
+                    <MyPostsStyle.UpdatedProfile>
+                      <MyPostsStyle.Writer>{userData.name}</MyPostsStyle.Writer>
+                      <MyPostsStyle.PostedDate>
+                        {selectedPost.createdAt}
+                      </MyPostsStyle.PostedDate>
+                    </MyPostsStyle.UpdatedProfile>
+                  </MyPostsStyle.ProfileData>
 
-                <MyPostsStyle.Content>
-                  {selectedPost.content}
-                </MyPostsStyle.Content>
-                <MyPostsStyle.GroupDes>
-                  <MyPostsStyle.ContentLikes>
-                    좋아요 수
-                  </MyPostsStyle.ContentLikes>
-                  <MyPostsStyle.ContentComment>
-                    댓글 수
-                  </MyPostsStyle.ContentComment>
-                </MyPostsStyle.GroupDes>
-              </MyPostsStyle.BoardLeft>
-              <MyPostsStyle.BoardImg src="" alt="게시된 이미지" />
-            </MyPostsStyle.Boardbox>
-          ))}
+                  <MyPostsStyle.Content>
+                    {formatCreatedAt(selectedPost.content)}
+                  </MyPostsStyle.Content>
+                </MyPostsStyle.BoardLeft>
+                <MyPostsStyle.BoardImg
+                  src={`http://localhost:3000/api/v1/image/post/${selectedPost.images[0]}`} // 이미지 URL 설정
+                  alt="게시된 이미지"
+                />
+              </MyPostsStyle.Boardbox>
+            ))}
         </MyPostsStyle.GroupBoardList>
       </MyPostsStyle.Wrapper>
     </MyPostsStyle.Container>

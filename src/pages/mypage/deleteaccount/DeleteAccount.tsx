@@ -1,21 +1,17 @@
 import React, { useState } from 'react';
-import * as DeleteStyle from './DeleteAccount.styled';
-
-import { removeCookie } from '../../../helper/Cookie';
+import * as DeleteStyle from '@/pages/mypage/deleteaccount/DeleteAccount.styled';
 import { useNavigate } from 'react-router-dom';
-import AxiosC from '../../../helper/AxiosC';
-
+import AxiosC from '@/helper/AxiosC';
 
 function DeleteAccountComponent() {
   const [Password, setPassword] = useState('');
   const navigate = useNavigate();
 
-    const onPasswordHanlder = (e: {
-      target: { value: React.SetStateAction<string> };
-    }) => {
-      setPassword(e.target.value);
-    };
-
+  const onPasswordHanlder = (e: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setPassword(e.target.value);
+  };
 
   // 탈퇴하기 버튼의 onClick Event
   // 이 함수에서 AxiosC를 axios로 바꾸면 탈퇴가 안된다
@@ -24,7 +20,7 @@ function DeleteAccountComponent() {
 
     try {
       const response = await AxiosC.put(
-        'http://localhost:3001/api/v1/auth/withdrawal',
+        'http://localhost:3000/api/v1/auth/withdrawal',
         {
           password: Password,
         },
@@ -33,7 +29,7 @@ function DeleteAccountComponent() {
       console.log(response);
       if (response.status === 200) {
         // 액세스 토큰 쿠키 삭제 ?? 해야하는가..
-  
+
         alert('회원 탈퇴 되셨습니다.');
         navigate('/');
       } else {

@@ -1,23 +1,13 @@
-import React,{useState, useEffect, useRef} from "react";
-import * as A from "./Admin.styled";
+import React, { useState, useEffect, useRef } from 'react';
+import * as A from '@/pages/admin/Admin.styled';
 import axios from 'axios';
-import GroupData from './GroupData';
-import SelectBox2 from "../../components/common/selectbox/SelectBox2";
+import GroupData from '@/pages/admin/GroupData';
+import SelectBox2 from '@/components/common/selectbox/SelectBox2';
 
 const sortOptions = [
-    { value: '좋아요', label: '좋아요' },
-    { value: '최근순', label: '최근순' },
-  ];
-  
-    
-function AdminGroup (){
-    const [groupData, setGroupData] = useState([]);
-    const element = useRef<HTMLDivElement>(null);
-    const onMoveBox = () => {
-        element.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-      };
-    
-    const [selectedSort, setSelectedSort] = useState('');
+  { value: '좋아요', label: '좋아요' },
+  { value: '최근순', label: '최근순' },
+];
 
     useEffect(() => {
         async function fetchData() {

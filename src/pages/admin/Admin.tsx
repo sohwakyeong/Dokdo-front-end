@@ -1,13 +1,12 @@
-import React,{ ReactNode } from "react";
-import * as S from './SideBar.styled';
-import Logo2 from '../../assets/img/Logo2.png';
-import Create from '../../assets/icon/adminicon/Create.png';
-import Edit from '../../assets/icon/adminicon/Edit Message.png';
-import Supervised from '../../assets/icon/adminicon/Supervised user circle.png';
-import Home from  '../../assets/icon/adminicon/Home.png';
-import Person from '../../assets/icon/adminicon/Writer male_0.png';
-import Logout from '../../assets/icon/adminicon/logout.png';
-
+import React, { ReactNode, useState } from "react";
+import Logo2 from '@/assets/img/Logo2.png';
+import User from '@/assets/icon/User.png';
+import Note from '@/assets/icon/Note.png';
+import Group from '@/assets/icon/Group.png';
+import Favorite from '@/assets/icon/Favorite.png';
+import Plus from '@/assets/icon/Plus.png';
+import Bell from '@/assets/icon/Bell.png';
+import * as S from '@/pages/admin/SideBar.styled'
 interface AdminProps {
    children: ReactNode;
 }

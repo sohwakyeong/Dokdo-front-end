@@ -1,7 +1,7 @@
-import React, {useState, useEffect, useRef} from "react";
-import * as A from './Admin.styled';
+import React, { useState, useEffect, useRef } from 'react';
+import * as A from '@/pages/admin/Admin.styled';
 import axios from 'axios';
-import UserData from './UserData';
+import UserData from '@/pages/admin/UserData';
 
 async function fetchAllUser() {
     try{
@@ -13,23 +13,23 @@ async function fetchAllUser() {
 }
 
 function AdminUser() {
-    const [userData, setUserData] = useState([]);
-    const element = useRef<HTMLDivElement>(null);
-    const onMoveBox = () => {
-      element.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    };
-    
-    useEffect(()=>{
-        async function fetchData() {
-            try {
-                const data = await fetchAllUser(); 
-                setUserData(data);
-            } catch(error) {
-                console.error('데이터를 가져오는 중 에러 발생:', error);
-            }
-        }
-        fetchData();
-    },[]);
+  const [userData, setUserData] = useState([]);
+  const element = useRef<HTMLDivElement>(null);
+  const onMoveBox = () => {
+    element.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await fetchAllUser();
+        setUserData(data);
+      } catch (error) {
+        console.error('데이터를 가져오는 중 에러 발생:', error);
+      }
+    }
+    fetchData();
+  }, []);
 
     return (
         <A.Wrapper>
@@ -60,7 +60,7 @@ function AdminUser() {
                 <A.ScrollToTop onClick={onMoveBox}>Top</A.ScrollToTop>
             </A.TopButton> 
     </A.Wrapper>
-    )
+  );
 }
 
 export default AdminUser;

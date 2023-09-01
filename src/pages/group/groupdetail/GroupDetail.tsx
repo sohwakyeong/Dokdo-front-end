@@ -1,45 +1,68 @@
 import React, { useState, useEffect } from 'react';
-import GroupImg from '../../../assets/img/독서모임3.jpg';
+import GroupImg from '@/assets/img/독서모임3.png';
 import axios from 'axios';
-import { getCookie } from '../../../helper/Cookie';
-import * as GD from './GroupDetail.styled';
+import { getCookie } from '@/helper/Cookie';
+import * as GD from '@/pages/group/groupdetail/GroupDetail.styled';
+
 import {
   ModalWrapper,
   ModalHeader,
   ModalContent,
-  CloseButton,
-} from './GroupDetail.styled';
+} from '@/pages/group/groupdetail/GroupDetail.styled';
 import { useParams } from 'react-router-dom'; // useParams 임포트
-import GroupHeader from '../../../components/layout/header/GroupHeader';
+import GroupHeader from '@/components/layout/header/GroupHeader';
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
-function GroupDetail() {
-  const [groupData, setGroupData] = useState<{
-    group_id: number;
-    name: string;
-    tags: string[];
+interface MemberType {
+  post: {
     _id: string;
+    title: string;
+    content: string;
+    images: string[];
+  };
+  user: {
+    name: string;
+    profilePic: string;
+  };
+}
+interface GroupData {
+  group_id: number;
+  name: string;
+  isRecruit: boolean;
+  profile: string;
+  leader: number;
+  like: number;
+  mem: Array<{
+    _id: string;
+    group_id: number;
+    user_id: number;
+    createdAt: string;
+  }>;
+  introduction: string;
+  place: string;
+  search: {
+    _id: string;
+    group_id: number;
     location: string;
     day: string;
     genre: string;
     age: string;
-    place: string;
-    introduction: string;
-    search: {
-      _id: string;
-      location: string;
-      day: string;
-      genre: string;
-      age: string;
-    };
-  } | null>(null);
+    __v: number;
+  };
+  tags: string[];
+  error: any;
+  createdAt: string;
+}
 
+function GroupDetail() {
+  const [groupData, setGroupData] = useState<GroupData | null>(null);
+  const { groupId } = useParams<{ groupId: string }>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [schedules, setSchedules] = useState<Array<any>>([]);
   const loginToken = getCookie('loginToken');
-  const { groupId } = useParams<{ groupId: string }>();
   const getLocalStorageKey = () => `schedules_${groupId}`;
+  const [members, setMembers] = useState<Array<any>>([]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -61,6 +84,27 @@ function GroupDetail() {
       console.log('Schedule limit reached!');
     }
   };
+
+  useEffect(() => {
+    // API 요청 함수 정의
+    async function fetchAllGroupBoardData(groupId: number) {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/api/v1/group/${groupId}/posts`,
+        );
+        if (response.status === 200) {
+          setMembers(response.data.data);
+        } else {
+          console.error('멤버 정보 가져오기 에러:', response.status);
+        }
+      } catch (error) {
+        console.error('멤버 정보 가져오기 에러:', error);
+      }
+    }
+
+    // 함수 호출
+    fetchAllGroupBoardData(Number(groupId));
+  }, [groupId]);
   useEffect(() => {
     // 페이지 로드 시 로컬 스토리지에서 해당 groupId의 일정 데이터 불러오기
     const savedSchedules = JSON.parse(
@@ -78,7 +122,7 @@ function GroupDetail() {
     async function fetchGroupData(groupId: number) {
       try {
         const response = await axios.get(
-          `http://localhost:3001/api/v1/group/${groupId}`,
+          `http://localhost:3000/api/v1/group/${groupId}`,
           {
             headers: {
               Authorization: `Bearer ${loginToken}`,
@@ -110,7 +154,7 @@ function GroupDetail() {
 
     try {
       const response = await axios.put(
-        `http://localhost:3001/api/v1/auth/group/${groupId}`,
+        `http://localhost:3000/api/v1/auth/group/${groupId}`,
         {},
         {
           headers: {
@@ -145,7 +189,6 @@ function GroupDetail() {
           <div>▪︎▪︎▪︎</div>
         </GD.EditButton>
         <GD.GroupName>📚{groupData.name}</GD.GroupName>
-        <GD.GroupInfoTitle>{groupData.introduction}</GD.GroupInfoTitle>
         <GD.GroupInfoTP>
           <div>🏖️ {groupData.place}</div>
           <div>⏰ 매주 {groupData.search.day}</div>
@@ -173,9 +216,15 @@ function GroupDetail() {
           schedules.map((schedule, index) => (
             <GD.ScheduleBox key={index}>
               <GD.SDTitle>{schedule.title}</GD.SDTitle>
-              <GD.SDDate>🍀 일시 {schedule.date}</GD.SDDate>
-              <GD.SDPlace>❣️ 위치 {schedule.location}</GD.SDPlace>
-              <GD.SDDues>🤑 회비 {schedule.amount}</GD.SDDues>
+              <GD.SDDate>
+                🍀 <span>일시</span> {schedule.date}
+              </GD.SDDate>
+              <GD.SDPlace>
+                ❣️ <span>위치</span> {schedule.location}
+              </GD.SDPlace>
+              <GD.SDDues>
+                🤑 <span>회비</span> {schedule.amount}
+              </GD.SDDues>
             </GD.ScheduleBox>
           ))
         )}
@@ -183,8 +232,7 @@ function GroupDetail() {
         {isModalOpen && ( // Modal의 isOpen 대신 조건부 렌더링 사용
           <ModalWrapper>
             <ModalHeader>
-              <h2>일정등록</h2>
-              <CloseButton onClick={closeModal}>×</CloseButton>
+              <div>일정 등록</div>
             </ModalHeader>
             <ModalContent>
               <form
@@ -209,51 +257,53 @@ function GroupDetail() {
                 }}
               >
                 <div>
-                  <label>제목:</label>
+                  <label>제목</label>
                   <input type="text" name="title" required />
                 </div>
                 <div>
-                  <label>일시:</label>
+                  <label>일시</label>
                   <input
                     type="text"
-                    placeholder="xx 월, xx 일, 몇시 몇분"
+                    placeholder="   **월 **일"
                     name="date"
                     required
                   />
                 </div>
                 <div>
-                  <label>위치:</label>
+                  <label>위치</label>
                   <input type="text" name="location" required />
                 </div>
                 <div>
-                  <label>금액:</label>
+                  <label>금액</label>
                   <input type="text" name="amount" required />
                 </div>
-                <button type="submit">일정 추가</button>
+                <div className="button-container">
+                  <button onClick={closeModal}>취소</button>
+                  <button type="submit">일정 추가</button>
+                </div>
               </form>
             </ModalContent>
           </ModalWrapper>
         )}
       </GD.Schedule>
       <GD.MemberBox>
-        <GD.Member>모집멤버 (25)</GD.Member>
+        <GD.Member>모임 멤버 ({members.length + 1})</GD.Member>{' '}
+        {/* Displaying count of members here */}
         <ul>
-          {Array(5)
-            .fill('')
-            .map((v, i) => (
-              <GD.MemberList key={i}>
+          {members.map((member: MemberType, index: number) => (
+            <li key={index}>
+              <GD.MemberList>
                 <GD.MemberImg>
-                  <img src="" alt="프로필" />
+                  <img src={member.post.images[0]} alt="프로필" />
                 </GD.MemberImg>
                 <GD.Desc>
-                  <div>최형욱</div>
-                  <div>한줄 소개 블라브라브라브라ㅡ르바르</div>
+                  <div>{member.user.name}</div>
                 </GD.Desc>
               </GD.MemberList>
-            ))}
+            </li>
+          ))}
         </ul>
         <GD.ButtonDisplay>
-          {' '}
           <GD.NFWrapper>
             <GD.NFDisplay>
               <GD.NFNextBtn>

@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, { useState } from 'react';
 import axios from 'axios';
-import * as A from './Admin.styled';
+import * as A from '@/pages/admin/Admin.styled';
 
 interface AdminPostData {
     post : {
@@ -19,7 +19,7 @@ interface AdminPostData {
 }
 
 interface AdminPostProps {
-    data?:AdminPostData;
+  data?: AdminPostData;
 }
 
 
