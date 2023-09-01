@@ -75,15 +75,21 @@ const GroupList = () => {
   const [selectedSort, setSelectedSort] = useState('');
   const [clickedInfo, setClickedInfo] = useState<string[]>([]);
   const [groupData, setGroupData] = useState([]);
+  const [offset, setOffset] = useState(0);
 
+
+
+
+
+  
   useEffect(() => {
     async function fetchData() {
       try {
         let apiUrl =
-          'http://localhost:3000/api/v1/group?limit=5&offset=0'; // 기본적으로 인기순 API 호출
+          'http://localhost:3001/api/v1/group?orderBy=popularity&limit=100&offset=0'; // 기본적으로 인기순 API 호출
 
         if (selectedSort === '최근순') {
-          apiUrl = 'http://localhost:3000/api/v1/group?limit=5&offset=0'; // 최신순 API 호출
+          apiUrl = 'http://localhost:3001/api/v1/group?&limit=100&offset=0'; // 최신순 API 호출
         }
 
         const data = await fetchAllGroupData(apiUrl); // API 요청 호출
@@ -147,14 +153,15 @@ const GroupList = () => {
       }
     }
   };
+
   const handleSearchButtonClick = async () => {
     try {
-      let apiUrl = 'http://localhost:3000/api/v1/group?limit=5&offset=0';
+      let apiUrl = 'http://localhost:3001/api/v1/group';
 
       if (selectedSort === '최근순') {
-        apiUrl += '?orderBy=oldest';
+        apiUrl += '?orderBy=oldest&limit=5&offset=0';
       } else {
-        apiUrl += '?orderBy=popularity';
+        apiUrl += '?orderBy=popularity&limit=5&offset=0';
       }
 
       const params = {
@@ -163,8 +170,11 @@ const GroupList = () => {
         genre: selectedGenre,
         age: selectedAge,
       };
+
+      const hasSelectedParams = Object.values(params).some(Boolean);
+
       // 선택된 값이 있는 경우에만 추가적인 쿼리 파라미터를 포함한 URL을 사용하여 API 요청 호출
-      if (Object.values(params).some(Boolean)) {
+      if (hasSelectedParams) {
         Object.entries(params).forEach(([key, value]) => {
           if (value) {
             apiUrl += `&${key}=${encodeURIComponent(value)}`;
@@ -175,15 +185,8 @@ const GroupList = () => {
 
         if (data.length === 0) {
           alert('검색 결과가 없습니다.');
-
           setGroupData([]);
-          setSelectedRegion('');
-          setSelectedDuration('');
-          setSelectedAge('');
-          setSelectedGenre('');
 
-          // 선택한 정렬 기준 초기화 및 디폴트 정렬값 설정
-          setSelectedSort('좋아요'); // 디폴트 정렬값 설정
           setClickedInfo([]);
         } else {
           setGroupData(data);
@@ -193,6 +196,21 @@ const GroupList = () => {
             .filter(condition => clickedInfo.includes(condition));
 
           setClickedInfo(updatedClickedInfo);
+        }
+      } else {
+        // 모든 선택이 취소되었을 때 디폴트로 '좋아요' 순으로 정렬하도록 처리
+        apiUrl += '?orderBy=popularity&limit=5&offset=0';
+
+        const data = await fetchAllGroupData(apiUrl);
+
+        if (data.length === 0) {
+          alert('검색 결과가 없습니다.');
+          setGroupData(data);
+
+          setSelectedSort('좋아요'); // 디폴트 정렬값 설정
+        } else {
+          setClickedInfo([]);
+          setSelectedSort('좋아요'); // 디폴트 정렬값 설정
         }
       }
     } catch (error) {

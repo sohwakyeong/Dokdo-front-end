@@ -3,32 +3,52 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+
+  width: 474px;
 `;
 
 export const User = styled.div`
   display: grid;
   grid-template-columns: 75px auto;
-  margin: 20px 10px;
+  margin: 10px 0;
+  width: 90%;
 `;
 
 export const EditButton = styled.div`
   font-size: 10px;
   cursor: pointer;
+  text-align: right;
+  width: 100%;
+  padding: 20px 0 0 0;
+  margin-right: 40px;
 `;
 
 export const DescDisplay = styled.div`
   display: flex;
-  justify-content: space-between;
-  padding: 0 10px;
+  flex-direction: column;
+
+  & div {
+    padding: 3px 0;
+  }
 `;
 
 export const UserName = styled.div`
-font-size: 12px;
+  font-size: 18px;
+  font-weight: 700;
+`;
 
-`
+export const MMDD = styled.div`
+  font-size: 13px;
+  color: #727272;
+`;
+
 export const ProfileImg = styled.img`
   width: 50px;
   height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 50%;
   background-color: #fff7ec;
   overflow: hidden;
@@ -43,10 +63,26 @@ export const Desc = styled.div`
 
 export const UserWriteBox = styled.div`
   box-sizing: border-box;
-  border-top: solid 1px #ddd;
-  border-bottom: solid 1px #ddd;
-  padding: 20px;
   height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & div {
+    width: 90%;
+    margin: 20px 0;
+  }
+  & img {
+    bottom: 0;
+    height: 309px;
+  }
+`;
+
+export const UserContent = styled.div`
+  width: 90%;
+  height: 100%;
+  padding: 10px;
 `;
 
 export const Button = styled.div`
@@ -55,10 +91,11 @@ export const Button = styled.div`
   margin: 40px;
 
   & button {
-    width: 150px;
-    height: 40px;
+    width: 88px;
+    height: 38px;
     border: 1px solid black;
     background-color: white;
+    margin: 0 10px;
     border-radius: 10px;
   }
 `;
