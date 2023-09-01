@@ -56,7 +56,7 @@ export const Title = styled.h1`
 export const FormGroupDate = styled.div`
   display: flex;
   align-items: center;
-  padding: 20px 0 30px 60px;
+  padding: 20px 0 30px 50px;
   width: 100%;
 
   & div {

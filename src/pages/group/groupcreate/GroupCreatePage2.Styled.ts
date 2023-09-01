@@ -128,12 +128,8 @@ export const SubmitButton = styled.button`
   font-weight: bold;
   cursor: pointer;
   transition: background 0.3s;
-  margin-left: 238px;
   bottom: 65px;
-  left: 110px;
   position: fixed;
-
-  transform: translateX(-50%);
 
   &:hover {
     background: #71503c;
