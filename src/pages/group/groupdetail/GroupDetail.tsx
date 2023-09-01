@@ -3,6 +3,7 @@ import GroupImg from '@/assets/img/독서모임3.png';
 import axios from 'axios';
 import { getCookie } from '@/helper/Cookie';
 import * as GD from '@/pages/group/groupdetail/GroupDetail.styled';
+import { useNavigate } from 'react-router-dom';
 
 import {
   ModalWrapper,
@@ -57,6 +58,7 @@ interface GroupData {
 }
 
 function GroupDetail() {
+  const navigate = useNavigate();
   const [groupData, setGroupData] = useState<GroupData | null>(null);
   const { groupId } = useParams<{ groupId: string }>();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -214,6 +216,31 @@ function GroupDetail() {
       console.error('그룹 가입 에러:', error);
     }
   }
+  async function handleDeleteGroup() {
+    if (window.confirm('정말로 그룹을 삭제하시겠습니까?')) {
+      try {
+        const response = await axios.delete(
+          `http://localhost:3001/api/v1/group/${groupId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${loginToken}`,
+            },
+            withCredentials: true,
+          },
+        );
+
+        if (response.status === 200) {
+          console.log('그룹 삭제 성공:', response.data);
+          // 그룹 삭제 후 리다이렉트 등 처리 가능
+          navigate('/group/list');
+        } else {
+          console.error('그룹 삭제 실패:', response.status);
+        }
+      } catch (error) {
+        console.error('그룹 삭제 에러:', error);
+      }
+    }
+  }
 
   return (
     <GD.Wrapper>
@@ -362,6 +389,7 @@ function GroupDetail() {
             <GD.NFDisplay>
               <GD.NFNextBtn>
                 <button onClick={handleJoinGroup}>모임 가입하기</button>
+                <button onClick={handleDeleteGroup}>모임 삭제하기</button>
               </GD.NFNextBtn>
             </GD.NFDisplay>
           </GD.NFWrapper>
