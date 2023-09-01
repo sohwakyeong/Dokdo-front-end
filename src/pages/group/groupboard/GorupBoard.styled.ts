@@ -99,6 +99,11 @@ export const BoardImg = styled.div`
   background-color: #ddd;
   border-radius: 15px;
   overflow: hidden;
+
+  & img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 export const BoardTitle = styled.div`
   font-size: 18px;

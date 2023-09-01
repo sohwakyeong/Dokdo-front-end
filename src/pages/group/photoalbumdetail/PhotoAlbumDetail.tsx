@@ -175,23 +175,25 @@ const PhotoDetail: React.FC<PhotoDetailDataProps> = ({ data }) => {
   return (
     <PAD.Wrapper>
       <PAD.GroupBoardTitle>
-        <div>{groupName || 'Loading...'} 모임의 사진첩</div>
+        <div>{groupName} 모임의 게시글</div>
       </PAD.GroupBoardTitle>
+      <PAD.EditButton>●●●</PAD.EditButton>
+
       <PAD.User>
-        <PAD.ProfileImg
-          src={`http://localhost:3001/api/v1/image/profile/${PhotoDetail?.data.user.profilePic}`}
-        ></PAD.ProfileImg>
-        <div></div>
-        <PAD.UserName>{PhotoDetail?.data.user.name}</PAD.UserName>
+        <div>
+          <PAD.ProfileImg
+            src={`http://localhost:3001/api/v1/image/profile/${PhotoDetail?.data.user.profilePic}`}
+          ></PAD.ProfileImg>
+        </div>
         <PAD.Desc>
           <PAD.DescDisplay>
-            <div>
+            <PAD.UserName>{PhotoDetail?.data.user.name}</PAD.UserName>
+            <PAD.MMDD>
               {formatCreatedAt(
                 PhotoDetail?.data?.post.createdAt || 'Loading...',
               )}
-            </div>
+            </PAD.MMDD>
           </PAD.DescDisplay>
-          <PAD.EditButton>●●●</PAD.EditButton>
         </PAD.Desc>
       </PAD.User>
       <PAD.UserWriteBox>
