@@ -18,7 +18,6 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 400px;
 `;
 
 export const Tag = styled.div`

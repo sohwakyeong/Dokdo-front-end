@@ -28,12 +28,13 @@ export const TextBox = styled.div`
 export const ImgBox = styled.div`
   width: 104px;
   height: 104px;
-  background-color: #fff7ec;
+  background-color: white;
   border-radius: 20px;
   overflow: hidden; // 추가
   display: flex; // 추가
   align-items: center; // 추가
   justify-content: center; // 추가
+  box-sizing: border-box;
 `;
 
 export const Img = styled.img`
@@ -41,6 +42,7 @@ export const Img = styled.img`
   height: 100%;
   object-fit: cover; // 이미지 비율 유지하면서 컨테이너에 꽉 차도록 설정
   border-radius: 20px;
+  border-radius: 1px solid #ddd;
 `;
 export const HashTagDisplay = styled.div`
   display: flex;

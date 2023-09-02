@@ -9,6 +9,12 @@ export const Left = styled.div`
   flex: 1;
   background-color: #fff7ec;
 
+  & img {
+    margin-left: 50px;
+    max-width: 80%;
+    position: fixed;
+    width: auto !important;
+  }
   @media (max-width: 1024px) {
     display: none;
   }

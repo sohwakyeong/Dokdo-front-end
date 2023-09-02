@@ -3,8 +3,7 @@ import Header from '@/components/layout/header/Header';
 import Footer from '@/components/layout/footer/Footer';
 import LeftScreen from '@/components/layout/leftscreen/LeftScreen';
 import { LayoutContainer, Children, Left, Right } from './Layout1.styled';
-
-
+import back from '@/assets/img/back1.png';
 
 interface Layout1Props {
   children: ReactNode;
@@ -14,7 +13,7 @@ function Layout1({ children }: Layout1Props) {
   return (
     <LayoutContainer>
       <Left>
-        <LeftScreen />
+        <img src={back} alt="" />
       </Left>
       <Right>
         <Header />
