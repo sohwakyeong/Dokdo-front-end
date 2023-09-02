@@ -60,7 +60,7 @@ function MiddleBoardBox({ data }: MiddleBoardBoxProps) {
         <MB.TextImgBox>
           <MB.ImgBox>
             <img
-              src={`http://localhost:3001/api/v1/image/profile/${data.profile}`}
+              src={`/api/v1/image/profile/${data.profile}`}
               alt="업로드사진"
             />
           </MB.ImgBox>

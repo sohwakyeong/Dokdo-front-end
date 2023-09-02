@@ -20,11 +20,7 @@ const GroupBoardWrite: React.FC = () => {
     const loginToken = getCookie('loginToken'); // Assuming getCookie is defined somewhere
 
     axios
-<<<<<<< HEAD
       .get('/api/v1/auth/me', {
-=======
-      .get('http://localhost:3001/api/v1/auth/me', {
->>>>>>> feature-main
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
@@ -58,11 +54,7 @@ const GroupBoardWrite: React.FC = () => {
       };
 
       const response = await axios.post(
-<<<<<<< HEAD
         `/api/v1/group/${groupId}/posts`,
-=======
-        `http://localhost:3001/api/v1/group/${groupId}/posts`,
->>>>>>> feature-main
         payload,
         { withCredentials: true },
       );
@@ -87,11 +79,7 @@ const GroupBoardWrite: React.FC = () => {
         formData.append('img', imageFile, 'img'); // 'img'로 키 값을 설정
 
         const uploadResponse = await axios.post(
-<<<<<<< HEAD
           `/api/v1/group/images`,
-=======
-          `http://localhost:3001/api/v1/group/images`,
->>>>>>> feature-main
           formData,
           { withCredentials: true },
         );

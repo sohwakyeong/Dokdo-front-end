@@ -169,13 +169,10 @@ const SignupComponent = () => {
       }
 
       // 위까지 응답 성공시 밑으로
-      const response = await AxiosC.post(
-        'http://localhost:3001/api/v1/auth/register',
-        {
-          email,
-          password,
-        },
-      );
+      const response = await AxiosC.post('/api/v1/auth/register', {
+        email,
+        password,
+      });
       console.log(response);
       navigate('/signupsuccess');
     } catch (e) {

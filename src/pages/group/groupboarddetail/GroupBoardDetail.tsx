@@ -90,19 +90,9 @@ const GroupBoardDetail: React.FC<
 
   const fetchGroupDetail = async (gId: number, pId: number) => {
     try {
-<<<<<<< HEAD
       const response = await axios.get(`/api/v1/group/${gId}/posts/${pId}`, {
         headers: {
           Authorization: `Bearer ${loginToken}`,
-=======
-      const response = await axios.get(
-        `http://localhost:3001/api/v1/group/${gId}/posts/${pId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${loginToken}`,
-          },
-          withCredentials: true,
->>>>>>> feature-main
         },
         withCredentials: true,
       });
@@ -121,15 +111,12 @@ const GroupBoardDetail: React.FC<
 
   const fetchGroupName = async (gId: number) => {
     try {
-      const response = await axios.get(
-        `http://localhost:3001/api/v1/group/${gId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${loginToken}`,
-          },
-          withCredentials: true,
+      const response = await axios.get(`/api/v1/group/${gId}`, {
+        headers: {
+          Authorization: `Bearer ${loginToken}`,
         },
-      );
+        withCredentials: true,
+      });
 
       if (response.status === 200) {
         const groupData = response.data.data;
@@ -152,11 +139,7 @@ const GroupBoardDetail: React.FC<
   const postComment = async () => {
     try {
       const response = await axios.post(
-<<<<<<< HEAD
         `/api/v1/group/${group_Id}/posts/${post_Id}/comments`,
-=======
-        `http://localhost:3001/api/v1/group/${group_Id}/posts/${post_Id}/comments`,
->>>>>>> feature-main
         { text: commentText },
         {
           headers: {
@@ -182,11 +165,7 @@ const GroupBoardDetail: React.FC<
   const postReply = async (commentId: number) => {
     try {
       const response = await axios.post(
-<<<<<<< HEAD
         `/api/v1/group/${group_Id}/posts/${post_Id}/comments/${commentId}/reply`,
-=======
-        `http://localhost:3001/api/v1/group/${group_Id}/posts/${post_Id}/comments/${commentId}/reply`,
->>>>>>> feature-main
         { text: replyText },
         {
           headers: {
@@ -208,11 +187,7 @@ const GroupBoardDetail: React.FC<
   const fetchComments = async (gId: number, pId: number) => {
     try {
       const response = await axios.get(
-<<<<<<< HEAD
         `/api/v1/group/${gId}/posts/${pId}/comments`,
-=======
-        `http://localhost:3001/api/v1/group/${gId}/posts/${pId}/comments`,
->>>>>>> feature-main
         {
           headers: {
             Authorization: `Bearer ${loginToken}`,
@@ -245,7 +220,7 @@ const GroupBoardDetail: React.FC<
 
     try {
       const response = await axios.delete(
-        `http://localhost:3001/api/v1/group/${group_Id}/posts/${post_Id}`,
+        `/api/v1/group/${group_Id}/posts/${post_Id}`,
         {
           headers: {
             Authorization: `Bearer ${loginToken}`,
@@ -275,7 +250,7 @@ const GroupBoardDetail: React.FC<
       <GBD.User>
         <div>
           <GBD.ProfileImg
-            src={`http://localhost:3001/api/v1/image/profile/${groupDetail?.data.user.profilePic}`}
+            src={`/api/v1/image/profile/${groupDetail?.data.user.profilePic}`}
           ></GBD.ProfileImg>
         </div>
         <GBD.Desc>
@@ -291,13 +266,6 @@ const GroupBoardDetail: React.FC<
       </GBD.User>
 
       <GBD.UserWriteBox>
-<<<<<<< HEAD
-        <div>{groupDetail?.data?.post.content || 'Loading...'}</div>
-        <img
-          src={`/api/v1/image/post/${groupDetail?.data.post.images[0]}`}
-          alt="게시된 이미지"
-        />
-=======
         <GBD.UserContent>
           {groupDetail?.data?.post.content || '게시글이 없습니다.'}
         </GBD.UserContent>
@@ -305,11 +273,10 @@ const GroupBoardDetail: React.FC<
         {groupDetail?.data?.post.images &&
           groupDetail.data.post.images.length > 0 && (
             <img
-              src={`http://localhost:3001/api/v1/image/post/${groupDetail.data.post.images[0]}`}
+              src={`/api/v1/image/post/${groupDetail.data.post.images[0]}`}
               alt="게시된 이미지"
             />
           )}
->>>>>>> feature-main
       </GBD.UserWriteBox>
       <GBD.Button>
         <button>❤️ 555</button>
@@ -326,7 +293,7 @@ const GroupBoardDetail: React.FC<
                 <GBD.ComentsBox>
                   <GBD.PFImg>
                     <img
-                      src={`http://localhost:3001/api/v1/image/profile/${commentsName[index]?.profilePic}`}
+                      src={`/api/v1/image/profile/${commentsName[index]?.profilePic}`}
                       alt="프사"
                     />
                   </GBD.PFImg>

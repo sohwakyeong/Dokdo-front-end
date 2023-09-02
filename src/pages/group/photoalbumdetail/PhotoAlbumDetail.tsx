@@ -96,15 +96,12 @@ const PhotoDetail: React.FC<PhotoDetailDataProps & GroupNameProps> = ({
 
   const fetchPhotoDetail = async (gId: number, pId: number) => {
     try {
-      const response = await axios.get(
-        `http://localhost:3000/api/v1/group/${gId}/posts/${pId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${loginToken}`,
-          },
-          withCredentials: true,
+      const response = await axios.get(`/api/v1/group/${gId}/posts/${pId}`, {
+        headers: {
+          Authorization: `Bearer ${loginToken}`,
         },
-      );
+        withCredentials: true,
+      });
 
       if (response.status === 200) {
         setPhotoDetail(response.data);
@@ -120,15 +117,12 @@ const PhotoDetail: React.FC<PhotoDetailDataProps & GroupNameProps> = ({
 
   const fetchGroupName = async (gId: number) => {
     try {
-      const response = await axios.get(
-        `http://localhost:3001/api/v1/group/${gId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${loginToken}`,
-          },
-          withCredentials: true,
+      const response = await axios.get(`/api/v1/group/${gId}`, {
+        headers: {
+          Authorization: `Bearer ${loginToken}`,
         },
-      );
+        withCredentials: true,
+      });
 
       if (response.status === 200) {
         const groupData = response.data.data;
@@ -149,7 +143,7 @@ const PhotoDetail: React.FC<PhotoDetailDataProps & GroupNameProps> = ({
   const postComment = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:3000/api/v1/group/${group_Id}/posts/${post_Id}/comments`,
+        `/api/v1/group/${group_Id}/posts/${post_Id}/comments`,
         { text: commentText },
         {
           headers: {
@@ -175,7 +169,7 @@ const PhotoDetail: React.FC<PhotoDetailDataProps & GroupNameProps> = ({
   const postReply = async (commentId: number) => {
     try {
       const response = await axios.post(
-        `http://localhost:3001/api/v1/group/${group_Id}/posts/${post_Id}/comments/${commentId}/reply`,
+        `/api/v1/group/${group_Id}/posts/${post_Id}/comments/${commentId}/reply`,
         { text: replyText },
         {
           headers: {
@@ -197,7 +191,7 @@ const PhotoDetail: React.FC<PhotoDetailDataProps & GroupNameProps> = ({
   const fetchComments = async (gId: number, pId: number) => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/v1/group/${gId}/posts/${pId}/comments`,
+        `/api/v1/group/${gId}/posts/${pId}/comments`,
         {
           headers: {
             Authorization: `Bearer ${loginToken}`,
@@ -229,7 +223,7 @@ const PhotoDetail: React.FC<PhotoDetailDataProps & GroupNameProps> = ({
 
     try {
       const response = await axios.delete(
-        `http://localhost:3001/api/v1/group/${group_Id}/albums/${post_Id}`,
+        `/api/v1/group/${group_Id}/albums/${post_Id}`,
         {
           headers: {
             Authorization: `Bearer ${loginToken}`,
@@ -260,7 +254,7 @@ const PhotoDetail: React.FC<PhotoDetailDataProps & GroupNameProps> = ({
       <PAD.User>
         <div>
           <PAD.ProfileImg
-            src={`http://localhost:3001/api/v1/image/profile/${photoDetail?.data.user.profilePic}`}
+            src={`/api/v1/image/profile/${photoDetail?.data.user.profilePic}`}
           ></PAD.ProfileImg>
         </div>
         <PAD.Desc>
@@ -276,11 +270,16 @@ const PhotoDetail: React.FC<PhotoDetailDataProps & GroupNameProps> = ({
       </PAD.User>
 
       <PAD.UserWriteBox>
-        <div>{PhotoDetail?.data?.post.content || 'Loading...'}</div>
-        <img
-          src={`http://localhost:3000/api/v1/image/post/${PhotoDetail?.data?.post.images[0]}`}
-          alt="게시된 이미지"
-        />
+        <PAD.UserContent>
+          {photoDetail?.data?.post.content || '게시글이 없습니다.'}
+        </PAD.UserContent>
+        {photoDetail?.data?.post.images &&
+          photoDetail.data.post.images.length > 0 && (
+            <img
+              src={`/api/v1/image/post/${photoDetail.data.post.images[0]}`}
+              alt="게시된 이미지"
+            />
+          )}
       </PAD.UserWriteBox>
       <PAD.Button>
         <button>❤️ 555</button>
@@ -297,7 +296,7 @@ const PhotoDetail: React.FC<PhotoDetailDataProps & GroupNameProps> = ({
                 <PAD.ComentsBox>
                   <PAD.PFImg>
                     <img
-                      src={`http://localhost:3001/api/v1/image/profile/${commentsName[index]?.profilePic}`}
+                      src={`/api/v1/image/profile/${commentsName[index]?.profilePic}`}
                       alt="프사"
                     />
                   </PAD.PFImg>

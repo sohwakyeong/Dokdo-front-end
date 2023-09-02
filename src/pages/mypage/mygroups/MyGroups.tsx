@@ -24,11 +24,7 @@ export default function MyGroupsComponent() {
     const loginToken = getCookie('loginToken');
 
     axios
-<<<<<<< HEAD
       .get('/api/v1/auth/me', {
-=======
-      .get('http://localhost:3001/api/v1/auth/me', {
->>>>>>> feature-main
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
@@ -56,13 +52,7 @@ export default function MyGroupsComponent() {
 
     for (const groupId of groupIds) {
       try {
-<<<<<<< HEAD
         const groupResponse = await axios.get(`/api/v1/group/${groupId}`);
-=======
-        const groupResponse = await axios.get(
-          `http://localhost:3001/api/v1/group/${groupId}`,
-        );
->>>>>>> feature-main
 
         if (groupResponse.data.error === null) {
           const groupInfo: GroupData = groupResponse.data.data;
@@ -89,7 +79,7 @@ export default function MyGroupsComponent() {
           {groupData.slice(0, 3).map((group, index) => (
             <MyGroupsStyle.GroupBoardBox key={index}>
               <MyGroupsStyle.BoardImg
-                src={`http://localhost:3001/api/v1/image/profile/${group.profile}`}
+                src={`/api/v1/image/profile/${group.profile}`}
                 alt="그룹의 대표 이미지"
               />
               <MyGroupsStyle.RightSide>
@@ -118,7 +108,7 @@ export default function MyGroupsComponent() {
           {groupData.slice(0, 3).map((group, index) => (
             <MyGroupsStyle.GroupBoardBox key={index}>
               <MyGroupsStyle.BoardImg
-                src={`http://localhost:3001/api/v1/image/profile/${group.profile}`}
+                src={`/api/v1/image/profile/${group.profile}`}
                 alt="그룹의 대표 이미지"
               />
               <MyGroupsStyle.RightSide>

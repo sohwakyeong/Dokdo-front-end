@@ -100,7 +100,7 @@ function BoardBox({ data, isMainPage }: BoardBoxProps) {
       </BB.TextBox>
       <BB.ImgBox>
         <BB.Img
-          src={`http://localhost:3001/api/v1/image/profile/${data.profile}`}
+          src={`/api/v1/image/profile/${data.profile}`}
           alt="업로드사진"
         />
       </BB.ImgBox>

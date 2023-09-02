@@ -51,7 +51,7 @@ function LoginComponent() {
 
     try {
       const response = await AxiosC.post(
-        'http://localhost:3001/api/v1/auth/login',
+        '/api/v1/auth/login',
         {
           email,
           password,

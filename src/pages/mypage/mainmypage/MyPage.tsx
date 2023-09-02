@@ -18,11 +18,7 @@ function MyPageComponent() {
   const loginToken = getCookie('loginToken');
   useEffect(() => {
     axios
-<<<<<<< HEAD
       .get('/api/v1/auth/me', {
-=======
-      .get('http://localhost:3001/api/v1/auth/me', {
->>>>>>> feature-main
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
@@ -49,23 +45,13 @@ function MyPageComponent() {
   // 이 함수에서 AxiosC를 axios로 바꾸면 로그아웃이 안된다
   const handleLogout = async () => {
     try {
-<<<<<<< HEAD
       const response = await AxiosC.put('/api/v1/auth/logout');
-      console.log(response);
-      // 액세스 토큰 쿠키 삭제
-      console.log('삭제 전');
-=======
-      const response = await AxiosC.put(
-        'http://localhost:3001/api/v1/auth/logout',
-      );
 
->>>>>>> feature-main
       await removeCookie('loginToken'); // await 추가
 
       alert('로그아웃에 성공하셨습니다.');
 
       navigate('/');
-  
     } catch (e) {
       console.error('로그아웃 에러:', e);
       alert('서버 오류: 다시 시도해주세요.');
@@ -76,11 +62,7 @@ function MyPageComponent() {
     <MyPageStyle.Container>
       <MyPageStyle.Wrapper>
         <MyPageStyle.UserIcon
-<<<<<<< HEAD
           src={`/api/v1/image/profile/${userData.profilePic}`}
-=======
-          src={`http://localhost:3001/api/v1/image/profile/${userData.profilePic}`}
->>>>>>> feature-main
           alt="유저 설정 이미지"
         />
         <MyPageStyle.Introduce>

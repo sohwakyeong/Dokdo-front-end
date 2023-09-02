@@ -47,9 +47,7 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
     setLoading(true);
 
     try {
-      const response = await axios.get(
-        `http://localhost:3001/api/v1/group/${groupId}/posts?`,
-      );
+      const response = await axios.get(`/api/v1/group/${groupId}/posts?`);
       return response.data.data;
     } catch (error) {
       setLoading(false);
@@ -60,13 +58,9 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const groupDataResponse = await axios.get(
-          `http://localhost:3001/api/v1/group/${groupId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${loginToken}`,
-            },
-            withCredentials: true,
+        const groupDataResponse = await axios.get(`/api/v1/group/${groupId}`, {
+          headers: {
+            Authorization: `Bearer ${loginToken}`,
           },
           withCredentials: true,
         });
@@ -86,8 +80,6 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
     fetchData();
   }, [loginToken, groupId]);
 
-
-  
   // 스크롤 이벤트 감지 함수
   const handleScroll = () => {
     const windowHeight = window.innerHeight;
@@ -126,10 +118,15 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
           >
             <GB.BoardLeft>
               <GB.User>
-                <img src={`http://localhost:3001/api/v1/image/profile/${groupBoardItem.user.profilePic}`} alt="게시자 프로필" />
+                <img
+                  src={`/api/v1/image/profile/${groupBoardItem.user.profilePic}`}
+                  alt="게시자 프로필"
+                />
                 <GB.UserName>
                   <div>{groupBoardItem.user.name}</div>
-                  <GB.UserDate>{formatDate(groupBoardItem.post.createdAt)}</GB.UserDate>
+                  <GB.UserDate>
+                    {formatDate(groupBoardItem.post.createdAt)}
+                  </GB.UserDate>
                 </GB.UserName>
               </GB.User>
               <div>
@@ -139,7 +136,7 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
             </GB.BoardLeft>
             <GB.BoardImg>
               <img
-                src={`http://localhost:3001/api/v1/image/post/${groupBoardItem.post.images[0]}`}
+                src={`/api/v1/image/post/${groupBoardItem.post.images[0]}`}
                 alt="게시된 이미지"
               />
             </GB.BoardImg>

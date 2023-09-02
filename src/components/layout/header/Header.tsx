@@ -2,7 +2,7 @@
 import React from 'react';
 import * as HD from '@/components/layout/header/Header.styled';
 import { Link } from 'react-router-dom';
-import searchIcon from '@/assets/icon/newIcon/헤더검색.png';
+import searchIcon from '@/assets/icon/Search.png';
 import notificationIcon from '@/assets/icon/Bell.png';
 import logo from '@/assets/icon/RightLogo.png';
 

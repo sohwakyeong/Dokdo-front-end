@@ -1,8 +1,4 @@
 import React, { useState, useEffect } from 'react';
-<<<<<<< HEAD
-import GroupImg from '@/assets/img/moim3.png';
-=======
->>>>>>> feature-main
 import axios from 'axios';
 import { getCookie } from '@/helper/Cookie';
 import * as GD from '@/pages/group/groupdetail/GroupDetail.styled';
@@ -119,7 +115,7 @@ function GroupDetail() {
 
     try {
       const response = await axios.put(
-        `http://localhost:3001/api/v1/group/${groupData.group_id}/profilePic`,
+        `/api/v1/group/${groupData.group_id}/profilePic`,
         formData,
 
         { withCredentials: true },
@@ -145,7 +141,7 @@ function GroupDetail() {
 
       try {
         const response = await axios.put(
-          `http://localhost:3001/api/v1/group/${groupData.group_id}/profilePic`,
+          `/api/v1/group/${groupData.group_id}/profilePic`,
           formData,
           { withCredentials: true },
         );
@@ -167,13 +163,7 @@ function GroupDetail() {
     // API 요청 함수 정의
     async function fetchAllGroupBoardData(groupId: number) {
       try {
-<<<<<<< HEAD
         const response = await axios.get(`/api/v1/group/${groupId}/posts`);
-=======
-        const response = await axios.get(
-          `http://localhost:3001/api/v1/group/${groupId}/posts`,
-        );
->>>>>>> feature-main
         if (response.status === 200) {
           setMembers(response.data.data);
         } else {
@@ -203,19 +193,9 @@ function GroupDetail() {
     // API 요청 함수 정의
     async function fetchGroupData(groupId: number) {
       try {
-<<<<<<< HEAD
         const response = await axios.get(`/api/v1/group/${groupId}`, {
           headers: {
             Authorization: `Bearer ${loginToken}`,
-=======
-        const response = await axios.get(
-          `http://localhost:3001/api/v1/group/${groupId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${loginToken}`,
-            },
-            withCredentials: true,
->>>>>>> feature-main
           },
           withCredentials: true,
         });
@@ -243,11 +223,7 @@ function GroupDetail() {
 
     try {
       const response = await axios.put(
-<<<<<<< HEAD
         `/api/v1/auth/group/${groupId}`,
-=======
-        `http://localhost:3001/api/v1/auth/group/${groupId}`,
->>>>>>> feature-main
         {},
         {
           headers: {
@@ -270,15 +246,12 @@ function GroupDetail() {
   async function handleDeleteGroup() {
     if (window.confirm('정말로 그룹을 삭제하시겠습니까?')) {
       try {
-        const response = await axios.delete(
-          `http://localhost:3001/api/v1/group/${groupId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${loginToken}`,
-            },
-            withCredentials: true,
+        const response = await axios.delete(`/api/v1/group/${groupId}`, {
+          headers: {
+            Authorization: `Bearer ${loginToken}`,
           },
-        );
+          withCredentials: true,
+        });
 
         if (response.status === 200) {
           console.log('그룹 삭제 성공:', response.data);
@@ -333,7 +306,7 @@ function GroupDetail() {
       <GD.DropdownButton onClick={toggleDropdown}>▪︎▪︎▪︎</GD.DropdownButton>
       <GD.GroupImage>
         <img
-          src={`http://localhost:3001/api/v1/image/profile/${groupData.profile}`}
+          src={`/api/v1/image/profile/${groupData.profile}`}
           alt="모임이미지"
         />
       </GD.GroupImage>

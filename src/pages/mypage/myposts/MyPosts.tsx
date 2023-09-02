@@ -42,7 +42,7 @@ function MyPostsComponent() {
     const loginToken = getCookie('loginToken');
 
     axios
-      .get('http://localhost:3001/api/v1/auth/me', {
+      .get('/api/v1/auth/me', {
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
@@ -66,15 +66,12 @@ function MyPostsComponent() {
     setLoading(true);
 
     axios
-      .get(
-        `http://localhost:3001/api/v1/auth/me/posts?limit=10&offset=${offset}`,
-        {
-          headers: {
-            Authorization: `Bearer ${loginToken}`,
-          },
-          withCredentials: true,
+      .get(`/api/v1/auth/me/posts?limit=10&offset=${offset}`, {
+        headers: {
+          Authorization: `Bearer ${loginToken}`,
         },
-      )
+        withCredentials: true,
+      })
       .then(postsResponse => {
         if (postsResponse.data.error === null) {
           const userPosts: PostData[] = postsResponse.data.data.posts;
@@ -88,7 +85,7 @@ function MyPostsComponent() {
             for (const post of userPosts) {
               try {
                 const postResponse = await axios.get(
-                  `http://localhost:3001/api/v1/group/${post.group_id}/posts/${post.post_id}`,
+                  `/api/v1/group/${post.group_id}/posts/${post.post_id}`,
                 );
 
                 if (postResponse.data.error === null) {
@@ -124,8 +121,6 @@ function MyPostsComponent() {
       });
   }, [offset]);
 
-
-
   // 스크롤 이벤트 감지 함수
   const handleScroll = () => {
     const windowHeight = window.innerHeight;
@@ -138,7 +133,6 @@ function MyPostsComponent() {
     }
   };
 
-
   // 스크롤 이벤트 리스너 등록
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -147,19 +141,18 @@ function MyPostsComponent() {
     };
   }, []);
 
-
   return (
     <MyPostsStyle.Container>
       <MyPostsStyle.Wrapper>
         <MyPostsStyle.GroupBoardList>
-          {userData && 
+          {userData &&
             selectedPosts.map((selectedPost, index) => (
               <MyPostsStyle.BoardWrap>
                 <MyPostsStyle.Boardbox key={selectedPost._id || index}>
                   <MyPostsStyle.BoardLeft>
                     <MyPostsStyle.ProfileData>
                       <MyPostsStyle.ProfileImg
-                        src={`http://localhost:3001/api/v1/image/profile/${userData.profilePic}`}
+                        src={`/api/v1/image/profile/${userData.profilePic}`}
                         alt={`${userData.name}의 프로필 사진`}
                       />
                       <MyPostsStyle.UpdatedProfile>
@@ -179,7 +172,7 @@ function MyPostsComponent() {
                     </MyPostsStyle.Content>
                   </MyPostsStyle.BoardLeft>
                   <MyPostsStyle.BoardImg
-                    src={`http://localhost:3001/api/v1/image/post/${selectedPost.images[0]}`}
+                    src={`/api/v1/image/post/${selectedPost.images[0]}`}
                     alt="게시된 이미지"
                   />
                 </MyPostsStyle.Boardbox>

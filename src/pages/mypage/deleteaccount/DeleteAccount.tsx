@@ -39,7 +39,7 @@ function DeleteAccountComponent() {
     }
     try {
       const response = await AxiosC.put(
-        'http://localhost:3001/api/v1/auth/withdrawal',
+        '/api/v1/auth/withdrawal',
         {
           password: Password,
         },
@@ -50,7 +50,6 @@ function DeleteAccountComponent() {
         await removeCookie('loginToken');
         alert('회원 탈퇴 되셨습니다.');
         setIsModalOpen(true);
-        
       } else {
         return alert('response 코드가 200이 아님');
       }
@@ -61,10 +60,10 @@ function DeleteAccountComponent() {
   };
 
   const GotoHome = () => {
-   setIsModalOpen(false);
-   navigate('/');
-   return;
-  }
+    setIsModalOpen(false);
+    navigate('/');
+    return;
+  };
 
   return (
     <DeleteStyle.Container>

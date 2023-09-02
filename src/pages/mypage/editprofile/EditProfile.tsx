@@ -76,7 +76,7 @@ function EditProfileComponent() {
   useEffect(() => {
     const loginToken = getCookie('loginToken');
     axios
-      .get('http://localhost:3001/api/v1/auth/me', {
+      .get('/api/v1/auth/me', {
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
@@ -106,17 +106,13 @@ function EditProfileComponent() {
       formData.append('img', selectedFile);
       const loginToken = getCookie('loginToken');
 
-      const response = await axios.put(
-        'http://localhost:3001/api/v1/auth/me/profilePic',
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${loginToken}`,
-            'Content-Type': 'multipart/form-data',
-          },
-          withCredentials: true,
+      const response = await axios.put('/api/v1/auth/me/profilePic', formData, {
+        headers: {
+          Authorization: `Bearer ${loginToken}`,
+          'Content-Type': 'multipart/form-data',
         },
-      );
+        withCredentials: true,
+      });
 
       if (response.status === 200) {
         setProfilePic(response.data.data);
@@ -149,7 +145,7 @@ function EditProfileComponent() {
     const loginToken = getCookie('loginToken');
 
     axios
-      .put('http://localhost:3001/api/v1/auth/me/password', updatedUserData, {
+      .put('/api/v1/auth/me/password', updatedUserData, {
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
@@ -187,14 +183,14 @@ function EditProfileComponent() {
     console.log('updatedUserData:', updatedUserData);
 
     axios
-      .put('http://localhost:3001/api/v1/auth/me', updatedUserData, {
+      .put('/api/v1/auth/me', updatedUserData, {
         headers: {
           Authorization: `Bearer ${loginToken}`,
         },
         withCredentials: true,
       })
       .then(response => {
-        console.log('응답:', response); 
+        console.log('응답:', response);
         if (response.status === 200) {
           alert('프로필 변경완료');
           navigate('/user/mypage');
@@ -203,28 +199,23 @@ function EditProfileComponent() {
         }
       })
       .catch(error => {
-        console.error('닉넴프로필 업데이트 에러:', error); 
+        console.error('닉넴프로필 업데이트 에러:', error);
       });
   };
   return (
     <EditStyle.Container>
       <EditStyle.Wrapper>
+        <EditStyle.UserIconBtn onClick={() => setIsProfileImageModalOpen(true)}>
+          <EditStyle.UserIcon
+            src={`/api/v1/image/profile/${userData.profilePic}?${Date.now()}`}
+            alt="유저 설정 이미지"
+          />
+        </EditStyle.UserIconBtn>
 
-          <EditStyle.UserIconBtn
-            onClick={() => setIsProfileImageModalOpen(true)}
-          >
-            <EditStyle.UserIcon
-              src={`http://localhost:3001/api/v1/image/profile/${
-                userData.profilePic
-              }?${Date.now()}`}
-              alt="유저 설정 이미지"
-            />
-          </EditStyle.UserIconBtn>
-  
         {isProfileImageModalOpen && (
           <Modal onClose={() => setIsProfileImageModalOpen(false)}>
             <h1>프로필 이미지 업로드</h1>
-     
+
             <EditStyle.FormTag>
               <EditStyle.Tag>이미지 선택</EditStyle.Tag>
             </EditStyle.FormTag>

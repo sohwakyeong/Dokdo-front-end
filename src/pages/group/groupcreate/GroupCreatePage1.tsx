@@ -10,7 +10,7 @@ import {
   Input,
   SubmitButton,
   Form,
- SubmitButtonDisplay, 
+  SubmitButtonDisplay,
 } from '@/pages/group/groupcreate/GroupCreatePage1.Styled';
 import axios from 'axios'; // API 요청을 위해 axios를 가져옴
 
@@ -71,7 +71,7 @@ const GroupCreatePage1: React.FC<GroupCreatePage1Props> = ({
       formData.append('img', image!, 'img');
 
       const uploadResponse = await axios.post(
-        'http://localhost:3001/api/v1/group/images',
+        '/api/v1/group/images',
         formData,
         {
           withCredentials: true,
@@ -124,9 +124,8 @@ const GroupCreatePage1: React.FC<GroupCreatePage1Props> = ({
         </FileInputContainer>
 
         <SubmitButtonDisplay>
-        <SubmitButton type="submit">다음</SubmitButton>
+          <SubmitButton type="submit">다음</SubmitButton>
         </SubmitButtonDisplay>
-
       </Form>
     </Container>
   );
