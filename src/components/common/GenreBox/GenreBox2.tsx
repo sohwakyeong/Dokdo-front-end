@@ -1,7 +1,6 @@
 import React from 'react';
 import * as IB from '@/components/common/GenreBox/GenreBox.styled';
 
-import { useNavigate } from 'react-router-dom';
 import Genre1 from '@/assets/icon/newIcon/sosul.png';
 import Genre2 from '@/assets/icon/newIcon/jagigaebal.png';
 import Genre3 from '@/assets/icon/newIcon/sisupil.png';
@@ -17,7 +16,6 @@ interface GenreBoxProps {
 }
 
 function GenreBox2({ onGenreSelect, selectedGenre }: GenreBoxProps) {
-  const navigator = useNavigate();
 
   const handleGenreClick = (genre: string) => {
     onGenreSelect(genre);

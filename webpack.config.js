@@ -9,6 +9,11 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
+  devServer: {
+    setupMiddlewares: (devServer) => {
+      // 필요한 미들웨어 구성
+    },
+  },
   module: {
     rules: [
       // Typescript
