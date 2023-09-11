@@ -28,7 +28,7 @@ export const OptionButton1 = styled.button`
   font-size: 96px;
   color: #333;
   border: 0.5px solid #aeaeae;
-  background: #F1F1F1;
+  background: #f1f1f1;
   border-radius: 50px;
   transition: background 0.3s ease;
   width: 188px;
@@ -36,13 +36,12 @@ export const OptionButton1 = styled.button`
 
   &:hover {
     font-weight: bold;
-    color: #0078E8;
-    background: #ECF9FF; // 기존에 있던 hover에 대한 배경색 변경
+    color: #0078e8;
+    background: #ecf9ff; // 기존에 있던 hover에 대한 배경색 변경
   }
 
   &:active {
-    background: #63DBFB;
-    
+    background: #63dbfb;
   }
 
   &:disabled {
@@ -57,7 +56,7 @@ export const OptionButton2 = styled.button`
   font-size: 96px;
   color: #333;
   border: 0.5px solid #aeaeae;
-  background: #F1F1F1;
+  background: #f1f1f1;
   border-radius: 50px;
   transition: background 0.3s ease;
   width: 188px;
@@ -65,12 +64,12 @@ export const OptionButton2 = styled.button`
 
   &:hover {
     font-weight: bold;
-    color: #EB3123;
-    background: #ECF9FF; // 기존에 있던 hover에 대한 배경색 변경
+    color: #eb3123;
+    background: #ecf9ff; // 기존에 있던 hover에 대한 배경색 변경
   }
 
   &:active {
-    background: #63DBFB;
+    background: #63dbfb;
   }
 
   &:disabled {
@@ -90,6 +89,7 @@ export const Navigation = styled.div`
   display: flex;
   align-items: center; // 수직 중앙 정렬
   width: 100%; // 전체 너비 사용
+  margin-top: 30px;
 `;
 export const BackButton = styled.button`
   cursor: pointer;

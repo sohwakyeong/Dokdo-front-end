@@ -61,6 +61,7 @@ export const Navigation = styled.div`
   display: flex;
   align-items: center; // 수직 중앙 정렬
   width: 100%; // 전체 너비 사용
+  margin-top: 30px;
 `;
 export const BackButton = styled.button`
   cursor: pointer;
