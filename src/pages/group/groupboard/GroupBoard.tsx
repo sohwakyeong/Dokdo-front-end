@@ -54,6 +54,7 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
       throw error;
     }
   }
+  //ㅎㅎ
 
   useEffect(() => {
     async function fetchData() {
@@ -116,6 +117,7 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
               navigate(`/group/${groupId}/board/${groupBoardItem.post.post_id}`)
             }
           >
+          
             <GB.BoardLeft>
               <GB.User>
                 <img
