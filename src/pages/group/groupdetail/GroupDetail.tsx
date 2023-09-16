@@ -31,7 +31,7 @@ interface GroupData {
   group_id: number;
   name: string;
   isRecruit: boolean;
-  profile: string[];
+  profile: string;
   leader: number;
   like: number;
   mem: Array<{
@@ -273,6 +273,8 @@ function GroupDetail() {
         member.user_id === groupData?.mem[0]?.user_id),
   );
 
+  console.log(groupData.profile);
+
   return (
     <GD.Wrapper>
       <GD.GroupHeader>
@@ -305,10 +307,7 @@ function GroupDetail() {
 
       <GD.DropdownButton onClick={toggleDropdown}>▪︎▪︎▪︎</GD.DropdownButton>
       <GD.GroupImage>
-        <img
-          src={`/api/v1/image/profile/${groupData.profile}`}
-          alt="모임이미지"
-        />
+        <img src={`/api/v1/image/profile/${groupData.profile}`} alt="모임이미지" />
       </GD.GroupImage>
 
       <GD.GroupInfo>
