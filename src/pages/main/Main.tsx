@@ -53,9 +53,11 @@ function Main() {
       </M.StyledGroupLink>
 
       <M.GroupList>
-        {groupData.slice(0, 3).map((groupItem, index) => (
-          <BoardBox key={index} data={groupItem} isMainPage={isMainPage} />
-        ))}
+        {groupData
+          ?.slice(0, 3)
+          .map((groupItem, index) => (
+            <BoardBox key={index} data={groupItem} isMainPage={isMainPage} />
+          ))}
       </M.GroupList>
       <MoreButton to="/group/list">더보기</MoreButton>
 
