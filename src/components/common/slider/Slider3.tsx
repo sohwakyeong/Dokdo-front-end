@@ -50,7 +50,7 @@ export default function Slider3() {
       modules={[Navigation, Pagination]}
       className="mySwiper"
     >
-      {popularData.length === 0 ? (
+      {!Array.isArray(popularData) || popularData.length === 0 ? (
         <p> 인기순으로 정렬하는 중!</p>
       ) : (
         popularData.map((item, index) => (
