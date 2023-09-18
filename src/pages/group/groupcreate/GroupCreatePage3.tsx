@@ -15,13 +15,12 @@ import {
   FormGroupPlace,
 } from '@/pages/group/groupcreate/GroupCreatePage3.Styled';
 
-import GenreBox2 from '@/components/common/GenreBox/GenreBox2'; // GenreBox 컴포넌트의 경로를 지정해주세요.
+import GenreBox2 from '@/components/common/GenreBox/GenreBox2';
 
 interface GroupCreatePage3Data {
   name: string;
   introduction: string;
   location: string;
-  profile: string;
   age: string;
   tag: string[];
   genre: string;
@@ -65,34 +64,26 @@ const GroupCreatePage3: React.FC<GroupCreatePage3Props> = ({
     };
 
     try {
-      // 그룹 생성 요청
       const response = await axios.post('/api/v1/group/', payload, {
         withCredentials: true,
       });
 
-      // 그룹 생성 응답에서 group_id 추출
-      const { group_id } = response.data;
+      const group_id = response.data.data.createGroup.searches.group_id; // 수정된 부분
 
-      // 프로필 이미지 업로드
-      if (data.profile) {
-        const formData = new FormData();
-        formData.append('img', data.profile);
+      console.log('서버 응답:', response.data);
 
-        await axios.put(`/api/v1/group/${group_id}/profilePic`, formData, {
-          withCredentials: true,
-        });
-      }
-
-      console.log('Response from the server:', response.data);
-      navigate('/group/list'); // 다음 페이지로 이동
+      // group_id를 다음 페이지로 전달
+      navigate('/create-group/step4', {
+        state: { group_id },
+      });
     } catch (err) {
-      console.error('Error while sending data to the API:', err);
+      console.error('API로 데이터 전송 중 오류 발생:', err);
 
       if ((err as AxiosError).isAxiosError) {
         const axiosError = err as AxiosError;
         setError({ message: axiosError.message });
       } else {
-        setError({ message: 'An unknown error occurred.' });
+        setError({ message: '알 수 없는 오류가 발생했습니다.' });
       }
     } finally {
       setLoading(false);
@@ -105,6 +96,7 @@ const GroupCreatePage3: React.FC<GroupCreatePage3Props> = ({
         <StepCircle>1</StepCircle>
         <StepCircle>2</StepCircle>
         <StepCircle>3</StepCircle>
+        <StepCircle>4</StepCircle>
       </StepsContainer>
 
       <Title>
