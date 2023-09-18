@@ -14,6 +14,7 @@ import PhotoAlbumWrite from '@/pages/group/photoalbumwrite/PhotoAlbumWrite';
 import GroupCreatePage1 from '@/pages/group/groupcreate/GroupCreatePage1';
 import GroupCreatePage2 from '@/pages/group/groupcreate/GroupCreatePage2';
 import GroupCreatePage3 from '@/pages/group/groupcreate/GroupCreatePage3';
+import GroupCreatePage4 from '@/pages/group/groupcreate/GroupCreatePage4';
 import BookRec from '@/pages/bookrec/BookRec';
 import Contest from '@/pages/contest/Contest';
 import Notifications from '@/pages/notifications/Notifications';
@@ -74,6 +75,14 @@ const MainRoutes = () => {
         element={
           <Layout3>
             <GroupCreatePage3 data={groupData} updateData={updateGroupData} />
+          </Layout3>
+        }
+      />
+      <Route
+        path="/create-group/step4"
+        element={
+          <Layout3>
+            <GroupCreatePage4 />
           </Layout3>
         }
       />
