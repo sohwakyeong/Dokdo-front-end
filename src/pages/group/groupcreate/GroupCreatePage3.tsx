@@ -21,6 +21,7 @@ interface GroupCreatePage3Data {
   name: string;
   introduction: string;
   location: string;
+  profile: string;
   age: string;
   tag: string[];
   genre: string;
@@ -64,10 +65,26 @@ const GroupCreatePage3: React.FC<GroupCreatePage3Props> = ({
     };
 
     try {
+      // 그룹 생성 요청
       const response = await axios.post('/api/v1/group/', payload, {
         withCredentials: true,
       });
+
+      // 그룹 생성 응답에서 group_id 추출
+      const { group_id } = response.data;
+
+      // 프로필 이미지 업로드
+      if (data.profile) {
+        const formData = new FormData();
+        formData.append('img', data.profile);
+
+        await axios.put(`/api/v1/group/${group_id}/profilePic`, formData, {
+          withCredentials: true,
+        });
+      }
+
       console.log('Response from the server:', response.data);
+      navigate('/group/list'); // 다음 페이지로 이동
     } catch (err) {
       console.error('Error while sending data to the API:', err);
 
@@ -80,7 +97,6 @@ const GroupCreatePage3: React.FC<GroupCreatePage3Props> = ({
     } finally {
       setLoading(false);
     }
-    navigate('/group/list');
   };
 
   return (

@@ -12,12 +12,12 @@ import {
   Form,
   SubmitButtonDisplay,
 } from '@/pages/group/groupcreate/GroupCreatePage1.Styled';
-import axios from 'axios'; // API 요청을 위해 axios를 가져옴
+import axios from 'axios';
 
 interface GroupCreatePage1Data {
   name: string;
   introduction: string;
-  image: File | null; // 이미지 파일 또는 null
+  profile: string | null; // 이미지 대신 프로필 이미지 URL을 사용
 }
 
 interface GroupCreatePage1Props {
@@ -31,14 +31,17 @@ const GroupCreatePage1: React.FC<GroupCreatePage1Props> = ({
   updateData,
   handleNext,
 }) => {
-  const [image, setImage] = useState<File | null>(null);
+  const [profile, setProfile] = useState<File | null>(null); // 프로필 이미지 파일을 관리
   const [name, setName] = useState(data.name);
   const [introduction, setIntroduction] = useState(data.introduction);
   const navigate = useNavigate();
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      setImage(e.target.files[0]);
+      // 파일 선택 시 프로필 이미지 파일을 직접 상태로 설정
+      const selectedFile = e.target.files[0];
+      console.log('Selected profile image:', selectedFile);
+      setProfile(selectedFile);
     }
   };
 
@@ -46,15 +49,15 @@ const GroupCreatePage1: React.FC<GroupCreatePage1Props> = ({
     e.preventDefault();
 
     try {
-      let uploadedImageName = null;
-      if (image) {
-        uploadedImageName = await uploadImage();
+      let uploadedProfileURL = null;
+      if (profile) {
+        uploadedProfileURL = await uploadProfilePic();
       }
 
       updateData({
         name,
         introduction,
-        image: uploadedImageName,
+        profile: uploadedProfileURL, // 프로필 이미지 URL로 업데이트
       });
 
       handleNext();
@@ -65,30 +68,27 @@ const GroupCreatePage1: React.FC<GroupCreatePage1Props> = ({
     }
   };
 
-  const uploadImage = async () => {
+  const uploadProfilePic = async () => {
     try {
       const formData = new FormData();
-      formData.append('img', image!, 'img');
+      formData.append('img', profile!, 'img');
 
-      const uploadResponse = await axios.post(
-        '/api/v1/group/images',
-        formData,
-        {
-          withCredentials: true,
-        },
-      );
+      const response = await axios.put('/api/v1/group/profilePic', formData, {
+        withCredentials: true,
+      });
 
-      if (uploadResponse.data.error === null) {
-        return uploadResponse.data.data[0];
+      if (response.status === 200) {
+        return response.data; // 업로드에 성공하면 프로필 이미지 URL을 반환
       } else {
-        console.error('이미지 업로드 실패:', uploadResponse.data.error);
-        throw new Error('이미지 업로드 실패');
+        console.error('프로필 이미지 업로드 실패:', response.status);
+        throw new Error('프로필 이미지 업로드 실패');
       }
     } catch (error) {
-      console.error('이미지 업로드 에러:', error);
+      console.error('프로필 이미지 업로드 에러:', error);
       throw error;
     }
   };
+
   return (
     <Container>
       <StepsContainer>
@@ -119,7 +119,7 @@ const GroupCreatePage1: React.FC<GroupCreatePage1Props> = ({
           />
         </FormGroup>
         <FileInputContainer>
-          <label>사진 업로드 </label>
+          <label>프로필 사진 업로드 </label>
           <input type="file" onChange={handleImageChange} />
         </FileInputContainer>
 

@@ -26,7 +26,7 @@ const MainRoutes = () => {
   const [groupData, setGroupData] = useState({
     name: '',
     introduction: '',
-    image: null,
+    profile: '',
     location: '',
     age: '',
     tag: [],
