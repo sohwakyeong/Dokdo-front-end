@@ -27,7 +27,8 @@ function AlbumData({ data }: AdminAlbumProps) {
 
   async function handleDeleteAlbum() {
     try {
-      await axios.delete(`/api/v1/admin/albums/${data?.album.post_id}`);
+      console.log("album.post_id",data?.album.post_id)
+      await axios.delete(`/api/v1/admin/posts/${data?.album.post_id}`);
       setDeleted(true);
     } catch (error) {
       throw error;
