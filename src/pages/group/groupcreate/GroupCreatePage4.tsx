@@ -9,7 +9,6 @@ import {
 } from '@/pages/group/groupcreate/GroupCreatePage4.Styled';
 
 const GroupCreatePage4: React.FC = () => {
-  const [profile, setProfile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
