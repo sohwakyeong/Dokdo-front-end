@@ -23,10 +23,9 @@ export const GroupBoardList = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
-
 `;
 export const BoardWrap = styled.div`
-width: 474px;
+  width: 474px;
   border-bottom: solid 1px #ddd;
 `;
 export const Boardbox = styled.div`
@@ -37,7 +36,6 @@ export const Boardbox = styled.div`
   align-items: center;
   box-sizing: border-box;
   margin: 13px 0;
-
 `;
 
 export const BoardLeft = styled.div`
@@ -74,7 +72,6 @@ export const UpdatedProfile = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 10px;
-  
 `;
 export const Writer = styled.div`
   font-size: 14px;
@@ -119,3 +116,43 @@ export const BoardImg = styled.img`
   overflow: hidden;
   margin-left: 20px;
 `;
+
+export const LoadingContent = styled.div`
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+`;
+
+export const LoadingImg = styled.img`
+  width: 51px;
+  height: 51px;
+`;
+
+export const LoadingText = styled.div`
+  font-size: 16px;
+  font-weight: 400;
+  color: black;
+  margin-top: 29px;
+`;
+ 
+export const NoContent = styled.div`
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+`;
+export const NoContentImg = styled.img`
+  width: 51px;
+  height: 51px;
+`;
+export const NoContentText = styled.div`
+  font-size: 16px;
+  font-weight: 400;
+  color: black;
+  margin-top: 29px;
+`;
+export const GoPostBtn = styled.button`
+width: 200px;
+
+`
