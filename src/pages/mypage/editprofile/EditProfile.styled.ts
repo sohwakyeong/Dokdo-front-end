@@ -24,15 +24,15 @@ export const Wrapper = styled.div`
 export const UserIconBtn = styled.button`
   background-color: transparent;
   border: none;
-  width: 150px;
-  height: 150px;
+  width: 130px;
+  height: 130px;
   cursor: pointer;
   margin-bottom: 22px;
 `;
 
 export const UserIcon = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   border: 1px solid #cbcbcb;
 `;
