@@ -1,10 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { SyntheticEvent, useCallback, useEffect, useState } from 'react';
 import * as EditStyle from '@/pages/mypage/editprofile/EditProfile.styled';
 import UserIcon from '@/assets/img/userprofile.png';
 import { getCookie } from '@/helper/Cookie';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Modal from '@/components/common/modal/modal';
+import UserImg from '@/assets/img/userbasicimg.png';
 
 function EditProfileComponent() {
   const navigate = useNavigate();
@@ -27,6 +28,9 @@ function EditProfileComponent() {
     user_id: number;
   } | null>(null);
 
+  const defaultUserImg = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+    e.currentTarget.src = UserImg;
+  };
   const loginToken = getCookie('loginToken');
 
   // 유효성 검사 비밀번호
@@ -208,7 +212,7 @@ function EditProfileComponent() {
         <EditStyle.UserIconBtn onClick={() => setIsProfileImageModalOpen(true)}>
           <EditStyle.UserIcon
             src={`/api/v1/image/profile/${userData.profilePic}?${Date.now()}`}
-            alt="유저 설정 이미지"
+            alt="" onError={defaultUserImg}
           />
         </EditStyle.UserIconBtn>
 
