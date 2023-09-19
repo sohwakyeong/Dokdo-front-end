@@ -26,9 +26,10 @@ function PostData({ data }: AdminPostProps) {
 
   async function handleDeletePost() {
     try {
-      const response = await axios.delete(`/api/v1/admin/posts/${data?.post.post_id}`);
-      console.log(response.data);
+      await axios.delete(`/api/v1/admin/posts/${data?.post.post_id}`);
+      alert("삭제가 완료되었습니다.");
       setDeleted(true);
+      window.location.reload();
     } catch (error) {
       throw error;
     }
