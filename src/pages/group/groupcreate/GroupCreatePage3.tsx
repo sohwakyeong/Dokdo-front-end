@@ -138,7 +138,7 @@ const GroupCreatePage3: React.FC<GroupCreatePage3Props> = ({
         </Place>
       </FormGroup>
 
-      <SubmitButton onClick={handlePageSubmit}>모임등록</SubmitButton>
+      <SubmitButton onClick={handlePageSubmit}>다음</SubmitButton>
     </Container>
   );
 };

@@ -46,6 +46,7 @@ export const Step = styled.div`
 
 export const Title = styled.h1`
   margin: 15px;
+  margin-top: 50px;
   font-size: 27px;
   text-align: center;
   color: #000000;
@@ -59,6 +60,7 @@ export const FormGroup = styled.div`
   display: flex;
   align-items: center;
   font-size: 18px;
+  margin-top: 25px;
   margin-bottom: 10px;
   width: 100%;
   max-width: 400px;
@@ -70,7 +72,7 @@ export const FormGroup = styled.div`
   }
   input,
   textarea {
-    padding: 10px;
+    padding: 15px;
     box-sizing: border-box;
     background-color: #ededed;
     border: 1px solid #ccc;
