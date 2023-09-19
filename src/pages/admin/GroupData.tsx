@@ -27,9 +27,10 @@ function GroupData({ data }: AdminGroupProps) {
 
   async function handleDeleteGroup() {
     try {
-    //   console.log("group_id value:", data?.group_id);
       await axios.delete(`/api/v1/admin/groups/${data?.group_id}`);
+      alert('삭제가 완료되었습니다.');
       setDeleted(true);
+      window.location.reload();
     } catch (error) {
       throw error;
     }
