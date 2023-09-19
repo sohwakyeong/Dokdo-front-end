@@ -6,6 +6,9 @@ import {
   FileInputContainer,
   SubmitButton,
   SubmitButtonDisplay,
+  StepsContainer,
+  StepCircle,
+  Title,
 } from '@/pages/group/groupcreate/GroupCreatePage4.Styled';
 
 const GroupCreatePage4: React.FC = () => {
@@ -49,6 +52,13 @@ const GroupCreatePage4: React.FC = () => {
 
   return (
     <Container>
+      <StepsContainer>
+        <StepCircle>1</StepCircle>
+        <StepCircle>2</StepCircle>
+        <StepCircle>3</StepCircle>
+        <StepCircle>4</StepCircle>
+      </StepsContainer>
+      <Title>우리 모임의 사진을 정해주세요!</Title>
       {/* 스타일 및 기타 컴포넌트 렌더링 */}
       <FileInputContainer>
         <label>프로필 사진 업로드</label>
