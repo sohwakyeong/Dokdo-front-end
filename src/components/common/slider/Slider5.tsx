@@ -37,7 +37,6 @@ export default function Slider3() {
           setUserData(userData);
 
           if (userData.group && userData.group.length > 0) {
-            // 사용자의 그룹 데이터를 가져옵니다.
             fetchMyGroups(userData.group);
           }
         } else {
@@ -71,21 +70,47 @@ export default function Slider3() {
   };
 
   return (
-    <Swiper
-      //@ts-ignore
-      keyboard={true}
-      mousewheel={true}
-      cssMode={true}
-      navigation={true}
-      pagination={{ clickable: true }}
-      modules={[Navigation, Pagination]}
-      className="mySwiper"
-    >
-      {popularData.slice(0, 3).map((item, index) => (
-        <SwiperSlide key={index}>
-          {item.name && <MiddleBoardBox2 data={item} />}
-        </SwiperSlide>
-      ))}
-    </Swiper>
-  );
-}
+  <Swiper
+    //@ts-ignore
+    keyboard={true}
+    mousewheel={true}
+    cssMode={true}
+    navigation={true}
+    pagination={{ clickable: true }}
+    modules={[Navigation, Pagination]}
+    className="mySwiper"
+  >
+    {popularData.length === 0 && (
+      <SwiperSlide>
+        <MiddleBoardBox2 data={{ 
+          _id: '',
+          group_id: 0,
+          post_id: 0,
+          user_id: 0,
+          createdAt: '',
+          updatedAt: '',
+          __v: 0,
+          profile: '',
+          name: '가입된 모임이 없습니다.',
+          isRecruit: false,
+          maxMember: 0,
+          meeting: 0,
+          leader: 0,
+          like: 0,
+          location: '',
+          day: '',
+          genre: '',
+          age: 0,
+          tags: {},
+          introduction: '클릭해서 더 많은 모임에 가입해보세요!',
+        }} />
+      </SwiperSlide>
+    )}
+
+    {popularData.slice(0, 3).map((item, index) => (
+      <SwiperSlide key={index}>
+        {item.name && <MiddleBoardBox2 data={item} />}
+      </SwiperSlide>
+    ))}
+  </Swiper>
+  )}

@@ -58,7 +58,7 @@ export const Section = styled.div`
 background-color: #f1f1f1;
 width: 474px;
 height: 12px;
-margin-top: 42px;
+margin-top: 10px;
 `;
 
 export const Title = styled.p`
@@ -76,8 +76,7 @@ export const ManageList = styled.div`
   flex-direction: column;
   width: 100%;
   margin-bottom: 28px;
-  margin-top: 53px;
-
+  margin-top: 30px;
   border-bottom: 1px solid #d7d7d7;
 
   & p {
@@ -86,21 +85,11 @@ export const ManageList = styled.div`
   }
 `;
 
-export const ManageList2 = styled.div`
-  display: flex;
-  color: black;
-  flex-direction: column;
-  width: 100%;
-  
-
-  & p {
-    font-size: 20px;
-    margin-left: 30px;
-  }
+export const ManageList2 = styled(ManageList)`
+  margin-top: 0px;
 `;
 
 export const ManageTitle = styled.p`
-  
   margin-bottom: 20px;
   font-weight: bold;
 `;
@@ -113,14 +102,28 @@ export const ManageLink = styled(Link)`
   border-bottom: 1px solid #b1b1b1;
 `;
 
-export const ManageLink2 = styled(Link)`
+export const ManageLink2 = styled(ManageLink)`
   margin-bottom: 20px;
-  text-decoration: none;
-  font-size: 12px;
+  border-bottom: none;
   color: black;
   & p {
-
     font-size: 18px;
+  }
+`;
+
+export const ManageButton = styled.button`
+  width: 100%;
+  padding: 0;
+  margin-bottom: 20px;
+  flex-direction: column;
+  border: none;
+  border-bottom: none;
+  background-color: transparent;
+  & p {
+    font-size: 18px;
+    font-weight: 400;
+    color: black;
+    text-decoration: none;
   }
 `;
 

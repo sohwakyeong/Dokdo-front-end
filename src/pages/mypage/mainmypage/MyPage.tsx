@@ -9,11 +9,15 @@ import UserImg from '@/assets/img/userbasicimg.png';
 
 function MyPageComponent() {
   const navigate = useNavigate();
-
+  const linkToAdminPage = () => {
+   navigate('/admin/user');
+  };
+ 
   const [userData, setUserData] = useState<{
     name: any;
     profilePic: string;
     introduction: string;
+    role: string;
   } | null>(null);
 
   const defaultUserImg = (e: SyntheticEvent<HTMLImageElement, Event>) => {
@@ -41,6 +45,7 @@ function MyPageComponent() {
         navigate('/login');
       });
   }, [navigate, loginToken]);
+  
 
   if (!userData) {
     return <div>로딩 중...</div>;
@@ -68,7 +73,8 @@ function MyPageComponent() {
       <MyPageStyle.Wrapper>
         <MyPageStyle.UserIcon
           src={`/api/v1/image/profile/${userData.profilePic}`}
-          alt="" onError={defaultUserImg}
+          alt=""
+          onError={defaultUserImg}
         />
         <MyPageStyle.Introduce>
           <MyPageStyle.NickName>{userData.name}</MyPageStyle.NickName>
@@ -96,12 +102,19 @@ function MyPageComponent() {
           <p>나의 정보 수정</p>
         </MyPageStyle.ManageLink2>
       </MyPageStyle.ManageList>
+{userData.role === "admin" ? (
       <MyPageStyle.ManageList2>
+        <MyPageStyle.ManageTitle>관리자 전용</MyPageStyle.ManageTitle>
+        <MyPageStyle.ManageButton onClick={linkToAdminPage}>
+          <p>관리자 페이지</p>
+        </MyPageStyle.ManageButton>
+      </MyPageStyle.ManageList2>) : <MyPageStyle.ManageList2>
         <MyPageStyle.ManageTitle>고객센터</MyPageStyle.ManageTitle>
         <MyPageStyle.ManageLink2 to="/user/mypage/inquiry">
           <p>문의하기</p>
         </MyPageStyle.ManageLink2>
       </MyPageStyle.ManageList2>
+}
       <MyPageStyle.Logout onClick={handleLogout}>로그아웃</MyPageStyle.Logout>
     </MyPageStyle.Container>
   );
