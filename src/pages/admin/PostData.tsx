@@ -26,7 +26,8 @@ function PostData({ data }: AdminPostProps) {
 
   async function handleDeletePost() {
     try {
-      await axios.delete(`/api/v1/admin/posts/${data?.post.post_id}`);
+      const response = await axios.delete(`/api/v1/admin/posts/${data?.post.post_id}`);
+      console.log(response.data);
       setDeleted(true);
     } catch (error) {
       throw error;

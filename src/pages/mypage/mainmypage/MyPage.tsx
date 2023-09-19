@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { SyntheticEvent, useEffect, useState } from 'react';
 import * as MyPageStyle from '@/pages/mypage/mainmypage/MyPage.styled';
 import { getCookie, removeCookie } from '@/helper/Cookie';
 import { useNavigate } from 'react-router-dom';
 import AxiosC from '@/helper/AxiosC';
 import axios from 'axios';
 import Slider5 from '@/components/common/slider/Slider5';
+import UserImg from '@/assets/img/userbasicimg.png';
 
 function MyPageComponent() {
   const navigate = useNavigate();
@@ -14,6 +15,10 @@ function MyPageComponent() {
     profilePic: string;
     introduction: string;
   } | null>(null);
+
+  const defaultUserImg = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+    e.currentTarget.src = UserImg;
+  };
 
   const loginToken = getCookie('loginToken');
   useEffect(() => {
@@ -63,7 +68,7 @@ function MyPageComponent() {
       <MyPageStyle.Wrapper>
         <MyPageStyle.UserIcon
           src={`/api/v1/image/profile/${userData.profilePic}`}
-          alt="유저 설정 이미지"
+          alt="" onError={defaultUserImg}
         />
         <MyPageStyle.Introduce>
           <MyPageStyle.NickName>{userData.name}</MyPageStyle.NickName>

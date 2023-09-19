@@ -28,7 +28,10 @@ function AlbumData({ data }: AdminAlbumProps) {
   async function handleDeleteAlbum() {
     try {
       await axios.delete(`/api/v1/admin/albums/${data?.album.post_id}`);
+      alert("삭제가 완료되었습니다.");
       setDeleted(true);
+      window.location.reload();
+       
     } catch (error) {
       throw error;
     }
