@@ -58,7 +58,7 @@ export const Section = styled.div`
 background-color: #f1f1f1;
 width: 474px;
 height: 12px;
-margin-top: 42px;
+margin-top: 10px;
 `;
 
 export const Title = styled.p`
@@ -76,7 +76,7 @@ export const ManageList = styled.div`
   flex-direction: column;
   width: 100%;
   margin-bottom: 28px;
-  margin-top: 53px;
+  margin-top: 30px;
 
   border-bottom: 1px solid #d7d7d7;
 

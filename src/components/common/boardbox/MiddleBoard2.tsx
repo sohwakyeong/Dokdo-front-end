@@ -1,8 +1,7 @@
 import React from 'react';
 import * as MB from '@/components/common/boardbox/MiddleBoard2.styled';
-import BoardImgBox from '@/components/common/boardbox/BoardImgBox';
 import { useNavigate } from 'react-router-dom';
-import defaultImage from '@/assets/img/Logo1.png';
+import PlusGroupIcon from '@/assets/icon/PlusGroup.png';
 
 export interface MiddleBoardData2 {
   _id: string;
@@ -47,22 +46,44 @@ function MiddleBoardBox2({ data }: MidleBoardBoxProps) {
     }
   };
 
+  // 데이터가 없을 때 기본값 설정
   if (!data) {
-    return null;
+    data = {
+      _id: '',
+      group_id: 0,
+      post_id: 0,
+      user_id: 0,
+      createdAt: '',
+      updatedAt: '',
+      __v: 0,
+      profile: '',
+      name: '가입된 모임이 없습니다.',
+      isRecruit: false,
+      maxMember: 0,
+      meeting: 0,
+      leader: 0,
+      like: 0,
+      location: '',
+      day: '',
+      genre: '',
+      age: 0,
+      tags: {},
+      introduction: '더 많은 모임에 가입해보세요',
+    };
   }
 
   const { name, introduction } = data;
-  const imageSource = data.profile || defaultImage;
+ 
+  const imageSource = data.profile
+    ? `/api/v1/image/profile/${data.profile}`
+    : PlusGroupIcon;
 
   return (
     <MB.Container onClick={handleClick}>
       <MB.Border>
         <MB.TextImgBox>
           <MB.ImgBox>
-            <img
-              src={`/api/v1/image/profile/${data.profile}`}
-              alt="업로드사진"
-            />
+            <img src={imageSource} alt="" />
           </MB.ImgBox>
           <MB.TextBox>
             <div>
