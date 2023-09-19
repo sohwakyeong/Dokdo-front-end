@@ -31,7 +31,6 @@ function AlbumData({ data }: AdminAlbumProps) {
       alert("삭제가 완료되었습니다.");
       setDeleted(true);
       window.location.reload();
-       
     } catch (error) {
       throw error;
     }
