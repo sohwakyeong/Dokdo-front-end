@@ -28,7 +28,6 @@ export const TextImgBox = styled.div`
   width: 100%;
   height: 200px;
   & div {
-    padding: 4px 4px 4px 6px;
     font-size: 15px;
   white-space: nowrap;
     overflow: hidden;
@@ -56,7 +55,7 @@ export const ImgBox = styled.div`
 
 export const TextBox = styled.div`
   width: 90%;
-  height: 100px;
+
   text-overflow: ellipsis;
   overflow: hidden;
   padding: 10px;
@@ -68,8 +67,7 @@ export const GroupName = styled.div`
 `;
 
 export const GroupIntro = styled.div`
-  width: 95%;
-  height: 70px;
+  height: 30px;
   color: #707070;
   font-size: 14px;
   overflow: hidden;

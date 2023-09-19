@@ -22,10 +22,7 @@ const MypageRoutes = () => {
   const checkUserPermission = async () => {
     try {
       const response = await AxiosC.post('/api/v1/auth/login');
-
       const userData = response.data;
-
-      // 사용자의 권한에 따라 isAdmin 값을 설정한다.
       setIsLogin(userData.isLogin);
     } catch (error) {
       console.error('권한 확인 중 오류 발생:', error);
@@ -33,7 +30,6 @@ const MypageRoutes = () => {
   };
 
   useEffect(() => {
-    // 컴포넌트가 마운트될 때 사용자의 권한을 확인한다.
     checkUserPermission();
   }, []);
 
