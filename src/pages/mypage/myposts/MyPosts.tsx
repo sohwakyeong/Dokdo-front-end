@@ -34,7 +34,7 @@ function MyPostsComponent() {
   function formatCreatedAt(createdAt: string | number | Date) {
     const date = new Date(createdAt);
     const month = date.getMonth() + 1;
-    const day = date.getDate();
+    const day = date.getDate() -1;
     return `${month}월 ${day}일`;
   }
 
@@ -76,14 +76,16 @@ function MyPostsComponent() {
         if (postsResponse.data.error === null) {
           const userPosts: PostData[] = postsResponse.data.data.posts;
 
-          // 'posts' 배열을 추출하여 선택된 게시물로 설정
           setMyPosts(userPosts);
-
+        
           const fetchAllPosts = async () => {
             const selectedPostsWithImages: PostData[] = [];
 
             for (const post of userPosts) {
               try {
+                if (userPosts.length === 0) {
+
+                }
                 const postResponse = await axios.get(
                   `/api/v1/group/${post.group_id}/posts/${post.post_id}`,
                 );
@@ -145,10 +147,12 @@ function MyPostsComponent() {
     <MyPostsStyle.Container>
       <MyPostsStyle.Wrapper>
         <MyPostsStyle.GroupBoardList>
-          {userData &&
+          {loading ? (
+            <div>Loading...</div>
+          ) : userData && selectedPosts.length > 0 ? (
             selectedPosts.map((selectedPost, index) => (
-              <MyPostsStyle.BoardWrap>
-                <MyPostsStyle.Boardbox key={selectedPost._id || index}>
+              <MyPostsStyle.BoardWrap key={selectedPost._id || index}>
+                <MyPostsStyle.Boardbox>
                   <MyPostsStyle.BoardLeft>
                     <MyPostsStyle.ProfileData>
                       <MyPostsStyle.ProfileImg
@@ -177,7 +181,10 @@ function MyPostsComponent() {
                   />
                 </MyPostsStyle.Boardbox>
               </MyPostsStyle.BoardWrap>
-            ))}
+            ))
+          ) : (
+            <div>쓴 글이 없습니다.</div>
+          )}
         </MyPostsStyle.GroupBoardList>
       </MyPostsStyle.Wrapper>
     </MyPostsStyle.Container>
