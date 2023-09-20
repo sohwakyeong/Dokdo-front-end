@@ -119,6 +119,7 @@ function EditProfileComponent() {
       });
 
       if (response.status === 200) {
+        window.location.reload();
         setProfilePic(response.data.data);
         setIsProfileImageModalOpen(false);
       } else {
@@ -212,7 +213,8 @@ function EditProfileComponent() {
         <EditStyle.UserIconBtn onClick={() => setIsProfileImageModalOpen(true)}>
           <EditStyle.UserIcon
             src={`/api/v1/image/profile/${userData.profilePic}?${Date.now()}`}
-            alt="" onError={defaultUserImg}
+            alt=""
+            onError={defaultUserImg}
           />
         </EditStyle.UserIconBtn>
 

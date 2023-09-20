@@ -15,7 +15,6 @@ export const Wrapper = styled.div`
   flex-direction: column;
   margin: 0 auto;
   box-sizing: border-box;
-  width: 420px;
   justify-content: space-between;
 `;
 
@@ -23,6 +22,8 @@ export const GroupBoardList = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  width: 90%;
 `;
 export const BoardWrap = styled.div`
   width: 474px;
@@ -135,7 +136,7 @@ export const LoadingText = styled.div`
   color: black;
   margin-top: 29px;
 `;
- 
+
 export const NoContent = styled.div`
   display: flex;
   justify-content: center;
@@ -153,6 +154,5 @@ export const NoContentText = styled.div`
   margin-top: 29px;
 `;
 export const GoPostBtn = styled.button`
-width: 200px;
-
-`
+  width: 200px;
+`;

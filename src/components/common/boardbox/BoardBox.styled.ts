@@ -56,10 +56,7 @@ export const Img = styled.img`
 `;
 export const HashTagDisplay = styled.div`
   display: flex;
-  & div {
-    margin-right: 7px;
-  }
-`;
+`
 
 export const HashTags = styled.div`
   border: none;
@@ -105,7 +102,6 @@ export const Place = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 18%;
   color: #7e7e7e;
   font-size: 14px;
   font-weight: 500;

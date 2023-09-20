@@ -12,6 +12,7 @@ import {
 import { useParams } from 'react-router-dom'; // useParams 임포트
 import GroupHeader from '@/components/layout/header/GroupHeader';
 import Modal from 'react-modal';
+import GroupLikeButton from './GroupLike';
 Modal.setAppElement('#root');
 
 interface MemberType {
@@ -55,7 +56,6 @@ interface GroupData {
   error: any;
   createdAt: string;
 }
-
 
 function GroupDetail() {
   const navigate = useNavigate();
@@ -313,6 +313,9 @@ function GroupDetail() {
           alt="모임이미지"
         />
       </GD.GroupImage>
+      {groupData && (
+      <GroupLikeButton group_id={groupData.group_id} like={groupData.like} />
+    )}
 
       <GD.GroupInfo>
         <GD.GroupName>📚{groupData.name}</GD.GroupName>
@@ -434,11 +437,11 @@ function GroupDetail() {
           <GD.NFWrapper>
             <GD.NFDisplay>
               {/* Conditionally render the button based on join error */}
-        
-                <div>{joinError}</div>
-                <GD.NFNextBtn>
-                  <button onClick={handleJoinGroup}>모임 가입하기</button>
-                </GD.NFNextBtn>
+
+              <div>{joinError}</div>
+              <GD.NFNextBtn>
+                <button onClick={handleJoinGroup}>모임 가입하기</button>
+              </GD.NFNextBtn>
             </GD.NFDisplay>
           </GD.NFWrapper>
         </GD.ButtonDisplay>
