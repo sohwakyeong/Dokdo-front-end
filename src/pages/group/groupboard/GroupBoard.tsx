@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { SyntheticEvent, useState, useEffect } from 'react';
 import * as GB from '@/pages/group/groupboard/GorupBoard.styled';
 import SearchInput from '@/components/common/searchinput/SearchInput';
 import axios from 'axios';
@@ -6,6 +6,7 @@ import PenFooter from '@/components/layout/footer/PenFooter';
 import GroupHeader from '@/components/layout/header/GroupHeader';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getCookie } from '@/helper/Cookie';
+import UserImg from '@/assets/img/userbasicimg.png';
 
 interface GroupData {
   group_id: number;
@@ -54,8 +55,6 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
       throw error;
     }
   }
-  //ㅎㅎ
-
   useEffect(() => {
     async function fetchData() {
       try {
@@ -101,6 +100,10 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
     };
   }, []);
 
+  const defaultUserImg = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+    e.currentTarget.src = UserImg;
+  };
+
   return (
     <GB.Wrapper>
       <GroupHeader data={{ group: Number(groupId) }} />
@@ -117,12 +120,11 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
               navigate(`/group/${groupId}/board/${groupBoardItem.post.post_id}`)
             }
           >
-          
             <GB.BoardLeft>
               <GB.User>
                 <img
                   src={`/api/v1/image/profile/${groupBoardItem.user.profilePic}`}
-                  alt="게시자 프로필"
+                  alt="게시자 프로필" onError={defaultUserImg}
                 />
                 <GB.UserName>
                   <div>{groupBoardItem.user.name}</div>

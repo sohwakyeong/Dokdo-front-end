@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { SyntheticEvent, useState, useEffect } from 'react';
 import axios from 'axios';
 import * as GBD from '@/pages/group/groupboarddetail/GroupBoaderDetail.styled';
 import { getCookie } from '@/helper/Cookie';
 import { useParams } from 'react-router-dom';
+import UserImg from '@/assets/img/userbasicimg.png';
 
 interface GroupDetailData {
   error: null | string;
@@ -293,17 +294,22 @@ const GroupBoardDetail: React.FC<
     }
   };
 
+  const defaultUserImg = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+    e.currentTarget.src = UserImg;
+  };
+
   return (
     <GBD.Wrapper>
       <GBD.GroupBoardTitle>
         <div>{groupName} 🍀 모임의 게시글</div>
       </GBD.GroupBoardTitle>
       <GBD.EditButton onClick={deletePost}>●●●</GBD.EditButton>
-
       <GBD.User>
         <div>
           <GBD.ProfileImg
             src={`/api/v1/image/profile/${groupDetail?.data.user.profilePic}`}
+            alt=""
+            onError={defaultUserImg}
           ></GBD.ProfileImg>
         </div>
         <GBD.Desc>
@@ -350,6 +356,7 @@ const GroupBoardDetail: React.FC<
                     <img
                       src={`/api/v1/image/profile/${commentsName[index]?.profilePic}`}
                       alt="프사"
+                      onError={defaultUserImg}
                     />
                   </GBD.PFImg>
                   <GBD.PFText>
