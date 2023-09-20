@@ -3,6 +3,7 @@ import axios from 'axios';
 import * as GBD from '@/pages/group/groupboarddetail/GroupBoaderDetail.styled';
 import { getCookie } from '@/helper/Cookie';
 import { useParams } from 'react-router-dom';
+
 interface GroupDetailData {
   error: null | string;
   data: {
@@ -44,6 +45,7 @@ interface GroupNameData {
   };
 }
 
+
 interface GroupNameProps {
   data?: GroupNameData;
 }
@@ -55,7 +57,6 @@ const GroupBoardDetail: React.FC<
   const { groupId, postsId } = useParams<{
     groupId?: string;
     postsId?: string;
-    gId?: string;
   }>();
   const group_Id = groupId ? parseInt(groupId, 10) : undefined;
   const post_Id = postsId ? parseInt(postsId, 10) : undefined;
@@ -69,6 +70,8 @@ const GroupBoardDetail: React.FC<
   const [commentText, setCommentText] = useState('');
   const [replyText, setReplyText] = useState<string>('');
   const [groupName, setGroupName] = useState<string>('');
+  const [likeCounter, setLikeCounter] = useState<number>(0);
+  const [isLiked, setIsLiked] = useState(false);
 
   function formatCreatedAt(createdAt: string | number | Date) {
     const date = new Date(createdAt);
@@ -78,14 +81,15 @@ const GroupBoardDetail: React.FC<
 
     return `${month}월 ${day}일`;
   }
-
   useEffect(() => {
     if (group_Id && post_Id) {
       fetchGroupDetail(group_Id, post_Id);
       fetchComments(group_Id, post_Id);
       fetchGroupName(group_Id);
+      fetchLikeStatus(group_Id, post_Id);
+
+      // 좋아요 개수 가져오기
     }
-    // useEffect의 의존성 배열에 사용된 함수들 추가
   }, [loginToken, group_Id, post_Id]);
 
   const fetchGroupDetail = async (gId: number, pId: number) => {
@@ -239,6 +243,55 @@ const GroupBoardDetail: React.FC<
       console.error('Error deleting post:', error);
     }
   };
+  const fetchLikeStatus = async (group_Id: number, post_Id: number) => {
+    try {
+      // postlikes 컬렉션에서 해당 게시물의 좋아요 개수를 조회
+      const response = await axios.get(`/api/v1/group/${group_Id}/posts/${post_Id}/like`
+      // , {
+      //   headers: {
+      //     Authorization: `Bearer ${loginToken}`,
+      //   },
+      //   withCredentials: true,
+      // }
+      );
+  
+      if (response.status === 200) {
+        const likeCount = response.data.data.likeNum; 
+        setLikeCounter(likeCount);
+      } else {
+        console.error('Error fetching like status:', response.status);
+        console.log('API Response:', response.data);
+      }
+    } catch (error) {
+      console.error('Error fetching like status:', error);
+    }
+  };
+
+  // 게시글 좋아요
+  const handleLikeBtn = async () => {
+    try {
+      const response = await axios.put(
+        `/api/v1/group/${group_Id}/posts/${post_Id}/like`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${loginToken}`,
+          },
+          withCredentials: true,
+        }
+      );
+  
+      if (response.status === 200) {
+        const updatedLikeCount = response.data.data.likeNum; // 서버에서 업데이트된 좋아요 개수를 받아옴
+        setLikeCounter(updatedLikeCount); // 좋아요 개수를 업데이트
+        setIsLiked(!isLiked); // 좋아요 상태를 토글 (누른 상태에서 취소, 취소 상태에서 누름)
+      } else {
+        console.error('Error liking/unliking post:', response.status);
+      }
+    } catch (error) {
+      console.error('Error liking/unliking post:', error);
+    }
+  };
 
   return (
     <GBD.Wrapper>
@@ -279,7 +332,9 @@ const GroupBoardDetail: React.FC<
           )}
       </GBD.UserWriteBox>
       <GBD.Button>
-        <button>❤️ 555</button>
+      <button onClick={handleLikeBtn}>
+          {isLiked ? '❤️ 취소' : `❤️ 좋아요`} {likeCounter}
+        </button>
         <button>공유하기</button>
       </GBD.Button>
       <GBD.Comment>
