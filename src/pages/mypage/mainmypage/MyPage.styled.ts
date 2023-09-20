@@ -121,7 +121,6 @@ export const ManageButton = styled.button`
   background-color: transparent;
   & p {
     font-size: 18px;
-    font-weight: 400;
     color: black;
     text-decoration: none;
   }

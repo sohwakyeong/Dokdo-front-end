@@ -51,13 +51,12 @@ function MyPageComponent() {
     return <div>로딩 중...</div>;
   }
 
-  // 로그아웃 버튼의 onClick Event
   // 이 함수에서 AxiosC를 axios로 바꾸면 로그아웃이 안된다
   const handleLogout = async () => {
     try {
       const response = await AxiosC.put('/api/v1/auth/logout');
 
-      await removeCookie('loginToken'); // await 추가
+      await removeCookie('loginToken'); 
 
       alert('로그아웃에 성공하셨습니다.');
 
