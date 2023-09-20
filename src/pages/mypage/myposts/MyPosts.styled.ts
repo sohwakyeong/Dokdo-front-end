@@ -3,26 +3,18 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   width: 474px;
+  height: 100%;
   margin: 0 auto;
 `;
 
-export const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin: 0 auto;
-  box-sizing: border-box;
-  width: 420px;
-  justify-content: space-between;
-`;
+
 
 export const GroupBoardList = styled.ul`
   display: flex;
   flex-direction: column;
-  align-items: center;
+
 `;
 export const BoardWrap = styled.div`
   width: 474px;
@@ -35,7 +27,7 @@ export const Boardbox = styled.div`
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  margin: 13px 0;
+
 `;
 
 export const BoardLeft = styled.div`
@@ -117,16 +109,27 @@ export const BoardImg = styled.img`
   margin-left: 20px;
 `;
 
-export const LoadingContent = styled.div`
+export const LoadingContainer = styled.div`
   display: flex;
+
   justify-content: center;
-  align-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+`;
+
+export const LoadingContent = styled.div`
+  width: 200px;
+  text-align: center;
+  display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 export const LoadingImg = styled.img`
-  width: 51px;
-  height: 51px;
+  width: 50px;
+  height: 50px;
 `;
 
 export const LoadingText = styled.div`
@@ -135,16 +138,28 @@ export const LoadingText = styled.div`
   color: black;
   margin-top: 29px;
 `;
- 
-export const NoContent = styled.div`
+
+export const NoContainer = styled.div`
   display: flex;
+
   justify-content: center;
-  align-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+`;
+
+export const NoContent = styled.div`
+  width: 200px;
+
+  text-align: center;
+  display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 export const NoContentImg = styled.img`
-  width: 51px;
-  height: 51px;
+  width: 50px;
+  height: 50px;
 `;
 export const NoContentText = styled.div`
   font-size: 16px;
@@ -153,6 +168,12 @@ export const NoContentText = styled.div`
   margin-top: 29px;
 `;
 export const GoPostBtn = styled.button`
-width: 200px;
-
-`
+  width: 223px;
+  height: 46px;
+  margin-top: 10px;
+  background-color: #84614b;
+  color: white;
+  font-size: 16px;
+  border-radius: 20px;
+  border: none;
+`;
