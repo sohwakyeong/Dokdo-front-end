@@ -294,6 +294,10 @@ const GroupBoardDetail: React.FC<
     }
   };
 
+  const defaultUserImg = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+    e.currentTarget.src = UserImg;
+  };
+
   return (
     <GBD.Wrapper>
       <GBD.GroupBoardTitle>
