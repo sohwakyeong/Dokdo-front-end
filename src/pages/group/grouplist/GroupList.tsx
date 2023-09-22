@@ -79,10 +79,10 @@ const GroupList = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        let apiUrl = '/api/v1/group?&limit=15&offset=0'; // 기본적으로 인기순 API 호출
+        let apiUrl = '/api/v1/group?orderBy=popularity&limit=15&offset=0'; // 기본적으로 인기순 API 호출
 
         if (selectedSort === '최근순') {
-          apiUrl = '/api/v1/group?orderBy=popularity&limit=15&offset=0'; // 최신순 API 호출
+          apiUrl = '/api/v1/group?&limit=15&offset=0'; // 최신순 API 호출
         }
 
         const data = await fetchAllGroupData(apiUrl); // API 요청 호출

@@ -399,47 +399,59 @@ export const DropdownContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
   border: 1px solid #000;
   border-radius: 15px;
-  width: 180px;
-  height: 80px;
+  width: 150px;
+  height: 100px;
+
 `;
 
 export const ProfileSection = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #000;
 `;
 
 export const DeleteSection = styled.div`
   display: flex;
   align-items: center;
 `;
+
+export const EditGroupSection = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 // 스타일링된 파일 선택 버튼
 export const StyledFileInput = styled.input`
   display: none;
 `;
 
 export const CustomFileInput = styled.label`
-  display: inline-block;
-  background-color: #ffffff;
-  color: 000;
-  padding: 10px 37px;
-  border-radius: 15px;
-  cursor: pointer;
-
-  &:hover {
-    font-weight: 700;
-  }
-`;
-
-// 파일 선택 버튼의 라벨 디자인
-export const CustomFileInputLabel = styled.span`
   font-size: 15px;
 
   &:hover {
     font-weight: 700;
+    color:#84614b;
+
+  }
+`;
+
+// 파일 선택 버튼의 라벨 디자인
+export const CustomFileInputLabel = styled.div`
+  font-size: 15px;
+
+  &:hover {
+    font-weight: 700;
+    color:#84614b;
+
+  }
+`;
+export const EditGroupInfo = styled.div`
+  font-size: 15px;
+
+  &:hover {
+    font-weight: 700;
+    color:#84614b;
   }
 `;
