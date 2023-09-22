@@ -12,6 +12,7 @@ import {
 import { useParams } from 'react-router-dom'; // useParams 임포트
 import GroupHeader from '@/components/layout/header/GroupHeader';
 import Modal from 'react-modal';
+import GroupLikeButton from './GroupLike';
 Modal.setAppElement('#root');
 
 interface MemberType {
@@ -307,8 +308,14 @@ function GroupDetail() {
 
       <GD.DropdownButton onClick={toggleDropdown}>▪︎▪︎▪︎</GD.DropdownButton>
       <GD.GroupImage>
-        <img src={`/api/v1/image/profile/${groupData.profile}`} alt="모임이미지" />
+        <img
+          src={`/api/v1/image/profile/${groupData.profile}`}
+          alt="모임이미지"
+        />
       </GD.GroupImage>
+      {groupData && (
+      <GroupLikeButton group_id={groupData.group_id} like={groupData.like} />
+    )}
 
       <GD.GroupInfo>
         <GD.GroupName>📚{groupData.name}</GD.GroupName>
@@ -430,15 +437,11 @@ function GroupDetail() {
           <GD.NFWrapper>
             <GD.NFDisplay>
               {/* Conditionally render the button based on join error */}
-              {joinError ? (
-                <div>{joinError}</div>
-              ) : isUserAlreadyJoined ? (
-                <div>이미 가입한 멤버입니다.</div>
-              ) : (
-                <GD.NFNextBtn>
-                  <button onClick={handleJoinGroup}>모임 가입하기</button>
-                </GD.NFNextBtn>
-              )}
+
+              <div>{joinError}</div>
+              <GD.NFNextBtn>
+                <button onClick={handleJoinGroup}>모임 가입하기</button>
+              </GD.NFNextBtn>
             </GD.NFDisplay>
           </GD.NFWrapper>
         </GD.ButtonDisplay>

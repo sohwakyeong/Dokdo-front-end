@@ -77,6 +77,9 @@ const PhotoDetail: React.FC<PhotoDetailDataProps & GroupNameProps> = ({
   const [commentsName, setCommentsName] = useState<UserData[]>([]);
   const [replyText, setReplyText] = useState<string>('');
 
+  const [likeCounter, setLikeCounter] = useState<number>(0);
+  const [isLiked, setIsLiked] = useState(false);
+  
   function formatCreatedAt(createdAt: string | number | Date) {
     const date = new Date(createdAt);
 
@@ -91,6 +94,7 @@ const PhotoDetail: React.FC<PhotoDetailDataProps & GroupNameProps> = ({
       fetchPhotoDetail(group_Id, post_Id);
       fetchComments(group_Id, post_Id);
       fetchGroupName(group_Id); // 모임 이름 가져오기
+      fetchLikeStatus(group_Id, post_Id);
     }
   }, [loginToken, group_Id, post_Id]);
 
@@ -244,6 +248,57 @@ const PhotoDetail: React.FC<PhotoDetailDataProps & GroupNameProps> = ({
     }
   };
 
+  const fetchLikeStatus = async (group_Id: number, post_Id: number) => {
+    try {
+      // postlikes 컬렉션에서 해당 게시물의 좋아요 개수를 조회
+      const response = await axios.get(`/api/v1/group/${group_Id}/posts/${post_Id}/like`
+      // , {
+      //   headers: {
+      //     Authorization: `Bearer ${loginToken}`,
+      //   },
+      //   withCredentials: true,
+      // }
+      );
+  
+      if (response.status === 200) {
+        const likeCount = response.data.data.likeNum; 
+        setLikeCounter(likeCount);
+      } else {
+        console.error('Error fetching like status:', response.status);
+        console.log('API Response:', response.data);
+      }
+    } catch (error) {
+      console.error('Error fetching like status:', error);
+    }
+  };
+
+  // 게시글 좋아요
+  const handleLikeBtn = async () => {
+    try {
+      const response = await axios.put(
+        `/api/v1/group/${group_Id}/posts/${post_Id}/like`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${loginToken}`,
+          },
+          withCredentials: true,
+        }
+      );
+  
+      if (response.status === 200) {
+        const updatedLikeCount = response.data.data.likeNum; // 서버에서 업데이트된 좋아요 개수를 받아옴
+        setLikeCounter(updatedLikeCount); // 좋아요 개수를 업데이트
+        setIsLiked(!isLiked); // 좋아요 상태를 토글 (누른 상태에서 취소, 취소 상태에서 누름)
+      } else {
+        console.error('Error liking/unliking post:', response.status);
+      }
+    } catch (error) {
+      console.error('Error liking/unliking post:', error);
+    }
+  };
+
+
   return (
     <PAD.Wrapper>
       <PAD.GroupBoardTitle>
@@ -282,7 +337,9 @@ const PhotoDetail: React.FC<PhotoDetailDataProps & GroupNameProps> = ({
           )}
       </PAD.UserWriteBox>
       <PAD.Button>
-        <button>❤️ 555</button>
+      <button onClick={handleLikeBtn}>
+          {isLiked ? '❤️ 취소' : `❤️ 좋아요`} {likeCounter}
+        </button>
         <button>공유하기</button>
       </PAD.Button>
       <PAD.Comment>
