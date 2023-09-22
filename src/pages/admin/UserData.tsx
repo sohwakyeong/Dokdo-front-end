@@ -65,6 +65,7 @@ function UserData({ data }: AdminUserProps) {
 
       if (response.status === 200) {
         setUpdated(true);
+        alert("수정이 완료되었습니다.");
         setIsEditing(false);
       } else {
         console.error('업데이트 실패:', response.data.error);

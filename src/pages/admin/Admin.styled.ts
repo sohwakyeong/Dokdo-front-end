@@ -168,3 +168,30 @@ export const ScrollToTop = styled.button`
     font-size: 13px;
     cursor: pointer;
 `
+export const NoContent = styled.div`
+width:100%;
+height:100%;
+display:flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+`
+export const NoImage = styled.img`
+`
+export const NoText = styled.div`
+ margin: 50px;
+ font-weight: bold;
+ color: grey;
+ font-size: 20px;
+`
+/* 스피너(로딩 아이콘) 스타일 */
+export const Spinner = styled.div` /* 이름을 Spinner로 변경하고 export 추가 */
+  border: 4px solid rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  border-top: 4px solid #3498db;
+  width: 36px;
+  height: 36px;
+  animation: spin 2s linear infinite;
+  margin: 0 auto;
+`;
+  

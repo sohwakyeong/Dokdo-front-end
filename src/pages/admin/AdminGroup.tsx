@@ -3,6 +3,7 @@ import * as A from '@/pages/admin/Admin.styled';
 import axios from 'axios';
 import GroupData from '@/pages/admin/GroupData';
 import SelectBox2 from '@/components/common/selectbox/SelectBox2';
+import MorePost from '@/assets/icon/newIcon/chat1.png';
 
 const sortOptions = [
   { value: '기본순', label: '기본순' },
@@ -12,6 +13,8 @@ const sortOptions = [
 
 function AdminGroup() {
   const [groupData, setGroupData] = useState([]);
+  const [isLoading, setIsLoding] = useState(false);
+
   const element = useRef<HTMLDivElement>(null);
   const onMoveBox = () => {
     element.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -22,6 +25,7 @@ function AdminGroup() {
   useEffect(() => {
     async function fetchData() {
       try {
+        setIsLoding(true)
         let apiUrl = '/api/v1/admin/groups?orderBy=oldest&limit=20&offset=0';
 
         if (selectedSort === '인기순') {
@@ -31,8 +35,10 @@ function AdminGroup() {
         } 
         const data = await fetchAllGroupData(apiUrl); 
         setGroupData(data);
+        setIsLoding(false);
       } catch (error) {
         console.error('데이터를 가져오는 중 에러 발생:', error);
+        setIsLoding(false)
       }
     }
     fetchData();
@@ -64,8 +70,18 @@ function AdminGroup() {
           총 <A.Sum>{groupData.length}</A.Sum> 개
         </A.Total>
         <A.Layout>
-          <div ref={element}></div>
-          <A.Table>
+          {isLoading ? (<A.NoContent>
+              <A.NoImage src = {MorePost} alt="게시물없음"/>
+              <A.NoText>데이터를 불러오는중 ...</A.NoText>
+            </A.NoContent>) :groupData.length === 0 ? (
+            <A.NoContent>
+              <A.NoImage src = {MorePost} alt="게시물없음"/>
+              <A.NoText>아직 작성된 게시물이 없습니다.</A.NoText>
+            </A.NoContent>
+          ) : (
+            <>
+              <div ref={element}></div>
+             <A.Table>
             <thead>
               <tr>
                 <th>번호</th>
@@ -79,6 +95,9 @@ function AdminGroup() {
               <GroupData key={group_id} data={name} />
             ))}
           </A.Table>
+
+            </>
+          )}
         </A.Layout>
       </A.Menu>
       <A.TopButton>
