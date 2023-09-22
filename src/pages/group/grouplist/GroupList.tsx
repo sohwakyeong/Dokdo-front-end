@@ -75,7 +75,7 @@ const GroupList = () => {
   const [selectedSort, setSelectedSort] = useState('');
   const [clickedInfo, setClickedInfo] = useState<string[]>([]);
   const [groupData, setGroupData] = useState([]);
- 
+
   useEffect(() => {
     async function fetchData() {
       try {

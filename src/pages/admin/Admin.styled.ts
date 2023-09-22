@@ -73,13 +73,14 @@ export const Table = styled.table`
     
     th {
         padding-bottom: 15px;
-        border-bottom: 1px grey solid;
+        border-bottom: 3px grey solid;
         font-size: 18px;
         font-weight: bold;
     }
 
     tr{
         text-align: center;
+        border-bottom: 1px rgba(128, 128, 128, 0.3) solid;
     }
 
     td {
@@ -92,7 +93,7 @@ export const Table = styled.table`
 `;
 
 export const Input = styled.input`
-    width: 210px;
+    width: 180px;
     border: none;
     font-size: 15px;
     text-align: center;
@@ -121,6 +122,10 @@ export const AdminButton = styled.button`
     border: 0.5px solid #A8A8A8;
     border-radius: 30px;
     font-size: 11px;
+    &:hover {
+        color:white;
+        background-color: #414141;
+    }
 `;
 
 export const ReplyButton = styled.button`

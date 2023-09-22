@@ -1,10 +1,14 @@
 import React, { ReactNode } from 'react';
 import Logo2 from '@/assets/img/Logo2.png';
 import Create from '@/assets/icon/adminicon/Create.png';
-import Edit from '@/assets/icon/adminicon/Edit Message.png';
-import Supervised from '@/assets/icon/adminicon/Supervised user circle.png';
+import Create1 from '@/assets/icon/adminicon/Create_1.png';
+import Edit from '@/assets/icon/adminicon/Edit_Message.png';
+import Edit1 from '@/assets/icon/adminicon/Edit_Message_1.png';
+import Supervised from '@/assets/icon/adminicon/Supervised_user_circle.png';
+import Supervised1 from '@/assets/icon/adminicon/Supervised_user_circle_1.png';
 import Home from '@/assets/icon/adminicon/Home.png';
-import Person from '@/assets/icon/adminicon/Writer male_0.png';
+import Person from '@/assets/icon/adminicon/Writer_male_0.png';
+import Person1 from '@/assets/icon/adminicon/Writer_male_1.png';
 import Logout from '@/assets/icon/adminicon/logout.png';
 import * as S from '@/pages/admin/SideBar.styled';
 import AxiosC from '@/helper/AxiosC';
@@ -16,24 +20,21 @@ interface AdminProps {
 }
 
 function Admin({ children }: AdminProps) {
+
   const navigate = useNavigate();
 
-  // 로그아웃 버튼의 onClick Event
-  // 이 함수에서 AxiosC를 axios로 바꾸면 로그아웃이 안된다
+  const isUserMenuActive = window.location.pathname === '/admin/user';
+  const isPostMenuActive = window.location.pathname === '/admin/post';
+  const isAlbumMenuActive = window.location.pathname === '/admin/album';
+  const isGroupMenuActive = window.location.pathname === '/admin/group';
+
   const handleLogout = async () => {
     try {
-      const response = await AxiosC.put('/api/v1/auth/logout');
-      console.log(response);
-
-      console.log('삭제 전');
+      await AxiosC.put('/api/v1/auth/logout');
       await removeCookie('loginToken');
-      console.log('삭제 후');
       alert('로그아웃에 성공하셨습니다.');
-      console.log('navigate 이전');
       navigate('/');
-      console.log('navigate 이후');
     } catch (e) {
-      console.error('로그아웃 에러:', e);
       alert('서버 오류: 다시 시도해주세요.');
     }
   };
@@ -49,30 +50,33 @@ function Admin({ children }: AdminProps) {
             <S.SideMenu>
               <S.AdminLink to="/">
                 <S.IconImg src={Home} alt="홈 이미지" />
-                공모전/책 관리
+                메인페이지
               </S.AdminLink>
             </S.SideMenu>
             <S.SideMenu>
-              <S.AdminLink to="/admin/user">
-                <S.IconImg src={Person} alt="사람 이미지" />
+            <S.AdminLink to="/admin/user">
+                <S.IconImg
+                  src={isUserMenuActive ? Person1 : Person}
+                  alt="사람 이미지"
+                />
                 회원 정보 관리
               </S.AdminLink>
             </S.SideMenu>
             <S.SideMenu>
               <S.AdminLink to="/admin/post">
-                <S.IconImg src={Create} alt="게시글 이미지" />
+                <S.IconImg src={isPostMenuActive ? Create1 : Create} alt="게시글 이미지" />
                 게시글 관리
               </S.AdminLink>
             </S.SideMenu>
             <S.SideMenu>
               <S.AdminLink to="/admin/album">
-                <S.IconImg src={Edit} alt="사진첩 이미지" />
+                <S.IconImg src={isAlbumMenuActive ? Edit1 : Edit} alt="사진첩 이미지" />
                 사진첩 관리
               </S.AdminLink>
             </S.SideMenu>
             <S.SideMenu>
               <S.AdminLink to="/admin/group">
-                <S.IconImg src={Supervised} alt="모임 이미지" />
+                <S.IconImg src={isGroupMenuActive ? Supervised1 : Supervised} alt="모임 이미지" />
                 모임 관리
               </S.AdminLink>
             </S.SideMenu>
@@ -88,3 +92,4 @@ function Admin({ children }: AdminProps) {
 }
 
 export default Admin;
+

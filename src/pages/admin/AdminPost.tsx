@@ -37,6 +37,9 @@ function AdminPost() {
         <A.Top>
           <A.Headline> 회원 게시글 관리</A.Headline>
         </A.Top>
+        <A.Total>
+          총 <A.Sum>{postData.length}</A.Sum> 개
+        </A.Total>
         <A.Layout>
           <div ref={element}></div>
           <A.Table>

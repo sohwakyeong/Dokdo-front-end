@@ -5,6 +5,7 @@ import GroupData from '@/pages/admin/GroupData';
 import SelectBox2 from '@/components/common/selectbox/SelectBox2';
 
 const sortOptions = [
+  { value: '기본순', label: '기본순' },
   { value: '인기순', label: '인기순' },
   { value: '최근순', label: '최근순' },
 ];
@@ -21,19 +22,19 @@ function AdminGroup() {
   useEffect(() => {
     async function fetchData() {
       try {
-        let apiUrl = '/api/v1/admin/groups?orderBy=popularity'; // 기본적으로 인기순 API 호출
+        let apiUrl = '/api/v1/admin/groups?orderBy=oldest&limit=20&offset=0';
 
-        if (selectedSort === '최근순') {
-          apiUrl = '/api/v1/admin/groups'; // 최신순 API 호출
-        }
-
-        const data = await fetchAllGroupData(apiUrl); // API 요청 호출
+        if (selectedSort === '인기순') {
+          apiUrl = '/api/v1/admin/groups?orderBy=popularity&limit=20&offset=0'; 
+        } else if (selectedSort === '최근순') {
+          apiUrl = '/api/v1/admin/groups?limit=20&offset=0';
+        } 
+        const data = await fetchAllGroupData(apiUrl); 
         setGroupData(data);
       } catch (error) {
         console.error('데이터를 가져오는 중 에러 발생:', error);
       }
     }
-
     fetchData();
   }, [selectedSort]);
 
@@ -45,27 +46,6 @@ function AdminGroup() {
       throw error;
     }
   }
-
-  async function fetchAllGroup() {
-    try {
-      const response = await axios.get('/api/v1/admin/groups');
-      return response.data.data;
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await fetchAllGroup();
-        setGroupData(data);
-      } catch (error) {
-        console.error('데이터를 가져오는 중 에러 발생:', error);
-      }
-    }
-    fetchData();
-  }, []);
 
   return (
     <A.Wrapper>
@@ -80,6 +60,9 @@ function AdminGroup() {
             }}
           />
         </A.Top>
+        <A.Total>
+          총 <A.Sum>{groupData.length}</A.Sum> 개
+        </A.Total>
         <A.Layout>
           <div ref={element}></div>
           <A.Table>

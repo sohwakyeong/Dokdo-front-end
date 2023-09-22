@@ -15,6 +15,7 @@ interface AdminUserProps {
 function UserData({ data }: AdminUserProps) {
   const [updated, setUpdated] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [deleted, setDeleted] = useState(false);
 
   const [userData, setUserData] = useState<{
     id: number;
@@ -31,6 +32,19 @@ function UserData({ data }: AdminUserProps) {
       });
     }
   }, [data]);
+
+  async function handleDeleteUser() {
+    try {
+      await axios.delete(`/api/v1/admin/users/${data?.user_id}`)
+      alert("삭제가 완료되었습니다.");
+      setDeleted(true);
+      window.location.reload();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+ 
 
   async function handleUpdatedUser() {
     const updatedUserData = {
@@ -71,6 +85,9 @@ function UserData({ data }: AdminUserProps) {
           <A.Input
             type="text"
             value={userData?.name || ''}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setUserData(prevData => ({ ...prevData!, name: e.target.value }))
+            }
             readOnly={!isEditing}
           />
         </td>
@@ -88,6 +105,8 @@ function UserData({ data }: AdminUserProps) {
           {isEditing ? (
             <>
               <A.AdminButton onClick={handleUpdatedUser}>저장</A.AdminButton>
+              <A.AdminButton onClick = {handleDeleteUser}>삭제</A.AdminButton>
+              {deleted && <></>}
               <A.AdminButton onClick={() => setIsEditing(false)}>
                 취소
               </A.AdminButton>

@@ -37,6 +37,9 @@ function AdminAlbum() {
         <A.Top>
           <A.Headline> 회원 사진첩 관리</A.Headline>
         </A.Top>
+        <A.Total>
+        총 <A.Sum>{albumData.length}</A.Sum> 개
+         </A.Total>
         <A.Layout>
           <div ref={element}></div>
           <A.Table>
@@ -63,3 +66,4 @@ function AdminAlbum() {
 }
 
 export default AdminAlbum;
+
