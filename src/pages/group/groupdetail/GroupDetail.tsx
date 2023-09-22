@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { getCookie } from '@/helper/Cookie';
 import * as GD from '@/pages/group/groupdetail/GroupDetail.styled';
 import { useNavigate } from 'react-router-dom';
-
 import {
   ModalWrapper,
   ModalHeader,
   ModalContent,
 } from '@/pages/group/groupdetail/GroupDetail.styled';
-import { useParams } from 'react-router-dom'; // useParams 임포트
+import { useParams } from 'react-router-dom';
 import GroupHeader from '@/components/layout/header/GroupHeader';
 import Modal from 'react-modal';
-import GroupLikeButton from './GroupLike';
+import GroupLikeButton from '@/components/group/grouplike/GroupLike';
 Modal.setAppElement('#root');
 
 interface MemberType {
@@ -65,15 +64,21 @@ function GroupDetail() {
   const [schedules, setSchedules] = useState<Array<any>>([]);
   const loginToken = getCookie('loginToken');
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  const getLocalStorageKey = () => `schedules_${groupId}`;
+
+  // 함수를 useCallback으로 감싸 의존성 배열에 추가
+  const getLocalStorageKey = useCallback(
+    () => `schedules_${groupId}`,
+    [groupId],
+  );
+
   const [members, setMembers] = useState<Array<any>>([]);
   const uniqueMembers: MemberType[] = [];
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [joinError, setJoinError] = useState<string | null>(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editedGroupData, setEditedGroupData] = useState<any>(null);
 
   members.forEach(member => {
-    // Check if the member's user_id and name are not already in uniqueMembers
     if (
       !uniqueMembers.some(
         m => m.user_id === member.user_id && m.user.name === member.user.name,
@@ -184,12 +189,22 @@ function GroupDetail() {
       localStorage.getItem(getLocalStorageKey()) || '[]',
     );
     setSchedules(savedSchedules);
-  }, [groupId]); // groupId가 변경될 때만 실행
+  }, [groupId, getLocalStorageKey]); // 'groupId'와 'getLocalStorageKey'를 의존성 배열에 추가
 
   useEffect(() => {
     // schedules 상태가 변경될 때마다 로컬 스토리지에 저장
     localStorage.setItem(getLocalStorageKey(), JSON.stringify(schedules));
-  }, [schedules, groupId]);
+  }, [schedules, groupId, getLocalStorageKey]); // 'schedules', 'groupId', 'getLocalStorageKey'를 의존성 배열에 추가
+
+  useEffect(() => {
+    // schedules 상태가 변경될 때마다 로컬 스토리지에 저장
+    localStorage.setItem(getLocalStorageKey(), JSON.stringify(schedules));
+  }, [loginToken, groupId, schedules, getLocalStorageKey]); // 'loginToken', 'groupId', 'schedules', 'getLocalStorageKey'를 의존성 배열에 추가
+
+  useEffect(() => {
+    // schedules 상태가 변경될 때마다 로컬 스토리지에 저장
+    localStorage.setItem(getLocalStorageKey(), JSON.stringify(schedules));
+  }, [loginToken, groupId]);
   useEffect(() => {
     // API 요청 함수 정의
     async function fetchGroupData(groupId: number) {
@@ -202,6 +217,7 @@ function GroupDetail() {
         });
         if (response.status === 200) {
           setGroupData(response.data.data);
+          setEditedGroupData(response.data.data); // 그룹 정보를 수정하는 상태에도 저장
         } else {
           console.error('그룹 정보 가져오기 에러:', response.status);
         }
@@ -211,7 +227,7 @@ function GroupDetail() {
     }
 
     // 미리 정의한 API 요청 함수를 호출하여 데이터를 가져옴
-    fetchGroupData(Number(groupId)); // groupId를 숫자로 변환하여 함수에 전달
+    fetchGroupData(Number(groupId));
   }, [loginToken, groupId]);
 
   if (!groupData) {
@@ -274,7 +290,72 @@ function GroupDetail() {
         member.user_id === groupData?.mem[0]?.user_id),
   );
 
-  console.log(groupData.profile);
+  const openEditModal = () => {
+    setIsEditModalOpen(true);
+    // 그룹 정보를 복사하여 수정을 위한 상태에 저장
+    setEditedGroupData({ ...groupData });
+  };
+
+  const closeEditModal = () => {
+    setIsEditModalOpen(false);
+  };
+
+  async function updateGroupInfo() {
+    try {
+      const response = await axios.put(
+        `/api/v1/group/${groupData?.group_id}`,
+        editedGroupData,
+        {
+          headers: {
+            Authorization: `Bearer ${loginToken}`,
+          },
+          withCredentials: true,
+        },
+      );
+
+      if (response.status === 200) {
+        console.log('그룹 정보 수정 성공:', response.data);
+        setGroupData(editedGroupData); // Update with edited data
+        closeEditModal();
+        alert('수정이 완료되었습니다!');
+      } else {
+        console.error('그룹 정보 수정 실패:', response.status);
+      }
+    } catch (error) {
+      console.error('그룹 정보 수정 에러:', error);
+    }
+  }
+
+  const addTag = () => {
+    const newTag = ''; // 새로운 태그 값을 설정하십시오.
+    setEditedGroupData({
+      ...editedGroupData,
+      tags: [...editedGroupData.tags, newTag],
+    });
+  };
+
+  // 태그 변경 핸들러
+  const handleTagChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+  ) => {
+    const newTags = [...editedGroupData.tags];
+    newTags[index] = e.target.value;
+    setEditedGroupData({
+      ...editedGroupData,
+      tags: newTags,
+    });
+  };
+
+  // 태그 삭제 함수
+  const removeTag = (index: number) => {
+    const newTags = [...editedGroupData.tags];
+    newTags.splice(index, 1);
+    setEditedGroupData({
+      ...editedGroupData,
+      tags: newTags,
+    });
+  };
 
   return (
     <GD.Wrapper>
@@ -284,6 +365,11 @@ function GroupDetail() {
       <GD.ModalDisplay>
         {showDropdown && (
           <GD.DropdownContent>
+            <GD.EditGroupSection>
+              <GD.EditGroupInfo onClick={openEditModal}>
+                그룹 정보 수정
+              </GD.EditGroupInfo>
+            </GD.EditGroupSection>
             <GD.ProfileSection>
               <GD.CustomFileInput htmlFor="profilePicInput">
                 <GD.StyledFileInput
@@ -293,7 +379,7 @@ function GroupDetail() {
                   onChange={handleImageUpload}
                 />
                 <GD.CustomFileInputLabel onClick={uploadProfilePic}>
-                  그룹 사진 업로드
+                  모임 대표사진 수정
                 </GD.CustomFileInputLabel>
               </GD.CustomFileInput>
             </GD.ProfileSection>
@@ -305,6 +391,97 @@ function GroupDetail() {
           </GD.DropdownContent>
         )}
       </GD.ModalDisplay>
+      {isEditModalOpen && (
+        <ModalWrapper>
+          <ModalHeader>
+            <div>그룹 정보 수정</div>
+          </ModalHeader>
+          <ModalContent>
+            <form>
+              <div>
+                <label>그룹 이름</label>
+                <input
+                  type="text"
+                  value={editedGroupData?.name}
+                  onChange={e =>
+                    setEditedGroupData({
+                      ...editedGroupData,
+                      name: e.target.value,
+                    })
+                  }
+                />
+              </div>
+
+              <div>
+                <label>그룹 장소</label>
+                <input
+                  type="text"
+                  value={editedGroupData?.place}
+                  onChange={e =>
+                    setEditedGroupData({
+                      ...editedGroupData,
+                      place: e.target.value,
+                    })
+                  }
+                />
+              </div>
+
+              <div>
+                <label>검색 일</label>
+                <input
+                  type="text"
+                  value={editedGroupData?.search.day}
+                  onChange={e =>
+                    setEditedGroupData({
+                      ...editedGroupData,
+                      search: {
+                        ...editedGroupData.search,
+                        day: e.target.value,
+                      },
+                    })
+                  }
+                />
+              </div>
+              <div>
+                <label>모임 소개</label>
+                <input
+                  type="text"
+                  value={editedGroupData?.introduction}
+                  onChange={e =>
+                    setEditedGroupData({
+                      ...editedGroupData,
+                      introduction: e.target.value,
+                    })
+                  }
+                />
+              </div>
+
+              {/* 
+              <div>
+                <label>태그</label>
+                {editedGroupData?.tags.map((tag: string, index: number) => (
+                  <div key={index}>
+                    <input
+                      type="text"
+                      value={tag}
+                      onChange={e => handleTagChange(e, index)}
+                    />
+                    <button onClick={() => removeTag(index)}>태그 삭제</button>
+                  </div>
+                ))}
+                <button onClick={addTag}>태그 추가</button>
+              </div> */}
+
+              <div className="button-container">
+                <button onClick={closeEditModal}>취소</button>
+                <button type="button" onClick={updateGroupInfo}>
+                  저장
+                </button>
+              </div>
+            </form>
+          </ModalContent>
+        </ModalWrapper>
+      )}
 
       <GD.DropdownButton onClick={toggleDropdown}>▪︎▪︎▪︎</GD.DropdownButton>
       <GD.GroupImage>
@@ -314,8 +491,8 @@ function GroupDetail() {
         />
       </GD.GroupImage>
       {groupData && (
-      <GroupLikeButton group_id={groupData.group_id} like={groupData.like} />
-    )}
+        <GroupLikeButton group_id={groupData.group_id} like={groupData.like} />
+      )}
 
       <GD.GroupInfo>
         <GD.GroupName>📚{groupData.name}</GD.GroupName>
@@ -359,7 +536,7 @@ function GroupDetail() {
           ))
         )}
 
-        {isModalOpen && ( // Modal의 isOpen 대신 조건부 렌더링 사용
+        {isModalOpen && (
           <ModalWrapper>
             <ModalHeader>
               <div>일정 등록</div>
@@ -417,14 +594,13 @@ function GroupDetail() {
         )}
       </GD.Schedule>
       <GD.MemberBox>
-        <GD.Member>모임 멤버 ({uniqueMembers.length + 1})</GD.Member>{' '}
-        {/* Displaying count of members here */}
+        <GD.Member>모임 멤버 ({uniqueMembers.length + 1})</GD.Member>
         <ul>
           {uniqueMembers.map((member: MemberType, index: number) => (
             <li key={index}>
               <GD.MemberList>
                 <GD.MemberImg>
-                  <img src={member.post.images[0]} alt="프로필" />
+                  <img src={member.user.profilePic} alt="프로필" />
                 </GD.MemberImg>
                 <GD.Desc>
                   <div>{member.user.name}</div>
@@ -436,8 +612,6 @@ function GroupDetail() {
         <GD.ButtonDisplay>
           <GD.NFWrapper>
             <GD.NFDisplay>
-              {/* Conditionally render the button based on join error */}
-
               <div>{joinError}</div>
               <GD.NFNextBtn>
                 <button onClick={handleJoinGroup}>모임 가입하기</button>
