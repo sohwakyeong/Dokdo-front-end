@@ -45,7 +45,7 @@ export const ImgBox = styled.div`
 
 export const Img = styled.div`
   width: 200px;
-  height: 100%;
+  height: 300px;
 
   & img {
     width: 100%;
