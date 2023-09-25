@@ -3,7 +3,7 @@ import * as MyPostsStyle from '@/pages/mypage/myposts/MyPosts.styled';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { getCookie } from '@/helper/Cookie';
-
+import MorePost from '@/assets/icon/newIcon/chat1.png';
 interface PostData {
   _id: string;
   group_id: number;
@@ -28,15 +28,19 @@ function MyPostsComponent() {
   const [myPosts, setMyPosts] = useState<PostData[]>([]);
   const [selectedPosts, setSelectedPosts] = useState<PostData[]>([]);
   const [userData, setUserData] = useState<UserData | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true); // 초기값을 true로 설정하여 처음에 로딩 중으로 설정
   const [offset, setOffset] = useState(0);
 
   function formatCreatedAt(createdAt: string | number | Date) {
     const date = new Date(createdAt);
     const month = date.getMonth() + 1;
-    const day = date.getDate();
+    const day = date.getDate() - 1;
     return `${month}월 ${day}일`;
   }
+
+  const onClickToPost = () => {
+    navigate('/group/list');
+  };
 
   useEffect(() => {
     const loginToken = getCookie('loginToken');
@@ -56,7 +60,7 @@ function MyPostsComponent() {
         }
       })
       .catch(error => {
-        console.error('myposts유저 정보 가져오기 에러:', error);
+        console.error('myposts 유저 정보 가져오기 에러:', error);
         navigate('/');
       });
   }, [navigate]);
@@ -76,7 +80,6 @@ function MyPostsComponent() {
         if (postsResponse.data.error === null) {
           const userPosts: PostData[] = postsResponse.data.data.posts;
 
-          // 'posts' 배열을 추출하여 선택된 게시물로 설정
           setMyPosts(userPosts);
 
           const fetchAllPosts = async () => {
@@ -84,6 +87,8 @@ function MyPostsComponent() {
 
             for (const post of userPosts) {
               try {
+                if (userPosts.length === 0) {
+                }
                 const postResponse = await axios.get(
                   `/api/v1/group/${post.group_id}/posts/${post.post_id}`,
                 );
@@ -121,19 +126,17 @@ function MyPostsComponent() {
       });
   }, [offset]);
 
-  // 스크롤 이벤트 감지 함수
   const handleScroll = () => {
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
 
     if (windowHeight + scrollTop >= documentHeight - 100 && !loading) {
-      // 스크롤이 가장 아래로 도달하면 추가 데이터를 로드합니다.
+
       setOffset(prevOffset => prevOffset + 5);
     }
   };
 
-  // 스크롤 이벤트 리스너 등록
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => {
@@ -143,45 +146,62 @@ function MyPostsComponent() {
 
   return (
     <MyPostsStyle.Container>
-      <MyPostsStyle.Wrapper>
+      {loading ? (
+        <MyPostsStyle.LoadingContainer>
+          <MyPostsStyle.LoadingContent>
+            <MyPostsStyle.LoadingImg src={MorePost} alt="MorePost" />
+            <MyPostsStyle.LoadingText>
+              내가 쓴 글 목록을 불러오는 중...
+            </MyPostsStyle.LoadingText>
+          </MyPostsStyle.LoadingContent>
+        </MyPostsStyle.LoadingContainer>
+      ) : userData && selectedPosts.length > 0 ? (
         <MyPostsStyle.GroupBoardList>
-          {userData &&
-            selectedPosts.map((selectedPost, index) => (
-              <MyPostsStyle.BoardWrap>
-                <MyPostsStyle.Boardbox key={selectedPost._id || index}>
-                  <MyPostsStyle.BoardLeft>
-                    <MyPostsStyle.ProfileData>
-                      <MyPostsStyle.ProfileImg
-                        src={`/api/v1/image/profile/${userData.profilePic}`}
-                        alt={`${userData.name}의 프로필 사진`}
-                      />
-                      <MyPostsStyle.UpdatedProfile>
-                        <MyPostsStyle.Writer>
-                          {userData.name}
-                        </MyPostsStyle.Writer>
-                        <MyPostsStyle.PostedDate>
-                          {formatCreatedAt(selectedPost.createdAt)}
-                        </MyPostsStyle.PostedDate>
-                      </MyPostsStyle.UpdatedProfile>
-                    </MyPostsStyle.ProfileData>
-                    <MyPostsStyle.Title>
-                      {selectedPost.title}
-                    </MyPostsStyle.Title>
-                    <MyPostsStyle.Content>
-                      {selectedPost.content}
-                    </MyPostsStyle.Content>
-                  </MyPostsStyle.BoardLeft>
-                  <MyPostsStyle.BoardImg
-                    src={`/api/v1/image/post/${selectedPost.images[0]}`}
-                    alt="게시된 이미지"
-                  />
-                </MyPostsStyle.Boardbox>
-              </MyPostsStyle.BoardWrap>
-            ))}
+          {selectedPosts.map((selectedPost, index) => (
+            <MyPostsStyle.BoardWrap key={selectedPost._id || index}>
+              <MyPostsStyle.Boardbox>
+                <MyPostsStyle.BoardLeft>
+                  <MyPostsStyle.ProfileData>
+                    <MyPostsStyle.ProfileImg
+                      src={`/api/v1/image/profile/${userData.profilePic}`}
+                      alt={`${userData.name}의 프로필 사진`}
+                    />
+                    <MyPostsStyle.UpdatedProfile>
+                      <MyPostsStyle.Writer>{userData.name}</MyPostsStyle.Writer>
+                      <MyPostsStyle.PostedDate>
+                        {formatCreatedAt(selectedPost.createdAt)}
+                      </MyPostsStyle.PostedDate>
+                    </MyPostsStyle.UpdatedProfile>
+                  </MyPostsStyle.ProfileData>
+                  <MyPostsStyle.Title>{selectedPost.title}</MyPostsStyle.Title>
+                  <MyPostsStyle.Content>
+                    {selectedPost.content}
+                  </MyPostsStyle.Content>
+                </MyPostsStyle.BoardLeft>
+                <MyPostsStyle.BoardImg
+                  src={`/api/v1/image/post/${selectedPost.images[0]}`}
+                  alt="게시된 이미지"
+                />
+              </MyPostsStyle.Boardbox>
+            </MyPostsStyle.BoardWrap>
+          ))}
         </MyPostsStyle.GroupBoardList>
-      </MyPostsStyle.Wrapper>
+      ) : (
+        <MyPostsStyle.NoContainer>
+          <MyPostsStyle.NoContent>
+            <MyPostsStyle.NoContentImg src={MorePost} alt="MorePost" />
+            <MyPostsStyle.NoContentText>
+              아직 작성하신 글이 없습니다.
+            </MyPostsStyle.NoContentText>
+            <MyPostsStyle.GoPostBtn onClick={onClickToPost}>
+              글쓰러 가기
+            </MyPostsStyle.GoPostBtn>
+          </MyPostsStyle.NoContent>
+        </MyPostsStyle.NoContainer>
+      )}
     </MyPostsStyle.Container>
   );
+
 }
 
 export default MyPostsComponent;

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as GBW from '@/pages/group/groupboardwrite/GroupBoardWrite.styled';
 import BoardWriteSection from '@/components/common/boardwritesection/BoardWriteSection';
-import Camera from '@/assets/icon/Camera.png';
-import { useParams } from 'react-router-dom';
+
+import { useParams, useNavigate } from 'react-router-dom';
 import GroupHeader from '@/components/layout/header/GroupHeader';
 import { getCookie } from '@/helper/Cookie';
 
@@ -13,54 +13,81 @@ const GroupBoardWrite: React.FC = () => {
   const [content, setContent] = useState('');
   const [images, setImages] = useState<File[]>([]); // 이미지 파일 배열
   const [userData, setUserData] = useState<any>(null); // User data
+  const [postId, setPostId] = useState<number | null>(null); // 게시물 ID
 
   const { groupId } = useParams<{ groupId: string }>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loginToken = getCookie('loginToken'); // Assuming getCookie is defined somewhere
 
-    axios
-      .get('/api/v1/auth/me', {
-        headers: {
-          Authorization: `Bearer ${loginToken}`,
-        },
-        withCredentials: true,
-      })
-      .then(response => {
-        if (response.status === 200) {
-          setUserData(response.data.data.getUser);
-        } else {
-          window.location.href = '/signup'; // Simulating page navigation
-        }
-      })
-      .catch(error => {
-        console.error('myposts유저 정보 가져오기 에러:', error);
-        window.location.href = '/'; // Simulating page navigation
-      });
-  }, []);
+    // 게시물 ID가 주어진 경우 수정 모드로 게시물 데이터를 가져옴
+    if (postId) {
+      axios
+        .get(`/api/v1/group/${groupId}/posts/${postId}`, {
+          headers: {
+            Authorization: `Bearer ${loginToken}`,
+          },
+          withCredentials: true,
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            const postData = response.data.data.post;
+            setTitle(postData.title);
+            setContent(postData.content);
+          } else {
+            console.error('Error fetching post data:', response.status);
+          }
+        })
+        .catch((error) => {
+          console.error('Error fetching post data:', error);
+        });
+    } else {
+      // 게시물 ID가 주어지지 않은 경우 새로운 게시물 작성 모드
+      axios
+        .get('/api/v1/auth/me', {
+          headers: {
+            Authorization: `Bearer ${loginToken}`,
+          },
+          withCredentials: true,
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            setUserData(response.data.data.getUser);
+          } else {
+            window.location.href = '/signup'; // Simulating page navigation
+          }
+        })
+        .catch((error) => {
+          console.error('myposts유저 정보 가져오기 에러:', error);
+          window.location.href = '/'; // Simulating page navigation
+        });
+    }
+  }, [postId, groupId]);
 
   const handleCreatePost = async () => {
     try {
       if (!userData) {
-        setResponseMessage('로그인이 필요합니다.');
+        alert('로그인이 필요합니다.');
         return;
       }
-      const uploadedImageNames = await uploadImages(); // Modified this line
+      const uploadedImageNames = await uploadImages();
 
       const payload = {
         title: title,
         content: content,
-        images: uploadedImageNames, // Use the uploaded image names directly
+        images: uploadedImageNames,
       };
 
       const response = await axios.post(
         `/api/v1/group/${groupId}/posts`,
         payload,
-        { withCredentials: true },
+        { withCredentials: true }
       );
 
       if (response.status === 200) {
-        setResponseMessage('성공적으로 작성되었습니다!');
+        alert('성공적으로 작성되었습니다!');
+        navigate(`/group/${groupId}/board`);
       } else {
         setResponseMessage(`오류 발생: ${response.statusText}`);
       }
@@ -76,12 +103,12 @@ const GroupBoardWrite: React.FC = () => {
     for (const imageFile of images) {
       try {
         const formData = new FormData();
-        formData.append('img', imageFile, 'img'); // 'img'로 키 값을 설정
+        formData.append('img', imageFile, 'img');
 
         const uploadResponse = await axios.post(
           `/api/v1/group/images`,
           formData,
-          { withCredentials: true },
+          { withCredentials: true }
         );
 
         if (uploadResponse.data.error === null) {
@@ -115,7 +142,7 @@ const GroupBoardWrite: React.FC = () => {
         <textarea
           placeholder="제목을 입력해주세요. (40자)"
           value={title}
-          onChange={e => setTitle(e.target.value)}
+          onChange={(e) => setTitle(e.target.value)}
           rows={2}
           maxLength={40}
         />
@@ -125,7 +152,7 @@ const GroupBoardWrite: React.FC = () => {
         <textarea
           placeholder="게시글 내용은 1000자 이내로 입력해주세요"
           value={content}
-          onChange={e => setContent(e.target.value)}
+          onChange={(e) => setContent(e.target.value)}
           rows={15}
           maxLength={1000}
         />

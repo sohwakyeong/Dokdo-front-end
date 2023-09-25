@@ -6,16 +6,8 @@ export const Wrapper = styled.div`
   gap: 20px;
   align-items: center;
   margin: 30px 0;
-  cursor: pointer;;
-
-  &:hover {
-    transform: scale(1.01);
-  }
-
-  &:active {
-    transform: scale(1);
-  }
 `;
+
 export const Container = styled.div`
   width: 88px;
   height: 88px;
@@ -26,6 +18,15 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(1.05);
+  }
 `;
 
 export const Image = styled.img`
@@ -39,6 +40,7 @@ export const Genre = styled.div`
   width: 100%;
   color: black;
 `;
+
 export const ContainerWrapper = styled.div`
   display: flex;
   flex-direction: column;

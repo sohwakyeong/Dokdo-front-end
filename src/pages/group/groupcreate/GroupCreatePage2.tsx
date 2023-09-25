@@ -108,6 +108,7 @@ const GroupCreatePage2: React.FC<GroupCreatePage2Props> = ({
         <StepCircle>1</StepCircle>
         <StepCircle>2</StepCircle>
         <StepCircle>3</StepCircle>
+        <StepCircle>4</StepCircle>
       </StepsContainer>
       <Title>
         독서 토론 모임에 대한 <br /> 정보를 설정해주세요

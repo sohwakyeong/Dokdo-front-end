@@ -69,9 +69,6 @@ function BoardBox({ data, isMainPage }: BoardBoxProps) {
         {isMainPage ? (
           // 메인 페이지 렌더링
           <>
-            <BB.GroupName>{name}</BB.GroupName>
-            <BB.Intro>{introduction}</BB.Intro>
-            <BB.Members>☺︎ {like}명 참여중</BB.Members>
             <BB.HashTagDisplay>
               <BB.Place>🇰🇷{location}</BB.Place>
               {Array.isArray(tags) &&
@@ -79,6 +76,9 @@ function BoardBox({ data, isMainPage }: BoardBoxProps) {
                   <BB.HashTags key={index}>{tag}</BB.HashTags>
                 ))}
             </BB.HashTagDisplay>
+            <BB.GroupName>{name}</BB.GroupName>
+            <BB.Intro>{introduction}</BB.Intro>
+            <BB.Members>❤️ {like}명이 좋아합니다.</BB.Members>
           </>
         ) : (
           // 그룹 페이지 렌더링
@@ -91,7 +91,7 @@ function BoardBox({ data, isMainPage }: BoardBoxProps) {
             </BB.HashTagDisplay>
             <BB.GroupName>{name}</BB.GroupName>
             <BB.Intro>{introduction}</BB.Intro>
-            <BB.Members>☺︎ {like}명 참여중</BB.Members>
+            <BB.Members>❤️ {like}명이 좋아합니다.</BB.Members>
           </>
         )}
       </BB.TextBox>

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import * as A from '@/pages/admin/Admin.styled';
 import axios from 'axios';
 import UserData from '@/pages/admin/UserData';
+import MorePost from '@/assets/icon/newIcon/chat1.png';
 
 async function fetchAllUser() {
   try {
@@ -14,6 +15,8 @@ async function fetchAllUser() {
 
 function AdminUser() {
   const [userData, setUserData] = useState([]);
+  const [isLoading, setIsLoding] = useState(false);
+
   const element = useRef<HTMLDivElement>(null);
   const onMoveBox = () => {
     element.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -22,10 +25,13 @@ function AdminUser() {
   useEffect(() => {
     async function fetchData() {
       try {
+        setIsLoding(true)
         const data = await fetchAllUser();
         setUserData(data);
+        setIsLoding(false);
       } catch (error) {
         console.error('데이터를 가져오는 중 에러 발생:', error);
+        setIsLoding(false);
       }
     }
     fetchData();
@@ -41,8 +47,18 @@ function AdminUser() {
           총 <A.Sum>{userData.length}</A.Sum> 명
         </A.Total>
         <A.Layout>
-          <div ref={element}></div>
-          <A.Table>
+          {isLoading ? (<A.NoContent>
+              <A.NoImage src = {MorePost} alt="게시물없음"/>
+              <A.NoText>데이터를 불러오는중 ...</A.NoText>
+            </A.NoContent>) :userData.length === 0 ? (
+            <A.NoContent>
+              <A.NoImage src = {MorePost} alt="게시물없음"/>
+              <A.NoText>아직 작성된 게시물이 없습니다.</A.NoText>
+            </A.NoContent>
+          ) : (
+            <>
+              <div ref={element}></div>
+            <A.Table>
             <thead>
               <tr>
                 <th>닉네임</th>
@@ -54,6 +70,8 @@ function AdminUser() {
               <UserData key={name} data={email} />
             ))}
           </A.Table>
+            </>
+          )}
         </A.Layout>
       </A.Menu>
       <A.TopButton>

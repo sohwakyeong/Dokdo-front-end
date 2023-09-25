@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import axios from 'axios';
 import * as A from '@/pages/admin/Admin.styled';
 
@@ -22,12 +21,12 @@ interface AdminPostProps {
 }
 
 function PostData({ data }: AdminPostProps) {
-  const [deleted, setDeleted] = useState(false);
 
   async function handleDeletePost() {
     try {
       await axios.delete(`/api/v1/admin/posts/${data?.post.post_id}`);
-      setDeleted(true);
+      alert("삭제가 완료되었습니다.");
+      window.location.reload();
     } catch (error) {
       throw error;
     }
@@ -55,7 +54,6 @@ function PostData({ data }: AdminPostProps) {
         {data && (
           <td>
             <A.AdminButton onClick={handleDeletePost}>삭제</A.AdminButton>
-            {deleted && <></>}
           </td>
         )}
       </tr>

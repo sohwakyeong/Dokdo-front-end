@@ -1,19 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { SyntheticEvent, useEffect, useState } from 'react';
 import * as MyPageStyle from '@/pages/mypage/mainmypage/MyPage.styled';
 import { getCookie, removeCookie } from '@/helper/Cookie';
 import { useNavigate } from 'react-router-dom';
 import AxiosC from '@/helper/AxiosC';
 import axios from 'axios';
 import Slider5 from '@/components/common/slider/Slider5';
+import UserImg from '@/assets/img/userbasicimg.png';
 
 function MyPageComponent() {
   const navigate = useNavigate();
-
+  const linkToAdminPage = () => {
+   navigate('/admin/user');
+  };
+ 
   const [userData, setUserData] = useState<{
     name: any;
     profilePic: string;
     introduction: string;
+    role: string;
   } | null>(null);
+
+  const defaultUserImg = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+    e.currentTarget.src = UserImg;
+  };
 
   const loginToken = getCookie('loginToken');
   useEffect(() => {
@@ -36,18 +45,18 @@ function MyPageComponent() {
         navigate('/login');
       });
   }, [navigate, loginToken]);
+  
 
   if (!userData) {
     return <div>로딩 중...</div>;
   }
 
-  // 로그아웃 버튼의 onClick Event
   // 이 함수에서 AxiosC를 axios로 바꾸면 로그아웃이 안된다
   const handleLogout = async () => {
     try {
       const response = await AxiosC.put('/api/v1/auth/logout');
 
-      await removeCookie('loginToken'); // await 추가
+      await removeCookie('loginToken'); 
 
       alert('로그아웃에 성공하셨습니다.');
 
@@ -63,7 +72,8 @@ function MyPageComponent() {
       <MyPageStyle.Wrapper>
         <MyPageStyle.UserIcon
           src={`/api/v1/image/profile/${userData.profilePic}`}
-          alt="유저 설정 이미지"
+          alt=""
+          onError={defaultUserImg}
         />
         <MyPageStyle.Introduce>
           <MyPageStyle.NickName>{userData.name}</MyPageStyle.NickName>
@@ -91,12 +101,19 @@ function MyPageComponent() {
           <p>나의 정보 수정</p>
         </MyPageStyle.ManageLink2>
       </MyPageStyle.ManageList>
+{userData.role === "admin" ? (
       <MyPageStyle.ManageList2>
+        <MyPageStyle.ManageTitle>관리자 전용</MyPageStyle.ManageTitle>
+        <MyPageStyle.ManageButton onClick={linkToAdminPage}>
+          <p>관리자 페이지</p>
+        </MyPageStyle.ManageButton>
+      </MyPageStyle.ManageList2>) : <MyPageStyle.ManageList2>
         <MyPageStyle.ManageTitle>고객센터</MyPageStyle.ManageTitle>
         <MyPageStyle.ManageLink2 to="/user/mypage/inquiry">
           <p>문의하기</p>
         </MyPageStyle.ManageLink2>
       </MyPageStyle.ManageList2>
+}
       <MyPageStyle.Logout onClick={handleLogout}>로그아웃</MyPageStyle.Logout>
     </MyPageStyle.Container>
   );

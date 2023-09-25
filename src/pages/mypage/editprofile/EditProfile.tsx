@@ -1,10 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { SyntheticEvent, useCallback, useEffect, useState } from 'react';
 import * as EditStyle from '@/pages/mypage/editprofile/EditProfile.styled';
 import UserIcon from '@/assets/img/userprofile.png';
 import { getCookie } from '@/helper/Cookie';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Modal from '@/components/common/modal/modal';
+import UserImg from '@/assets/img/userbasicimg.png';
 
 function EditProfileComponent() {
   const navigate = useNavigate();
@@ -17,8 +18,6 @@ function EditProfileComponent() {
   const [isProfileImageModalOpen, setIsProfileImageModalOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null); // 선택한 파일을 상태로 관리
 
-  // 데이터 API. fetchData할 때는 axios를 써야함
-  // 유저 정보 가져오기 위한 값 타입 지정
   const [userData, setUserData] = useState<{
     name: any;
     email: string;
@@ -27,6 +26,9 @@ function EditProfileComponent() {
     user_id: number;
   } | null>(null);
 
+  const defaultUserImg = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+    e.currentTarget.src = UserImg;
+  };
   const loginToken = getCookie('loginToken');
 
   // 유효성 검사 비밀번호
@@ -65,7 +67,8 @@ function EditProfileComponent() {
     },
     [newPassword],
   );
-  // 파일 선택 시 호출되는 함수
+
+  // 파일 선택시
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
@@ -95,7 +98,7 @@ function EditProfileComponent() {
       });
   }, [navigate, loginToken]);
 
-  // 모달에서 파일 업로드 버튼 함수
+  // 모달에서 프로필사진 업로드 버튼
   const uploadProfilePic = async () => {
     if (!selectedFile) {
       alert('파일을 선택하세요.');
@@ -115,6 +118,7 @@ function EditProfileComponent() {
       });
 
       if (response.status === 200) {
+        window.location.reload();
         setProfilePic(response.data.data);
         setIsProfileImageModalOpen(false);
       } else {
@@ -129,7 +133,7 @@ function EditProfileComponent() {
     return <div>로딩 중...</div>;
   }
 
-  // 모달에서 비밀번호 변경하기 함수
+  // 모달에서 비밀번호 변경 버튼
   const onClickModalSubmit = () => {
     if (!(newPassword && confirmPassword)) {
       return alert('빈칸 없이 입력해주세요.');
@@ -166,10 +170,7 @@ function EditProfileComponent() {
       });
   };
 
-  // 저장하기 함수
   const onClickSubmit = () => {
-    console.log('onClickSubmit 함수 호출됨'); // 이 줄을 추가합니다.
-
     if (!userData.name) {
       return alert('닉네임을 입력해주세요.');
     }
@@ -192,6 +193,7 @@ function EditProfileComponent() {
       .then(response => {
         console.log('응답:', response);
         if (response.status === 200) {
+    
           alert('프로필 변경완료');
           navigate('/user/mypage');
         } else {
@@ -208,14 +210,14 @@ function EditProfileComponent() {
         <EditStyle.UserIconBtn onClick={() => setIsProfileImageModalOpen(true)}>
           <EditStyle.UserIcon
             src={`/api/v1/image/profile/${userData.profilePic}?${Date.now()}`}
-            alt="유저 설정 이미지"
+            alt=""
+            onError={defaultUserImg}
           />
         </EditStyle.UserIconBtn>
-
+        
         {isProfileImageModalOpen && (
           <Modal onClose={() => setIsProfileImageModalOpen(false)}>
             <h1>프로필 이미지 업로드</h1>
-
             <EditStyle.FormTag>
               <EditStyle.Tag>이미지 선택</EditStyle.Tag>
             </EditStyle.FormTag>
