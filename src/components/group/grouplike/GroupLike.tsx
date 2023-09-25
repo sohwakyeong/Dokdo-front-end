@@ -48,14 +48,15 @@ function GroupLikeButton({ group_id, like }: GroupNameData) {
   // ...
 
   return (
-    <div>
+    <LikeDisPlay>
+      <div>❤️</div>
       <LikeButton
         className="LikeButton"
         onClick={() => handleGroupLikeButton(group_id)}
       >
-        ❤️ {groupLikeNum}
+        {groupLikeNum}
       </LikeButton>
-    </div>
+    </LikeDisPlay>
   );
 }
 
@@ -64,4 +65,17 @@ export default GroupLikeButton;
 const LikeButton = styled.button`
   border: none;
   background-color: white;
+  font-size: 11px;
+`;
+
+const LikeDisPlay = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  font-size: 20px;
+
+  & div {
+    font-size: 25px;
+  }
 `;

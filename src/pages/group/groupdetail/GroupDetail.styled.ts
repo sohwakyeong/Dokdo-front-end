@@ -245,6 +245,11 @@ export const MemberImg = styled.div`
   background-color: #ddd;
   overflow: hidden;
   margin: auto;
+
+  & img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const Desc = styled.div`
@@ -257,6 +262,7 @@ export const Desc = styled.div`
 export const ButtonDisplay = styled.div`
   display: flex;
   justify-content: center;
+  width: 100%;
 `;
 export const ModalWrapper = styled.div`
   position: fixed;
@@ -363,9 +369,8 @@ export const NFNextBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 85%;
   background-color: #84614b;
-  width: 380px;
   height: 45px;
   border-radius: 20px;
 
@@ -404,7 +409,6 @@ export const DropdownContent = styled.div`
   border-radius: 15px;
   width: 150px;
   height: 100px;
-
 `;
 
 export const ProfileSection = styled.div`
@@ -432,8 +436,7 @@ export const CustomFileInput = styled.label`
 
   &:hover {
     font-weight: 700;
-    color:#84614b;
-
+    color: #84614b;
   }
 `;
 
@@ -443,8 +446,7 @@ export const CustomFileInputLabel = styled.div`
 
   &:hover {
     font-weight: 700;
-    color:#84614b;
-
+    color: #84614b;
   }
 `;
 export const EditGroupInfo = styled.div`
@@ -452,6 +454,14 @@ export const EditGroupInfo = styled.div`
 
   &:hover {
     font-weight: 700;
-    color:#84614b;
+    color: #84614b;
   }
+`;
+
+export const GroupLikeDisplay = styled.div`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 9%;
+  height: 100%;
 `;
