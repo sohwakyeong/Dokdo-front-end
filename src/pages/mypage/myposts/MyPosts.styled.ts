@@ -9,13 +9,11 @@ export const Container = styled.div`
   margin: 0 auto;
 `;
 
-
-
 export const GroupBoardList = styled.ul`
   display: flex;
   flex-direction: column;
-
 `;
+
 export const BoardWrap = styled.div`
   width: 474px;
   border-bottom: solid 1px #ddd;
@@ -27,7 +25,7 @@ export const Boardbox = styled.div`
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-
+  padding: 5px 0;
 `;
 
 export const BoardLeft = styled.div`
@@ -50,13 +48,12 @@ export const BoardLeft = styled.div`
 
 export const ProfileData = styled.div`
   display: flex;
-
   align-items: center;
 `;
 
 export const ProfileImg = styled.img`
-  width: 33px;
-  height: 33px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   margin-bottom: 5px;
 `;
@@ -66,32 +63,27 @@ export const UpdatedProfile = styled.div`
   margin-left: 10px;
 `;
 export const Writer = styled.div`
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   color: black;
 `;
 
 export const PostedDate = styled.div`
   color: #727272;
-  font-size: 12px;
+  font-size: 13px;
 `;
 export const Title = styled.div`
   font-weight: 700;
   margin-top: 4px;
-  font-size: 14px;
+  font-size: 15px;
 `;
 
 export const Content = styled.div`
-  font-size: 13px;
+  font-size: 14px;
   margin-top: 1px;
   margin-bottom: 10px;
 `;
 
-export const GroupDes = styled.div`
-  display: flex;
-  font-size: 13px;
-  color: gray;
-`;
 export const ContentLikes = styled.div`
   margin-right: 10px;
 `;
@@ -101,8 +93,8 @@ export const ContentComment = styled.div`
 `;
 
 export const BoardImg = styled.img`
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   background-color: #ddd;
   border-radius: 15px;
   overflow: hidden;

@@ -27,7 +27,7 @@ export const UserIconBtn = styled.button`
   width: 130px;
   height: 130px;
   cursor: pointer;
-  margin-bottom: 22px;
+  margin: 10px 0;
 `;
 
 export const UserIcon = styled.img`
@@ -119,8 +119,9 @@ export const SubmitButton = styled.button`
   color: white;
   background-color: #84614b;
   cursor: pointer;
-  width: 90%;
+  width: 89%;
   margin: 30px auto 10px auto;
+  padding: 0;
 `;
 
 export const ModalSubmitButton = styled(SubmitButton)`

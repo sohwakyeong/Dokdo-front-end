@@ -142,7 +142,7 @@ function MyPostsComponent() {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, []); 
 
   return (
     <MyPostsStyle.Container>

@@ -14,6 +14,9 @@ import MyPostsComponent from '@/pages/mypage/myposts/MyPosts';
 import DeleteAccountComponent from '@/pages/mypage/deleteaccount/DeleteAccount';
 import Layout1 from '@/components/layout/layout1/Layout1';
 import Layout3 from '@/components/layout/layout1/Layout3';
+import Layout8 from '@/components/layout/layout1/Layout8';
+
+import Layout9 from '@/components/layout/layout1/Layout9';
 import AxiosC from '@/helper/AxiosC';
 
 const MypageRoutes = () => {
@@ -39,9 +42,9 @@ const MypageRoutes = () => {
       <Route
         path="/login"
         element={
-          <Layout3>
+          <Layout8>
             <LoginComponent />
-          </Layout3>
+          </Layout8>
         }
       />
       {/* 회원가입 */}
@@ -57,9 +60,9 @@ const MypageRoutes = () => {
       <Route
         path="/signupsuccess"
         element={
-          <Layout1>
+          <Layout8>
             <SignupSuccessComponent />
-          </Layout1>
+          </Layout8>
         }
       />
       {/* 마이페이지/회원탈퇴 */}
@@ -75,36 +78,36 @@ const MypageRoutes = () => {
       <Route
         path="/user/mypage/mygroups"
         element={
-          <Layout3>
+          <Layout9>
             <MyGroupsComponent />
-          </Layout3>
+          </Layout9>
         }
       />
       {/* 마이페이지/내가좋아요한모임 */}
       <Route
         path="/user/mypage/likedgroups"
         element={
-          <Layout3>
+          <Layout9>
             <LikedGroupsComponent />
-          </Layout3>
+          </Layout9>
         }
       />
       {/* 마이페이지/나의글목록 */}
       <Route
         path="/user/mypage/myposts"
         element={
-          <Layout3>
+          <Layout9>
             <MyPostsComponent />
-          </Layout3>
+          </Layout9>
         }
       />
       {/* 마이페이지/나의정보수정 */}
       <Route
         path="/user/mypage/editprofile"
         element={
-          <Layout3>
+          <Layout9>
             <EditProfileComponent />
-          </Layout3>
+          </Layout9>
         }
       />
 

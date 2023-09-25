@@ -6,7 +6,6 @@ import ClapImg from '@/assets/img/claphand.png';
 
 function SignupSuccessComponent() {
 
-
   return (
     <SignupSuccessStyle.Container>
       <SignupSuccessStyle.Wrapper>
