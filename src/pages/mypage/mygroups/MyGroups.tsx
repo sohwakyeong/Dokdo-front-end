@@ -4,6 +4,7 @@ import { getCookie } from '@/helper/Cookie';
 import axios from 'axios';
 import MoreButton from '@/components/common/morebutton/MoreButton';
 import GroupData from '@/pages/admin/GroupData';
+import { useNavigate } from 'react-router-dom';
 
 interface UserData {
   group: number[];
@@ -14,11 +15,13 @@ interface GroupData {
   introduction: string;
   profile: string;
   tags: string[];
+  group_id: number;
 }
 
 export default function MyGroupsComponent() {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [groupData, setGroupData] = useState<GroupData[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loginToken = getCookie('loginToken');
@@ -55,8 +58,9 @@ export default function MyGroupsComponent() {
         const groupResponse = await axios.get(`/api/v1/group/${groupId}`);
 
         if (groupResponse.data.error === null) {
-          const groupInfo: GroupData = groupResponse.data.data;
-          groupDataArray.push(groupInfo);
+          const groupInfo: GroupData = {...groupResponse.data.data, group_id: groupId,
+           };
+            groupDataArray.push(groupInfo);
         } else {
           console.error(
             '그룹 슬라이드 가져오기 오류:',
@@ -69,7 +73,10 @@ export default function MyGroupsComponent() {
     }
     setGroupData(groupDataArray);
   };
-
+    const onClickToGroup = (group_id: number) => {
+      navigate(`/group/${group_id}/detail`);
+    };
+console.log(groupData);
   return (
     <MyGroupsStyle.Container>
       <MyGroupsStyle.Wrapper>
@@ -77,7 +84,7 @@ export default function MyGroupsComponent() {
         <MyGroupsStyle.MyGroupBoardBox>
           <MyGroupsStyle.Title>내가 가입한 모임</MyGroupsStyle.Title>
           {groupData.slice(0, 3).map((group, index) => (
-            <MyGroupsStyle.GroupBoardBox key={index}>
+            <MyGroupsStyle.GroupBoardBox key={index} onClick={()=> {onClickToGroup(group.group_id)}}>
               <MyGroupsStyle.BoardImg
                 src={`/api/v1/image/profile/${group.profile}`}
                 alt="그룹의 대표 이미지"

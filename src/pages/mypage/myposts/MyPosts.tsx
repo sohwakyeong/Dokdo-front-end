@@ -150,7 +150,7 @@ function MyPostsComponent() {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [handleScroll]);
+  }, []);
 
   return (
     <MyPostsStyle.Container>

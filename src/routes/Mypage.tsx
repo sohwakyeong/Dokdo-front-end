@@ -15,7 +15,6 @@ import DeleteAccountComponent from '@/pages/mypage/deleteaccount/DeleteAccount';
 import Layout1 from '@/components/layout/layout1/Layout1';
 import Layout3 from '@/components/layout/layout1/Layout3';
 import Layout8 from '@/components/layout/layout1/Layout8';
-
 import Layout9 from '@/components/layout/layout1/Layout9';
 import AxiosC from '@/helper/AxiosC';
 
@@ -69,9 +68,9 @@ const MypageRoutes = () => {
       <Route
         path="/user/deleteaccount"
         element={
-          <Layout3>
+          <Layout8>
             <DeleteAccountComponent />
-          </Layout3>
+          </Layout8>
         }
       />
       {/* 마이페이지/내모임 */}
@@ -96,18 +95,18 @@ const MypageRoutes = () => {
       <Route
         path="/user/mypage/myposts"
         element={
-          <Layout9>
+          <Layout1>
             <MyPostsComponent />
-          </Layout9>
+          </Layout1>
         }
       />
       {/* 마이페이지/나의정보수정 */}
       <Route
         path="/user/mypage/editprofile"
         element={
-          <Layout9>
+          <Layout8>
             <EditProfileComponent />
-          </Layout9>
+          </Layout8>
         }
       />
 

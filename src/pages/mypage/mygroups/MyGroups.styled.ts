@@ -29,7 +29,7 @@ export const MyGroupBoardBox = styled.div`
   justify-content: center;
   margin: 20px auto;
   width: 100%;
-  height: 100%;
+  height: 416px;
   flex-direction: column;
 `;
 
