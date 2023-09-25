@@ -17,7 +17,9 @@ export const GroupBoardList = styled.ul`
 export const BoardWrap = styled.div`
   width: 474px;
   border-bottom: solid 1px #ddd;
+  
 `;
+
 export const Boardbox = styled.div`
   width: 100%;
   height: 100%;
