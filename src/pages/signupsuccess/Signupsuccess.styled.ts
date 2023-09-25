@@ -14,15 +14,15 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 100px auto 10px auto;
   box-sizing: border-box;
-  width: 420px;
-  justify-content: space-between;
+  width: 93%;
+  justify-content: center;
 `;
 
 export const CheckImg = styled.img`
   width: 130px;
   height: 130px;
+  margin-top: 100px;
   margin-bottom: 40px;
 `;
 
@@ -37,7 +37,7 @@ export const GotoHome = styled.button`
   border-radius: 8px;
   width: 100%;
   height: 50px;
-  margin-top: 250px;
+  margin-top: 200px;
   background-color: #84614b;
 `;
 

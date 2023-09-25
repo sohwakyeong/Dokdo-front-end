@@ -6,14 +6,14 @@ import {
   Children,
   Left,
   Right,
-} from '@/components/layout/layout1/Layout3.styled';
+} from '@/components/layout/layout1/Layout9.styled';
 import back from '@/assets/img/back1.png';
 import BackSearchHeader from '@/components/layout/header/BackSearchHeader';
 
 interface Layout3Props {
   children: ReactNode;
 }
-// 헤더 : 뒤로가기 중앙 우측 검색알림아이콘 / 푸터 기본푸터 : 쓰는곳 그룹
+// 헤더 : 뒤로가기 중앙 우측 검색알림아이콘 / 푸터 기본푸터 : 쓰는곳 마이페이지
 function Layout3({ children }: Layout3Props) {
   return (
     <LayoutContainer>
