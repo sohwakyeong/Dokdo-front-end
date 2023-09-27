@@ -18,14 +18,11 @@ interface GroupData {
   group_id: number;
 }
 
-interface LikedGroupData {
-  group_id: number;
-}
-
 export default function MyGroupsComponent() {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [groupData, setGroupData] = useState<GroupData[]>([]);
-  const [likedGroups, setLikedGroups] = useState<LikedGroupData[]>([]);
+  const [likedGroups, setLikedGroups] = useState<GroupData[]>([]);
+  const [groupInfoData, setGroupInfoData] = useState<GroupData[]>([]);
 
   const navigate = useNavigate();
 
@@ -60,66 +57,110 @@ export default function MyGroupsComponent() {
   const fetchMyGroups = async (groupIds: number[]) => {
     const groupDataArray: GroupData[] = [];
 
-    for (const groupId of groupIds) {
+    for (const group_id of groupIds) {
       try {
-        const groupResponse = await axios.get(`/api/v1/group/${groupId}`);
+        const groupResponse = await axios.get(`/api/v1/group/${group_id}`);
 
         if (groupResponse.data.error === null) {
-          const groupInfo: GroupData = { ...groupResponse.data.data, group_id: groupId };
+          const groupInfo: GroupData = {
+            ...groupResponse.data.data,
+            group_id: group_id,
+          };
           groupDataArray.push(groupInfo);
         } else {
-          console.error('그룹 슬라이드 가져오기 오류:', groupResponse.data.error);
+          console.error(
+            '그룹 정보 가져오기 오류:',
+            groupResponse.data.error,
+          );
         }
       } catch (error) {
-        console.error('그룹 슬라이드 가져오기 에러:', error);
+        console.error('그룹 정보 가져오기 에러:', error);
       }
     }
     setGroupData(groupDataArray);
+    console.log(groupDataArray);
   };
 
   const onClickToGroup = (group_id: number) => {
     navigate(`/group/${group_id}/detail`);
   };
 
-  useEffect(() => {
+  const fetchLikedGroupsAndGroupInfo = async () => {
     const loginToken = getCookie('loginToken');
 
-    // 좋아요한 그룹 목록 가져오기
-    axios
-      .get('/api/v1/auth/user/likes/groups', {
-        headers: {
-          Authorization: `Bearer ${loginToken}`,
+    try {
+      // 좋아요한 그룹 목록 가져오기
+      const likedGroupsResponse = await axios.get(
+        '/api/v1/auth/user/likes/groups',
+        {
+          headers: {
+            Authorization: `Bearer ${loginToken}`,
+          },
+          withCredentials: true,
         },
-        withCredentials: true,
-      })
-      .then(response => {
-        if (response.status === 200) {
-          const likedGroupsData: LikedGroupData[] = response.data.data;
-          setLikedGroups(likedGroupsData);
-        }
-      })
-      .catch(error => {
-        console.error('좋아요한 그룹 목록을 가져오는 중 에러 발생:', error);
-      });
+      );
+
+      if (likedGroupsResponse.status === 200) {
+        const likedGroupsData: GroupData[] = likedGroupsResponse.data.data;
+
+    
+        const groupIds = likedGroupsData.map(likedGroup => likedGroup.group_id);
+        console.log(groupIds);
+      
+        const groupInfoPromises = groupIds.map(async group_id => {
+          try {
+            const groupInfoResponse = await axios.get(
+              `/api/v1/group/${group_id}`,
+            );
+            if (groupInfoResponse.status === 200) {
+              console.log(groupInfoResponse.data.data);
+              return groupInfoResponse.data.data;
+            }
+          } catch (error) {
+            console.error('좋아요한 그룹 정보를 가져오는 중 에러 발생:', error);
+          }
+        });
+
+        const likedGroupInfoData = await Promise.all(groupInfoPromises);
+        setLikedGroups(likedGroupsData);
+        setGroupInfoData(likedGroupInfoData);
+      }
+    } catch (error) {
+      console.error(
+        '좋아요한 그룹 및 그룹 정보를 가져오는 중 에러 발생:',
+        error,
+      );
+    }
+  };
+
+  useEffect(() => {
+    fetchLikedGroupsAndGroupInfo();
   }, []);
-console.log(likedGroups);
+
   return (
     <MyGroupsStyle.Container>
       <MyGroupsStyle.Wrapper>
         <MyGroupsStyle.MyGroupBoardBox>
           <MyGroupsStyle.Title>내가 가입한 모임</MyGroupsStyle.Title>
           {groupData.slice(0, 3).map((group, index) => (
-            <MyGroupsStyle.GroupBoardBox key={index} onClick={() => onClickToGroup(group.group_id)}>
+            <MyGroupsStyle.GroupBoardBox
+              key={index}
+              onClick={() => onClickToGroup(group.group_id)}
+            >
               <MyGroupsStyle.BoardImg
                 src={`/api/v1/image/profile/${group.profile}`}
                 alt="그룹의 대표 이미지"
               />
               <MyGroupsStyle.RightSide>
                 <MyGroupsStyle.GroupName>{group.name}</MyGroupsStyle.GroupName>
-                <MyGroupsStyle.GroupIntro>{group.introduction}</MyGroupsStyle.GroupIntro>
+                <MyGroupsStyle.GroupIntro>
+                  {group.introduction}
+                </MyGroupsStyle.GroupIntro>
                 <MyGroupsStyle.GroupTags>
                   {group.tags.map((tag, tagIndex) => (
-                    <MyGroupsStyle.GroupTag key={tagIndex}>{tag}</MyGroupsStyle.GroupTag>
+                    <MyGroupsStyle.GroupTag key={tagIndex}>
+                      {tag}
+                    </MyGroupsStyle.GroupTag>
                   ))}
                 </MyGroupsStyle.GroupTags>
               </MyGroupsStyle.RightSide>
@@ -132,9 +173,30 @@ console.log(likedGroups);
       <MyGroupsStyle.Wrapper>
         <MyGroupsStyle.MyGroupBoardBox>
           <MyGroupsStyle.Title>내가 좋아요한 모임</MyGroupsStyle.Title>
-          {likedGroups.slice(0, 3).map((likedGroup, index) => (
-            <MyGroupsStyle.GroupBoardBox key={index}>
-              {/*여기에 group_id 받아와서 추춣한 그룹 정보를 가져와야함*/}
+          {groupInfoData.slice(0, 3).map((groupInfo, index) => (
+            <MyGroupsStyle.GroupBoardBox
+              key={index}
+              onClick={() => onClickToGroup(groupInfo.group_id)}
+            >
+              <MyGroupsStyle.BoardImg
+                src={`/api/v1/image/profile/${groupInfo.profile}`}
+                alt="그룹의 대표 이미지"
+              />
+              <MyGroupsStyle.RightSide>
+                <MyGroupsStyle.GroupName>
+                  {groupInfo.name}
+                </MyGroupsStyle.GroupName>
+                <MyGroupsStyle.GroupIntro>
+                  {groupInfo.introduction}
+                </MyGroupsStyle.GroupIntro>
+                <MyGroupsStyle.GroupTags>
+                  {groupInfo.tags.map((tag, tagIndex) => (
+                    <MyGroupsStyle.GroupTag key={tagIndex}>
+                      {tag}
+                    </MyGroupsStyle.GroupTag>
+                  ))}
+                </MyGroupsStyle.GroupTags>
+              </MyGroupsStyle.RightSide>
             </MyGroupsStyle.GroupBoardBox>
           ))}
         </MyGroupsStyle.MyGroupBoardBox>

@@ -145,7 +145,7 @@ export const DeleteWrap = styled.div`
 export const DeleteAccount = styled(Link)`
   border-bottom: 1px solid #8c8c8c;
   font-size: 15px;
-
+border: none;
   margin: 30px 0 40px 0;
   color: #8c8c8c;
 `;

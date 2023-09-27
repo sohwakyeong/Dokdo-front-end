@@ -77,7 +77,7 @@ function MyPostsComponent() {
         },
         withCredentials: true,
         params: {
-          includeGroupID: true, // 이렇게 추가하여 서버에게 group_id를 포함시킬 것을 요청
+          includeGroupID: true, 
         },
       })
       .then(postsResponse => {

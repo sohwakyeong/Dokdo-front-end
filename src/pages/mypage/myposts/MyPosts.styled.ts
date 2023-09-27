@@ -12,6 +12,7 @@ export const Container = styled.div`
 export const GroupBoardList = styled.ul`
   display: flex;
   flex-direction: column;
+  margin-top: 15px;
 `;
 
 export const BoardWrap = styled.div`
