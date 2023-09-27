@@ -131,7 +131,6 @@ export const Logout = styled.button`
   text-decoration: none;
   border-bottom: 1px solid #b1b1b1;
   font-size: 12px;
-  text-decoration: none;
   color: #b1b1b1;
   background-color: white;
   cursor: pointer;

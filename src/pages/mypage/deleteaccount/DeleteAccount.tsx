@@ -3,7 +3,7 @@ import * as DeleteStyle from '@/pages/mypage/deleteaccount/DeleteAccount.styled'
 import { useNavigate } from 'react-router-dom';
 import AxiosC from '@/helper/AxiosC';
 import Modal from '@/components/common/modal/modal';
-import { removeCookie } from '@/helper/Cookie';
+import { getCookie, removeCookie } from '@/helper/Cookie';
 import { GotoHome } from '../inquiredsuccess/InquiredSuccess.styled';
 function DeleteAccountComponent() {
   const [isListVisible, setListVisible] = useState(false);
@@ -48,7 +48,7 @@ function DeleteAccountComponent() {
       if (response.status === 200) {
         // 액세스 토큰 쿠키 삭제 ?? 해야하는가..
         await removeCookie('loginToken');
-        alert('회원 탈퇴 되셨습니다.');
+        alert('회원 탈퇴되셨습니다.');
         setIsModalOpen(true);
       } else {
         return alert('response 코드가 200이 아님');

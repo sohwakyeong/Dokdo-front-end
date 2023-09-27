@@ -26,10 +26,9 @@ export const EmptyPage = styled.div`
 
 export const MyGroupBoardBox = styled.div`
   display: flex;
-  justify-content: center;
-  margin: 20px auto;
+  margin: 20px auto 0 auto;
   width: 100%;
-  height: 416px;
+  /* height: 416px; */
   flex-direction: column;
 `;
 
@@ -87,8 +86,6 @@ export const GroupIntro = styled.div`
 export const GroupTags = styled.div`
   display: flex;
   margin-top: 1px;
-  
-  
 `;
 export const GroupTag = styled.div`
   font-size: 8px;
@@ -99,15 +96,13 @@ export const GroupTag = styled.div`
   align-items: center;
   text-align: center;
 
-
   & + & {
     margin-left: 5px;
   }
 `;
 
 export const SectionLine = styled.div`
-width: 474px;
-border: 1px solid #d7d7d7;
-margin: 10px 0;
-
-`
+  width: 474px;
+  border: 1px solid #d7d7d7;
+  margin: 10px 0;
+`;
