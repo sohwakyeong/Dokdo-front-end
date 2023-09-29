@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate} from 'react-router-dom';
 import * as BC from '@/pages/bookrec/BookRec.styled';
 
 interface Book {
@@ -7,21 +8,24 @@ interface Book {
   pubDate: string;
   link: string;
   cover: string;
+  description: string;
+  isbn : string;
 }
 
 declare global {
   interface Window {
-    handleJSONPResponse?: (data: any) => void; // '?' 를 사용하여 선택적 속성으로 만들었습니다.
+    handleJSONPResponse?: (data: any) => void;
   }
 }
 
 const BookRec = () => {
   const [books, setBooks] = useState<Book[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const callbackName = 'handleJSONPResponse';
 
-    const url = `http://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey=ttbdsjs99121606001&QueryType=Bestseller&MaxResults=20&start=1&SearchTarget=Book&output=js&Version=20131101&callback=${callbackName}`;
+    const url = `http://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey=${process.env.REACT_APP_ALADIN_SECRET_KEY}&QueryType=Bestseller&MaxResults=20&start=1&SearchTarget=Book&output=js&Version=20131101&callback=${callbackName}`;
 
     // 기존의 콜백 함수를 백업
     const originalCallback = window[callbackName];
@@ -51,6 +55,9 @@ const BookRec = () => {
       document.head.removeChild(script);
     };
   }, []);
+  
+   const handleBookClick = (isbn:string) => 
+   navigate(`/bookrec/${isbn}`)
 
   return (
     <BC.Wrapper>
@@ -64,8 +71,7 @@ const BookRec = () => {
         <BC.SliederBox>
           <BC.Wrapper>
             {books.map((book, index) => (
-              <BC.List key={index}>
-                <BC.StyledLink to={book.link}>
+              <BC.List key={index} onClick={() => handleBookClick(book.isbn)}>
                   <BC.ImgBox>
                     <BC.Img>
                       <img src={book.cover} alt="도서이미지" />
@@ -76,7 +82,6 @@ const BookRec = () => {
                       <div>{book.pubDate}</div>
                     </BC.Info>
                   </BC.ImgBox>
-                </BC.StyledLink>
               </BC.List>
             ))}
           </BC.Wrapper>
@@ -87,3 +92,4 @@ const BookRec = () => {
 };
 
 export default BookRec;
+
