@@ -1,39 +1,78 @@
-import React from 'react';
-import * as BC from '@/components/bookContest/bookandcontest/BookAndContest.styled';
-import bookImg7 from '@/assets/img/chucheon4.png';
-import bookImg8 from '@/assets/img/chucheon3.png';
+import React, { useState, useEffect } from 'react';
+import { useNavigate} from 'react-router-dom';
+import * as BC from '@/components/common/BookContest/BookBox.styled';
 
-// BookAndContestBox 컴포넌트의 props 타입 정의
+interface Book {
+  title: string;
+  author: string;
+  pubDate: string;
+  link: string;
+  cover: string;
+  description: string;
+  isbn : string;
+}
 
-function BcBox4() {
+declare global {
+  interface Window {
+    handleJSONPResponse?: (data: any) => void;
+  }
+}
+
+const BcBox4 = () => {
+  const [books, setBooks] = useState<Book[]>([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const callbackName = 'handleJSONPResponse';
+
+    const url = `http://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey=${process.env.REACT_APP_ALADIN_SECRET_KEY}&QueryType=Bestseller&MaxResults=2&start=5&SearchTarget=Book&output=js&Version=20131101&callback=${callbackName}`;
+
+    const originalCallback = window[callbackName];
+
+    window[callbackName] = data => {
+      console.log('JSONP Response:', data);
+      setBooks(data.item);
+
+  
+      if (originalCallback) {
+        window[callbackName] = originalCallback;
+      } else {
+        delete window[callbackName];
+      }
+    };
+
+    const script = document.createElement('script');
+    script.src = url;
+    document.head.appendChild(script);
+
+    return () => {
+      if (originalCallback) {
+        window[callbackName] = originalCallback;
+      } else {
+        delete window[callbackName];
+      }
+      document.head.removeChild(script);
+    };
+  }, []);
+  
+   const handleBookClick = (isbn:string) => 
+   navigate(`/bookrec/${isbn}`)
+
   return (
     <BC.Wrapper>
-      <BC.List>
-        <BC.ImgBox>
-          <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000202687816">
+      {books.map((book,index)=> (
+      <BC.List key ={index} >
+        <BC.ImgBox onClick={() => handleBookClick(book.isbn)}>
             <BC.Img>
-              <img src={bookImg7} alt="도서이미지" />
+              <img src={book.cover} alt="도서이미지" />
             </BC.Img>
             <BC.Info>
-              <div>아메리칸 프로메테우스</div>
-              <div>카이버드외/사이언스북스</div>
-              <div>2023.06.12</div>
+            <BC.Title>{book.title}</BC.Title>
+              <div>{book.author}</div>
             </BC.Info>
-          </BC.StyledLink>
-        </BC.ImgBox>
-        <BC.ImgBox>
-          <BC.StyledLink to="https://product.kyobobook.co.kr/detail/S000208590459">
-            <BC.Img>
-              <img src={bookImg8} alt="도서이미지" />
-            </BC.Img>
-            <BC.Info>
-              <div>1%를 읽는 힘</div>
-              <div>메르토네이도</div>
-              <div>2023.08.30</div>
-            </BC.Info>
-          </BC.StyledLink>
         </BC.ImgBox>
       </BC.List>
+      ))}
     </BC.Wrapper>
   );
 }

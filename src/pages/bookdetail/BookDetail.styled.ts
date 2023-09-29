@@ -46,8 +46,8 @@ export const TitleBox = styled.div`
   font-weight: bold;
   padding: 10px;
   overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 export const CategoryBox = styled.div`
   font-size: 13px;

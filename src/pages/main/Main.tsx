@@ -75,7 +75,7 @@ function Main() {
       <M.BooksTop10>
         <M.BooksTitle>
           <M.StyledBookLink to="/bookrec">
-            독서 토론 인기 책🔥<div>독서 토론 인기책을 확인해보세요!</div>
+            실시간 인기 도서🔥<div>Best Seller로 시작하는 독서토론!</div>
           </M.StyledBookLink>
         </M.BooksTitle>
       </M.BooksTop10>
