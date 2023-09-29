@@ -16,6 +16,7 @@ import GroupCreatePage2 from '@/pages/group/groupcreate/GroupCreatePage2';
 import GroupCreatePage3 from '@/pages/group/groupcreate/GroupCreatePage3';
 import GroupCreatePage4 from '@/pages/group/groupcreate/GroupCreatePage4';
 import BookRec from '@/pages/bookrec/BookRec';
+import BookDetail from '@/pages/bookdetail/BookDetail';
 import Contest from '@/pages/contest/Contest';
 import Notifications from '@/pages/notifications/Notifications';
 import Likes from '@/pages/likes/Likes';
@@ -168,7 +169,14 @@ const MainRoutes = () => {
           </Layout1>
         }
       />
-
+      <Route
+        path="/bookrec/:isbn"
+        element={
+          <Layout1>
+            <BookDetail />
+          </Layout1>
+        }
+      />
       <Route
         path="/notifications"
         element={

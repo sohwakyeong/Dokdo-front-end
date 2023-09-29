@@ -63,3 +63,4 @@ export const SliederBox = styled.div`
   display: flex;
   width: 100%;
 `;
+

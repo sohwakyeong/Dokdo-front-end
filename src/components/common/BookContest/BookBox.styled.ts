@@ -1,11 +1,14 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+
 
 export const Wrapper = styled.div`
   display: flex;
+  justify-content: space-evenly;
   flex-direction: column;
+    flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
-  width: 474px;
+  width: 420px;
 `;
 
 export const BoxTitleBox = styled.div`
@@ -40,30 +43,26 @@ export const ImgBox = styled.div`
   align-items: center;
   width: 100%;
   padding: 8px;
+  cursor: pointer;
 `;
 
-export const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: black;
-`;
 
 export const Img = styled.div`
+  box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.15);
   width: 180px;
   height: 280px;
-  background-color: #fff7ec;
-  box-sizing: border-box;
-  border: 1px solid #ddd;
+  border-radius: 20px;
   & img {
-    width: 100%;
-    height: 100%;
+  width: 180px;
+  height: 280px;
+  border-radius: 20px;
   }
 `;
 
 export const Info = styled.div`
   margin: 15px 0 25px 0;
   width: 100%;
-  text-decoration: none;
-
+  line-height: 20px;
   & div {
     width: 180px;
     padding: 3px;
@@ -81,3 +80,7 @@ export const SliederBox = styled.div`
   align-items: center;
   width: 100%;
 `;
+
+export const Title = styled.div`
+font-weight: bold;
+`
