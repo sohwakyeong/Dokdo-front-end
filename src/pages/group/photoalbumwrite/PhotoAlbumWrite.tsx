@@ -3,7 +3,8 @@ import axios from 'axios';
 import * as GBW from '@/pages/group/groupboardwrite/GroupBoardWrite.styled';
 import BoardWriteSection2 from '@/components/common/boardwritesection/BoardWriteSection2';
 import Camera from '@/assets/icon/Camera.png';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+
 import GroupHeader from '@/components/layout/header/GroupHeader';
 import { getCookie } from '@/helper/Cookie';
 
@@ -15,6 +16,7 @@ const PhotoAlbumWrite: React.FC = () => {
   const [userData, setUserData] = useState<any>(null); // User data
 
   const { groupId } = useParams<{ groupId: string }>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loginToken = getCookie('loginToken'); // Assuming getCookie is defined somewhere
@@ -42,7 +44,8 @@ const PhotoAlbumWrite: React.FC = () => {
   const handleCreatePost = async () => {
     try {
       if (!userData) {
-        setResponseMessage('로그인이 필요합니다.');
+               alert('성공적으로 작성되었습니다!');
+
         return;
       }
       const uploadedImageNames = await uploadImages(); // Modified this line
@@ -60,7 +63,9 @@ const PhotoAlbumWrite: React.FC = () => {
       );
 
       if (response.status === 200) {
-        setResponseMessage('성공적으로 작성되었습니다!');
+            alert('성공적으로 작성되었습니다!');
+
+        navigate(`/group/${groupId}/photo`);
       } else {
         setResponseMessage(`오류 발생: ${response.statusText}`);
       }

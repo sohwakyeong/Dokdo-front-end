@@ -12,6 +12,8 @@ import { useParams } from 'react-router-dom';
 import GroupHeader from '@/components/layout/header/GroupHeader';
 import Modal from 'react-modal';
 import GroupLikeButton from '@/components/group/grouplike/GroupLike';
+import GroupMember from '@/components/group/groupmember/GroupMember';
+import EditImage from '@/components/group/editimage/EditImage';
 Modal.setAppElement('#root');
 
 interface MemberType {
@@ -257,6 +259,8 @@ function GroupDetail() {
         console.error('그룹 가입 실패:', response.status);
       }
     } catch (error) {
+      alert('이미 그룹에 가입된 멤버입니다!');
+
       console.error('그룹 가입 에러:', error);
     }
   }
@@ -326,37 +330,6 @@ function GroupDetail() {
     }
   }
 
-  const addTag = () => {
-    const newTag = ''; // 새로운 태그 값을 설정하십시오.
-    setEditedGroupData({
-      ...editedGroupData,
-      tags: [...editedGroupData.tags, newTag],
-    });
-  };
-
-  // 태그 변경 핸들러
-  const handleTagChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-  ) => {
-    const newTags = [...editedGroupData.tags];
-    newTags[index] = e.target.value;
-    setEditedGroupData({
-      ...editedGroupData,
-      tags: newTags,
-    });
-  };
-
-  // 태그 삭제 함수
-  const removeTag = (index: number) => {
-    const newTags = [...editedGroupData.tags];
-    newTags.splice(index, 1);
-    setEditedGroupData({
-      ...editedGroupData,
-      tags: newTags,
-    });
-  };
-
   return (
     <GD.Wrapper>
       <GD.GroupHeader>
@@ -371,17 +344,6 @@ function GroupDetail() {
               </GD.EditGroupInfo>
             </GD.EditGroupSection>
             <GD.ProfileSection>
-              <GD.CustomFileInput htmlFor="profilePicInput">
-                <GD.StyledFileInput
-                  id="profilePicInput"
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                />
-                <GD.CustomFileInputLabel onClick={uploadProfilePic}>
-                  모임 대표사진 수정
-                </GD.CustomFileInputLabel>
-              </GD.CustomFileInput>
             </GD.ProfileSection>
             <GD.DeleteSection>
               <GD.CustomFileInputLabel onClick={handleDeleteGroup}>
@@ -490,9 +452,6 @@ function GroupDetail() {
           alt="모임이미지"
         />
       </GD.GroupImage>
-      {groupData && (
-        <GroupLikeButton group_id={groupData.group_id} like={groupData.like} />
-      )}
 
       <GD.GroupInfo>
         <GD.GroupName>📚{groupData.name}</GD.GroupName>
@@ -593,33 +552,32 @@ function GroupDetail() {
           </ModalWrapper>
         )}
       </GD.Schedule>
-      <GD.MemberBox>
-        <GD.Member>모임 멤버 ({uniqueMembers.length + 1})</GD.Member>
-        <ul>
-          {uniqueMembers.map((member: MemberType, index: number) => (
-            <li key={index}>
-              <GD.MemberList>
-                <GD.MemberImg>
-                  <img src={member.user.profilePic} alt="프로필" />
-                </GD.MemberImg>
-                <GD.Desc>
-                  <div>{member.user.name}</div>
-                </GD.Desc>
-              </GD.MemberList>
-            </li>
-          ))}
-        </ul>
-        <GD.ButtonDisplay>
+      <GroupMember />
+      <GD.ButtonDisplay>
           <GD.NFWrapper>
             <GD.NFDisplay>
               <div>{joinError}</div>
-              <GD.NFNextBtn>
-                <button onClick={handleJoinGroup}>모임 가입하기</button>
-              </GD.NFNextBtn>
+              <GD.GroupLikeDisplay>
+                {groupData && (
+                  <GroupLikeButton
+                    group_id={groupData.group_id}
+                    like={groupData.like}
+                  />
+                )}
+              </GD.GroupLikeDisplay>
+
+              {isUserAlreadyJoined ? (
+                <GD.NFNextBtn>
+                  <button>{groupData.name}</button>
+                </GD.NFNextBtn>
+              ) : (
+                <GD.NFNextBtn>
+                  <button onClick={handleJoinGroup}>모임 가입하기</button>
+                </GD.NFNextBtn>
+              )}
             </GD.NFDisplay>
           </GD.NFWrapper>
         </GD.ButtonDisplay>
-      </GD.MemberBox>
     </GD.Wrapper>
   );
 }

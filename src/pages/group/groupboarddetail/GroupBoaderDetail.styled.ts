@@ -194,9 +194,12 @@ export const GroupBoardTitle = styled.div`
   margin-top: 20px;
 `;
 
-export const CommentTitle = styled.div`
+export const BoardTitle = styled.div`
   font-size: 20px;
   padding: 30px 30px 20px 30px;
+  width: 90%;
+  height: 100%;
+  padding: 10px;
 `;
 
 export const CIWrapper = styled.div`
@@ -276,4 +279,78 @@ export const CommnetCreatedAt = styled.div`
 export const PFText = styled.div`
   width: 100%;
   margin-bottom: 3px;
+`;
+export const DropdownButton = styled.button`
+  display: flex;
+  justify-content: right;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 25px;
+  right: 0;
+  width: 90%;
+`;
+
+export const DropdownContent = styled.div`
+  background: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  border: 1px solid #000;
+  border-radius: 15px;
+  width: 150px;
+  height: 100px;
+
+`;
+
+export const ProfileSection = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const DeleteSection = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const EditGroupSection = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+// 스타일링된 파일 선택 버튼
+export const StyledFileInput = styled.input`
+  display: none;
+`;
+
+export const CustomFileInput = styled.label`
+  font-size: 15px;
+
+  &:hover {
+    font-weight: 700;
+    color:#84614b;
+
+  }
+`;
+
+// 파일 선택 버튼의 라벨 디자인
+export const CustomFileInputLabel = styled.div`
+  font-size: 15px;
+
+  &:hover {
+    font-weight: 700;
+    color:#84614b;
+
+  }
+`;
+export const EditGroupInfo = styled.div`
+  font-size: 15px;
+
+  &:hover {
+    font-weight: 700;
+    color:#84614b;
+  }
 `;
