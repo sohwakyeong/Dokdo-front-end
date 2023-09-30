@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import * as GDM from './GroupMember.styled';
 import axios from 'axios';
 import { getCookie } from '@/helper/Cookie';
+import { useParams } from 'react-router-dom';
 
 interface Member {
   _id: string;
@@ -28,11 +29,13 @@ function GroupMember() {
   const [groupData, setGroupData] = useState<GroupData | null>(null);
   const [membersInfo, setMembersInfo] = useState<UserInfo[]>([]);
   const loginToken = getCookie('loginToken');
+  const { groupId } = useParams<{ groupId: string }>();
+
 
   useEffect(() => {
-    async function fetchGroupData() {
+    async function fetchGroupData(group_id:number) {
       try {
-        const response = await axios.get('/api/v1/group/10', {
+        const response = await axios.get(`/api/v1/group/${group_id}`, {
           headers: {
             Authorization: `Bearer ${loginToken}`,
           },
@@ -55,8 +58,8 @@ function GroupMember() {
       }
     }
     
-    fetchGroupData();
-  }, []);
+    fetchGroupData(Number(groupId));
+  }, [groupId]);
 
   async function fetchUserInfo(user_id: number): Promise<UserInfo | null> {
     try {

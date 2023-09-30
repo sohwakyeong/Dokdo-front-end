@@ -13,6 +13,7 @@ import GroupHeader from '@/components/layout/header/GroupHeader';
 import Modal from 'react-modal';
 import GroupLikeButton from '@/components/group/grouplike/GroupLike';
 import GroupMember from '@/components/group/groupmember/GroupMember';
+import EditImage from '@/components/group/editimage/EditImage';
 Modal.setAppElement('#root');
 
 interface MemberType {
@@ -343,17 +344,6 @@ function GroupDetail() {
               </GD.EditGroupInfo>
             </GD.EditGroupSection>
             <GD.ProfileSection>
-              <GD.CustomFileInput htmlFor="profilePicInput">
-                <GD.StyledFileInput
-                  id="profilePicInput"
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                />
-                <GD.CustomFileInputLabel onClick={uploadProfilePic}>
-                  모임 대표사진 수정
-                </GD.CustomFileInputLabel>
-              </GD.CustomFileInput>
             </GD.ProfileSection>
             <GD.DeleteSection>
               <GD.CustomFileInputLabel onClick={handleDeleteGroup}>

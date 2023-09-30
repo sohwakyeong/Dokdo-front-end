@@ -4,6 +4,7 @@ import * as GBD from '@/pages/group/groupboarddetail/GroupBoaderDetail.styled';
 import { getCookie } from '@/helper/Cookie';
 import { useParams, useNavigate } from 'react-router-dom';
 import UserImg from '@/assets/img/userbasicimg.png';
+import EditImage from '@/components/group/editimage/EditImage';
 
 interface GroupDetailData {
   error: null | string;
@@ -466,24 +467,7 @@ const GroupBoardDetail: React.FC<
             </GBD.EditGroupInfo>
           </GBD.EditGroupSection>
           <GBD.ProfileSection>
-            <GBD.CustomFileInput htmlFor="profilePicInput">
-              <GBD.StyledFileInput
-                id="profilePicInput"
-                type="file"
-                accept="image/*"
-                onChange={handleImageUpload}
-              />
-              <GBD.CustomFileInputLabel
-                onClick={() => {
-                  const imageFile = images[0]; // 첫 번째 이미지만 가져옵니다.
-                  if (imageFile) {
-                    uploadSingleImage(imageFile);
-                  }
-                }}
-              >
-                게시글 이미지 수정
-              </GBD.CustomFileInputLabel>
-            </GBD.CustomFileInput>
+            <EditImage />
           </GBD.ProfileSection>
           <GBD.DeleteSection>
             <GBD.CustomFileInputLabel onClick={deletePost}>
