@@ -26,24 +26,24 @@ export default function Slider() {
         className="mySwiper"
       >
         <SwiperSlide>
-          <Link to="/contest">
+          <Link to="/bookrec">
             <img src={main3} alt="독서모임 이미지3" />
           </Link>
         </SwiperSlide>
         <SwiperSlide>
-          <Link to="/contest">
+          <Link to="/bookrec">
             <img src={moim1} alt="독서모임 이미지3" />
           </Link>
         </SwiperSlide>
 
         <SwiperSlide>
-          <Link to="/contest">
+          <Link to="/bookrec">
             <img src={main1} alt="독서모임 이미지3" />
           </Link>
         </SwiperSlide>
 
         <SwiperSlide>
-          <Link to="/contest">
+          <Link to="/bookrec">
             <img src={main2} alt="독서모임 이미지3" />
           </Link>
         </SwiperSlide>

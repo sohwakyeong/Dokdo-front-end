@@ -5,9 +5,9 @@ export const Container = styled.div`
   justify-content: center;
 
   width: 100%;
-  height: 100%;
+  height: 230px;
   background-color: white;
-    &:hover {
+  &:hover {
     transform: scale(1.01);
   }
 
@@ -33,7 +33,7 @@ export const TextImgBox = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 230px;
+  
   & div {
     font-size: 15px;
   }
@@ -48,21 +48,29 @@ export const ImgBox = styled.div`
   box-sizing: border-box;
   overflow: hidden;
   object-fit: cover;
-  border-bottom: 1px solid #ddd;
 
   & img {
     width: 100%;
-    height: 100%;
+    height: 120px;
     object-fit: cover;
   }
 `;
 
 export const TextBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 90%;
-  height: 140px;
+  
+  height: 50%;
   text-overflow: ellipsis;
   overflow: hidden;
-  padding: 10px;
+
+  & div {
+    width: 100%;
+    padding: 3px 0;
+    
+  }
 `;
 
 export const GroupName = styled.div`
@@ -77,4 +85,5 @@ export const GroupIntro = styled.div`
   font-size: 14px;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: center;
 `;

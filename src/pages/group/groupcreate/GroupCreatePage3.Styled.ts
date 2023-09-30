@@ -6,6 +6,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 474px;
+  
 `;
 
 export const StepsContainer = styled.div`
@@ -138,7 +139,6 @@ export const SubmitButton = styled.button`
   cursor: pointer;
   transition: background 0.3s;
   bottom: 65px;
-  position: fixed;
 
   &:hover {
     background: #71503c;
@@ -206,7 +206,6 @@ export const Place = styled.div`
 export const FormGroupPlace = styled.div`
   align-items: center;
   display: flex;
-
   & div {
     margin-right: 20px;
   }

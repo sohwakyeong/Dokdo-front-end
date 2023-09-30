@@ -81,7 +81,7 @@ const GroupCreatePage3: React.FC<GroupCreatePage3Props> = ({
 
       if ((err as AxiosError).isAxiosError) {
         const axiosError = err as AxiosError;
-        setError({ message: axiosError.message });
+        alert('1,2,3단계 정보를 모두 입력해주세요!')
       } else {
         setError({ message: '알 수 없는 오류가 발생했습니다.' });
       }
@@ -103,8 +103,6 @@ const GroupCreatePage3: React.FC<GroupCreatePage3Props> = ({
         독서 토론 모임에 대한 <br /> 정보를 설정해주세요
       </Title>
 
-      {loading && <div>Loading...</div>}
-      {error && <div>Error: {error.message}</div>}
       <label>장르 </label>
       <FormGroup>
         <GenreBox2 onGenreSelect={setGenre} selectedGenre={genre} />

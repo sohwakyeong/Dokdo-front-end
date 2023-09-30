@@ -202,9 +202,13 @@ const GroupBoardDetail: React.FC<
         fetchComments(group_Id, post_Id);
         setCommentText('');
       } else {
+        alert('모임에 가입하고 댓글을 작성해주세요!');
+
         console.error('Error posting comment:', response.status);
       }
     } catch (error) {
+      alert('모임에 가입하고 댓글을 작성해주세요!');
+
       console.error('Error posting comment:', error);
     }
   };
@@ -296,7 +300,10 @@ const GroupBoardDetail: React.FC<
 
       if (response.status === 200) {
         const likeCount = response.data.data.likeNum;
+        const userLikedStatus = response.data.data.userLiked; // 가정: API 응답에서 userLiked 항목을 사용하여 사용자가 좋아요를 눌렀는지 확인
+
         setLikeCounter(likeCount);
+        setIsLiked(userLikedStatus);
       } else {
         console.error('Error fetching like status:', response.status);
         console.log('API Response:', response.data);
@@ -314,9 +321,7 @@ const GroupBoardDetail: React.FC<
       );
 
       if (response.status === 200) {
-        const updatedLikeCount = response.data.data.likeNum;
-        setLikeCounter(updatedLikeCount);
-        setIsLiked(!isLiked);
+        fetchLikeStatus(group_Id, post_Id); // 다시 좋아요 상태를 가져옵니다.
       } else {
         console.error('Error liking/unliking post:', response.status);
       }
@@ -453,6 +458,18 @@ const GroupBoardDetail: React.FC<
     }
   };
 
+  const handleShareBtn = () => {
+    const url = window.location.href; // 현재 페이지의 URL을 가져옵니다.
+    navigator.clipboard.writeText(url).then(
+      () => {
+        alert('현재 게시글이 복사되었습니다!'); // 복사 성공 시 알림
+      },
+      err => {
+        console.error('URL 복사에 실패했습니다!:', err); // 복사 실패 시 에러 출력
+      },
+    );
+  };
+
   return (
     <GBD.Wrapper>
       <GBD.GroupBoardTitle>
@@ -460,21 +477,23 @@ const GroupBoardDetail: React.FC<
       </GBD.GroupBoardTitle>
 
       {showDropdown && (
-        <GBD.DropdownContent>
-          <GBD.EditGroupSection>
-            <GBD.EditGroupInfo onClick={openEditModal}>
-              게시글 수정
-            </GBD.EditGroupInfo>
-          </GBD.EditGroupSection>
-          <GBD.ProfileSection>
-            <EditImage />
-          </GBD.ProfileSection>
-          <GBD.DeleteSection>
-            <GBD.CustomFileInputLabel onClick={deletePost}>
-              게시글 삭제하기
-            </GBD.CustomFileInputLabel>
-          </GBD.DeleteSection>
-        </GBD.DropdownContent>
+        <GBD.EditBoardWrap>
+          <GBD.DropdownContent>
+            <GBD.EditGroupSection>
+              <GBD.EditGroupInfo onClick={openEditModal}>
+                게시글 수정
+              </GBD.EditGroupInfo>
+            </GBD.EditGroupSection>
+            <GBD.ProfileSection>
+              <EditImage />
+            </GBD.ProfileSection>
+            <GBD.DeleteSection>
+              <GBD.CustomFileInputLabel onClick={deletePost}>
+                게시글 삭제하기
+              </GBD.CustomFileInputLabel>
+            </GBD.DeleteSection>
+          </GBD.DropdownContent>
+        </GBD.EditBoardWrap>
       )}
       <GBD.EditButton onClick={toggleDropdown}>●●●</GBD.EditButton>
       <GBD.User>
@@ -514,42 +533,46 @@ const GroupBoardDetail: React.FC<
       </GBD.UserWriteBox>
       <GBD.Button>
         <button onClick={handleLikeBtn}>
-          {isLiked ? '❤️ 취소' : `❤️ 좋아요`} {likeCounter}
+          {isLiked ? `❤️ ${likeCounter} 취소` : `❤️ 좋아요`} {likeCounter}
         </button>
-        <button>공유하기</button>
+        <button onClick={handleShareBtn}>공유하기</button>
       </GBD.Button>
       <GBD.Comment>
         <GBD.CommentsTitle>
           댓글 <span> {comments.length}</span>
         </GBD.CommentsTitle>
-        {comments.map((comment, index) => (
-          <div key={comment.comment_id}>
-            {!comment.isDeleted ? (
-              <GBD.CommentsList>
-                <GBD.ComentsBox>
-                  <GBD.PFImg>
-                    <img
-                      src={`/api/v1/image/profile/${commentsName[index]?.profilePic}`}
-                      alt="프사"
-                      onError={defaultUserImg}
-                    />
-                  </GBD.PFImg>
-                  <GBD.PFText>
-                    <GBD.CommentUser>
-                      {commentsName[index]?.name}
-                    </GBD.CommentUser>
-                    <GBD.CommentText>{comment.text}</GBD.CommentText>
-                    <GBD.CommnetCreatedAt>
-                      {formatCreatedAt(comment.createdAt)}
-                    </GBD.CommnetCreatedAt>
-                  </GBD.PFText>
-                </GBD.ComentsBox>
-              </GBD.CommentsList>
-            ) : (
-              <div>Deleted Comment</div>
-            )}
-          </div>
-        ))}
+        {comments.length > 0 ? (
+          comments.map((comment, index) => (
+            <div key={comment.comment_id}>
+              {!comment.isDeleted ? (
+                <GBD.CommentsList>
+                  <GBD.ComentsBox>
+                    <GBD.PFImg>
+                      <img
+                        src={`/api/v1/image/profile/${commentsName[index]?.profilePic}`}
+                        alt="프사"
+                        onError={defaultUserImg}
+                      />
+                    </GBD.PFImg>
+                    <GBD.PFText>
+                      <GBD.CommentUser>
+                        {commentsName[index]?.name}
+                      </GBD.CommentUser>
+                      <GBD.CommentText>{comment.text}</GBD.CommentText>
+                      <GBD.CommnetCreatedAt>
+                        {formatCreatedAt(comment.createdAt)}
+                      </GBD.CommnetCreatedAt>
+                    </GBD.PFText>
+                  </GBD.ComentsBox>
+                </GBD.CommentsList>
+              ) : (
+                <div>Deleted Comment</div>
+              )}
+            </div>
+          ))
+        ) : (
+          <GBD.NoCommentsText>댓글이 아직 없습니다.</GBD.NoCommentsText>
+        )}
       </GBD.Comment>
       <GBD.CIWrapper>
         <GBD.CIDisplay>

@@ -246,9 +246,10 @@ export const CIInput = styled.div`
     height: 45px;
     border-radius: 20px;
     border: 1px solid #868686;
+    padding-left: 10px;
+
 
     &::placeholder {
-      padding-left: 10px;
       font-size: 15px;
       color: #a8a8a8;
     }

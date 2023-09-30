@@ -344,6 +344,17 @@ function GroupDetail() {
               </GD.EditGroupInfo>
             </GD.EditGroupSection>
             <GD.ProfileSection>
+              <GD.CustomFileInput htmlFor="profilePicInput">
+                <GD.StyledFileInput
+                  id="profilePicInput"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                />
+                <GD.CustomFileInputLabel onClick={uploadProfilePic}>
+                  모임 대표사진 수정
+                </GD.CustomFileInputLabel>
+              </GD.CustomFileInput>
             </GD.ProfileSection>
             <GD.DeleteSection>
               <GD.CustomFileInputLabel onClick={handleDeleteGroup}>
@@ -554,30 +565,30 @@ function GroupDetail() {
       </GD.Schedule>
       <GroupMember />
       <GD.ButtonDisplay>
-          <GD.NFWrapper>
-            <GD.NFDisplay>
-              <div>{joinError}</div>
-              <GD.GroupLikeDisplay>
-                {groupData && (
-                  <GroupLikeButton
-                    group_id={groupData.group_id}
-                    like={groupData.like}
-                  />
-                )}
-              </GD.GroupLikeDisplay>
-
-              {isUserAlreadyJoined ? (
-                <GD.NFNextBtn>
-                  <button>{groupData.name}</button>
-                </GD.NFNextBtn>
-              ) : (
-                <GD.NFNextBtn>
-                  <button onClick={handleJoinGroup}>모임 가입하기</button>
-                </GD.NFNextBtn>
+        <GD.NFWrapper>
+          <GD.NFDisplay>
+            <div>{joinError}</div>
+            <GD.GroupLikeDisplay>
+              {groupData && (
+                <GroupLikeButton
+                  group_id={groupData.group_id}
+                  like={groupData.like}
+                />
               )}
-            </GD.NFDisplay>
-          </GD.NFWrapper>
-        </GD.ButtonDisplay>
+            </GD.GroupLikeDisplay>
+
+            {isUserAlreadyJoined ? (
+              <GD.NFNextBtn>
+                <button>{groupData.name}</button>
+              </GD.NFNextBtn>
+            ) : (
+              <GD.NFNextBtn>
+                <button onClick={handleJoinGroup}>모임 가입하기</button>
+              </GD.NFNextBtn>
+            )}
+          </GD.NFDisplay>
+        </GD.NFWrapper>
+      </GD.ButtonDisplay>
     </GD.Wrapper>
   );
 }
