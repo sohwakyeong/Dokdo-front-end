@@ -107,6 +107,7 @@ export const Comment = styled.div`
 
 export const NoCommentsText = styled.div`
   margin-bottom: 20px;
+  color: darkgray;
 `;
 
 export const CommentsTitle = styled.div`

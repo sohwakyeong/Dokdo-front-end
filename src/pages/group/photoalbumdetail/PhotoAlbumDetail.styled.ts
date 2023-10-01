@@ -278,3 +278,9 @@ export const PFText = styled.div`
   width: 100%;
   margin-bottom: 3px;
 `;
+
+export const NoCommentsText = styled.div`
+  margin-bottom: 20px;
+  color: darkgray;
+
+`;

@@ -124,3 +124,29 @@ export const BoardContent = styled.div`
   white-space: nowrap;
   padding: 2px;
 `;
+export const NoContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 500px;
+`;
+
+export const NoContent = styled.div`
+  width: 200px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+`;
+export const NoContentImg = styled.img`
+  width: 50px;
+  height: 50px;
+`;
+export const NoContentText = styled.div`
+  font-size: 16px;
+  font-weight: 400;
+  color: black;
+  margin-top: 29px;
+`;

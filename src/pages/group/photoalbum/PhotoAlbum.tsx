@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, SyntheticEvent } from 'react';
 import * as PA from '@/pages/group/photoalbum/PhotoAlbum.styled';
 import SearchInput from '@/components/common/searchinput/SearchInput';
 import axios from 'axios';
@@ -6,6 +6,8 @@ import PenFooter2 from '@/components/layout/footer/PenFooter2';
 import { getCookie } from '@/helper/Cookie';
 import { useParams, useNavigate } from 'react-router-dom';
 import GroupHeader from '@/components/layout/header/GroupHeader';
+import MorePost from '@/assets/icon/newIcon/chat1.png';
+import userImg from '@/assets/img/userbasicimg.png';
 
 interface PhotoItem {
   post: {
@@ -76,6 +78,10 @@ const PhotoAlbum: React.FC<PhotoItemProps> = ({ data }) => {
     fetchData();
   }, [loginToken, groupId]);
 
+  const defaultUserImg = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+    e.currentTarget.src = userImg;
+  };
+
   return (
     <PA.Wrapper>
       <GroupHeader data={{ group: Number(groupId) }} />
@@ -88,7 +94,13 @@ const PhotoAlbum: React.FC<PhotoItemProps> = ({ data }) => {
       <PA.PhotoList>
         <ul>
           {photoItems.length === 0 ? (
-            <div> 등록된 사진이 없습니다.</div>
+            <PA.NoContainer>
+              <PA.NoContent>
+                <PA.NoContentImg src={MorePost} alt="No Photos" />{' '}
+                {/* MorePost를 원하는 이미지 경로로 교체해야 합니다. */}
+                <PA.NoContentText>등록된 사진이 없습니다.</PA.NoContentText>
+              </PA.NoContent>
+            </PA.NoContainer>
           ) : (
             photoItems.map((photoItem, index) => (
               <li
@@ -103,6 +115,7 @@ const PhotoAlbum: React.FC<PhotoItemProps> = ({ data }) => {
                       <img
                         src={`/api/v1/image/profile/${photoItem.user.profilePic}`}
                         alt="게시자 프로필"
+                        onError={defaultUserImg}
                       />
                     </PA.ProfileImg>
                     <PA.User>
@@ -113,7 +126,8 @@ const PhotoAlbum: React.FC<PhotoItemProps> = ({ data }) => {
                   <PA.PhotoImg>
                     <img
                       src={`/api/v1/image/post/${photoItem.post.images[0]}`}
-                      alt="업로드사진"
+                      alt=""
+                      onError={defaultUserImg}
                     />
                   </PA.PhotoImg>
                   <PA.PhotoBoxBottom>

@@ -132,6 +132,7 @@ export const PostButton = styled.div`
   cursor: pointer;
   transition: background 0.3s;
   bottom: 65px;
+  margin: 10px;
 
   &:hover {
     background: #71503c;

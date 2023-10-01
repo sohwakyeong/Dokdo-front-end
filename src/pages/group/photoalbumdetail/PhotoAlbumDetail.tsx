@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, SyntheticEvent } from 'react';
 import axios from 'axios';
 import * as PAD from '@/pages/group/photoalbumdetail/PhotoAlbumDetail.styled';
 import { getCookie } from '@/helper/Cookie';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import userImg from '@/assets/img/userbasicimg.png';
+
 
 interface PhotoDetailData {
   error: null | string;
@@ -253,11 +255,11 @@ const PhotoDetail: React.FC<PhotoDetailDataProps & GroupNameProps> = ({
       const response = await axios.get(
         `/api/v1/group/${group_Id}/posts/${post_Id}/like`,
       );
-  
+
       if (response.status === 200) {
         const likeCount = response.data.data.likeNum;
         const userLikedStatus = response.data.data.userLiked; // 가정: API 응답에서 userLiked 항목을 사용하여 사용자가 좋아요를 눌렀는지 확인
-  
+
         setLikeCounter(likeCount);
         setIsLiked(userLikedStatus);
       } else {
@@ -276,7 +278,7 @@ const PhotoDetail: React.FC<PhotoDetailDataProps & GroupNameProps> = ({
         `/api/v1/group/${group_Id}/posts/${post_Id}/like`,
         {},
       );
-  
+
       if (response.status === 200) {
         fetchLikeStatus(group_Id, post_Id); // 다시 좋아요 상태를 가져옵니다.
       } else {
@@ -299,6 +301,10 @@ const PhotoDetail: React.FC<PhotoDetailDataProps & GroupNameProps> = ({
     );
   };
 
+  const defaultUserImg = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+    e.currentTarget.src = userImg;
+  };
+
   return (
     <PAD.Wrapper>
       <PAD.GroupBoardTitle>
@@ -310,6 +316,7 @@ const PhotoDetail: React.FC<PhotoDetailDataProps & GroupNameProps> = ({
         <div>
           <PAD.ProfileImg
             src={`/api/v1/image/profile/${photoDetail?.data.user.profilePic}`}
+            onError={defaultUserImg}
           ></PAD.ProfileImg>
         </div>
         <PAD.Desc>
@@ -343,37 +350,41 @@ const PhotoDetail: React.FC<PhotoDetailDataProps & GroupNameProps> = ({
         <button onClick={handleShareBtn}>공유하기</button>
       </PAD.Button>
       <PAD.Comment>
-        <PAD.CommentsTitle>
-          댓글 <span> {comments.length}</span>
-        </PAD.CommentsTitle>
-        {comments.map((comment, index) => (
-          <div key={comment.comment_id}>
-            {!comment.isDeleted ? (
-              <PAD.CommentsList>
-                <PAD.ComentsBox>
-                  <PAD.PFImg>
-                    <img
-                      src={`/api/v1/image/profile/${commentsName[index]?.profilePic}`}
-                      alt="프사"
-                    />
-                  </PAD.PFImg>
-                  <PAD.PFText>
-                    <PAD.CommentUser>
-                      {commentsName[index]?.name}
-                    </PAD.CommentUser>
-                    <PAD.CommentText>{comment.text}</PAD.CommentText>
-                    <PAD.CommnetCreatedAt>
-                      {formatCreatedAt(comment.createdAt)}
-                    </PAD.CommnetCreatedAt>
-                  </PAD.PFText>
-                </PAD.ComentsBox>
-              </PAD.CommentsList>
-            ) : (
-              <div>Deleted Comment</div>
-            )}
-          </div>
-        ))}
-      </PAD.Comment>
+  <PAD.CommentsTitle>
+    댓글 <span> {comments.length}</span>
+  </PAD.CommentsTitle>
+  {comments.length > 0 ? (
+    comments.map((comment, index) => (
+      <div key={comment.comment_id}>
+        {!comment.isDeleted ? (
+          <PAD.CommentsList>
+            <PAD.ComentsBox>
+              <PAD.PFImg>
+                <img
+                  src={`/api/v1/image/profile/${commentsName[index]?.profilePic}`}
+                  alt="프사"
+                />
+              </PAD.PFImg>
+              <PAD.PFText>
+                <PAD.CommentUser>
+                  {commentsName[index]?.name}
+                </PAD.CommentUser>
+                <PAD.CommentText>{comment.text}</PAD.CommentText>
+                <PAD.CommnetCreatedAt>
+                  {formatCreatedAt(comment.createdAt)}
+                </PAD.CommnetCreatedAt>
+              </PAD.PFText>
+            </PAD.ComentsBox>
+          </PAD.CommentsList>
+        ) : (
+          <div>Deleted Comment</div>
+        )}
+      </div>
+    ))
+  ) : (
+    <PAD.NoCommentsText>댓글이 아직 없습니다.</PAD.NoCommentsText>
+  )}
+</PAD.Comment>
       <PAD.CIWrapper>
         <PAD.CIDisplay>
           <PAD.CIInput>

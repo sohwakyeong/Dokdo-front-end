@@ -60,6 +60,7 @@ const GroupBoardWrite: React.FC = () => {
         })
         .catch((error) => {
           console.error('myposts유저 정보 가져오기 에러:', error);
+          alert('게시글 작성은 그룹가입 후 이용할 수 있습니다.')
           window.location.href = '/'; // Simulating page navigation
         });
     }
@@ -89,11 +90,12 @@ const GroupBoardWrite: React.FC = () => {
         alert('성공적으로 작성되었습니다!');
         navigate(`/group/${groupId}/board`);
       } else {
-        setResponseMessage(`오류 발생: ${response.statusText}`);
+        alert('게시글 작성은 그룹 가입 후 사용할 수 있습니다.')
       }
     } catch (error: any) {
       console.error('Error:', error);
-      setResponseMessage(`요청 실패: ${error.message}`);
+      alert('게시글 작성은 그룹 가입 후 사용할 수 있습니다.')
+     window.location.href = `/group/${groupId}/detail`; 
     }
   };
 
