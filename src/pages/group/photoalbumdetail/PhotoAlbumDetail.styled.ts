@@ -246,9 +246,10 @@ export const CIInput = styled.div`
     height: 45px;
     border-radius: 20px;
     border: 1px solid #868686;
+    padding-left: 10px;
+
 
     &::placeholder {
-      padding-left: 10px;
       font-size: 15px;
       color: #a8a8a8;
     }
@@ -276,4 +277,10 @@ export const CommnetCreatedAt = styled.div`
 export const PFText = styled.div`
   width: 100%;
   margin-bottom: 3px;
+`;
+
+export const NoCommentsText = styled.div`
+  margin-bottom: 20px;
+  color: darkgray;
+
 `;

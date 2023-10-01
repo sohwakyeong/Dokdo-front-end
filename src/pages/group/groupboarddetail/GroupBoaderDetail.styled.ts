@@ -105,6 +105,11 @@ export const Comment = styled.div`
   margin-bottom: 55px;
 `;
 
+export const NoCommentsText = styled.div`
+  margin-bottom: 20px;
+  color: darkgray;
+`;
+
 export const CommentsTitle = styled.div`
   font-size: 20px;
   font-weight: 800;
@@ -249,9 +254,9 @@ export const CIInput = styled.div`
     height: 45px;
     border-radius: 20px;
     border: 1px solid #868686;
+    padding-left: 10px;
 
     &::placeholder {
-      padding-left: 10px;
       font-size: 15px;
       color: #a8a8a8;
     }
@@ -291,6 +296,13 @@ export const DropdownButton = styled.button`
   width: 90%;
 `;
 
+export const EditBoardWrap = styled.div`
+  width: 474px;
+  display: flex;
+  justify-content: end;
+  margin-right: 20px;
+`;
+
 export const DropdownContent = styled.div`
   background: white;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -299,11 +311,11 @@ export const DropdownContent = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  margin: 10px;
   border: 1px solid #000;
   border-radius: 15px;
-  width: 150px;
+  width: 180px;
   height: 100px;
-
 `;
 
 export const ProfileSection = styled.div`
@@ -331,8 +343,7 @@ export const CustomFileInput = styled.label`
 
   &:hover {
     font-weight: 700;
-    color:#84614b;
-
+    color: #84614b;
   }
 `;
 
@@ -342,8 +353,7 @@ export const CustomFileInputLabel = styled.div`
 
   &:hover {
     font-weight: 700;
-    color:#84614b;
-
+    color: #84614b;
   }
 `;
 export const EditGroupInfo = styled.div`
@@ -351,6 +361,6 @@ export const EditGroupInfo = styled.div`
 
   &:hover {
     font-weight: 700;
-    color:#84614b;
+    color: #84614b;
   }
 `;

@@ -5,18 +5,14 @@ import styled from 'styled-components';
 
 interface GroupNameData {
   group_id: number;
-  like: number; // 추가: 그룹의 좋아요 수를 받아오기 위한 prop
+  like: number;
 }
 
 function GroupLikeButton({ group_id, like }: GroupNameData) {
-  const [groupLike, setGroupLike] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
-  const [groupLikeNum, setGroupLikeNum] = useState(like); // 초기 좋아요 수를 prop에서 받아옴
+  const [isLiked, setIsLiked] = useState(like > 0);
+  const [groupLikeNum, setGroupLikeNum] = useState(like);
   const loginToken = getCookie('loginToken');
 
-  // ...
-
-  // 좋아요 버튼 클릭 시 실행되는 함수
   async function handleGroupLikeButton(group_id: number) {
     try {
       const response = await axios.put(
@@ -31,13 +27,14 @@ function GroupLikeButton({ group_id, like }: GroupNameData) {
       );
       if (response.status === 200) {
         const updatedGroupLike = response.data.data.groupLike;
-        setGroupLike(updatedGroupLike);
-        setIsLiked(!isLiked);
 
-        // 좋아요가 업데이트되면 좋아요 수도 업데이트
+        // 좋아요 상태를 서버의 응답 값으로 업데이트
+        setIsLiked(updatedGroupLike);
+
         const updatedLikeNum = response.data.data.groupLikeCounter;
         setGroupLikeNum(updatedLikeNum);
       } else {
+        alert('토론 모임 좋아요는 로그인을 해야 누를 수 있습니다');
         console.error('groupLike Error', response.status);
       }
     } catch (error) {
@@ -45,17 +42,15 @@ function GroupLikeButton({ group_id, like }: GroupNameData) {
     }
   }
 
-  // ...
-
   return (
     <LikeDisPlay>
-      <div>❤️</div>
       <LikeButton
         className="LikeButton"
         onClick={() => handleGroupLikeButton(group_id)}
       >
-        {groupLikeNum}
+        {isLiked ? '❤️' : '🤍'}
       </LikeButton>
+      <div>{groupLikeNum}</div>
     </LikeDisPlay>
   );
 }
@@ -65,17 +60,16 @@ export default GroupLikeButton;
 const LikeButton = styled.button`
   border: none;
   background-color: white;
-  font-size: 11px;
+  font-size: 30px;
+  cursor: pointer;
 `;
 
 const LikeDisPlay = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   font-size: 20px;
-
   & div {
-    font-size: 25px;
+    font-size: 13px;
   }
 `;

@@ -13,7 +13,6 @@ import GroupHeader from '@/components/layout/header/GroupHeader';
 import Modal from 'react-modal';
 import GroupLikeButton from '@/components/group/grouplike/GroupLike';
 import GroupMember from '@/components/group/groupmember/GroupMember';
-import EditImage from '@/components/group/editimage/EditImage';
 Modal.setAppElement('#root');
 
 interface MemberType {
@@ -239,7 +238,11 @@ function GroupDetail() {
   //그룹 가입 버튼
   async function handleJoinGroup(e: { preventDefault: () => void }) {
     e.preventDefault();
-
+    if (!loginToken) {
+      alert('로그인 후 이용해주세요!');
+      navigate('/login'); // 로그인 페이지로 이동
+      return;
+    }
     try {
       const response = await axios.put(
         `/api/v1/auth/group/${groupId}`,
@@ -255,6 +258,7 @@ function GroupDetail() {
       if (response.status === 200) {
         console.log('그룹 가입 성공:', response.data);
         alert('그룹에 가입되었습니다!');
+        window.location.reload();
       } else {
         console.error('그룹 가입 실패:', response.status);
       }
@@ -344,6 +348,17 @@ function GroupDetail() {
               </GD.EditGroupInfo>
             </GD.EditGroupSection>
             <GD.ProfileSection>
+              <GD.CustomFileInput htmlFor="profilePicInput">
+                <GD.StyledFileInput
+                  id="profilePicInput"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                />
+                <GD.CustomFileInputLabel onClick={uploadProfilePic}>
+                  모임 대표사진 수정
+                </GD.CustomFileInputLabel>
+              </GD.CustomFileInput>
             </GD.ProfileSection>
             <GD.DeleteSection>
               <GD.CustomFileInputLabel onClick={handleDeleteGroup}>
@@ -554,30 +569,34 @@ function GroupDetail() {
       </GD.Schedule>
       <GroupMember />
       <GD.ButtonDisplay>
-          <GD.NFWrapper>
-            <GD.NFDisplay>
-              <div>{joinError}</div>
-              <GD.GroupLikeDisplay>
-                {groupData && (
-                  <GroupLikeButton
-                    group_id={groupData.group_id}
-                    like={groupData.like}
-                  />
-                )}
-              </GD.GroupLikeDisplay>
+        <GD.NFWrapper>
+          <GD.NFDisplay>
+            <div>{joinError}</div>
+            <GD.GroupLikeDisplay>
+              {groupData && (
+                <GroupLikeButton
+                  group_id={groupData.group_id}
+                  like={groupData.like}
+                />
+              )}
+            </GD.GroupLikeDisplay>
 
-              {isUserAlreadyJoined ? (
-                <GD.NFNextBtn>
-                  <button>{groupData.name}</button>
-                </GD.NFNextBtn>
-              ) : (
+            {loginToken ? ( // 로그인되어 있을 때
+              <>
                 <GD.NFNextBtn>
                   <button onClick={handleJoinGroup}>모임 가입하기</button>
                 </GD.NFNextBtn>
-              )}
-            </GD.NFDisplay>
-          </GD.NFWrapper>
-        </GD.ButtonDisplay>
+         
+              </>
+            ) : (
+              // 로그인되어 있지 않을 때
+              <GD.NFNextBtn>
+                <button onClick={handleJoinGroup}>모임 가입하기</button>
+              </GD.NFNextBtn>
+            )}
+          </GD.NFDisplay>
+        </GD.NFWrapper>
+      </GD.ButtonDisplay>
     </GD.Wrapper>
   );
 }

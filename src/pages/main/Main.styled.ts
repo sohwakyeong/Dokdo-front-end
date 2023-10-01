@@ -61,14 +61,14 @@ export const GroupTop10 = styled.div`
   align-items: center;
   border-top: 15px solid #f1f1f1;
   width: 474px;
-  margin: 20px;
+  margin: 20px 0 10px 0;
 `;
 
 export const GroupTopTitle = styled.div`
   font-size: 20px;
   font-weight: bold;
   padding: 10px;
-  margin: 10px 0 5px 0;
+  margin: 10px 0 0 0;
   text-align: center;
 `;
 
@@ -90,13 +90,13 @@ export const BooksTop10 = styled.div`
   align-items: center;
   border-top: 1px solid #f1f1f1;
   width: 474px;
-  margin: 15px;
+  margin: 20px 0 10px 0;
 `;
 
 export const BooksTitle = styled.div`
   font-size: 20px;
   padding: 10px;
-  margin: 10px 0 5px 0;
+  margin: 10px 0 0 0;
   text-align: center;
 `;
 
