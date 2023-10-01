@@ -12,9 +12,6 @@
 ## :calendar: 개발 기간
 -23.08.14 ~ 23.09.01
 
-### :black_nib: 팀원 구성과 분배
-![팀원소개-1](/uploads/aace20841bd558b880d63ebf52134af4/팀원소개-1.png)
-
 #### :high_brightness: Front-end
 - 박다인 _ 웹의 UX/UI Design :crown:
 - 최형욱 _ 메인페이지, 토론모임페이지
@@ -74,6 +71,15 @@
 - !HOTFIX: 급하게 치명적인 버그를 고쳐야 하는 경우
 
 ### :station: 배포
+
+#### :ticket:배포사이트 & TEST ID
+- URL : http://dok-do.site
+- 일반 유저
+   - ID: user@test.com
+   - PW: dokdo1234!!
+- 관리자
+   - ID: admin@test.com
+   - PW: dokdo1234!!
 
 #### :ticket:Front-end
 - craco를 이용한 ~~ 오픈 및 ~를 활용한 배포
