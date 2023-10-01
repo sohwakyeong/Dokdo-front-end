@@ -20,8 +20,8 @@ function SignupSuccessComponent() {
            독서 토론에 도전해보세요!
         </SignupSuccessStyle.Description>
         <SignupSuccessStyle.GotoHome>
-          <SignupSuccessStyle.GotoHomeLink to="/">
-            확인
+          <SignupSuccessStyle.GotoHomeLink to="/login">
+            로그인 하러 가기
           </SignupSuccessStyle.GotoHomeLink>
         </SignupSuccessStyle.GotoHome>
       </SignupSuccessStyle.Wrapper>

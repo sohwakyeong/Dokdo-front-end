@@ -45,5 +45,5 @@ export const GotoHomeLink = styled(Link)`
   border: none;
 text-decoration: none;
   color: white;
-  font-size: 15px;
+  font-size: 18px;
 `;
