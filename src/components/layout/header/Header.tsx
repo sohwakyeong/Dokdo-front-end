@@ -19,9 +19,6 @@ function Header() {
           <Link to="/search">
             <HD.StlyedImg src={searchIcon} alt="돋보기 아이콘" />
           </Link>
-          <Link to="/notifications">
-            <HD.StlyedImg2 src={notificationIcon} alt="알림 아이콘" />
-          </Link>
         </HD.Nav>
       </HD.Up>
       <HD.Down>

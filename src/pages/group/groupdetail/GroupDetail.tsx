@@ -12,6 +12,7 @@ import { useParams } from 'react-router-dom';
 import GroupHeader from '@/components/layout/header/GroupHeader';
 import Modal from 'react-modal';
 import GroupLikeButton from '@/components/group/grouplike/GroupLike';
+import GroupMember from '@/components/group/groupmember/GroupMember';
 Modal.setAppElement('#root');
 
 interface MemberType {
@@ -237,7 +238,11 @@ function GroupDetail() {
   //그룹 가입 버튼
   async function handleJoinGroup(e: { preventDefault: () => void }) {
     e.preventDefault();
-
+    if (!loginToken) {
+      alert('로그인 후 이용해주세요!');
+      navigate('/login'); // 로그인 페이지로 이동
+      return;
+    }
     try {
       const response = await axios.put(
         `/api/v1/auth/group/${groupId}`,
@@ -253,10 +258,13 @@ function GroupDetail() {
       if (response.status === 200) {
         console.log('그룹 가입 성공:', response.data);
         alert('그룹에 가입되었습니다!');
+        window.location.reload();
       } else {
         console.error('그룹 가입 실패:', response.status);
       }
     } catch (error) {
+      alert('이미 그룹에 가입된 멤버입니다!');
+
       console.error('그룹 가입 에러:', error);
     }
   }
@@ -325,37 +333,6 @@ function GroupDetail() {
       console.error('그룹 정보 수정 에러:', error);
     }
   }
-
-  const addTag = () => {
-    const newTag = ''; // 새로운 태그 값을 설정하십시오.
-    setEditedGroupData({
-      ...editedGroupData,
-      tags: [...editedGroupData.tags, newTag],
-    });
-  };
-
-  // 태그 변경 핸들러
-  const handleTagChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-  ) => {
-    const newTags = [...editedGroupData.tags];
-    newTags[index] = e.target.value;
-    setEditedGroupData({
-      ...editedGroupData,
-      tags: newTags,
-    });
-  };
-
-  // 태그 삭제 함수
-  const removeTag = (index: number) => {
-    const newTags = [...editedGroupData.tags];
-    newTags.splice(index, 1);
-    setEditedGroupData({
-      ...editedGroupData,
-      tags: newTags,
-    });
-  };
 
   return (
     <GD.Wrapper>
@@ -490,9 +467,6 @@ function GroupDetail() {
           alt="모임이미지"
         />
       </GD.GroupImage>
-      {groupData && (
-        <GroupLikeButton group_id={groupData.group_id} like={groupData.like} />
-      )}
 
       <GD.GroupInfo>
         <GD.GroupName>📚{groupData.name}</GD.GroupName>
@@ -593,33 +567,36 @@ function GroupDetail() {
           </ModalWrapper>
         )}
       </GD.Schedule>
-      <GD.MemberBox>
-        <GD.Member>모임 멤버 ({uniqueMembers.length + 1})</GD.Member>
-        <ul>
-          {uniqueMembers.map((member: MemberType, index: number) => (
-            <li key={index}>
-              <GD.MemberList>
-                <GD.MemberImg>
-                  <img src={member.user.profilePic} alt="프로필" />
-                </GD.MemberImg>
-                <GD.Desc>
-                  <div>{member.user.name}</div>
-                </GD.Desc>
-              </GD.MemberList>
-            </li>
-          ))}
-        </ul>
-        <GD.ButtonDisplay>
-          <GD.NFWrapper>
-            <GD.NFDisplay>
-              <div>{joinError}</div>
+      <GroupMember />
+      <GD.ButtonDisplay>
+        <GD.NFWrapper>
+          <GD.NFDisplay>
+            <div>{joinError}</div>
+            <GD.GroupLikeDisplay>
+              {groupData && (
+                <GroupLikeButton
+                  group_id={groupData.group_id}
+                  like={groupData.like}
+                />
+              )}
+            </GD.GroupLikeDisplay>
+
+            {loginToken ? ( // 로그인되어 있을 때
+              <>
+                <GD.NFNextBtn>
+                  <button onClick={handleJoinGroup}>모임 가입하기</button>
+                </GD.NFNextBtn>
+         
+              </>
+            ) : (
+              // 로그인되어 있지 않을 때
               <GD.NFNextBtn>
                 <button onClick={handleJoinGroup}>모임 가입하기</button>
               </GD.NFNextBtn>
-            </GD.NFDisplay>
-          </GD.NFWrapper>
-        </GD.ButtonDisplay>
-      </GD.MemberBox>
+            )}
+          </GD.NFDisplay>
+        </GD.NFWrapper>
+      </GD.ButtonDisplay>
     </GD.Wrapper>
   );
 }

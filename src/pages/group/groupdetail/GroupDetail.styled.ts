@@ -204,22 +204,25 @@ export const SDDues = styled.div`
 `;
 
 export const NotScheduleBox = styled.div`
-  margin: 15px 0;
-  width: 405px;
-  height: 230px;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  width: 405px;
+  height: 230px;
+  margin: 15px 0;
   border: 1px solid #d9d9d9;
   border-radius: 10px;
 `;
 
 export const MemberBox = styled.div`
-  display: flex;
+  display: flex; 
   flex-direction: column;
+
   margin: 20px 0;
-  width: 100%;
   padding: 20px;
+
+  width: 100%;
   box-sizing: border-box;
   border-top: solid 15px #ddd;
 `;
@@ -245,43 +248,54 @@ export const MemberImg = styled.div`
   background-color: #ddd;
   overflow: hidden;
   margin: auto;
+
+  & img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const Desc = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  
   font-weight: bold;
 `;
 
 export const ButtonDisplay = styled.div`
   display: flex;
   justify-content: center;
+
+  width: 100%;
 `;
 export const ModalWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   position: fixed;
+  z-index: 1000;
+
   top: 50%;
   left: 20%;
   transform: translateY(-50%);
+
   width: 409px;
   height: 381px;
   background-color: #ffffff;
-  border: 1px solid #d9d9d9;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  z-index: 1000;
 
-  display: flex; // Flexbox 사용
-  flex-direction: column; // 수직 방향으로 아이템 배치
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
 `;
 
 export const ModalHeader = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
+
   margin-top: 30px;
-  font-weight: bold;
-  justify-content: center; // 항목들을 수평 방향으로 중앙에 배치합니다.
-  align-items: center; // 항목들을 세로 방향으로 중앙에 배치합니다.
   padding: 10px 15px;
+  font-weight: bold;
   font-size: 24px;
 `;
 
@@ -298,7 +312,7 @@ export const ModalContent = styled.div`
   }
 
   & > form > div > label {
-    width: 60px;
+    width: 100px;
     margin-left: 10px;
     display: inline-block;
     font-size: 18px;
@@ -307,13 +321,14 @@ export const ModalContent = styled.div`
 
   & > form > div > input {
     flex: 1;
-    width: 306px;
+    width: 300px;
     height: 31.6px;
     border-radius: 10px;
     border: 0px solid #ccc;
     background-color: #efefef;
     margin-left: -15px;
     margin-right: 20px;
+    padding-left: 15px;
   }
 
   & > form > .button-container > button {
@@ -363,9 +378,8 @@ export const NFNextBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 85%;
   background-color: #84614b;
-  width: 380px;
   height: 45px;
   border-radius: 20px;
 
@@ -404,7 +418,6 @@ export const DropdownContent = styled.div`
   border-radius: 15px;
   width: 150px;
   height: 100px;
-
 `;
 
 export const ProfileSection = styled.div`
@@ -432,8 +445,7 @@ export const CustomFileInput = styled.label`
 
   &:hover {
     font-weight: 700;
-    color:#84614b;
-
+    color: #84614b;
   }
 `;
 
@@ -443,8 +455,7 @@ export const CustomFileInputLabel = styled.div`
 
   &:hover {
     font-weight: 700;
-    color:#84614b;
-
+    color: #84614b;
   }
 `;
 export const EditGroupInfo = styled.div`
@@ -452,6 +463,14 @@ export const EditGroupInfo = styled.div`
 
   &:hover {
     font-weight: 700;
-    color:#84614b;
+    color: #84614b;
   }
+`;
+
+export const GroupLikeDisplay = styled.div`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 9%;
+  height: 100%;
 `;

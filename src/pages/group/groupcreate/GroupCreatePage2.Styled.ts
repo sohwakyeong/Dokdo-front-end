@@ -65,9 +65,12 @@ export const FormGroup = styled.div`
   position: relative;
   top: -15px;
   color: #000000;
+  margin: 5px;
 
   label {
-    margin-bottom: 20px; // 레이블과 입력 필드 사이에 간격 추가
+    
+    align-items: center;
+    margin-bottom: 10px; // 레이블과 입력 필드 사이에 간격 추가
     flex-shrink: 0;
   }
 

@@ -2,8 +2,9 @@ import React, { SyntheticEvent, useState, useEffect } from 'react';
 import axios from 'axios';
 import * as GBD from '@/pages/group/groupboarddetail/GroupBoaderDetail.styled';
 import { getCookie } from '@/helper/Cookie';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import UserImg from '@/assets/img/userbasicimg.png';
+import EditImage from '@/components/group/editimage/EditImage';
 
 interface GroupDetailData {
   error: null | string;
@@ -20,7 +21,7 @@ interface GroupDetailData {
     };
     user: {
       name: string;
-      profilePic: string[];
+      profilePic: string;
     };
   };
 }
@@ -31,6 +32,7 @@ interface Comment {
   comment_id: number;
   createdAt: string;
 }
+
 interface UserData {
   name: string;
   profilePic: string;
@@ -46,11 +48,37 @@ interface GroupNameData {
   };
 }
 
-
 interface GroupNameProps {
   data?: GroupNameData;
 }
-
+interface GroupData {
+  group_id: number;
+  name: string;
+  isRecruit: boolean;
+  profile: string;
+  leader: number;
+  like: number;
+  mem: Array<{
+    _id: string;
+    group_id: number;
+    user_id: number;
+    createdAt: string;
+  }>;
+  introduction: string;
+  place: string;
+  search: {
+    _id: string;
+    group_id: number;
+    location: string;
+    day: string;
+    genre: string;
+    age: string;
+    __v: number;
+  };
+  tags: string[];
+  error: any;
+  createdAt: string;
+}
 const GroupBoardDetail: React.FC<
   GroupBoardDetailDataProps & GroupNameProps
 > = ({ data }) => {
@@ -59,8 +87,8 @@ const GroupBoardDetail: React.FC<
     groupId?: string;
     postsId?: string;
   }>();
-  const group_Id = groupId ? parseInt(groupId, 10) : undefined;
-  const post_Id = postsId ? parseInt(postsId, 10) : undefined;
+  const group_Id = groupId ? parseInt(groupId, 10) : 0;
+  const post_Id = postsId ? parseInt(postsId, 10) : 0;
   const [groupDetail, setGroupDetail] = useState<GroupDetailData | null>(
     data || null,
   );
@@ -74,6 +102,23 @@ const GroupBoardDetail: React.FC<
   const [likeCounter, setLikeCounter] = useState<number>(0);
   const [isLiked, setIsLiked] = useState(false);
 
+  const [joinError, setJoinError] = useState<string | null>(null);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  const [editedTitle, setEditedTitle] = useState<string>('');
+  const [editedContent, setEditedContent] = useState<string>('');
+
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [groupData, setGroupData] = useState<GroupData | null>(null);
+  const [images, setImages] = useState<File[]>([]); // 이미지 파일 배열
+
+  const navigate = useNavigate();
+
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
   function formatCreatedAt(createdAt: string | number | Date) {
     const date = new Date(createdAt);
 
@@ -82,14 +127,13 @@ const GroupBoardDetail: React.FC<
 
     return `${month}월 ${day}일`;
   }
+
   useEffect(() => {
     if (group_Id && post_Id) {
       fetchGroupDetail(group_Id, post_Id);
       fetchComments(group_Id, post_Id);
       fetchGroupName(group_Id);
       fetchLikeStatus(group_Id, post_Id);
-
-      // 좋아요 개수 가져오기
     }
   }, [loginToken, group_Id, post_Id]);
 
@@ -155,14 +199,16 @@ const GroupBoardDetail: React.FC<
       );
 
       if (response.status === 200) {
-        // 댓글 작성 후에 댓글 목록을 업데이트
-        //@ts-ignore
         fetchComments(group_Id, post_Id);
-        setCommentText(''); // 작성한 댓글 내용을 초기화
+        setCommentText('');
       } else {
+        alert('모임에 가입하고 댓글을 작성해주세요!');
+
         console.error('Error posting comment:', response.status);
       }
     } catch (error) {
+      alert('모임에 가입하고 댓글을 작성해주세요!');
+
       console.error('Error posting comment:', error);
     }
   };
@@ -212,6 +258,7 @@ const GroupBoardDetail: React.FC<
       console.error('Error fetching comments:', error);
     }
   };
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -220,7 +267,7 @@ const GroupBoardDetail: React.FC<
     const confirmed = window.confirm('게시글을 삭제하시겠습니까?');
 
     if (!confirmed) {
-      return; // 삭제를 취소한 경우 함수 종료
+      return;
     }
 
     try {
@@ -234,9 +281,9 @@ const GroupBoardDetail: React.FC<
         },
       );
 
-      if (response.status === 204) {
-        // 게시글이 성공적으로 삭제된 경우, 해당 페이지를 새로고침하거나 다른 동작을 수행할 수 있습니다.
-        // 예: history.push()를 사용하여 게시글 목록 페이지로 이동
+      if (response.status === 200) {
+        alert('게시글이 삭제되었습니다.');
+        navigate(`/group/${groupId}/board`);
       } else {
         console.error('Error deleting post:', response.status);
       }
@@ -244,21 +291,19 @@ const GroupBoardDetail: React.FC<
       console.error('Error deleting post:', error);
     }
   };
+
   const fetchLikeStatus = async (group_Id: number, post_Id: number) => {
     try {
-      // postlikes 컬렉션에서 해당 게시물의 좋아요 개수를 조회
-      const response = await axios.get(`/api/v1/group/${group_Id}/posts/${post_Id}/like`
-      // , {
-      //   headers: {
-      //     Authorization: `Bearer ${loginToken}`,
-      //   },
-      //   withCredentials: true,
-      // }
+      const response = await axios.get(
+        `/api/v1/group/${group_Id}/posts/${post_Id}/like`,
       );
-  
+
       if (response.status === 200) {
-        const likeCount = response.data.data.likeNum; 
+        const likeCount = response.data.data.likeNum;
+        const userLikedStatus = response.data.data.userLiked; // 가정: API 응답에서 userLiked 항목을 사용하여 사용자가 좋아요를 눌렀는지 확인
+
         setLikeCounter(likeCount);
+        setIsLiked(userLikedStatus);
       } else {
         console.error('Error fetching like status:', response.status);
         console.log('API Response:', response.data);
@@ -268,24 +313,15 @@ const GroupBoardDetail: React.FC<
     }
   };
 
-  // 게시글 좋아요
   const handleLikeBtn = async () => {
     try {
       const response = await axios.put(
         `/api/v1/group/${group_Id}/posts/${post_Id}/like`,
         {},
-        {
-          headers: {
-            Authorization: `Bearer ${loginToken}`,
-          },
-          withCredentials: true,
-        }
       );
-  
+
       if (response.status === 200) {
-        const updatedLikeCount = response.data.data.likeNum; // 서버에서 업데이트된 좋아요 개수를 받아옴
-        setLikeCounter(updatedLikeCount); // 좋아요 개수를 업데이트
-        setIsLiked(!isLiked); // 좋아요 상태를 토글 (누른 상태에서 취소, 취소 상태에서 누름)
+        fetchLikeStatus(group_Id, post_Id); // 다시 좋아요 상태를 가져옵니다.
       } else {
         console.error('Error liking/unliking post:', response.status);
       }
@@ -298,12 +334,168 @@ const GroupBoardDetail: React.FC<
     e.currentTarget.src = UserImg;
   };
 
+  const openEditModal = () => {
+    setEditedTitle(groupDetail?.data.post.title || '');
+    setEditedContent(groupDetail?.data.post.content || '');
+    setIsEditModalOpen(true);
+  };
+
+  const closeEditModal = () => {
+    setIsEditModalOpen(false);
+  };
+
+  const saveEditedPost = async () => {
+    try {
+      const response = await axios.put(
+        `/api/v1/group/${group_Id}/posts/${post_Id}`,
+        {
+          title: editedTitle,
+          content: editedContent,
+          // images: [], // 이미지 정보를 여기에 추가 (이 부분을 주석 처리해야 합니다)
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${loginToken}`,
+          },
+          withCredentials: true,
+        },
+      );
+
+      if (response.status === 200) {
+        closeEditModal();
+        // 수정된 게시글 내용을 업데이트하는 함수 호출
+        updatePostContent(editedTitle, editedContent);
+      } else {
+        console.error('Error editing post:', response.status);
+      }
+    } catch (error) {
+      console.error('Error editing post:', error);
+    }
+  };
+
+  const updatePostContent = (editedTitle: string, editedContent: string) => {
+    // 필요한 작업을 수행 (예: 화면에 수정된 내용 표시)
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files && e.target.files[0];
+
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append('img', selectedFile);
+
+      try {
+        const response = await axios.put(
+          `/api/v1/group/${group_Id}/posts/${post_Id}`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${loginToken}`,
+              'Content-Type': 'multipart/form-data',
+            },
+            withCredentials: true,
+          },
+        );
+
+        if (response.status === 200) {
+          // 이미지 업로드가 성공하면 서버에서 새 이미지의 정보를 반환합니다.
+          const newImageInfo = response.data.data;
+          // 이제 새 이미지 정보를 기존 이미지 배열에 추가합니다.
+          if (groupDetail) {
+            const updatedImages = [...groupDetail.data.post.images];
+            updatedImages[0] = newImageInfo;
+
+            setGroupDetail({
+              ...groupDetail,
+              data: {
+                ...groupDetail.data,
+                post: {
+                  ...groupDetail.data.post,
+                  images: updatedImages, // 업데이트된 이미지 배열을 설정
+                },
+              },
+            });
+
+            console.log('Image uploaded successfully.');
+          }
+        } else {
+          console.error('Image upload failed:', response.status);
+        }
+      } catch (error) {
+        console.error('Image upload error:', error);
+      }
+    }
+  };
+
+  const uploadSingleImage = async (imageFile: File) => {
+    try {
+      const formData = new FormData();
+      formData.append('img', imageFile);
+
+      const uploadResponse = await axios.put(
+        `/api/v1/group/${group_Id}/posts/${post_Id}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${loginToken}`,
+            'Content-Type': 'multipart/form-data',
+          },
+          withCredentials: true,
+        },
+      );
+
+      if (uploadResponse.status === 200) {
+        const uploadedImageName = uploadResponse.data.data;
+        console.log('이미지 업로드 성공:', uploadedImageName);
+        return uploadedImageName;
+      } else {
+        console.error('이미지 업로드 실패:', uploadResponse.data.error);
+        return null;
+      }
+    } catch (error) {
+      console.error('이미지 업로드 에러:', error);
+      return null;
+    }
+  };
+
+  const handleShareBtn = () => {
+    const url = window.location.href; // 현재 페이지의 URL을 가져옵니다.
+    navigator.clipboard.writeText(url).then(
+      () => {
+        alert('현재 게시글이 복사되었습니다!'); // 복사 성공 시 알림
+      },
+      err => {
+        console.error('URL 복사에 실패했습니다!:', err); // 복사 실패 시 에러 출력
+      },
+    );
+  };
+
   return (
     <GBD.Wrapper>
       <GBD.GroupBoardTitle>
         <div>{groupName} 🍀 모임의 게시글</div>
       </GBD.GroupBoardTitle>
-      <GBD.EditButton onClick={deletePost}>●●●</GBD.EditButton>
+
+      {showDropdown && (
+        <GBD.EditBoardWrap>
+          <GBD.DropdownContent>
+            <GBD.EditGroupSection>
+              <GBD.EditGroupInfo onClick={openEditModal}>
+                게시글 수정
+              </GBD.EditGroupInfo>
+            </GBD.EditGroupSection>
+            <GBD.ProfileSection>
+              <EditImage />
+            </GBD.ProfileSection>
+            <GBD.DeleteSection>
+              <GBD.CustomFileInputLabel onClick={deletePost}>
+                게시글 삭제하기
+              </GBD.CustomFileInputLabel>
+            </GBD.DeleteSection>
+          </GBD.DropdownContent>
+        </GBD.EditBoardWrap>
+      )}
+      <GBD.EditButton onClick={toggleDropdown}>●●●</GBD.EditButton>
       <GBD.User>
         <div>
           <GBD.ProfileImg
@@ -325,10 +517,12 @@ const GroupBoardDetail: React.FC<
       </GBD.User>
 
       <GBD.UserWriteBox>
+        <GBD.BoardTitle>
+          {groupDetail?.data?.post.title || '게시글이 없습니다.'}
+        </GBD.BoardTitle>
         <GBD.UserContent>
           {groupDetail?.data?.post.content || '게시글이 없습니다.'}
         </GBD.UserContent>
-        {/* 이미지 배열이 정의되어 있고 비어있지 않은 경우에만 이미지 출력 */}
         {groupDetail?.data?.post.images &&
           groupDetail.data.post.images.length > 0 && (
             <img
@@ -338,43 +532,47 @@ const GroupBoardDetail: React.FC<
           )}
       </GBD.UserWriteBox>
       <GBD.Button>
-      <button onClick={handleLikeBtn}>
-          {isLiked ? '❤️ 취소' : `❤️ 좋아요`} {likeCounter}
+        <button onClick={handleLikeBtn}>
+          {isLiked ? `❤️ ${likeCounter} 취소` : `❤️ 좋아요`} {likeCounter}
         </button>
-        <button>공유하기</button>
+        <button onClick={handleShareBtn}>공유하기</button>
       </GBD.Button>
       <GBD.Comment>
         <GBD.CommentsTitle>
           댓글 <span> {comments.length}</span>
         </GBD.CommentsTitle>
-        {comments.map((comment, index) => (
-          <div key={comment.comment_id}>
-            {!comment.isDeleted ? (
-              <GBD.CommentsList>
-                <GBD.ComentsBox>
-                  <GBD.PFImg>
-                    <img
-                      src={`/api/v1/image/profile/${commentsName[index]?.profilePic}`}
-                      alt="프사"
-                      onError={defaultUserImg}
-                    />
-                  </GBD.PFImg>
-                  <GBD.PFText>
-                    <GBD.CommentUser>
-                      {commentsName[index]?.name}
-                    </GBD.CommentUser>
-                    <GBD.CommentText>{comment.text}</GBD.CommentText>
-                    <GBD.CommnetCreatedAt>
-                      {formatCreatedAt(comment.createdAt)}
-                    </GBD.CommnetCreatedAt>
-                  </GBD.PFText>
-                </GBD.ComentsBox>
-              </GBD.CommentsList>
-            ) : (
-              <div>Deleted Comment</div>
-            )}
-          </div>
-        ))}
+        {comments.length > 0 ? (
+          comments.map((comment, index) => (
+            <div key={comment.comment_id}>
+              {!comment.isDeleted ? (
+                <GBD.CommentsList>
+                  <GBD.ComentsBox>
+                    <GBD.PFImg>
+                      <img
+                        src={`/api/v1/image/profile/${commentsName[index]?.profilePic}`}
+                        alt="프사"
+                        onError={defaultUserImg}
+                      />
+                    </GBD.PFImg>
+                    <GBD.PFText>
+                      <GBD.CommentUser>
+                        {commentsName[index]?.name}
+                      </GBD.CommentUser>
+                      <GBD.CommentText>{comment.text}</GBD.CommentText>
+                      <GBD.CommnetCreatedAt>
+                        {formatCreatedAt(comment.createdAt)}
+                      </GBD.CommnetCreatedAt>
+                    </GBD.PFText>
+                  </GBD.ComentsBox>
+                </GBD.CommentsList>
+              ) : (
+                <div>Deleted Comment</div>
+              )}
+            </div>
+          ))
+        ) : (
+          <GBD.NoCommentsText>댓글이 아직 없습니다.</GBD.NoCommentsText>
+        )}
       </GBD.Comment>
       <GBD.CIWrapper>
         <GBD.CIDisplay>

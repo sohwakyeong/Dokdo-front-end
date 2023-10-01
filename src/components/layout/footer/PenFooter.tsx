@@ -11,7 +11,7 @@ function PenFooter() {
       <Display>
         <Link to={`/group/${groupId}/boardwrite`}>
           <Button>
-            <img src={PenIcon} alt="" />
+            <img src={PenIcon} alt="글 작성 버튼" />
           </Button>
         </Link>
       </Display>
@@ -38,14 +38,13 @@ const Display = styled.div`
 `;
 
 const Button = styled.button`
-  width: 60px;
-  height: 60px;
-  background-color: white;
+  height: 50px;
+  background-color:transparent;
+  border:none;
+
   cursor: pointer;
-  border-radius: 50%;
-  border: 3px solid black;
   & img {
-    width: 40px;
-    height: 40px;
+    width: 80x;
+    height: 50px;
   }
 `;

@@ -59,14 +59,12 @@ const GroupCreatePage4: React.FC = () => {
         <StepCircle>4</StepCircle>
       </StepsContainer>
       <Title>우리 모임의 사진을 정해주세요!</Title>
-      {/* 스타일 및 기타 컴포넌트 렌더링 */}
       <FileInputContainer>
         <label>프로필 사진 업로드</label>
-        <input type="file" onChange={handleImageUpload} />
-      </FileInputContainer>
+      <input type="file" onChange={handleImageUpload} />
 
+      </FileInputContainer>
       <SubmitButtonDisplay>
-        {/* 완료 버튼을 눌렀을 때 handleComplete 함수 호출 */}
         <SubmitButton
           type="button"
           disabled={uploading}

@@ -5,6 +5,7 @@ import axios from 'axios';
 import MoreButton from '@/components/common/morebutton/MoreButton';
 import GroupData from '@/pages/admin/GroupData';
 import { useNavigate } from 'react-router-dom';
+import MorePost from '@/assets/icon/newIcon/chat1.png';
 
 interface UserData {
   group: number[];
@@ -23,6 +24,8 @@ export default function MyGroupsComponent() {
   const [groupData, setGroupData] = useState<GroupData[]>([]);
   const [likedGroups, setLikedGroups] = useState<GroupData[]>([]);
   const [groupInfoData, setGroupInfoData] = useState<GroupData[]>([]);
+  const [loading, setLoading] = useState(true);
+
 
   const navigate = useNavigate();
 
@@ -124,6 +127,7 @@ export default function MyGroupsComponent() {
         const likedGroupInfoData = await Promise.all(groupInfoPromises);
         setLikedGroups(likedGroupsData);
         setGroupInfoData(likedGroupInfoData);
+        setLoading(false);
       }
     } catch (error) {
       console.error(
@@ -142,65 +146,119 @@ export default function MyGroupsComponent() {
       <MyGroupsStyle.Wrapper>
         <MyGroupsStyle.MyGroupBoardBox>
           <MyGroupsStyle.Title>내가 가입한 모임</MyGroupsStyle.Title>
-          {groupData.slice(0, 3).map((group, index) => (
-            <MyGroupsStyle.GroupBoardBox
-              key={index}
-              onClick={() => onClickToGroup(group.group_id)}
-            >
-              <MyGroupsStyle.BoardImg
-                src={`/api/v1/image/profile/${group.profile}`}
-                alt="그룹의 대표 이미지"
-              />
-              <MyGroupsStyle.RightSide>
-                <MyGroupsStyle.GroupName>{group.name}</MyGroupsStyle.GroupName>
-                <MyGroupsStyle.GroupIntro>
-                  {group.introduction}
-                </MyGroupsStyle.GroupIntro>
-                <MyGroupsStyle.GroupTags>
-                  {group.tags.map((tag, tagIndex) => (
-                    <MyGroupsStyle.GroupTag key={tagIndex}>
-                      {tag}
-                    </MyGroupsStyle.GroupTag>
-                  ))}
-                </MyGroupsStyle.GroupTags>
-              </MyGroupsStyle.RightSide>
-            </MyGroupsStyle.GroupBoardBox>
-          ))}
+          <MyGroupsStyle.DataCheck>
+            {loading ? (
+              <MyGroupsStyle.LoadingContainer>
+                <MyGroupsStyle.LoadingContent>
+                  <MyGroupsStyle.LoadingImg src={MorePost} alt="MorePost" />
+                  <MyGroupsStyle.LoadingText>
+                    데이터를 불러오는 중...
+                  </MyGroupsStyle.LoadingText>
+                </MyGroupsStyle.LoadingContent>
+              </MyGroupsStyle.LoadingContainer>
+            ) : userData && groupData.length > 0 ? (
+              <>
+                {groupData.slice(0, 3).map((group, index) => (
+                  <MyGroupsStyle.GroupBoardBox
+                    key={index}
+                    onClick={() => onClickToGroup(group.group_id)}
+                  >
+                    <MyGroupsStyle.BoardImg
+                      src={`/api/v1/image/profile/${group.profile}`}
+                      alt="그룹의 대표 이미지"
+                    />
+                    <MyGroupsStyle.RightSide>
+                      <MyGroupsStyle.GroupName>
+                        {group.name}
+                      </MyGroupsStyle.GroupName>
+                      <MyGroupsStyle.GroupIntro>
+                        {group.introduction}
+                      </MyGroupsStyle.GroupIntro>
+                      <MyGroupsStyle.GroupTags>
+                        {group.tags.map((tag, tagIndex) => (
+                          <MyGroupsStyle.GroupTag key={tagIndex}>
+                            {tag}
+                          </MyGroupsStyle.GroupTag>
+                        ))}
+                      </MyGroupsStyle.GroupTags>
+                    </MyGroupsStyle.RightSide>
+                  </MyGroupsStyle.GroupBoardBox>
+                ))}
+              </>
+            ) : (
+              <MyGroupsStyle.NoContainer>
+                <MyGroupsStyle.NoContent>
+                  <MyGroupsStyle.NoContentImg src={MorePost} alt="MorePost" />
+                  <MyGroupsStyle.NoContentText>
+                    가입한 모임이 없습니다.
+                  </MyGroupsStyle.NoContentText>
+                </MyGroupsStyle.NoContent>
+              </MyGroupsStyle.NoContainer>
+            )}
+          </MyGroupsStyle.DataCheck>
         </MyGroupsStyle.MyGroupBoardBox>
-        <MoreButton to="/group/list">더보기</MoreButton>
+      
+          <MoreButton to="/group/list">모임 둘러보기</MoreButton>
+        
       </MyGroupsStyle.Wrapper>
 
       <MyGroupsStyle.Wrapper>
         <MyGroupsStyle.MyGroupBoardBox>
           <MyGroupsStyle.Title>내가 좋아요한 모임</MyGroupsStyle.Title>
-          {groupInfoData.slice(0, 3).map((groupInfo, index) => (
-            <MyGroupsStyle.GroupBoardBox
-              key={index}
-              onClick={() => onClickToGroup(groupInfo.group_id)}
-            >
-              <MyGroupsStyle.BoardImg
-                src={`/api/v1/image/profile/${groupInfo.profile}`}
-                alt="그룹의 대표 이미지"
-              />
-              <MyGroupsStyle.RightSide>
-                <MyGroupsStyle.GroupName>
-                  {groupInfo.name}
-                </MyGroupsStyle.GroupName>
-                <MyGroupsStyle.GroupIntro>
-                  {groupInfo.introduction}
-                </MyGroupsStyle.GroupIntro>
-                <MyGroupsStyle.GroupTags>
-                  {groupInfo.tags.map((tag, tagIndex) => (
-                    <MyGroupsStyle.GroupTag key={tagIndex}>
-                      {tag}
-                    </MyGroupsStyle.GroupTag>
-                  ))}
-                </MyGroupsStyle.GroupTags>
-              </MyGroupsStyle.RightSide>
-            </MyGroupsStyle.GroupBoardBox>
-          ))}
+          <MyGroupsStyle.DataCheck>
+            {loading ? (
+              <MyGroupsStyle.LoadingContainer>
+                <MyGroupsStyle.LoadingContent>
+                  <MyGroupsStyle.LoadingImg src={MorePost} alt="MorePost" />
+                  <MyGroupsStyle.LoadingText>
+                    데이터를 불러오는 중...
+                  </MyGroupsStyle.LoadingText>
+                </MyGroupsStyle.LoadingContent>
+              </MyGroupsStyle.LoadingContainer>
+            ) : userData && likedGroups.length > 0 ? (
+              <>
+                {groupInfoData.slice(0, 3).map((groupInfo, index) => (
+                  <>
+                    <MyGroupsStyle.GroupBoardBox
+                      key={index}
+                      onClick={() => onClickToGroup(groupInfo.group_id)}
+                    >
+                      <MyGroupsStyle.BoardImg
+                        src={`/api/v1/image/profile/${groupInfo.profile}`}
+                        alt="그룹의 대표 이미지"
+                      />
+                      <MyGroupsStyle.RightSide>
+                        <MyGroupsStyle.GroupName>
+                          {groupInfo.name}
+                        </MyGroupsStyle.GroupName>
+                        <MyGroupsStyle.GroupIntro>
+                          {groupInfo.introduction}
+                        </MyGroupsStyle.GroupIntro>
+                        <MyGroupsStyle.GroupTags>
+                          {groupInfo.tags.map((tag, tagIndex) => (
+                            <MyGroupsStyle.GroupTag key={tagIndex}>
+                              {tag}
+                            </MyGroupsStyle.GroupTag>
+                          ))}
+                        </MyGroupsStyle.GroupTags>
+                      </MyGroupsStyle.RightSide>
+                    </MyGroupsStyle.GroupBoardBox>
+                  </>
+                ))}
+              </>
+            ) : (
+              <MyGroupsStyle.NoContainer>
+                <MyGroupsStyle.NoContent>
+                  <MyGroupsStyle.NoContentImg src={MorePost} alt="MorePost" />
+                  <MyGroupsStyle.NoContentText>
+                    좋아요한 모임이 없습니다.
+                  </MyGroupsStyle.NoContentText>
+                </MyGroupsStyle.NoContent>
+              </MyGroupsStyle.NoContainer>
+            )}
+          </MyGroupsStyle.DataCheck>
         </MyGroupsStyle.MyGroupBoardBox>
-        <MoreButton to="/group/list">더보기</MoreButton>
+        <MoreButton to="/group/list">모임 둘러보기</MoreButton>
       </MyGroupsStyle.Wrapper>
     </MyGroupsStyle.Container>
   );
