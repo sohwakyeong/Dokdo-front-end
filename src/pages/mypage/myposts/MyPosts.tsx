@@ -201,7 +201,7 @@ function MyPostsComponent() {
             <MyPostsStyle.NoContentText>
               아직 작성하신 글이 없습니다.
             </MyPostsStyle.NoContentText>
-            <MyPostsStyle.GoPostBtn>토론 모임으로 가기</MyPostsStyle.GoPostBtn>
+            <MyPostsStyle.GoPostBtn onClick={()=> navigate('/group/list')}>토론 모임으로 가기</MyPostsStyle.GoPostBtn>
           </MyPostsStyle.NoContent>
         </MyPostsStyle.NoContainer>
       )}

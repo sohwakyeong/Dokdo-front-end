@@ -5,7 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 474px;
-  height: 100%;
+  height: 600px;
   margin: 0 auto;
 `;
 
@@ -171,4 +171,5 @@ export const GoPostBtn = styled.button`
   font-size: 16px;
   border-radius: 20px;
   border: none;
+  cursor: pointer;
 `;

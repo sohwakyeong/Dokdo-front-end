@@ -54,7 +54,6 @@ export default function Slider3() {
         const groupResponse = await axios.get(`/api/v1/group/${groupId}`);
 
         if (groupResponse.data.error === null) {
-          // 그룹 데이터 처리
           const groupInfo: MiddleBoardData2 = groupResponse.data.data;
           setPopularData(prevpopularData => [...prevpopularData, groupInfo]);
         } else {
