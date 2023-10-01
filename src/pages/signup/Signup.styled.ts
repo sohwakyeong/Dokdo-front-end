@@ -31,6 +31,7 @@ export const Tag = styled.div`
 
 export const FormInput = styled.div`
   display: flex;
+  width: 100%;
 `;
 
 export const Input = styled.input`
@@ -53,6 +54,22 @@ export const Input = styled.input`
   }
 `;
 
+export const InputButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 50px;
+  font-size: 14px;
+
+  cursor: pointer;
+  margin-left: 10px;
+  border-radius: 10px;
+  border: 1px solid #cbcbcb;
+ 
+`;
+
+
 export const Alert = styled.div`
   display: flex;
   margin-left: 15px;
@@ -62,19 +79,7 @@ export const Alert = styled.div`
   color: ${({ className }) => (className === 'success' ? 'green' : '#d31a38')};
 `;
 
-export const EmailInput = styled(Input)`
-  
-`;
 
-export const InputButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 42px;
-  font-size: 18px;
-  border-radius: 8px;
-  cursor: pointer;
-`;
 
 export const CheckContainer = styled.div`
   display: flex;
@@ -140,6 +145,7 @@ export const SubmitButton = styled(InputButton)`
   border: none;
   text-decoration: none;
   color: white;
+  font-size: 18px;
 `;
 
 export const ModalButton = styled.button`

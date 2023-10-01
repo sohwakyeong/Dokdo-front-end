@@ -3,6 +3,7 @@ import AxiosC from '@/helper/AxiosC';
 import { useNavigate } from 'react-router-dom';
 import * as SignupStyle from '@/pages/signup/Signup.styled';
 import Modal from '@/components/common/modal/modal';
+import axios from 'axios';
 
 const SignupComponent = () => {
   const [email, setEmail] = useState('');
@@ -25,7 +26,7 @@ const SignupComponent = () => {
   const [isPersonalModalOpen, setIsPersonalModalOpen] = useState(false);
   const [isAdversibilityeModalOpen, setIsAdversibilityModalOpen] =
     useState(false);
-
+ const [isExist, setExistState] = useState(true);
   // 유효성 검사 이메일
   const validateEmail = (email: string) => {
     return email
@@ -46,6 +47,30 @@ const SignupComponent = () => {
   const isEmailValid = validateEmail(email);
   const isPwdValid = validatePwd(password);
   const isConfirmPwd = password === confirmPwd;
+
+  const DupleCheck = async (e: any) => {
+    e.preventDefault();
+    try {
+      const response = await axios.get(
+        `/api/v1/auth/users?email=test@test.com`,
+        {
+          withCredentials: true,
+        },
+      );
+      
+console.log(response.data.data.isExist);
+
+      if (response.data.data.isExist === false) {
+        setExistState(false);
+        alert('사용 가능한 이메일입니다.');
+      } else {
+                setExistState(true);
+         alert('중복된 이메일입니다.');
+      }
+    } catch (error) {
+      console.error('중복 검사 오류:', error);
+    }
+  };
 
   // 이메일
   const onChangeEmail = useCallback(async (e: { target: { value: any } }) => {
@@ -85,7 +110,7 @@ const SignupComponent = () => {
     },
     [password],
   );
-  // 약관 동의
+
   const allBtnEvent = () => {
     if (allCheck === false) {
       setAllCheck(true);
@@ -147,10 +172,13 @@ const SignupComponent = () => {
     }
   }, [ageCheck, useCheck, personCheck, marketingCheck]);
 
-  // 리로드 방지, 입력안한 칸 있으면 alert
+  
   const onSubmitHandler = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     try {
+       if (isExist === true) {
+         return alert('이메일 중복 검사를 해주세요.');
+       }
       if (
         !(
           emailMsg === '확인되었습니다.' &&
@@ -167,8 +195,7 @@ const SignupComponent = () => {
       if (!(ageCheck && useCheck && personCheck)) {
         return alert('필수 약관을 모두 동의해주셔야 가입이 진행됩니다.');
       }
-
-      // 위까지 응답 성공시 밑으로
+     
       const response = await AxiosC.post('/api/v1/auth/register', {
         email,
         password,
@@ -224,6 +251,7 @@ const SignupComponent = () => {
             value={email}
             onChange={onChangeEmail}
           />
+          <SignupStyle.InputButton onClick={DupleCheck} >중복 검사</SignupStyle.InputButton>
         </SignupStyle.FormInput>
 
         {/* 여기에 중복된 이메일입니다 => 확인되었습니다로 바뀌는 거 삼항연산자로 ?isNotDuple === "확인되었습니다": "중복된 이메일입니다" */}
@@ -258,7 +286,7 @@ const SignupComponent = () => {
             type="password"
             name="is_Password"
             // minLength 나중에 2에서 8로 바꾸기
-            minLength={10}
+            minLength={8}
             placeholder="비밀번호를 재입력해주세요."
             autoComplete="off"
             value={confirmPwd}
