@@ -1,7 +1,6 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import * as BC from '@/pages/bookdetail/BookDetail.styled';
-
 
 interface Book {
   title: string;
@@ -86,6 +85,7 @@ const BookDetail = () => {
             </BC.ImageBox>
             <BC.TableBox>
               <BC.Table>
+              <table>
                 <tbody>
                   <tr>
                     <th scope="row">정가</th>
@@ -108,12 +108,17 @@ const BookDetail = () => {
                     <td>{book.subInfo.itemPage}쪽</td>
                   </tr>
                 </tbody>
+                </table>
               </BC.Table>
             </BC.TableBox>
           </BC.MainInfo>
           <BC.DescriptionInfo>
             <BC.Description>책 설명</BC.Description>
-            <BC.DescriptionDetail>{book.description ? book.description: '해당 책의 상세 설명은 제공되지 않습니다.'}</BC.DescriptionDetail>
+            <BC.DescriptionDetail>
+              {book.description
+                ? book.description
+                : '해당 책의 상세 설명은 제공되지 않습니다.'}
+            </BC.DescriptionDetail>
           </BC.DescriptionInfo>
           <BC.ButtonBox>
             <BC.ButtonLink to={book.link}>구매하러가기</BC.ButtonLink>
@@ -125,4 +130,3 @@ const BookDetail = () => {
 };
 
 export default BookDetail;
-

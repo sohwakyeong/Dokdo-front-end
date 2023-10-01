@@ -61,13 +61,15 @@ height: 12px;
 margin-top: 10px;
 `;
 
-export const Title = styled.p`
+export const Title = styled(Link)`
   font-weight: bold;
   text-decoration: none;
   font-size: 20px;
   color: black;
   display: flex;
   padding-right: 305px;
+  text-decoration: none;
+  border: none;
 `;
 
 export const ManageList = styled.div`
