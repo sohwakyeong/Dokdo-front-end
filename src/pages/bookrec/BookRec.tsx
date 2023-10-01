@@ -67,23 +67,23 @@ const BookRec = () => {
           </BC.BoxTitle>
         </BC.BoxTitleBox>
         <BC.SliederBox>
-          <BC.WrapperBook>
-            {books.map((book, index) => (
-              <BC.BookSet>
-              <BC.List key={index} >
-                  <BC.ImgBox onClick={() => handleBookClick(book.isbn)}>
-                    <BC.Img>
-                      <img src={book.cover} alt="도서이미지" />
-                    </BC.Img>
-                    <BC.Info>
-                      <BC.BookTitle>{book.title}</BC.BookTitle>
-                      <div>{book.author}</div>
-                    </BC.Info>
-                  </BC.ImgBox>
-              </BC.List>
-               </BC.BookSet>
-            ))}
-          </BC.WrapperBook>
+        <BC.WrapperBook>
+        {books.map((book) => (
+          <BC.BookSet key={book.isbn}>
+            <BC.List>
+              <BC.ImgBox onClick={() => handleBookClick(book.isbn)}>
+                <BC.Img>
+                  <img src={book.cover} alt="도서이미지" />
+                </BC.Img>
+                <BC.Info>
+                  <BC.BookTitle>{book.title}</BC.BookTitle>
+                  <div>{book.author}</div>
+                </BC.Info>
+              </BC.ImgBox>
+            </BC.List>
+          </BC.BookSet>
+        ))}
+      </BC.WrapperBook>
         </BC.SliederBox>
       </BC.Box>
     </BC.Wrapper>
