@@ -479,14 +479,14 @@ const GroupBoardDetail: React.FC<
       {showDropdown && (
         <GBD.EditBoardWrap>
           <GBD.DropdownContent>
-            <GBD.EditGroupSection>
+            {/* <GBD.EditGroupSection>
               <GBD.EditGroupInfo onClick={openEditModal}>
                 게시글 수정
               </GBD.EditGroupInfo>
             </GBD.EditGroupSection>
             <GBD.ProfileSection>
               <EditImage />
-            </GBD.ProfileSection>
+            </GBD.ProfileSection> */}
             <GBD.DeleteSection>
               <GBD.CustomFileInputLabel onClick={deletePost}>
                 게시글 삭제하기

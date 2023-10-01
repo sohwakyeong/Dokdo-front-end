@@ -114,7 +114,6 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
         <GB.GroupBoardTitle>
           <div>게시글 목록</div>
         </GB.GroupBoardTitle>
-  
         {groupBoardData.length === 0 ? (
           <GB.NoContainer>
             <GB.NoContent>

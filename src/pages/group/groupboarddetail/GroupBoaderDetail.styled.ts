@@ -314,8 +314,8 @@ export const DropdownContent = styled.div`
   margin: 10px;
   border: 1px solid #000;
   border-radius: 15px;
-  width: 180px;
-  height: 100px;
+  width: 150px;
+  height: 50px;
 `;
 
 export const ProfileSection = styled.div`
