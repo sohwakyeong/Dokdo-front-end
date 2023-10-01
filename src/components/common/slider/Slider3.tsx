@@ -16,7 +16,7 @@ import Logo from '@/assets/img/Logo1.png'
 async function fetchPopularData() {
   try {
     const response = await axios.get(
-      '/api/v1/group?orderBy=&limit=10&offset=0',
+      '/api/v1/group?orderBy=popularity&limit=10&offset=0',
     );
     return response.data.data;
   } catch {

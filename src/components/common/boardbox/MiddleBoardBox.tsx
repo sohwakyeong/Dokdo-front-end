@@ -1,6 +1,5 @@
 import React from 'react';
 import * as MB from '@/components/common/boardbox/MiddleBoardBox.styled';
-import BoardImgBox from '@/components/common/boardbox/BoardImgBox';
 import { useNavigate } from 'react-router-dom';
 import defaultImage from '@/assets/img/Logo1.png';
 

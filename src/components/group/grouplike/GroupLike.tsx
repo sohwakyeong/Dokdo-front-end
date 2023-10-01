@@ -60,7 +60,7 @@ export default GroupLikeButton;
 const LikeButton = styled.button`
   border: none;
   background-color: white;
-  font-size: 30px;
+  font-size: 20px;
   cursor: pointer;
 `;
 
@@ -68,8 +68,8 @@ const LikeDisPlay = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 20px;
+  font-size: 12px;
   & div {
-    font-size: 13px;
+    font-size: 12px;
   }
 `;

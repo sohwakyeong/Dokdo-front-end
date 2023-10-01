@@ -10,6 +10,8 @@ const GlobalStyles = createGlobalStyle`
   */
      * {
     font-family: Pretendard, 'Noto Sans KR', sans-serif;
+
+
   }
 
      body {
@@ -42,7 +44,8 @@ const GlobalStyles = createGlobalStyle`
     display: block;
   }
   body {
-    line-height: 1;
+    line-height: 22px;
+letter-spacing: 0.02em;
   }
   ol, ul, li {
     list-style: none;

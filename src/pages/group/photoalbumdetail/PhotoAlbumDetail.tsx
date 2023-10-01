@@ -165,9 +165,11 @@ const PhotoDetail: React.FC<PhotoDetailDataProps & GroupNameProps> = ({
         fetchComments(group_Id, post_Id);
         setCommentText(''); // 작성한 댓글 내용을 초기화
       } else {
+        alert('모임에 가입하고 댓글을 작성해주세요!');
         console.error('Error posting comment:', response.status);
       }
     } catch (error) {
+      alert('모임에 가입하고 댓글을 작성해주세요!');
       console.error('Error posting comment:', error);
     }
   };
@@ -362,7 +364,8 @@ const PhotoDetail: React.FC<PhotoDetailDataProps & GroupNameProps> = ({
               <PAD.PFImg>
                 <img
                   src={`/api/v1/image/profile/${commentsName[index]?.profilePic}`}
-                  alt="프사"
+                  alt=""
+                  onError={defaultUserImg}
                 />
               </PAD.PFImg>
               <PAD.PFText>

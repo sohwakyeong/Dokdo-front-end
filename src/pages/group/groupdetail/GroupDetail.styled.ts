@@ -34,7 +34,7 @@ export const GroupName = styled.div`
 
 // 이미지 유압프레스로 들어가게 해야 함
 export const GroupImage = styled.div`
-  height: 200px;
+  height: 100%;
   width: 100%;
   overflow: hidden;
   display: flex;
@@ -216,7 +216,7 @@ export const NotScheduleBox = styled.div`
 `;
 
 export const MemberBox = styled.div`
-  display: flex; 
+  display: flex;
   flex-direction: column;
 
   margin: 20px 0;
@@ -259,7 +259,7 @@ export const Desc = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  
+
   font-weight: bold;
 `;
 

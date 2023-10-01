@@ -33,7 +33,7 @@ export const TextImgBox = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  
+
   & div {
     font-size: 15px;
   }
@@ -61,29 +61,34 @@ export const TextBox = styled.div`
   flex-direction: column;
   align-items: center;
   width: 90%;
-  
+
   height: 50%;
   text-overflow: ellipsis;
   overflow: hidden;
 
   & div {
     width: 100%;
-    padding: 3px 0;
-    
   }
 `;
 
 export const GroupName = styled.div`
   font-size: 16px;
   font-weight: 600;
+  margin-bottom: 3px;
+  overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
 `;
 
 export const GroupIntro = styled.div`
   width: 95%;
-  height: 70px;
+  max-height: 70px; /* 최대 높이를 설정합니다. */
   color: #707070;
   font-size: 14px;
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 `;

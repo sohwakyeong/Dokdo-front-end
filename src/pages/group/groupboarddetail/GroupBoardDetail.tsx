@@ -497,13 +497,11 @@ const GroupBoardDetail: React.FC<
       )}
       <GBD.EditButton onClick={toggleDropdown}>●●●</GBD.EditButton>
       <GBD.User>
-        <div>
           <GBD.ProfileImg
             src={`/api/v1/image/profile/${groupDetail?.data.user.profilePic}`}
             alt=""
             onError={defaultUserImg}
           ></GBD.ProfileImg>
-        </div>
         <GBD.Desc>
           <GBD.DescDisplay>
             <GBD.UserName>{groupDetail?.data.user.name}</GBD.UserName>
