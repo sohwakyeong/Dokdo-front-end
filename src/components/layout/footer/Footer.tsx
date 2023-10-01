@@ -56,9 +56,9 @@ function Footer() {
           <div>모임 등록</div>
         </FT.StyledLink>
 
-        <FT.StyledLink to="/likes" onClick={handleLikesClick}>
+        <FT.StyledLink to="/user/mypage/mygroups" onClick={handleLikesClick}>
           <img src={likeIcon} alt="좋아요 아이콘" />
-          <div>좋아요</div>
+          <div>내 모임</div>
         </FT.StyledLink>
 
         {/* 마이페이지 또는 로그인/가입 링크 표시 */}

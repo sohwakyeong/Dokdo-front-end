@@ -18,7 +18,6 @@ import GroupCreatePage4 from '@/pages/group/groupcreate/GroupCreatePage4';
 import BookRec from '@/pages/bookrec/BookRec';
 import BookDetail from '@/pages/bookdetail/BookDetail';
 import Contest from '@/pages/contest/Contest';
-import Notifications from '@/pages/notifications/Notifications';
 import Likes from '@/pages/likes/Likes';
 import Layout1 from '@/components/layout/layout1/Layout1';
 import Layout3 from '@/components/layout/layout1/Layout3';
@@ -177,14 +176,7 @@ const MainRoutes = () => {
           </Layout1>
         }
       />
-      <Route
-        path="/notifications"
-        element={
-          <Layout1>
-            <Notifications />
-          </Layout1>
-        }
-      />
+
 
       <Route
         path="/contest"
