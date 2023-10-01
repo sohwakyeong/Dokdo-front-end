@@ -24,7 +24,6 @@ interface UserData {
   name: string;
   profilePic: string;
   group: number[]; 
-
 }
 
 function MyPostsComponent() {

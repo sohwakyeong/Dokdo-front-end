@@ -106,3 +106,65 @@ export const SectionLine = styled.div`
   border: 1px solid #d7d7d7;
   margin: 10px 0;
 `;
+export const DataCheck = styled.div``;
+
+
+export const LoadingContainer = styled.div`
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 30px auto 10px auto;
+`;
+
+export const LoadingContent = styled.div`
+  width: 200px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const LoadingImg = styled.img`
+  width: 50px;
+  height: 50px;
+`;
+
+export const LoadingText = styled.div`
+  font-size: 16px;
+  font-weight: 400;
+  color: black;
+  margin-top: 29px;
+`;
+
+
+export const NoContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 30px auto 10px auto;
+`;
+
+export const NoContent = styled.div`
+  width: 200px;
+
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+export const NoContentImg = styled.img`
+  width: 50px;
+  height: 50px;
+`;
+export const NoContentText = styled.div`
+  font-size: 16px;
+  font-weight: 400;
+  color: black;
+  margin-top: 29px;
+`;
+
