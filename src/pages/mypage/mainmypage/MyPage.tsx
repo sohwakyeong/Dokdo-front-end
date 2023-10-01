@@ -84,7 +84,9 @@ function MyPageComponent() {
       </MyPageStyle.Wrapper>
 
       <MyPageStyle.Group>
-        <MyPageStyle.Title>내 모임</MyPageStyle.Title>
+        <MyPageStyle.Title to="/user/mypage/mygroups">
+          내 모임
+        </MyPageStyle.Title>
         <MyPageStyle.ManageLink to="/user/mypage/mygroups">
           전체보기
         </MyPageStyle.ManageLink>
@@ -101,19 +103,21 @@ function MyPageComponent() {
           <p>나의 정보 수정</p>
         </MyPageStyle.ManageLink2>
       </MyPageStyle.ManageList>
-{userData.role === "admin" ? (
-      <MyPageStyle.ManageList2>
-        <MyPageStyle.ManageTitle>관리자 전용</MyPageStyle.ManageTitle>
-        <MyPageStyle.ManageButton onClick={linkToAdminPage}>
-          <p>관리자 페이지</p>
-        </MyPageStyle.ManageButton>
-      </MyPageStyle.ManageList2>) : <MyPageStyle.ManageList2>
-        <MyPageStyle.ManageTitle>고객센터</MyPageStyle.ManageTitle>
-        <MyPageStyle.ManageLink2 to="/user/mypage/inquiry">
-          <p>문의하기</p>
-        </MyPageStyle.ManageLink2>
-      </MyPageStyle.ManageList2>
-}
+      {userData.role === 'admin' ? (
+        <MyPageStyle.ManageList2>
+          <MyPageStyle.ManageTitle>관리자 전용</MyPageStyle.ManageTitle>
+          <MyPageStyle.ManageButton onClick={linkToAdminPage}>
+            <p>관리자 페이지</p>
+          </MyPageStyle.ManageButton>
+        </MyPageStyle.ManageList2>
+      ) : (
+        <MyPageStyle.ManageList2>
+          <MyPageStyle.ManageTitle>고객센터</MyPageStyle.ManageTitle>
+          <MyPageStyle.ManageLink2 to="/user/mypage/inquiry">
+            <p>문의하기</p>
+          </MyPageStyle.ManageLink2>
+        </MyPageStyle.ManageList2>
+      )}
       <MyPageStyle.Logout onClick={handleLogout}>로그아웃</MyPageStyle.Logout>
     </MyPageStyle.Container>
   );
