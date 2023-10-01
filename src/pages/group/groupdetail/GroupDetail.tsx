@@ -13,6 +13,7 @@ import GroupHeader from '@/components/layout/header/GroupHeader';
 import Modal from 'react-modal';
 import GroupLikeButton from '@/components/group/grouplike/GroupLike';
 import GroupMember from '@/components/group/groupmember/GroupMember';
+import logo from '@/assets/img/Logo1.png';
 Modal.setAppElement('#root');
 
 interface MemberType {
@@ -103,7 +104,7 @@ function GroupDetail() {
   // Method to add a schedule
   const addSchedule = (newSchedule: any) => {
     if (schedules.length < 5) {
-      const newSchedules = [...schedules, newSchedule];
+      const newSchedules = [newSchedule];
       setSchedules(newSchedules);
       localStorage.setItem(getLocalStorageKey(), JSON.stringify(newSchedules)); // 새로운 일정 추가될 때 로컬 스토리지에도 저장
       closeModal();
@@ -111,6 +112,7 @@ function GroupDetail() {
       console.log('Schedule limit reached!');
     }
   };
+
   async function uploadProfilePic() {
     if (!selectedImage || !groupData) {
       console.log('No image selected or no group data.');
@@ -232,7 +234,19 @@ function GroupDetail() {
   }, [loginToken, groupId]);
 
   if (!groupData) {
-    return <div>로딩 중...</div>;
+    return (
+      <div
+        style={{
+          width: '474px',
+          height: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <img src={logo} alt="logo" />
+      </div>
+    );
   }
 
   //그룹 가입 버튼
@@ -327,10 +341,10 @@ function GroupDetail() {
         closeEditModal();
         alert('수정이 완료되었습니다!');
       } else {
-        console.error('그룹 정보 수정 실패:', response.status);
+        alert('그룹 정보 수정은 모임장만 가능합니다.');
       }
     } catch (error) {
-      console.error('그룹 정보 수정 에러:', error);
+      alert('그룹 정보 수정은 모임장만 가능합니다.');
     }
   }
 
@@ -586,7 +600,6 @@ function GroupDetail() {
                 <GD.NFNextBtn>
                   <button onClick={handleJoinGroup}>모임 가입하기</button>
                 </GD.NFNextBtn>
-         
               </>
             ) : (
               // 로그인되어 있지 않을 때

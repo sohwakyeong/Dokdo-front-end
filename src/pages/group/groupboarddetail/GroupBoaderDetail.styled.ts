@@ -44,8 +44,8 @@ export const MMDD = styled.div`
 `;
 
 export const ProfileImg = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -123,10 +123,10 @@ export const CommentsTitle = styled.div`
 
 export const CommentsList = styled.div`
   width: 474px;
-  height: 55px;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 `;
 
 export const ComentsBox = styled.div`
@@ -142,12 +142,12 @@ export const PFImg = styled.div`
   align-items: center;
   background-color: white;
   margin-right: 20px;
-  width: 50px;
+  width: 55px;
   height: 50px;
 
   & img {
-    width: 100%;
-    height: 100%;
+    width: 50px;
+    height: 50px;
     border: 1px solid #ddd;
     border-radius: 50%;
     box-sizing: border-box;
