@@ -45,10 +45,11 @@ export const Step = styled.div`
 
 export const Title = styled.h1`
   margin: 15px;
-  font-size: 27px;
+  font-size: 20px;
   text-align: center;
   color: #000000;
   margin-bottom: 30px;
+  margin: 10px;
   font-weight: bold;
   position: relative;
   top: -15px;
@@ -121,7 +122,7 @@ export const Input = styled.input`
   margin-left: 0px;
 `;
 export const SubmitButton = styled.button`
-  width: 440px;
+  width: 405px;
   height: 66px;
   border-radius: 20px;
   background: #84614b;
@@ -132,7 +133,8 @@ export const SubmitButton = styled.button`
   cursor: pointer;
   transition: background 0.3s;
   bottom: 65px;
-  position: fixed;
+  margin: 10px;
+
 
   &:hover {
     background: #71503c;

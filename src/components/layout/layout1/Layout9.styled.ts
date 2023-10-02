@@ -7,14 +7,14 @@ export const LayoutContainer = styled.div`
 
 export const Left = styled.div`
   flex: 1;
-  background-color: #fff7ec;
-  z-index: -1; /* 배경으로 보내기 위한 z-index 설정 */
-
+  background-color: #fff9f1;
+  z-index: -1;
+  width: 100%;
   & img {
-    margin-left: 50px;
-    max-width: 80%;
+    max-width: 85%;
     position: fixed;
-    width: auto !important;
+    width: 52% !important;
+    height: 100vh;
   }
   @media (max-width: 1024px) {
     display: none;
@@ -32,7 +32,7 @@ export const footer = styled.footer`
 export const Right = styled.div`
   flex: 1;
   height: 100%;
-  background-color: #fff7ec;
+  background-color: #fff9f1;
 
   @media (max-width: 1024px) {
     display: flex;
@@ -42,7 +42,7 @@ export const Right = styled.div`
 
 export const Children = styled.div`
   max-width: 474px !important;
-  padding: 50px 0 50px 0;
+  padding: 70px 0 70px 0;
   background-color: white;
   min-height: calc(100vh - 2px);
   box-sizing: border-box;

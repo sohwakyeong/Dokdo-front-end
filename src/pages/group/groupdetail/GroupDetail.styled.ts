@@ -73,7 +73,7 @@ export const HashTag = styled.div`
   width: 380px;
   & div {
     padding: 8px;
-    background-color: #fff7ec;
+    background-color: #fff9f1;
     border-radius: 20px;
     width: 80px;
     color: #84614b;

@@ -25,7 +25,7 @@ export const BoxTitleBox = styled.div`
   justify-content: center;
   width: 100%;
   height: 50px;
-  background-color:#f7f7f7;
+  background-color: #f7f7f7;
 `;
 
 export const Box = styled.div`
@@ -65,7 +65,7 @@ export const Img = styled.div`
   & img {
     width: 180px;
     height: 280px;
-    background-color: #fff7ec;
+    background-color: #fff9f1;
     border-radius: 5px;
   }
 `;
@@ -85,9 +85,9 @@ export const Info = styled.div`
   }
 `;
 export const BookTitle = styled.div`
-font-size: 15px;
-font-weight:bold;
-`
+  font-size: 15px;
+  font-weight: bold;
+`;
 
 export const SliederBox = styled.div`
   display: flex;

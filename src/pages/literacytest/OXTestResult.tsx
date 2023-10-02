@@ -6,12 +6,12 @@ import {
   // SocialIcons,
   // SocialIcon,
   // SocialIconImage,
-  ResultImage,
   ReviewButton,
   TestInstructions,
   RepeatButton,
   StyledLink,
   ImgResult,
+  ResultImgDisplay,
 } from '@/pages/literacytest/OXTestResult.Style';
 import questionsData from '@/assets/data/ox-questions.json';
 // import facebookIcon from '@/assets/img/facebook.png';
@@ -43,18 +43,24 @@ const OXTestResult: React.FC<OXTestResultProps> = ({ userAnswers }) => {
   const getImageSource = () => {
     if (correctAnswers <= 3) return pigImage;
     if (correctAnswers <= 6) return smartImage;
-    // 다른 조건에 따른 이미지 반환
+    if (correctAnswers <= 9) return smartImage;
+    if (correctAnswers <= 10) return smartImage;
   };
 
   const imageSource = getImageSource();
   const handleRepeatTest = () => {
-    navigate('/'); /// 특정 경로로 이동
+    navigate('/literacy-test'); /// 특정 경로로 이동
   };
 
   return (
     <Container>
-      <ResultText>{`${correctAnswers} / ${questionsData.questions.length}`}</ResultText>
-      <ResultImage src={imageSource} alt="Result" /> {/* 이미지 출력 */}
+      <ImgResult>
+        <ResultText>{`${correctAnswers} / ${questionsData.questions.length}`}</ResultText>
+        <ResultImgDisplay>
+          <img src={imageSource} alt="Result" /> {/* 이미지 출력 */}
+        </ResultImgDisplay>
+      </ImgResult>
+
       <ResultText>{getResultMessage()}</ResultText>
       <TestInstructions>문해력 향상에 도움을 받고 싶다면?</TestInstructions>
       <StyledLink to="/group/list">독서토론 시작하기</StyledLink>
@@ -72,9 +78,7 @@ const OXTestResult: React.FC<OXTestResultProps> = ({ userAnswers }) => {
       <TestInstructions>
         문해력이 궁금한 친구에게 공유해 보세요!
       </TestInstructions>
-      <RepeatButton onClick={handleRepeatTest}>
-        ✔ 테스트 다시하기 ✔
-      </RepeatButton>
+      <RepeatButton onClick={handleRepeatTest}>테스트 다시하기 ✔</RepeatButton>
     </Container>
   );
 };

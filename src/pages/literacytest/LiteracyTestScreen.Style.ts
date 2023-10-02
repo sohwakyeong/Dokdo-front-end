@@ -87,3 +87,5 @@ export const ProgressBarFiller = styled.div<{ progress: number }>`
   border-radius: 20px;
   background-color: #84614b;
 `;
+
+

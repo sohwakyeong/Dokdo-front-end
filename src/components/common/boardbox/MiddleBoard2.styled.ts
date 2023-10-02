@@ -29,17 +29,16 @@ export const TextImgBox = styled.div`
   height: 200px;
   & div {
     font-size: 15px;
-  white-space: nowrap;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
   }
 `;
 
 export const ImgBox = styled.div`
   width: 100%;
   height: 85%;
-  background-color: #fff7ec;
+  background-color: #fff9f1;
   object-fit: cover;
   margin-bottom: 7px;
   box-sizing: border-box;

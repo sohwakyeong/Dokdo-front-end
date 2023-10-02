@@ -50,7 +50,7 @@ export const StyledLink = styled(Link)`
 export const Img = styled.div`
   width: 180px;
   height: 280px;
-  background-color: #fff7ec;
+  background-color: #fff9f1;
   box-sizing: border-box;
   border: 1px solid #ddd;
   & img {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getCookie } from '@/helper/Cookie';
 import styled from 'styled-components';
@@ -9,9 +9,28 @@ interface GroupNameData {
 }
 
 function GroupLikeButton({ group_id, like }: GroupNameData) {
-  const [isLiked, setIsLiked] = useState(like > 0);
-  const [groupLikeNum, setGroupLikeNum] = useState(like);
+  const [isLiked, setIsLiked] = useState(false);
+  const [groupLikeNum, setGroupLikeNum] = useState<number>(like);
   const loginToken = getCookie('loginToken');
+
+  const fetchLikeStatus = async (group_Id: number) => {
+    try {
+      const response = await axios.get(`/api/v1/group/${group_Id}`);
+
+      if (response.status === 200) {
+        const groupLikeNum = response.data.data.like;
+        const groupLikedStatus = response.data.data.groupLiked; // 가정: API 응답에서 userLiked 항목을 사용하여 사용자가 좋아요를 눌렀는지 확인
+
+        setGroupLikeNum(groupLikeNum);
+        setIsLiked(groupLikedStatus);
+      } else {
+        console.error('Error fetching like status:', response.status);
+        console.log('API Response:', response.data);
+      }
+    } catch (error) {
+      console.error('Error fetching like status:', error);
+    }
+  };
 
   async function handleGroupLikeButton(group_id: number) {
     try {
@@ -26,18 +45,13 @@ function GroupLikeButton({ group_id, like }: GroupNameData) {
         },
       );
       if (response.status === 200) {
-        const updatedGroupLike = response.data.data.groupLike;
-
-        // 좋아요 상태를 서버의 응답 값으로 업데이트
-        setIsLiked(updatedGroupLike);
-
-        const updatedLikeNum = response.data.data.groupLikeCounter;
-        setGroupLikeNum(updatedLikeNum);
+        fetchLikeStatus(group_id);
       } else {
         alert('토론 모임 좋아요는 로그인을 해야 누를 수 있습니다');
         console.error('groupLike Error', response.status);
       }
     } catch (error) {
+      alert('로그인을 해야 모임 좋아요를 누를 수 있습니다');
       console.error('Error GroupLike Put', error);
     }
   }
@@ -48,9 +62,9 @@ function GroupLikeButton({ group_id, like }: GroupNameData) {
         className="LikeButton"
         onClick={() => handleGroupLikeButton(group_id)}
       >
-        {isLiked ? '❤️' : '🤍'}
+        <HeartIcon>{isLiked ? '❤️' : '❤️'}</HeartIcon>
+        <LikeCount>{groupLikeNum}</LikeCount>
       </LikeButton>
-      <div>{groupLikeNum}</div>
     </LikeDisPlay>
   );
 }
@@ -60,8 +74,20 @@ export default GroupLikeButton;
 const LikeButton = styled.button`
   border: none;
   background-color: white;
-  font-size: 20px;
+  font-size: 16px;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const HeartIcon = styled.span`
+  font-size: 20px;
+  text-align: center;
+`;
+
+const LikeCount = styled.div`
+  font-size: 16px;
 `;
 
 const LikeDisPlay = styled.div`

@@ -55,7 +55,7 @@ export const PhotoBoardBox = styled.div`
 export const PhotoImg = styled.div`
   width: 100%;
   height: 150px;
-  background-color: #fff7ec;
+  background-color: #fff9f1;
   overflow: hidden;
   border-radius: 15px;
 
@@ -68,7 +68,7 @@ export const ProfileImg = styled.div`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: #fff7ec;
+  background-color: #fff9f1;
   overflow: hidden;
 
   & img {

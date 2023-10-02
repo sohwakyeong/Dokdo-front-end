@@ -7,14 +7,13 @@ export const LayoutContainer = styled.div`
 
 export const Left = styled.div`
   flex: 1;
-  background-color: #fff7ec;
+  background-color: #fff9f1;
   z-index: -1;
-  width: 100%;
   & img {
-    margin-left: 50px;
-    max-width: 80%;
+    max-width: 85%;
     position: fixed;
-    width: auto !important;
+    width: 52% !important;
+    height: 100vh;
   }
   @media (max-width: 1024px) {
     display: none;
@@ -32,7 +31,7 @@ export const footer = styled.footer`
 export const Right = styled.div`
   flex: 1;
   height: 100%;
-  background-color: #fff7ec;
+  background-color: #fff9f1;
 
   @media (max-width: 1024px) {
     display: flex;

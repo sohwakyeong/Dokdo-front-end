@@ -50,7 +50,7 @@ export const ProfileImg = styled.img`
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background-color: #fff7ec;
+  background-color: #fff9f1;
   overflow: hidden;
   margin: auto;
 `;
@@ -158,7 +158,7 @@ export const CommentProfileImg = styled.div`
   width: 39px;
   height: 39px;
   border-radius: 50%;
-  background-color: #fff7ec;
+  background-color: #fff9f1;
   overflow: hidden;
   display: flex;
   align-items: center;

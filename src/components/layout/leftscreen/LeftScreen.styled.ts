@@ -4,13 +4,11 @@ export const StyledLeftScreen = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff7ec;
+  background-color: #fff9f1;
   position: fixed;
 
   left: 0;
   top: 0;
-  width: 50%;
-  height: 100vh;
 `;
 
 export const Wrapper = styled.div`
@@ -18,6 +16,8 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  height: 100%;
 `;
 
 export const Tag = styled.div`

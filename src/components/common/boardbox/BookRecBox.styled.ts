@@ -46,7 +46,7 @@ export const Img = styled.div`
   width: 115px;
   height: 115px;
 
-  background-color: #fff7ec;
+  background-color: #fff9f1;
 `;
 
 export const Info = styled.div`
