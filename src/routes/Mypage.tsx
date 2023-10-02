@@ -5,9 +5,6 @@ import LoginComponent from '@/pages/login/Login';
 import SignupComponent from '@/pages/signup/Signup';
 import SignupSuccessComponent from '@/pages/signupsuccess/Signupsuccess';
 import EditProfileComponent from '@/pages/mypage/editprofile/EditProfile';
-import InquiredSuccessComponent from '@/pages/mypage/inquiredsuccess/InquiredSuccess';
-import InquiryComponent from '@/pages/mypage/inquiry/Inquiry';
-import LikedGroupsComponent from '@/pages/mypage/likedgroups/LikedGroups';
 import MyGroupsComponent from '@/pages/mypage/mygroups/MyGroups';
 import MyPageComponent from '@/pages/mypage/mainmypage/MyPage';
 import MyPostsComponent from '@/pages/mypage/myposts/MyPosts';
@@ -82,15 +79,6 @@ const MypageRoutes = () => {
           </Layout9>
         }
       />
-      {/* 마이페이지/내가좋아요한모임 */}
-      <Route
-        path="/user/mypage/likedgroups"
-        element={
-          <Layout9>
-            <LikedGroupsComponent />
-          </Layout9>
-        }
-      />
       {/* 마이페이지/나의글목록 */}
       <Route
         path="/user/mypage/myposts"
@@ -107,25 +95,6 @@ const MypageRoutes = () => {
           <Layout8>
             <EditProfileComponent />
           </Layout8>
-        }
-      />
-
-      {/* 마이페이지/문의하기성공페이지 */}
-      <Route
-        path="/user/mypage/inquiredsuccess"
-        element={
-          <Layout1>
-            <InquiredSuccessComponent />
-          </Layout1>
-        }
-      />
-      {/* 마이페이지/문의하기 */}
-      <Route
-        path="/user/mypage/inquiry"
-        element={
-          <Layout1>
-            <InquiryComponent />
-          </Layout1>
         }
       />
       {/* 마이페이지 */}

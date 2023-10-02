@@ -72,7 +72,6 @@ const GroupCreatePage3: React.FC<GroupCreatePage3Props> = ({
 
       console.log('서버 응답:', response.data);
 
-      // group_id를 다음 페이지로 전달
       navigate('/create-group/step4', {
         state: { group_id },
       });

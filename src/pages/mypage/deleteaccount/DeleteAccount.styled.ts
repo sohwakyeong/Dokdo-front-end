@@ -168,3 +168,4 @@ export const CheckModalSubmit = styled.button`
 `;
 
 export const ModalSubmit = styled(CheckModalSubmit)``;
+

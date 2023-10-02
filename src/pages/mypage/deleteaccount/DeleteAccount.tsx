@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import AxiosC from '@/helper/AxiosC';
 import Modal from '@/components/common/modal/modal';
 import { getCookie, removeCookie } from '@/helper/Cookie';
-import { GotoHome } from '../inquiredsuccess/InquiredSuccess.styled';
+
 function DeleteAccountComponent() {
   const [isListVisible, setListVisible] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
