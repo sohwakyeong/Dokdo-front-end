@@ -30,10 +30,9 @@ const BookRec = () => {
     const originalCallback = window[callbackName];
 
     window[callbackName] = data => {
-      console.log('JSONP Response:', data);
       setBooks(data.item);
 
-  
+
       if (originalCallback) {
         window[callbackName] = originalCallback;
       } else {
