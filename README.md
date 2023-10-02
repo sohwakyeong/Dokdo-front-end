@@ -1,3 +1,10 @@
+# :station: 프로젝트 배포 -> AWS EC2를 통한 사이트 배포 
+## [http://www.dok-do.site/](http://dok-do.site/)
+
+
+
+
+
 # :books: 독도 : 독서 토론, 도전 해 봐!
 ![logo](https://kdt-gitlab.elice.io/sw_track/class_05/web_2_project/team04/front-end/uploads/afeb34035a54c32cc494cd87c809d04d/logo.png)
 ## :pencil2: 프로젝트 소개
@@ -27,7 +34,7 @@
 - 김성진 _ 백엔드 총괄
 
 ### :mag: 개발 환경
-![기술스택-1](/uploads/3c81a1dd935ff08668845d37465f5cbf/기술스택-1.png)
+![기술스택-1](https://kdt-gitlab.elice.io/sw_track/class_05/web_2_project/team04/front-end/uploads/3c81a1dd935ff08668845d37465f5cbf/%E1%84%80%E1%85%B5%E1%84%89%E1%85%AE%E1%86%AF%E1%84%89%E1%85%B3%E1%84%90%E1%85%A2%E1%86%A8-1.png)
 
 ### :ship: 협업한 방법
 - Figma : 디자인 및 웹 서비스 기획의 틀을 잡기 위해 사용.
@@ -39,12 +46,24 @@
 
 ### :mag: API 명세서
 https://www.notion.so/b542228d2237476f93c7056e1f475a03?v=422c6ff82081407db8eea40376edcffd
+<img width="933" alt="스크린샷 2023-10-02 오후 4 42 41" src="https://github.com/Dokdo-pro/front-end/assets/130480277/48a650e6-7068-45cd-8e4d-f868f354d333">
+<img width="809" alt="스크린샷 2023-10-02 오후 4 43 10" src="https://github.com/Dokdo-pro/front-end/assets/130480277/2af55042-e7dd-4502-9087-f33edd6c3d32">
+
+
+
 
 ### :open_file_folder: Git Branch 관리
-++ master-dev-featurebranch 한 내역 캡처, 설명 추가
+GitFlow : master -> dev -> feature branch 로 작업
+<img width="804" alt="스크린샷 2023-10-02 오후 5 55 56" src="https://github.com/Dokdo-pro/front-end/assets/130480277/e6d72952-f929-45ad-bece-f58bddd5fc39">
+
+
+master: 서비스의 안정된 상태 반영
+dev: 개발 중인 기능이 통합되는 브랜치
+feature: 개별 기능 또는 작업 단위 개발
 
 #### :file_folder: 코딩 컨벤션
- ++ 리팩토링 이후 컴포넌트 구조를 컨벤션으로 정하고 작성 후 여기에 추가.
+<img width="826" alt="스크린샷 2023-10-02 오후 5 46 52" src="https://github.com/Dokdo-pro/front-end/assets/130480277/e530e250-09d3-4109-a76b-e50adb13d32f">
+
 
 #### :file_folder: 커밋 컨벤션
 - Feat: 새로운 기능 추가
@@ -73,14 +92,5 @@ https://www.notion.so/b542228d2237476f93c7056e1f475a03?v=422c6ff82081407db8eea40
 
 - !HOTFIX: 급하게 치명적인 버그를 고쳐야 하는 경우
 
-### :station: 배포
 
-#### :ticket:Front-end
-- craco를 이용한 ~~ 오픈 및 ~를 활용한 배포
 
-#### :ticket: Back-end
-- @@@를 이용한 @ 오픈 및 @#를 활용한 배포
-#### :vertical_traffic_light: 서버 실행 방법
-++
-#### :construction: .env 설정
-++ 이미지 캡처 추가
