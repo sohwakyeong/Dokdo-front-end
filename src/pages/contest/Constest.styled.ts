@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -50,10 +49,9 @@ export const Img = styled.div`
   & img {
     width: 100%;
     height: 100%;
-
   }
 
-  background-color: #fff7ec;
+  background-color: #fff9f1;
 `;
 
 export const Info = styled.div`

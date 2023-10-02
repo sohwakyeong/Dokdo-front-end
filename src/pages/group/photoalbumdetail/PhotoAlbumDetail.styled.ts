@@ -50,7 +50,7 @@ export const ProfileImg = styled.img`
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background-color: #fff7ec;
+  background-color: #fff9f1;
   overflow: hidden;
   margin: auto;
 `;
@@ -117,7 +117,7 @@ export const CommentsTitle = styled.div`
 `;
 
 export const CommentsList = styled.div`
-   width: 474px;
+  width: 474px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -147,13 +147,13 @@ export const PFImg = styled.div`
     border-radius: 50%;
     box-sizing: border-box;
   }
-  `
+`;
 
 export const CommentProfileImg = styled.div`
   width: 39px;
   height: 39px;
   border-radius: 50%;
-  background-color: #fff7ec;
+  background-color: #fff9f1;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -248,7 +248,6 @@ export const CIInput = styled.div`
     border: 1px solid #868686;
     padding-left: 10px;
 
-
     &::placeholder {
       font-size: 15px;
       color: #a8a8a8;
@@ -282,5 +281,4 @@ export const PFText = styled.div`
 export const NoCommentsText = styled.div`
   margin-bottom: 20px;
   color: darkgray;
-
 `;

@@ -14,7 +14,7 @@ export const Title = styled.div`
 export const Img = styled.div`
   width: 474px;
   height: 474px;
-  background-color: #fff7ec;
+  background-color: #fff9f1;
 
   & img {
     width: 100%;
