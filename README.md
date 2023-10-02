@@ -57,9 +57,9 @@ GitFlow : master -> dev -> feature branch 로 작업
 <img width="804" alt="스크린샷 2023-10-02 오후 5 55 56" src="https://github.com/Dokdo-pro/front-end/assets/130480277/e6d72952-f929-45ad-bece-f58bddd5fc39">
 
 
-master: 서비스의 안정된 상태 반영
-dev: 개발 중인 기능이 통합되는 브랜치
-feature: 개별 기능 또는 작업 단위 개발
+- master: 서비스의 안정된 상태 반영 <br />
+- dev: 개발 중인 기능이 통합되는 브랜치<br />
+- feature: 개별 기능 또는 작업 단위 개발<br />
 
 #### :file_folder: 코딩 컨벤션
 <img width="826" alt="스크린샷 2023-10-02 오후 5 46 52" src="https://github.com/Dokdo-pro/front-end/assets/130480277/e530e250-09d3-4109-a76b-e50adb13d32f">
