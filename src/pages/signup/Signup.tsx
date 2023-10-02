@@ -57,8 +57,7 @@ const SignupComponent = () => {
           withCredentials: true,
         },
       );
-      
-console.log(response.data.data.isExist);
+    
 
       if (response.data.data.isExist === false) {
         setExistState(false);
@@ -72,7 +71,6 @@ console.log(response.data.data.isExist);
     }
   };
 
-  // 이메일
   const onChangeEmail = useCallback(async (e: { target: { value: any } }) => {
     const currEmail = e.target.value;
     setEmail(currEmail);
@@ -84,7 +82,6 @@ console.log(response.data.data.isExist);
     }
   }, []);
 
-  // 비밀번호
   const onChangePwd = useCallback((e: { target: { value: any } }) => {
     const currPwd = e.target.value;
     setPassword(currPwd);
@@ -96,7 +93,7 @@ console.log(response.data.data.isExist);
     }
   }, []);
 
-  //비밀번호 확인
+
   const onChangeConfirmPwd = useCallback(
     (e: { target: { value: any } }) => {
       const currConfirmPwd = e.target.value;
@@ -200,7 +197,7 @@ console.log(response.data.data.isExist);
         email,
         password,
       });
-      console.log(response);
+    
       navigate('/signupsuccess');
     } catch (e) {
       console.error(e);
@@ -254,7 +251,7 @@ console.log(response.data.data.isExist);
           <SignupStyle.InputButton onClick={DupleCheck} >중복 검사</SignupStyle.InputButton>
         </SignupStyle.FormInput>
 
-        {/* 여기에 중복된 이메일입니다 => 확인되었습니다로 바뀌는 거 삼항연산자로 ?isNotDuple === "확인되었습니다": "중복된 이메일입니다" */}
+       
         <SignupStyle.FormTag>
           <SignupStyle.Tag>비밀번호</SignupStyle.Tag>
           <SignupStyle.Alert className={isPwdValid ? 'success' : 'error'}>
@@ -285,7 +282,6 @@ console.log(response.data.data.isExist);
             id="pwd_cnf_val"
             type="password"
             name="is_Password"
-            // minLength 나중에 2에서 8로 바꾸기
             minLength={8}
             placeholder="비밀번호를 재입력해주세요."
             autoComplete="off"

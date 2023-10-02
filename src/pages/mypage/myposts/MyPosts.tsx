@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { SyntheticEvent, useEffect, useState } from 'react';
 import * as MyPostsStyle from '@/pages/mypage/myposts/MyPosts.styled';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +6,8 @@ import { getCookie } from '@/helper/Cookie';
 import MorePost from '@/assets/icon/newIcon/chat1.png';
 import UserData from '@/pages/admin/UserData';
 import PostData from '@/pages/admin/PostData';
+import UserImg from '@/assets/img/userbasicimg.png';
+
 interface PostData {
   _id: string;
   group_id: number;
@@ -33,7 +35,9 @@ function MyPostsComponent() {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
   const [offset, setOffset] = useState(0);
-
+const defaultUserImg = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+  e.currentTarget.src = UserImg;
+};
   function formatCreatedAt(createdAt: string | number | Date) {
     const date = new Date(createdAt);
     const month = date.getMonth() + 1;
@@ -165,14 +169,19 @@ function MyPostsComponent() {
       ) : userData && selectedPosts.length > 0 ? (
         <MyPostsStyle.GroupBoardList>
           {selectedPosts.map((selectedPost, index) => (
-            <MyPostsStyle.BoardWrap key={selectedPost._id || index} onClick={() =>
-                onClickToPost(selectedPost.group_id, selectedPost.post_id)}>
+            <MyPostsStyle.BoardWrap
+              key={selectedPost._id || index}
+              onClick={() =>
+                onClickToPost(selectedPost.group_id, selectedPost.post_id)
+              }
+            >
               <MyPostsStyle.Boardbox>
                 <MyPostsStyle.BoardLeft>
                   <MyPostsStyle.ProfileData>
                     <MyPostsStyle.ProfileImg
                       src={`/api/v1/image/profile/${userData.profilePic}`}
-                      alt={`${userData.name}의 프로필 사진`}
+                      alt=""
+                      onError={defaultUserImg}
                     />
                     <MyPostsStyle.UpdatedProfile>
                       <MyPostsStyle.Writer>{userData.name}</MyPostsStyle.Writer>
@@ -201,7 +210,9 @@ function MyPostsComponent() {
             <MyPostsStyle.NoContentText>
               아직 작성하신 글이 없습니다.
             </MyPostsStyle.NoContentText>
-            <MyPostsStyle.GoPostBtn onClick={()=> navigate('/group/list')}>토론 모임으로 가기</MyPostsStyle.GoPostBtn>
+            <MyPostsStyle.GoPostBtn onClick={() => navigate('/group/list')}>
+              토론 모임으로 가기
+            </MyPostsStyle.GoPostBtn>
           </MyPostsStyle.NoContent>
         </MyPostsStyle.NoContainer>
       )}

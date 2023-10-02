@@ -67,7 +67,7 @@ function GroupDetail() {
   const loginToken = getCookie('loginToken');
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
-  // 함수를 useCallback으로 감싸 의존성 배열에 추가
+  
   const getLocalStorageKey = useCallback(
     () => `schedules_${groupId}`,
     [groupId],
@@ -96,12 +96,12 @@ function GroupDetail() {
     setIsModalOpen(true);
   };
 
-  // Method to close the modal
+
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
-  // Method to add a schedule
+ 
   const addSchedule = (newSchedule: any) => {
     if (schedules.length < 5) {
       const newSchedules = [newSchedule];
@@ -132,7 +132,7 @@ function GroupDetail() {
 
       if (response.status === 200) {
         console.log('Profile picture uploaded successfully.');
-        // You might want to refresh the groupData or display a success message here
+      
       } else {
         console.error('Profile picture upload failed:', response.status);
       }
@@ -157,9 +157,7 @@ function GroupDetail() {
 
         if (response.status === 200) {
           window.location.reload();
-          console.log('Profile picture uploaded successfully.');
-          // You might want to refresh the groupData or display a success message here
-        } else {
+          } else {
           console.error('Profile picture upload failed:', response.status);
         }
       } catch (error) {
@@ -169,7 +167,7 @@ function GroupDetail() {
   };
 
   useEffect(() => {
-    // API 요청 함수 정의
+   
     async function fetchAllGroupBoardData(groupId: number) {
       try {
         const response = await axios.get(`/api/v1/group/${groupId}/posts`);
@@ -183,11 +181,11 @@ function GroupDetail() {
       }
     }
 
-    // 함수 호출
+    
     fetchAllGroupBoardData(Number(groupId));
   }, [groupId]);
   useEffect(() => {
-    // 페이지 로드 시 로컬 스토리지에서 해당 groupId의 일정 데이터 불러오기
+   
     const savedSchedules = JSON.parse(
       localStorage.getItem(getLocalStorageKey()) || '[]',
     );
@@ -195,17 +193,17 @@ function GroupDetail() {
   }, [groupId, getLocalStorageKey]); // 'groupId'와 'getLocalStorageKey'를 의존성 배열에 추가
 
   useEffect(() => {
-    // schedules 상태가 변경될 때마다 로컬 스토리지에 저장
+   
     localStorage.setItem(getLocalStorageKey(), JSON.stringify(schedules));
   }, [schedules, groupId, getLocalStorageKey]); // 'schedules', 'groupId', 'getLocalStorageKey'를 의존성 배열에 추가
 
   useEffect(() => {
-    // schedules 상태가 변경될 때마다 로컬 스토리지에 저장
+   
     localStorage.setItem(getLocalStorageKey(), JSON.stringify(schedules));
   }, [loginToken, groupId, schedules, getLocalStorageKey]); // 'loginToken', 'groupId', 'schedules', 'getLocalStorageKey'를 의존성 배열에 추가
 
   useEffect(() => {
-    // schedules 상태가 변경될 때마다 로컬 스토리지에 저장
+   
     localStorage.setItem(getLocalStorageKey(), JSON.stringify(schedules));
   }, [loginToken, groupId]);
   useEffect(() => {
@@ -254,7 +252,7 @@ function GroupDetail() {
     e.preventDefault();
     if (!loginToken) {
       alert('로그인 후 이용해주세요!');
-      navigate('/login'); // 로그인 페이지로 이동
+      navigate('/login'); 
       return;
     }
     try {
@@ -293,8 +291,6 @@ function GroupDetail() {
         });
 
         if (response.status === 200) {
-          console.log('그룹 삭제 성공:', response.data);
-          // 그룹 삭제 후 리다이렉트 등 처리 가능
           navigate('/group/list');
         } else {
           console.error('그룹 삭제 실패:', response.status);
@@ -336,8 +332,8 @@ function GroupDetail() {
       );
 
       if (response.status === 200) {
-        console.log('그룹 정보 수정 성공:', response.data);
-        setGroupData(editedGroupData); // Update with edited data
+      
+        setGroupData(editedGroupData);
         closeEditModal();
         alert('수정이 완료되었습니다!');
       } else {

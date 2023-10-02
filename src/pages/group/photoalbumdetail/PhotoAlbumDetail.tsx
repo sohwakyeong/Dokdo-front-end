@@ -266,7 +266,7 @@ const PhotoDetail: React.FC<PhotoDetailDataProps & GroupNameProps> = ({
         setIsLiked(userLikedStatus);
       } else {
         console.error('Error fetching like status:', response.status);
-        console.log('API Response:', response.data);
+       
       }
     } catch (error) {
       console.error('Error fetching like status:', error);
