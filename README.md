@@ -1,6 +1,6 @@
 # :station: 프로젝트 배포 -> AWS EC2를 통한 사이트 배포 
 ## [http://www.dok-do.site/](http://dok-do.site/)
-
+![배포설명](https://github.com/sohwakyeong/sohwakyeong/blob/main/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202023-10-02%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2010.35.30.png?raw=true)
 
 
 
@@ -15,6 +15,7 @@
 ![서비스설명_마이페이지-1](https://kdt-gitlab.elice.io/sw_track/class_05/web_2_project/team04/front-end/uploads/cd00348fabb8a1c7185f577838e4adc1/%E1%84%89%E1%85%A5%E1%84%87%E1%85%B5%E1%84%89%E1%85%B3%E1%84%89%E1%85%A5%E1%86%AF%E1%84%86%E1%85%A7%E1%86%BC_%E1%84%86%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%91%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%8C%E1%85%B5-1.png)
 ![서비스설명_문해력테스트-1](https://kdt-gitlab.elice.io/sw_track/class_05/web_2_project/team04/front-end/uploads/e9b2c4e1274fb1b317213bf1acd59dcf/%E1%84%89%E1%85%A5%E1%84%87%E1%85%B5%E1%84%89%E1%85%B3%E1%84%89%E1%85%A5%E1%86%AF%E1%84%86%E1%85%A7%E1%86%BC_%E1%84%86%E1%85%AE%E1%86%AB%E1%84%92%E1%85%A2%E1%84%85%E1%85%A7%E1%86%A8%E1%84%90%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B3-1.png)
 ![서비스설명_관리자-1](https://kdt-gitlab.elice.io/sw_track/class_05/web_2_project/team04/front-end/uploads/b0d50ea13b6431b2cd324e121dcfd80e/%E1%84%89%E1%85%A5%E1%84%87%E1%85%B5%E1%84%89%E1%85%B3%E1%84%89%E1%85%A5%E1%86%AF%E1%84%86%E1%85%A7%E1%86%BC_%E1%84%80%E1%85%AA%E1%86%AB%E1%84%85%E1%85%B5%E1%84%8C%E1%85%A1-1.png)
+![서비스설명_도서추천-1](https://github.com/sohwakyeong/sohwakyeong/blob/main/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202023-10-02%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2011.07.53.png?raw=true)
 
 ## :calendar: 개발 기간
 -23.08.14 ~ 23.09.01
@@ -27,7 +28,7 @@
 - 최형욱 _ 메인페이지, 토론모임페이지
 - 김민태 _ 토론모임페이지, 테스트 페이지  
 - 왕지은 _ 마이페이지
-- 소화경 _ 자유게시판 페이지, 관리자페이지
+- 소화경 _ 도서추천 페이지, 관리자페이지
 - 사은빈 _ 관리자페이지
 
 #### :high_brightness: Back-end
@@ -57,9 +58,9 @@ GitFlow : master -> dev -> feature branch 로 작업
 <img width="804" alt="스크린샷 2023-10-02 오후 5 55 56" src="https://github.com/Dokdo-pro/front-end/assets/130480277/e6d72952-f929-45ad-bece-f58bddd5fc39">
 
 
-master: 서비스의 안정된 상태 반영
-dev: 개발 중인 기능이 통합되는 브랜치
-feature: 개별 기능 또는 작업 단위 개발
+- master: 서비스의 안정된 상태 반영 <br />
+- dev: 개발 중인 기능이 통합되는 브랜치<br />
+- feature: 개별 기능 또는 작업 단위 개발<br />
 
 #### :file_folder: 코딩 컨벤션
 <img width="826" alt="스크린샷 2023-10-02 오후 5 46 52" src="https://github.com/Dokdo-pro/front-end/assets/130480277/e530e250-09d3-4109-a76b-e50adb13d32f">
