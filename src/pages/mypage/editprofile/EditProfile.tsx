@@ -181,7 +181,7 @@ function EditProfileComponent() {
     };
 
     const loginToken = getCookie('loginToken');
-    console.log('updatedUserData:', updatedUserData);
+   
 
     axios
       .put('/api/v1/auth/me', updatedUserData, {
@@ -191,7 +191,7 @@ function EditProfileComponent() {
         withCredentials: true,
       })
       .then(response => {
-        console.log('응답:', response);
+       
         if (response.status === 200) {
     
           alert('프로필 변경완료');

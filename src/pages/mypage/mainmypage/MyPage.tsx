@@ -111,12 +111,7 @@ function MyPageComponent() {
           </MyPageStyle.ManageButton>
         </MyPageStyle.ManageList2>
       ) : (
-        <MyPageStyle.ManageList2>
-          <MyPageStyle.ManageTitle>고객센터</MyPageStyle.ManageTitle>
-          <MyPageStyle.ManageLink2 to="/user/mypage/inquiry">
-            <p>문의하기</p>
-          </MyPageStyle.ManageLink2>
-        </MyPageStyle.ManageList2>
+        undefined
       )}
       <MyPageStyle.Logout onClick={handleLogout}>로그아웃</MyPageStyle.Logout>
     </MyPageStyle.Container>

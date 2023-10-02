@@ -81,7 +81,7 @@ export default function MyGroupsComponent() {
       }
     }
     setGroupData(groupDataArray);
-    console.log(groupDataArray);
+   
   };
 
   const onClickToGroup = (group_id: number) => {
@@ -108,7 +108,7 @@ export default function MyGroupsComponent() {
 
     
         const groupIds = likedGroupsData.map(likedGroup => likedGroup.group_id);
-        console.log(groupIds);
+       
       
         const groupInfoPromises = groupIds.map(async group_id => {
           try {
@@ -116,7 +116,7 @@ export default function MyGroupsComponent() {
               `/api/v1/group/${group_id}`,
             );
             if (groupInfoResponse.status === 200) {
-              console.log(groupInfoResponse.data.data);
+            
               return groupInfoResponse.data.data;
             }
           } catch (error) {
