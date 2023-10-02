@@ -1,19 +1,19 @@
 # :books: 독도 : 독서 토론, 도전 해 봐!
-![logo](/uploads/afeb34035a54c32cc494cd87c809d04d/logo.png)
+![logo](https://kdt-gitlab.elice.io/sw_track/class_05/web_2_project/team04/front-end/uploads/afeb34035a54c32cc494cd87c809d04d/logo.png)
 ## :pencil2: 프로젝트 소개
-![프로젝트소개-1](/uploads/c7ef57f0fb6ae41602cf2a0e50a6ca3f/프로젝트소개-1.png)
-![페르소나-1](/uploads/62c9b26426c7d84fd30685439bd18b4d/페르소나-1.png)
-![서비스설명_메인-1](/uploads/6e9be002369988e708a5081c0e0aaa25/서비스설명_메인-1.png)
-![서비스설명_토론모임-1](/uploads/2a85ebb440d971809148657691ddbc9d/서비스설명_토론모임-1.png)
-![서비스설명_마이페이지-1](/uploads/cd00348fabb8a1c7185f577838e4adc1/서비스설명_마이페이지-1.png)
-![서비스설명_문해력테스트-1](/uploads/e9b2c4e1274fb1b317213bf1acd59dcf/서비스설명_문해력테스트-1.png)
-![서비스설명_관리자-1](/uploads/b0d50ea13b6431b2cd324e121dcfd80e/서비스설명_관리자-1.png)
+![프로젝트소개-1](https://kdt-gitlab.elice.io/sw_track/class_05/web_2_project/team04/front-end/uploads/c7ef57f0fb6ae41602cf2a0e50a6ca3f/%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%E1%84%89%E1%85%A9%E1%84%80%E1%85%A2-1.png)
+![페르소나-1](https://kdt-gitlab.elice.io/sw_track/class_05/web_2_project/team04/front-end/uploads/62c9b26426c7d84fd30685439bd18b4d/%E1%84%91%E1%85%A6%E1%84%85%E1%85%B3%E1%84%89%E1%85%A9%E1%84%82%E1%85%A1-1.png)
+![서비스설명_메인-1](https://kdt-gitlab.elice.io/sw_track/class_05/web_2_project/team04/front-end/uploads/6e9be002369988e708a5081c0e0aaa25/%E1%84%89%E1%85%A5%E1%84%87%E1%85%B5%E1%84%89%E1%85%B3%E1%84%89%E1%85%A5%E1%86%AF%E1%84%86%E1%85%A7%E1%86%BC_%E1%84%86%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AB-1.png)
+![서비스설명_토론모임-1](https://kdt-gitlab.elice.io/sw_track/class_05/web_2_project/team04/front-end/uploads/2a85ebb440d971809148657691ddbc9d/%E1%84%89%E1%85%A5%E1%84%87%E1%85%B5%E1%84%89%E1%85%B3%E1%84%89%E1%85%A5%E1%86%AF%E1%84%86%E1%85%A7%E1%86%BC_%E1%84%90%E1%85%A9%E1%84%85%E1%85%A9%E1%86%AB%E1%84%86%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%B7-1.png)
+![서비스설명_마이페이지-1](https://kdt-gitlab.elice.io/sw_track/class_05/web_2_project/team04/front-end/uploads/cd00348fabb8a1c7185f577838e4adc1/%E1%84%89%E1%85%A5%E1%84%87%E1%85%B5%E1%84%89%E1%85%B3%E1%84%89%E1%85%A5%E1%86%AF%E1%84%86%E1%85%A7%E1%86%BC_%E1%84%86%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%91%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%8C%E1%85%B5-1.png)
+![서비스설명_문해력테스트-1](https://kdt-gitlab.elice.io/sw_track/class_05/web_2_project/team04/front-end/uploads/e9b2c4e1274fb1b317213bf1acd59dcf/%E1%84%89%E1%85%A5%E1%84%87%E1%85%B5%E1%84%89%E1%85%B3%E1%84%89%E1%85%A5%E1%86%AF%E1%84%86%E1%85%A7%E1%86%BC_%E1%84%86%E1%85%AE%E1%86%AB%E1%84%92%E1%85%A2%E1%84%85%E1%85%A7%E1%86%A8%E1%84%90%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B3-1.png)
+![서비스설명_관리자-1](https://kdt-gitlab.elice.io/sw_track/class_05/web_2_project/team04/front-end/uploads/b0d50ea13b6431b2cd324e121dcfd80e/%E1%84%89%E1%85%A5%E1%84%87%E1%85%B5%E1%84%89%E1%85%B3%E1%84%89%E1%85%A5%E1%86%AF%E1%84%86%E1%85%A7%E1%86%BC_%E1%84%80%E1%85%AA%E1%86%AB%E1%84%85%E1%85%B5%E1%84%8C%E1%85%A1-1.png)
 
 ## :calendar: 개발 기간
 -23.08.14 ~ 23.09.01
 
 ### :black_nib: 팀원 구성과 분배
-![팀원소개-1](/uploads/aace20841bd558b880d63ebf52134af4/팀원소개-1.png)
+
 
 #### :high_brightness: Front-end
 - 박다인 _ 웹의 UX/UI Design :crown:
@@ -38,7 +38,7 @@
 - GitLab : Code Repository
 
 ### :mag: API 명세서
-++ 명세서 캡처 이미지와 링크 추가
+https://www.notion.so/b542228d2237476f93c7056e1f475a03?v=422c6ff82081407db8eea40376edcffd
 
 ### :open_file_folder: Git Branch 관리
 ++ master-dev-featurebranch 한 내역 캡처, 설명 추가
