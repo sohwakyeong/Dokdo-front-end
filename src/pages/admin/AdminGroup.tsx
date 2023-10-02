@@ -76,7 +76,7 @@ function AdminGroup() {
             </A.NoContent>) :groupData.length === 0 ? (
             <A.NoContent>
               <A.NoImage src = {MorePost} alt="게시물없음"/>
-              <A.NoText>아직 작성된 게시물이 없습니다.</A.NoText>
+              <A.NoText>아직 모집중인 모임이 없습니다.</A.NoText>
             </A.NoContent>
           ) : (
             <>
