@@ -38,7 +38,6 @@ const BookDetail = () => {
     const originalCallback = window[callbackName];
 
     window[callbackName] = data => {
-      console.log('JSONP Response:', data);
       setBooks(data.item);
 
       // 요청 처리 후 원래의 콜백 함수로 복원 (만약 있었다면)

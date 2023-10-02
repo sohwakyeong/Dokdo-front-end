@@ -30,7 +30,6 @@ const BcBox2 = () => {
     const originalCallback = window[callbackName];
 
     window[callbackName] = data => {
-      console.log('JSONP Response:', data);
       setBooks(data.item);
 
   
