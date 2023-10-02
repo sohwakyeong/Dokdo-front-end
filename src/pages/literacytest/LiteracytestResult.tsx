@@ -7,12 +7,12 @@ import {
   // SocialIcons,
   // SocialIcon,
   // SocialIconImage,
-  ResultImage,
-  ReviewButton,
+  // ReviewButton,
   TestInstructions,
   RepeatButton,
   StyledLink,
   ImgResult,
+  ResultImgDisplay,
 } from '@/pages/literacytest/LiteracytestResult.Style';
 // import facebookIcon from '@/assets/img/facebook.png';
 // import twitterIcon from '@/assets/img/twitter.png';
@@ -57,7 +57,7 @@ const LiteracyTestResult: React.FC<LiteracyTestResultProps> = ({
 
   const imageSource = getImageSource();
   const handleRepeatTest = () => {
-    navigate('/'); /// 특정 경로로 이동
+    navigate('/literacy-test'); /// 특정 경로로 이동
   };
 
   return (
@@ -65,7 +65,10 @@ const LiteracyTestResult: React.FC<LiteracyTestResultProps> = ({
       <ImgResult>
         {/* <ResultText>{getResultMessage()}</ResultText> */}
         <ResultText>{`${correctAnswers} / ${questions.questions.length}`}</ResultText>
-        <ResultImage src={imageSource} alt="Result" />
+        <ResultImgDisplay>
+        <img src={imageSource} alt="Result" />
+
+        </ResultImgDisplay>
       </ImgResult>
 
       <TestInstructions>문해력 향상에 도움을 받고 싶다면?</TestInstructions>
@@ -86,7 +89,7 @@ const LiteracyTestResult: React.FC<LiteracyTestResultProps> = ({
         문해력이 궁금한 친구에게 공유해 보세요!
       </TestInstructions>
       <RepeatButton onClick={handleRepeatTest}>
-        ✔ 테스트 다시하기 ✔
+        테스트 다시하기 ✔
       </RepeatButton>
     </Container>
   );

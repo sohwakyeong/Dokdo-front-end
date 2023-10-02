@@ -82,7 +82,7 @@ export const BookImg = styled.div`
   width: 100%;
   height: 193px;
 
-  background-color: #fff7ec;
+  background-color: #fff9f1;
 `;
 
 export const BookInfo = styled.div`
@@ -119,7 +119,7 @@ export const GroupBoxImg = styled.div`
   width: 60px;
   height: 60px;
   overflow: hidden;
-  background-color: #fff7ec;
+  background-color: #fff9f1;
   border-radius: 20px;
 `;
 

@@ -44,7 +44,7 @@ export const ImgBox = styled.div`
 export const Img = styled.div`
   width: 180px;
   height: 180px;
-  background-color: #fff7ec;
+  background-color: #fff9f1;
 `;
 
 export const Info = styled.div`
@@ -55,7 +55,6 @@ export const Info = styled.div`
     padding: 3px;
     text-align: start;
     font-size: 14px;
-    
   }
 `;
 

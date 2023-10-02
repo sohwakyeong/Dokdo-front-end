@@ -7,6 +7,7 @@ import GroupHeader from '@/components/layout/header/GroupHeader';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getCookie } from '@/helper/Cookie';
 import UserImg from '@/assets/img/userbasicimg.png';
+import MorePost from '@/assets/icon/newIcon/chat1.png'
 
 interface GroupData {
   group_id: number;
@@ -113,42 +114,54 @@ const GroupBoard: React.FC<GroupBoardProps> = ({ data }) => {
         <GB.GroupBoardTitle>
           <div>게시글 목록</div>
         </GB.GroupBoardTitle>
-        {groupBoardData.map((groupBoardItem, index) => (
-          <GB.Boardbox
-            key={index}
-            onClick={() =>
-              navigate(`/group/${groupId}/board/${groupBoardItem.post.post_id}`)
-            }
-          >
-            <GB.BoardLeft>
-              <GB.User>
+        {groupBoardData.length === 0 ? (
+          <GB.NoContainer>
+            <GB.NoContent>
+              <GB.NoContentImg src={MorePost} alt="MorePost" />
+              <GB.NoContentText>아직 작성하신 글이 없습니다.</GB.NoContentText>
+            </GB.NoContent>
+          </GB.NoContainer>
+        ) : (
+          groupBoardData.map((groupBoardItem, index) => (
+            <GB.Boardbox
+              key={index}
+              onClick={() =>
+                navigate(`/group/${groupId}/board/${groupBoardItem.post.post_id}`)
+              }
+            >
+              <GB.BoardLeft>
+                <GB.User>
+                  <img
+                    src={`/api/v1/image/profile/${groupBoardItem.user.profilePic}`}
+                    alt="게시자 프로필"
+                    onError={defaultUserImg}
+                  />
+                  <GB.UserName>
+                    <div>{groupBoardItem.user.name}</div>
+                    <GB.UserDate>
+                      {formatDate(groupBoardItem.post.createdAt)}
+                    </GB.UserDate>
+                  </GB.UserName>
+                </GB.User>
+                <div>
+                  <GB.BoardTitle>{groupBoardItem.post.title}</GB.BoardTitle>
+                  <GB.BoardContent>{groupBoardItem.post.content}</GB.BoardContent>
+                </div>
+              </GB.BoardLeft>
+              <GB.BoardImg>
                 <img
-                  src={`/api/v1/image/profile/${groupBoardItem.user.profilePic}`}
-                  alt="게시자 프로필" onError={defaultUserImg}
+                  src={`/api/v1/image/post/${groupBoardItem.post.images[0]}`}
+                  alt="게시된 이미지"
                 />
-                <GB.UserName>
-                  <div>{groupBoardItem.user.name}</div>
-                  <GB.UserDate>
-                    {formatDate(groupBoardItem.post.createdAt)}
-                  </GB.UserDate>
-                </GB.UserName>
-              </GB.User>
-              <div>
-                <GB.BoardTitle>{groupBoardItem.post.title}</GB.BoardTitle>
-                <GB.BoardContent>{groupBoardItem.post.content}</GB.BoardContent>
-              </div>
-            </GB.BoardLeft>
-            <GB.BoardImg>
-              <img
-                src={`/api/v1/image/post/${groupBoardItem.post.images[0]}`}
-                alt="게시된 이미지"
-              />
-            </GB.BoardImg>
-          </GB.Boardbox>
-        ))}
+              </GB.BoardImg>
+            </GB.Boardbox>
+          ))
+        )}
       </GB.GroupBoardList>
     </GB.Wrapper>
   );
 };
 
 export default GroupBoard;
+
+

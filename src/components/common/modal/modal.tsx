@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 const ModalOverlay = styled.div`
   position: fixed;
-
   left: 0;
   bottom: 0;
   width: 100%;
@@ -21,7 +20,10 @@ const ModalWrapper = styled.div`
   background-color: white;
   padding: 1rem;
   border-radius: 10px;
-  
+  line-height: 1.2;
+  & p {
+    margin-top: 3px;
+  }
 `;
 
 interface ModalProps {

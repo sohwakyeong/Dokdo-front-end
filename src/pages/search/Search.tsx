@@ -28,39 +28,7 @@ const Search = () => {
           <BookAndContestBox />
         </S.BookRecList>
       </S.BookRecBox>
-      <S.BookRecBox>
-        <S.BookRecBoxTitle>이런 독서 토론 모임도 있어요! </S.BookRecBoxTitle>
-        <S.GorupBoxDisplay>
-          <S.GroupSmallBox>
-            <S.GroupBox>
-              <S.GroupBoxImg>
-                <img src="" alt="이미지" />
-              </S.GroupBoxImg>
-              <S.GroupBoxInfo>
-                <div>새벽비대면토론</div>
-                <div>
-                  새벽시간마다 디스코드를 켜고 비대면 독서 토론을 진행합니다.
-                </div>
-                <div>올빼미족 비대면</div>
-              </S.GroupBoxInfo>
-            </S.GroupBox>
-          </S.GroupSmallBox>
-          <S.GroupSmallBox>
-            <S.GroupBox>
-              <S.GroupBoxImg>
-                <img src="" alt="이미지" />
-              </S.GroupBoxImg>
-              <S.GroupBoxInfo>
-                <div>새벽비대면토론</div>
-                <div>
-                  새벽시간마다 디스코드를 켜고 비대면 독서 토론을 진행합니다.
-                </div>
-                <div>올빼미족 비대면</div>
-              </S.GroupBoxInfo>
-            </S.GroupBox>
-          </S.GroupSmallBox>
-        </S.GorupBoxDisplay>
-      </S.BookRecBox>
+     
     </S.Wrapper>
   );
 };

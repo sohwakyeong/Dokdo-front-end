@@ -4,7 +4,8 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 474px;
+  width: 100%;
+  height: 100%;
 `;
 
 export const GroupPhotoTitle = styled.div`
@@ -20,6 +21,13 @@ export const GroupPhotoTitle = styled.div`
   box-sizing: border-box;
   border-top: 0.5 solid #dbdbdb;
   border-bottom: 0.5 solid #dbdbdb;
+  & div {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const InputDisplay = styled.div`
@@ -29,6 +37,10 @@ export const InputDisplay = styled.div`
 export const PhotoList = styled.div`
   width: 90%;
   height: 100%;
+
+  & ul {
+    height: 100%;
+  }
 `;
 
 export const PhotoBoardBox = styled.div`
@@ -43,7 +55,7 @@ export const PhotoBoardBox = styled.div`
 export const PhotoImg = styled.div`
   width: 100%;
   height: 150px;
-  background-color: #fff7ec;
+  background-color: #fff9f1;
   overflow: hidden;
   border-radius: 15px;
 
@@ -56,7 +68,7 @@ export const ProfileImg = styled.div`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: #fff7ec;
+  background-color: #fff9f1;
   overflow: hidden;
 
   & img {
@@ -88,7 +100,35 @@ export const PhotoBoxBottom = styled.div`
 `;
 
 export const PhotoBoardTitle = styled.div`
-  margin-top: 10px;
-  font-size: 19px;
-  font-
+  font-size: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 2px;
+`;
+export const NoContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 500px;
+`;
+
+export const NoContent = styled.div`
+  width: 200px;
+
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+export const NoContentImg = styled.img`
+  width: 50px;
+  height: 50px;
+`;
+export const NoContentText = styled.div`
+  font-size: 16px;
+  font-weight: 400;
+  color: black;
+  margin-top: 29px;
 `;

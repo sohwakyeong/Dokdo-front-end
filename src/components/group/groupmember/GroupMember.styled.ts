@@ -45,4 +45,10 @@ export const Desc = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   font-weight: bold;
+
+  & p {
+    font-weight: 400;
+    color:#7d7d7d;
+    font-size: 14px;
+  }
 `;

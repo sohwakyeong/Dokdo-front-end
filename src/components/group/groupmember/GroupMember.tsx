@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, SyntheticEvent } from 'react';
 import * as GDM from './GroupMember.styled';
 import axios from 'axios';
 import { getCookie } from '@/helper/Cookie';
+import { useParams } from 'react-router-dom';
+import userImg from '@/assets/img/userbasicimg.png';
 
 interface Member {
   _id: string;
@@ -9,7 +11,7 @@ interface Member {
   user_id: number;
   createdAt: string;
   name: string;
-  profile: string; 
+  profile: string;
 }
 
 interface GroupData {
@@ -28,11 +30,12 @@ function GroupMember() {
   const [groupData, setGroupData] = useState<GroupData | null>(null);
   const [membersInfo, setMembersInfo] = useState<UserInfo[]>([]);
   const loginToken = getCookie('loginToken');
+  const { groupId } = useParams<{ groupId: string }>();
 
   useEffect(() => {
-    async function fetchGroupData() {
+    async function fetchGroupData(group_id: number) {
       try {
-        const response = await axios.get('/api/v1/group/10', {
+        const response = await axios.get(`/api/v1/group/${group_id}`, {
           headers: {
             Authorization: `Bearer ${loginToken}`,
           },
@@ -41,8 +44,8 @@ function GroupMember() {
 
         if (response.status === 200) {
           const members = response.data.data.mem;
-          const usersInfoPromises = members.map((member: Member) => 
-            fetchUserInfo(member.user_id)
+          const usersInfoPromises = members.map((member: Member) =>
+            fetchUserInfo(member.user_id),
           );
           const usersInfo = await Promise.all(usersInfoPromises);
           setGroupData(response.data.data);
@@ -54,9 +57,9 @@ function GroupMember() {
         console.error('그룹 정보 가져오기 에러:', error);
       }
     }
-    
-    fetchGroupData();
-  }, []);
+
+    fetchGroupData(Number(groupId));
+  }, [groupId]);
 
   async function fetchUserInfo(user_id: number): Promise<UserInfo | null> {
     try {
@@ -76,13 +79,22 @@ function GroupMember() {
           introduction,
         };
       } else {
-        console.error('사용자 정보 가져오기 에러:', response.status, response.data);
+        console.error(
+          '사용자 정보 가져오기 에러:',
+          response.status,
+          response.data,
+        );
       }
     } catch (error) {
       console.error('사용자 정보 가져오기 에러:', error);
     }
     return null;
   }
+
+  const defaultUserImg = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+    e.currentTarget.src = userImg;
+  };
+
 
   return (
     <div>
@@ -93,8 +105,11 @@ function GroupMember() {
             <li key={userInfo.user_id}>
               <GDM.MemberList>
                 <GDM.MemberImg>
-                <img src={`/api/v1/image/profile/${userInfo.profilePic}`} alt="프로필" />
-
+                    <img
+                      src={`/api/v1/image/profile/${userInfo.profilePic}`}
+                      alt=""
+                      onError={defaultUserImg}
+                    />
                 </GDM.MemberImg>
                 <GDM.Desc>
                   <div>{userInfo.name}</div>

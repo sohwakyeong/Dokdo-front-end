@@ -27,9 +27,6 @@ function BackSearchHeader() {
           <Link to="/search">
             <StlyedImg src={searchIcon} alt="돋보기 아이콘" />
           </Link>
-          <Link to="/notifications">
-            <StlyedImg src={notificationIcon} alt="알림 아이콘" />
-          </Link>
         </Nav>
       </Display>
     </Wrapper>
@@ -65,7 +62,6 @@ const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 65px;
 `;
 const BackBtn = styled.div`
   & button {

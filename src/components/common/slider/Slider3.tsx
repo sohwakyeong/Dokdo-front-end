@@ -9,12 +9,14 @@ import MiddleBoardBox from '@/components/common/boardbox/MiddleBoardBox';
 
 import axios from 'axios';
 import { MiddleBoardData } from '@/components/common/boardbox/MiddleBoardBox';
+import Logo from '@/assets/img/Logo1.png'
+
 
 // 서버에서 인기 데이터를 가져오는 함수
 async function fetchPopularData() {
   try {
     const response = await axios.get(
-      '/api/v1/group?orderBy=&limit=10&offset=0',
+      '/api/v1/group?orderBy=popularity&limit=10&offset=0',
     );
     return response.data.data;
   } catch {
@@ -51,7 +53,7 @@ export default function Slider3() {
       className="mySwiper"
     >
       {!Array.isArray(popularData) || popularData.length === 0 ? (
-        <p> 인기순으로 정렬하는 중!</p>
+        <p></p>
       ) : (
         popularData.map((item, index) => (
           <SwiperSlide key={index}>

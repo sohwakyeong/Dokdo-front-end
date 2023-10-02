@@ -1,6 +1,5 @@
 import React from 'react';
 import * as MB from '@/components/common/boardbox/MiddleBoardBox.styled';
-import BoardImgBox from '@/components/common/boardbox/BoardImgBox';
 import { useNavigate } from 'react-router-dom';
 import defaultImage from '@/assets/img/Logo1.png';
 
@@ -34,12 +33,10 @@ interface MiddleBoardBoxProps {
 function MiddleBoardBox({ data }: MiddleBoardBoxProps) {
   const navigate = useNavigate();
 
-  // 모임 상세 페이지 URL을 생성하는 함수
   const generateGroupDetailURL = (sequence: string): string => {
     return `/group/${sequence}/detail`;
   };
 
-  // 보드박스 클릭 시 모임 상세 페이지로 이동
   const handleClick = () => {
     if (data) {
       const groupDetailURL = generateGroupDetailURL(data.group_id.toString());

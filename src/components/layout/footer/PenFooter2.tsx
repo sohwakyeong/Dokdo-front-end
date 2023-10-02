@@ -38,14 +38,13 @@ const Display = styled.div`
 `;
 
 const Button = styled.button`
-  width: 60px;
-  height: 60px;
-  background-color: white;
+  height: 50px;
+  background-color:transparent;
+  border:none;
+
   cursor: pointer;
-  border-radius: 50%;
-  border: 3px solid black;
   & img {
-    width: 40px;
-    height: 40px;
+    width: 80x;
+    height: 50px;
   }
 `;

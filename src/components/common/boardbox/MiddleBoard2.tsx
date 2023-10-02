@@ -40,9 +40,11 @@ function MiddleBoardBox2({ data }: MidleBoardBoxProps) {
 
   // 보드박스 클릭 시 모임 상세 페이지로 이동
   const handleClick = () => {
-    if (data) {
+    if (data && data.group_id) {
       const groupDetailURL = generateGroupDetailURL(data.group_id.toString());
       navigate(groupDetailURL);
+    } else {
+      navigate('/group');
     }
   };
 
@@ -79,7 +81,7 @@ function MiddleBoardBox2({ data }: MidleBoardBoxProps) {
     : PlusGroupIcon;
 
   return (
-    <MB.Container onClick={handleClick}>
+    <MB.Container onClick={data ? handleClick : undefined}>
       <MB.Border>
         <MB.TextImgBox>
           <MB.ImgBox>

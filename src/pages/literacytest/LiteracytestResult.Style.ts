@@ -6,7 +6,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center; // 수평 중앙 정렬
-  justify-content: center; // 수직 중앙 정렬
   width: 474px;
   height: 100%; // 화면의 높이만큼 설정
   margin-top: 50px;
@@ -14,7 +13,9 @@ export const Container = styled.div`
 
 export const ImgResult = styled.div`
   width: 100%;
-  height: 100%;
+  display: flex;
+flex-direction: column;
+  align-items: center;
 `;
 
 export const ResultText = styled.div`
@@ -38,11 +39,6 @@ export const SocialIcon = styled.a`
 export const SocialIconImage = styled.img`
   width: 30px;
   height: 30px;
-`;
-export const ResultImage = styled.img`
-  width: 200px; // 너비를 원하는 크기로 조정
-  height: auto; // 높이를 자동으로 조정하여 비율 유지
-  margin: 20px 0; // 위아래 여백 추가
 `;
 export const ReviewButton = styled.button`
   width: 284px;
@@ -131,5 +127,14 @@ export const StyledLink = styled(Link)`
 
   &:active {
     transform: scale(1);
+  }
+`;
+export const ResultImgDisplay = styled.div`
+
+  width: 80%;
+
+  & img {
+    width: 80%;
+    margin: 20px 0; // 위아래 여백 추가
   }
 `;

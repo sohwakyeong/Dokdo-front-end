@@ -45,7 +45,6 @@ export const ImgBox = styled.div`
   justify-content: center; // 추가
   box-sizing: border-box;
   border: 1px solid #ddd;
-
 `;
 
 export const Img = styled.img`
@@ -56,13 +55,13 @@ export const Img = styled.img`
 `;
 export const HashTagDisplay = styled.div`
   display: flex;
-`
+`;
 
 export const HashTags = styled.div`
   border: none;
   height: 20px;
   border-radius: 20px;
-  background-color: #fff7ec;
+  background-color: #fff9f1;
   color: #84614b;
   width: fit-content;
   overflow: hidden;

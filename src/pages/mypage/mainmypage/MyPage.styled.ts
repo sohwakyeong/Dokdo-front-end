@@ -61,13 +61,15 @@ height: 12px;
 margin-top: 10px;
 `;
 
-export const Title = styled.p`
+export const Title = styled(Link)`
   font-weight: bold;
   text-decoration: none;
   font-size: 20px;
   color: black;
   display: flex;
   padding-right: 305px;
+  text-decoration: none;
+  border: none;
 `;
 
 export const ManageList = styled.div`
@@ -131,7 +133,6 @@ export const Logout = styled.button`
   text-decoration: none;
   border-bottom: 1px solid #b1b1b1;
   font-size: 12px;
-  text-decoration: none;
   color: #b1b1b1;
   background-color: white;
   cursor: pointer;

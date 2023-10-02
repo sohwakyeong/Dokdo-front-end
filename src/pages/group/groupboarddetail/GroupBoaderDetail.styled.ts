@@ -44,13 +44,13 @@ export const MMDD = styled.div`
 `;
 
 export const ProfileImg = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background-color: #fff7ec;
+  background-color: #fff9f1;
   overflow: hidden;
   margin: auto;
 `;
@@ -105,6 +105,11 @@ export const Comment = styled.div`
   margin-bottom: 55px;
 `;
 
+export const NoCommentsText = styled.div`
+  margin-bottom: 20px;
+  color: darkgray;
+`;
+
 export const CommentsTitle = styled.div`
   font-size: 20px;
   font-weight: 800;
@@ -118,10 +123,10 @@ export const CommentsTitle = styled.div`
 
 export const CommentsList = styled.div`
   width: 474px;
-  height: 55px;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 `;
 
 export const ComentsBox = styled.div`
@@ -137,12 +142,12 @@ export const PFImg = styled.div`
   align-items: center;
   background-color: white;
   margin-right: 20px;
-  width: 50px;
+  width: 55px;
   height: 50px;
 
   & img {
-    width: 100%;
-    height: 100%;
+    width: 50px;
+    height: 50px;
     border: 1px solid #ddd;
     border-radius: 50%;
     box-sizing: border-box;
@@ -153,7 +158,7 @@ export const CommentProfileImg = styled.div`
   width: 39px;
   height: 39px;
   border-radius: 50%;
-  background-color: #fff7ec;
+  background-color: #fff9f1;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -249,9 +254,9 @@ export const CIInput = styled.div`
     height: 45px;
     border-radius: 20px;
     border: 1px solid #868686;
+    padding-left: 10px;
 
     &::placeholder {
-      padding-left: 10px;
       font-size: 15px;
       color: #a8a8a8;
     }
@@ -291,6 +296,13 @@ export const DropdownButton = styled.button`
   width: 90%;
 `;
 
+export const EditBoardWrap = styled.div`
+  width: 474px;
+  display: flex;
+  justify-content: end;
+  margin-right: 20px;
+`;
+
 export const DropdownContent = styled.div`
   background: white;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -299,11 +311,11 @@ export const DropdownContent = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  margin: 10px;
   border: 1px solid #000;
   border-radius: 15px;
   width: 150px;
-  height: 100px;
-
+  height: 50px;
 `;
 
 export const ProfileSection = styled.div`
@@ -331,8 +343,7 @@ export const CustomFileInput = styled.label`
 
   &:hover {
     font-weight: 700;
-    color:#84614b;
-
+    color: #84614b;
   }
 `;
 
@@ -342,8 +353,7 @@ export const CustomFileInputLabel = styled.div`
 
   &:hover {
     font-weight: 700;
-    color:#84614b;
-
+    color: #84614b;
   }
 `;
 export const EditGroupInfo = styled.div`
@@ -351,6 +361,6 @@ export const EditGroupInfo = styled.div`
 
   &:hover {
     font-weight: 700;
-    color:#84614b;
+    color: #84614b;
   }
 `;

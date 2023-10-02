@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { getCookie } from '@/helper/Cookie';
 import MorePost from '@/assets/icon/newIcon/chat1.png';
+import UserData from '@/pages/admin/UserData';
+import PostData from '@/pages/admin/PostData';
 interface PostData {
   _id: string;
   group_id: number;
@@ -21,6 +23,7 @@ interface PostData {
 interface UserData {
   name: string;
   profilePic: string;
+  group: number[]; 
 }
 
 function MyPostsComponent() {
@@ -28,7 +31,7 @@ function MyPostsComponent() {
   const [myPosts, setMyPosts] = useState<PostData[]>([]);
   const [selectedPosts, setSelectedPosts] = useState<PostData[]>([]);
   const [userData, setUserData] = useState<UserData | null>(null);
-  const [loading, setLoading] = useState(true); // 초기값을 true로 설정하여 처음에 로딩 중으로 설정
+  const [loading, setLoading] = useState(true);
   const [offset, setOffset] = useState(0);
 
   function formatCreatedAt(createdAt: string | number | Date) {
@@ -37,10 +40,7 @@ function MyPostsComponent() {
     const day = date.getDate() - 1;
     return `${month}월 ${day}일`;
   }
-
-  const onClickToPost = () => {
-    navigate('/group/list');
-  };
+  
 
   useEffect(() => {
     const loginToken = getCookie('loginToken');
@@ -75,11 +75,13 @@ function MyPostsComponent() {
           Authorization: `Bearer ${loginToken}`,
         },
         withCredentials: true,
+        params: {
+          includeGroupID: true, 
+        },
       })
       .then(postsResponse => {
         if (postsResponse.data.error === null) {
           const userPosts: PostData[] = postsResponse.data.data.posts;
-
           setMyPosts(userPosts);
 
           const fetchAllPosts = async () => {
@@ -96,6 +98,7 @@ function MyPostsComponent() {
                 if (postResponse.data.error === null) {
                   const postData: PostData = {
                     ...postResponse.data.data.post,
+                    group_id: post.group_id,
                   };
                   selectedPostsWithImages.push(postData);
                 } else {
@@ -126,13 +129,17 @@ function MyPostsComponent() {
       });
   }, [offset]);
 
+  const onClickToPost = (group_id: number, post_id: number) => {
+    navigate(`/group/${group_id}/board/${post_id}`);
+  };
+   
+
   const handleScroll = () => {
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
 
     if (windowHeight + scrollTop >= documentHeight - 100 && !loading) {
-
       setOffset(prevOffset => prevOffset + 5);
     }
   };
@@ -158,7 +165,8 @@ function MyPostsComponent() {
       ) : userData && selectedPosts.length > 0 ? (
         <MyPostsStyle.GroupBoardList>
           {selectedPosts.map((selectedPost, index) => (
-            <MyPostsStyle.BoardWrap key={selectedPost._id || index}>
+            <MyPostsStyle.BoardWrap key={selectedPost._id || index} onClick={() =>
+                onClickToPost(selectedPost.group_id, selectedPost.post_id)}>
               <MyPostsStyle.Boardbox>
                 <MyPostsStyle.BoardLeft>
                   <MyPostsStyle.ProfileData>
@@ -193,15 +201,12 @@ function MyPostsComponent() {
             <MyPostsStyle.NoContentText>
               아직 작성하신 글이 없습니다.
             </MyPostsStyle.NoContentText>
-            <MyPostsStyle.GoPostBtn onClick={onClickToPost}>
-              글쓰러 가기
-            </MyPostsStyle.GoPostBtn>
+            <MyPostsStyle.GoPostBtn onClick={()=> navigate('/group/list')}>토론 모임으로 가기</MyPostsStyle.GoPostBtn>
           </MyPostsStyle.NoContent>
         </MyPostsStyle.NoContainer>
       )}
     </MyPostsStyle.Container>
   );
-
 }
 
 export default MyPostsComponent;

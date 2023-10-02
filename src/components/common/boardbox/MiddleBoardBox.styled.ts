@@ -5,9 +5,9 @@ export const Container = styled.div`
   justify-content: center;
 
   width: 100%;
-  height: 100%;
+  height: 230px;
   background-color: white;
-    &:hover {
+  &:hover {
     transform: scale(1.01);
   }
 
@@ -33,7 +33,7 @@ export const TextImgBox = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 230px;
+
   & div {
     font-size: 15px;
   }
@@ -48,33 +48,47 @@ export const ImgBox = styled.div`
   box-sizing: border-box;
   overflow: hidden;
   object-fit: cover;
-  border-bottom: 1px solid #ddd;
 
   & img {
     width: 100%;
-    height: 100%;
+    height: 120px;
     object-fit: cover;
   }
 `;
 
 export const TextBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 90%;
-  height: 140px;
+
+  height: 50%;
   text-overflow: ellipsis;
   overflow: hidden;
-  padding: 10px;
+
+  & div {
+    width: 100%;
+  }
 `;
 
 export const GroupName = styled.div`
   font-size: 16px;
   font-weight: 600;
+  margin-bottom: 3px;
+  overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
 `;
 
 export const GroupIntro = styled.div`
   width: 95%;
-  height: 70px;
+  max-height: 70px; /* 최대 높이를 설정합니다. */
   color: #707070;
   font-size: 14px;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 `;

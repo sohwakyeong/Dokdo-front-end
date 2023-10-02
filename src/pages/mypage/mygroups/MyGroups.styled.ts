@@ -26,10 +26,9 @@ export const EmptyPage = styled.div`
 
 export const MyGroupBoardBox = styled.div`
   display: flex;
-  justify-content: center;
-  margin: 20px auto;
+  margin: 20px auto 0 auto;
   width: 100%;
-  height: 100%;
+  /* height: 416px; */
   flex-direction: column;
 `;
 
@@ -87,8 +86,6 @@ export const GroupIntro = styled.div`
 export const GroupTags = styled.div`
   display: flex;
   margin-top: 1px;
-  
-  
 `;
 export const GroupTag = styled.div`
   font-size: 8px;
@@ -99,15 +96,75 @@ export const GroupTag = styled.div`
   align-items: center;
   text-align: center;
 
-
   & + & {
     margin-left: 5px;
   }
 `;
 
 export const SectionLine = styled.div`
-width: 474px;
-border: 1px solid #d7d7d7;
-margin: 10px 0;
+  width: 474px;
+  border: 1px solid #d7d7d7;
+  margin: 10px 0;
+`;
+export const DataCheck = styled.div``;
 
-`
+
+export const LoadingContainer = styled.div`
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 30px auto 10px auto;
+`;
+
+export const LoadingContent = styled.div`
+  width: 200px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const LoadingImg = styled.img`
+  width: 50px;
+  height: 50px;
+`;
+
+export const LoadingText = styled.div`
+  font-size: 16px;
+  font-weight: 400;
+  color: black;
+  margin-top: 29px;
+`;
+
+
+export const NoContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 30px auto 10px auto;
+`;
+
+export const NoContent = styled.div`
+  width: 200px;
+
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+export const NoContentImg = styled.img`
+  width: 50px;
+  height: 50px;
+`;
+export const NoContentText = styled.div`
+  font-size: 16px;
+  font-weight: 400;
+  color: black;
+  margin-top: 29px;
+`;
+

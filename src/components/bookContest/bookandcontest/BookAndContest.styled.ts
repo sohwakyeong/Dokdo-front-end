@@ -50,7 +50,7 @@ export const StyledLink = styled(Link)`
 export const Img = styled.div`
   width: 180px;
   height: 280px;
-  background-color: #fff7ec;
+  background-color: #fff9f1;
   box-sizing: border-box;
   border: 1px solid #ddd;
   & img {
@@ -65,9 +65,13 @@ export const Info = styled.div`
   text-decoration: none;
 
   & div {
+    width: 180px;
     padding: 3px;
     text-align: start;
     font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 `;
 

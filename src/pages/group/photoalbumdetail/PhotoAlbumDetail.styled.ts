@@ -50,7 +50,7 @@ export const ProfileImg = styled.img`
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background-color: #fff7ec;
+  background-color: #fff9f1;
   overflow: hidden;
   margin: auto;
 `;
@@ -118,10 +118,10 @@ export const CommentsTitle = styled.div`
 
 export const CommentsList = styled.div`
   width: 474px;
-  height: 55px;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 `;
 
 export const ComentsBox = styled.div`
@@ -137,12 +137,12 @@ export const PFImg = styled.div`
   align-items: center;
   background-color: white;
   margin-right: 20px;
-  width: 50px;
+  width: 55px;
   height: 50px;
 
   & img {
-    width: 100%;
-    height: 100%;
+    width: 50px;
+    height: 50px;
     border: 1px solid #ddd;
     border-radius: 50%;
     box-sizing: border-box;
@@ -153,7 +153,7 @@ export const CommentProfileImg = styled.div`
   width: 39px;
   height: 39px;
   border-radius: 50%;
-  background-color: #fff7ec;
+  background-color: #fff9f1;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -246,9 +246,9 @@ export const CIInput = styled.div`
     height: 45px;
     border-radius: 20px;
     border: 1px solid #868686;
+    padding-left: 10px;
 
     &::placeholder {
-      padding-left: 10px;
       font-size: 15px;
       color: #a8a8a8;
     }
@@ -276,4 +276,9 @@ export const CommnetCreatedAt = styled.div`
 export const PFText = styled.div`
   width: 100%;
   margin-bottom: 3px;
+`;
+
+export const NoCommentsText = styled.div`
+  margin-bottom: 20px;
+  color: darkgray;
 `;

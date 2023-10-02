@@ -8,23 +8,21 @@ export const Container = styled.div`
   color: black;
   box-sizing: border-box;
   width: 474px;
-  margin: 0 auto;
+  margin: 10px auto 0 auto;
 `;
 
 export const Wrapper = styled.form`
-  width: 420px;
-  
+  width: 93%;
+  height: 100%;
   justify-content: center;
 `;
 
 export const FormTag = styled.div`
   display: flex;
-  
   padding-bottom: 15px;
 `;
 export const Tag = styled.div`
   display: flex;
-  margin-top: 20px;
   justify-items: left;
   font-size: 18px;
   font-weight: bold;
@@ -33,6 +31,7 @@ export const Tag = styled.div`
 
 export const FormInput = styled.div`
   display: flex;
+  width: 100%;
 `;
 
 export const Input = styled.input`
@@ -43,6 +42,7 @@ export const Input = styled.input`
   border-radius: 15px;
   border: 1px solid #cbcbcb;
   padding: 0 15px;
+  margin-bottom: 20px;
   
 
   &::placeholder {
@@ -50,40 +50,40 @@ export const Input = styled.input`
     font-size: 15px;
   }
   &:hover {
-    border: 2px solid #d31a38;
+    border: 1px solid #d31a38;
   }
-`;
-
-export const Alert = styled.div`
-  display: flex;
-  justify-content: left;
-  padding-top: 10px;
-  margin-left: 5px;
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.1rem;
-  margin-bottom: 10px;
-
-  color: ${({ className }) => (className === 'success' ? 'green' : '#d31a38')};
-`;
-
-export const EmailInput = styled(Input)`
-  width: 100%;
 `;
 
 export const InputButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 42px;
-  font-size: 18px;
-  border-radius: 8px;
+  width: 100px;
+  height: 50px;
+  font-size: 14px;
+
   cursor: pointer;
+  margin-left: 10px;
+  border-radius: 10px;
+  border: 1px solid #cbcbcb;
+ 
 `;
+
+
+export const Alert = styled.div`
+  display: flex;
+  margin-left: 15px;
+  font-size: 15px;
+  font-weight: 600;
+  align-items: center;
+  color: ${({ className }) => (className === 'success' ? 'green' : '#d31a38')};
+`;
+
+
 
 export const CheckContainer = styled.div`
   display: flex;
-  width: 420px;
+  width: 93%;
   margin: 15px 27px 16px 27px;
 `;
 
@@ -99,12 +99,12 @@ export const CheckWrapper = styled.div`
 export const CheckLine = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 420px;
+  width: 430px;
 `;
 
 export const CheckLabel = styled.label`
   display: flex;
-  font-size: 15px;
+  font-size: 16px;
   padding: 7px;
   color: #484848;
   align-items: center;
@@ -137,7 +137,7 @@ export const CheckBox = styled.div`
 `;
 
 export const SubmitButton = styled(InputButton)`
-  width: 100%;
+  width: 93%;
   height: 50px;
   display: flex;
   margin: 30px auto 10px auto;
@@ -145,6 +145,7 @@ export const SubmitButton = styled(InputButton)`
   border: none;
   text-decoration: none;
   color: white;
+  font-size: 18px;
 `;
 
 export const ModalButton = styled.button`
@@ -166,6 +167,8 @@ export const ModalSubmitButton = styled.button`
   border: none;
   text-decoration: none;
   color: white;
+  border-radius: 8px;
+    margin-top: 10px;
 `;
 
 export const Ptag = styled.p`
