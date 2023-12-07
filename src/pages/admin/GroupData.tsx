@@ -21,10 +21,18 @@ interface AdminGroupData {
 interface AdminGroupProps {
   data?: AdminGroupData;
 }
-
+/**
+ * 그룹 데이터를 표시하는 GroupData 컴포넌트.
+ * @param {AdminGroupProps} props - 그룹 데이터를 포함하는 props.
+ * @returns {React.ReactNode} 그룹 데이터 테이블 행을 렌더링.
+ */
 function GroupData({ data }: AdminGroupProps) {
   const [deleted, setDeleted] = useState(false);
-
+/**
+   * 선택한 그룹을 삭제하는 함수.
+   * @async
+   * @returns {void}
+   */
   async function handleDeleteGroup() {
     try {
       await axios.delete(`/api/v1/admin/groups/${data?.group_id}`);

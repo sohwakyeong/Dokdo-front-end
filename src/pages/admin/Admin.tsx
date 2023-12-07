@@ -14,7 +14,7 @@ import * as S from '@/pages/admin/SideBar.styled';
 import AxiosC from '@/helper/AxiosC';
 import { removeCookie } from '@/helper/Cookie';
 import { useNavigate } from 'react-router-dom';
-
+//컴포넌트의 프롭스를 위한 인터페이스.
 interface AdminProps {
   children: ReactNode;
 }
@@ -22,12 +22,12 @@ interface AdminProps {
 function Admin({ children }: AdminProps) {
 
   const navigate = useNavigate();
-
+//현재 경로를 기반으로 활성 메뉴상태 확인.
   const isUserMenuActive = window.location.pathname === '/admin/user';
   const isPostMenuActive = window.location.pathname === '/admin/post';
   const isAlbumMenuActive = window.location.pathname === '/admin/album';
   const isGroupMenuActive = window.location.pathname === '/admin/group';
-
+//로그아웃함수 Axios를 이용한 API 호출및 쿠키 제거.
   const handleLogout = async () => {
     try {
       await AxiosC.put('/api/v1/auth/logout');

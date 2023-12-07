@@ -4,15 +4,24 @@ import axios from 'axios';
 import PostData from '@/pages/admin/PostData';
 import MorePost from '@/assets/icon/newIcon/chat1.png';
 
+/**
+ * 서버에서 모든 게시글 데이터를 가져오는 함수.
+ * @returns {Promise<Object[]>} 게시글 데이터 배열을 반환.
+ */
+
 async function fetchAllPost() {
   try {
     const response = await axios.get('/api/v1/admin/posts');
-    return response.data.data; // 서버 응답에서 실제 그룹 데이터를 반환
+    return response.data.data;
   } catch (error) {
     throw error;
   }
 }
-
+ /** 
+     * fetchData - 게시글 데이터를 불러와 상태를 업데이트.
+     * @async
+     * @returns {void}
+     */
 function AdminPost() {
   const [postData, setPostData] = useState([]);
   const [isLoading, setIsLoding] = useState(false);

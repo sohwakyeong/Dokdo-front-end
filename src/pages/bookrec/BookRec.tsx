@@ -17,7 +17,10 @@ declare global {
     handleJSONPResponse?: (data: any) => void;
   }
 }
-
+/**
+ * 독서 토론 추천도서 목록을 표시하는 BookRec 컴포넌트.
+ * @returns {React.ReactNode} 추천 도서 목록을 렌더링.
+ */
 const BookRec = () => {
   const [books, setBooks] = useState<Book[]>([]);
   const navigate = useNavigate();
@@ -53,7 +56,10 @@ const BookRec = () => {
       document.head.removeChild(script);
     };
   }, []);
-  
+   /**
+   * 특정 도서를 클릭할 때 해당 도서의 상세 페이지로 이동하는 함수.
+   * @param {string} isbn - 클릭된 도서의 ISBN.
+   */
    const handleBookClick = (isbn:string) => 
    navigate(`/bookrec/${isbn}`)
 

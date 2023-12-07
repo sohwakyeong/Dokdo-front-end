@@ -11,6 +11,11 @@ const sortOptions = [
   { value: '최근순', label: '최근순' },
 ];
 
+ /**
+   * 정렬 옵션에 따라 토론 모임 데이터를 불러오고 상태를 업데이트.
+   * @async
+   * @returns {void}
+   */
 function AdminGroup() {
   const [groupData, setGroupData] = useState([]);
   const [isLoading, setIsLoding] = useState(false);
@@ -43,7 +48,11 @@ function AdminGroup() {
     }
     fetchData();
   }, [selectedSort]);
-
+/**
+ * 선택된 정렬 옵션에 따라 토론 모임 데이터를 불러오는 함수.
+ * @param {string} apiUrl - 데이터를 불러올 API의 URL.
+ * @returns {Promise<Object[]>} 토론 모임 데이터 배열을 반환.
+ */
   async function fetchAllGroupData(apiUrl: string) {
     try {
       const response = await axios.get(apiUrl);

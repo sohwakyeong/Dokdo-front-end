@@ -4,6 +4,10 @@ import axios from 'axios';
 import UserData from '@/pages/admin/UserData';
 import MorePost from '@/assets/icon/newIcon/chat1.png';
 
+/**
+ * 서버에서 모든 사용자 데이터를 가져오는 함수.
+ * @returns {Promise<Object[]>} 사용자 데이터 배열을 반환.
+*/
 async function fetchAllUser() {
   try {
     const response = await axios.get('/api/v1/admin/users');
@@ -12,7 +16,11 @@ async function fetchAllUser() {
     throw error;
   }
 }
-
+ /**
+     * fetchData - 사용자 데이터를 불러와 상태를 업데이트.
+     * @async
+     * @returns {void}
+     */
 function AdminUser() {
   const [userData, setUserData] = useState([]);
   const [isLoading, setIsLoding] = useState(false);

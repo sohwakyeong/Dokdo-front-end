@@ -11,7 +11,11 @@ interface AdminUserData {
 interface AdminUserProps {
   data?: AdminUserData;
 }
-
+/**
+ * 사용자 데이터를 표시하고 관리하는 UserData 컴포넌트.
+ * @param {AdminUserProps} props - 사용자 데이터를 포함하는 props.
+ * @returns {React.ReactNode} 사용자 데이터 테이블 행을 렌더링.
+ */
 function UserData({ data }: AdminUserProps) {
   const [updated, setUpdated] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -32,7 +36,11 @@ function UserData({ data }: AdminUserProps) {
       });
     }
   }, [data]);
-
+/**
+   * 선택한 사용자를 삭제하는 함수.
+   * @async
+   * @returns {void}
+   */
   async function handleDeleteUser() {
     try {
       await axios.delete(`/api/v1/admin/users/${data?.user_id}`)
@@ -43,9 +51,11 @@ function UserData({ data }: AdminUserProps) {
       throw error;
     }
   }
-
- 
-
+ /**
+   * 사용자 정보를 업데이트하는 함수.
+   * @async
+   * @returns {void}
+   */
   async function handleUpdatedUser() {
     const updatedUserData = {
       id: userData!.id,

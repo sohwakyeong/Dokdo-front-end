@@ -18,13 +18,16 @@ interface Book {
 interface SubInfo {
   itemPage: number;
 }
-
+// 글로벌 window 객체에 handleJSONPResponse 함수 타입 정의.
 declare global {
   interface Window {
     handleJSONPResponse?: (data: any) => void;
   }
 }
-
+/**
+ * 책 상세 정보를 표시하는 BookDetail 컴포넌트.
+ * @returns {React.ReactNode} 책 상세 정보를 렌더링.
+ */
 const BookDetail = () => {
   const [books, setBooks] = useState<Book[]>([]);
   const { isbn } = useParams();
@@ -34,13 +37,11 @@ const BookDetail = () => {
 
     const url = `http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx?ttbkey=${process.env.REACT_APP_ALADIN_SECRET_KEY}&itemIdType=ISBN&ItemId=${isbn}&output=js&Version=20131101&callback=${callbackName}`;
 
-    // 기존의 콜백 함수를 백업
     const originalCallback = window[callbackName];
 
     window[callbackName] = data => {
       setBooks(data.item);
 
-      // 요청 처리 후 원래의 콜백 함수로 복원 (만약 있었다면)
       if (originalCallback) {
         window[callbackName] = originalCallback;
       } else {
